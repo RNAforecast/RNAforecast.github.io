@@ -87,6 +87,7 @@ html, body {
       min-height: 100%; } }
 
 body {
+  /*
   display: -moz-flex;
   display: -webkit-flex;
   display: -ms-flex;
@@ -95,6 +96,7 @@ body {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  */
   -moz-justify-content: center;
   -webkit-justify-content: center;
   -ms-justify-content: center;
@@ -354,10 +356,13 @@ hr {
 section.special, article.special {
   text-align: center; }
 
+header {
+  margin-top: 100px;}
+
 header p {
   color: rgba(255, 255, 255, 0.5);
   position: relative;
-  margin: 0 6em 1.5em 0; }
+  margin: 0 0 1.5em 0; }
 
 header h2 + p {
   font-size: 1.25em;
@@ -798,53 +803,18 @@ button,
   #header {
     margin: 0 0 1em 0; } }
 
-/* Signup Form */
-#signup-form {
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  position: relative; }
-  #signup-form input[type="text"],
-  #signup-form input[type="password"],
-  #signup-form input[type="email"] {
-    width: 18em; }
-  #signup-form > * {
-    margin: 0 0 0 1em; }
-  #signup-form > :first-child {
-    margin: 0 0 0 0; }
-  @media screen and (max-width: 480px) {
-    #signup-form {
-      -moz-flex-direction: column;
-      -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-      flex-direction: column; }
-      #signup-form input[type="type"],
-      #signup-form input[type="password"],
-      #signup-form input[type="email"] {
-        width: 100%; }
-      #signup-form > * {
-        margin: 1.25em 0 0 0; }
-      #signup-form .message {
-        bottom: -1.5em;
-        font-size: 0.9em;
-        height: 1em;
-        left: 0;
-        line-height: inherit;
-        margin-top: 0;
-        position: absolute; } }
-
 /* Footer */
 #footer {
   -moz-transition: opacity 0.5s ease-in-out;
   -webkit-transition: opacity 0.5s ease-in-out;
   -ms-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
+  margin-top: 10em;
   bottom: 4em;
   color: rgba(255, 255, 255, 0.5);
-  left: 4em;
+  /*left: 4em;*/
   opacity: 0.5;
-  position: absolute; }
+/*position: absolute;*/ }
   #footer .icons {
     margin: 0 0 0.5em 0; }
   #footer .copyright {
@@ -870,18 +840,18 @@ button,
   @media screen and (max-width: 1680px) {
     #footer {
       bottom: 3.5em;
-      left: 3.5em; } }
+      /*left: 3.5em; */} }
   @media screen and (max-width: 736px) {
     #footer {
       bottom: 2em;
-      left: 2em; } }
+    /*  left: 2em;*/ } }
   @media screen and (max-width: 360px) {
     #footer {
       bottom: 1.25em;
-      left: 1.25em; } }
+    /*  left: 1.25em;*/ } }
   @media screen and (max-height: 640px) {
     #footer {
       bottom: auto;
-      left: auto;
-      margin: 1em 0 0 0;
+      /*left: auto;*/
+      margin: 0 0 0 0;
       position: relative; } }
