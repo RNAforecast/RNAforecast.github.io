@@ -21,7 +21,7 @@ Home
 
         .. raw:: html
 
-          <a class="r-button r-button-normalsize" href=contact.html><i class="fas fa-envelope"></i>Get Started</a>
+          <a class="r-button r-button-normalsize" href=contact/><i class="fas fa-envelope"></i>Get Started</a>
 
     .. container::  m-container-inflate  m-right-l m-col-m-6 m-right-m m-col-s-8 m-center-s
 

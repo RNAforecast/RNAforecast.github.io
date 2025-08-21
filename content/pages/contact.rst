@@ -3,7 +3,7 @@ Contact RNA Forecast
 :summary: Contact RNA Forecast
 :title: Contact RNA Forecast
 :description: RNA Forecast contact page
-:save_as: contact.html
+:slug: contact
 :banner: Contact Us
 :banner_lead: Get in touch with our team to discuss your RNA engineering needs
 

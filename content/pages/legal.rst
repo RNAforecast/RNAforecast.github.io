@@ -3,7 +3,7 @@ RNA Forecast Legal Information
 :summary: RNA Forecast Legal Information
 :title: RNA Forecast Legal Information
 :description: RNA Forecast legal note for compliance with Austrian laws
-:save_as: legal.html
+:slug: legal
 
 
 .. container:: r-Impressum
