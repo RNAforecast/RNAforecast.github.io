@@ -1,0 +1,188 @@
+/*
+    This file is part of m.css.
+
+    Copyright © 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+              Vladimír Vondruš <mosra@centrum.cz>
+    Copyright © 2019 Cris Luengo <cris.l.luengo@gmail.com>
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+*/
+
+:root {
+  /* Color shares */
+  --white: #ffffff;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+
+/* Custom RNA Forecast colors */
+/*  --rnaf-primary: #1e3a8a;*/
+  --rnaf-primary: #003049;
+  --rnaf-secondary: #3b82f6;
+  --rnaf-accent: #10b981;
+  --rnaf-warning: #f59e0b;
+  --rnaf-gradient-hero: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  --rnaf-background: #EEF0F2;
+
+  /* Text properties */
+  /*--font: 'Roboto Flex', sans-serif;*/
+  100%);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --code-font: 'Source Code Pro', monospace;
+  --font-size: 18px;
+  --code-font-size: 1em; /* *not* rem, so it follows surrounding font size */
+  --line-height: 1.5;
+  --paragraph-indent: 0rem;
+  --paragraph-align: justify;
+  --link-decoration: underline;
+  --link-decoration-nav: none;
+  --link-decoration-heading: none;
+  --nav-brand-case: none;
+  --nav-menu-case: none;
+  --nav-heading-case: uppercase;
+  --nav-categories-case: none;
+  --landing-header-case: none;
+  --heading-font-weight: normal;
+  --heading-font-weight-bold: 700 !important;
+
+  /* Shapes */
+  --border-radius: 0.5rem;
+
+  /* Basics */
+  --background-color: var(--rnaf-gradient-bg);
+  --color: rgba(33, 37, 41, 0.75);
+  --line-color: var(--gray-200);
+  --link-color: var(--rnaf-primary);
+  --link-active-color: #cb4b16;
+  --mark-color: #4c93d3;
+  --mark-background-color: #e6e69c;
+  --code-color: #5b5b5b;
+  --code-inverted-color: rgba(91, 91, 91, 0.33);
+  --console-color: var(--code-color);
+  --console-inverted-color: var(--code-inverted-color);
+  /* This is simply color-picked --code-note-background-color on top of
+     --background-color */
+  --code-background-color: #fbf0ec;
+  --code-note-background-color: rgba(251, 240, 236, 0.5);
+  --console-background-color: #000000;
+  --button-background-color: #ffffff;
+  --text-muted-color: #212529bf;
+
+  /* Header */
+  --header-border-width: 0.25rem 0 0 0;
+  --header-color: #FFFFFF2;
+  --header-breadcrumb-color: #bdbdbd; /* same as --dim-color */
+  --header-background-color: #ffffff;
+  --header-background-color-landing: rgba(255, 255, 255, 0.75);
+  --header-background-color-jumbo: rgba(255, 255, 255, 0.25);
+  --header-link-color: #495057;
+  --header-link-active-color: var(--rnaf-primary);
+  --header-link-current-color: var(--rnaf-primary);
+  --header-link-active-background-color: #ffffff;
+  --header-link-active-background-color: rgba(255, 255, 255, 0.5);
+
+  /* Footer */
+  --footer-font-size: 0.85rem;
+  --footer-color: var(--gray-300);
+  --footer-background-color: var(--gray-900);
+  --footer-link-color: var(--gray-300);
+  --footer-link-active-color: var(--gray-600);
+
+  /* Cover image */
+  --cover-image-background-color: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+
+  /* Search (used only by m-documentation.css) */
+  --search-overlay-color: var(--header-background-color-landing);
+  --search-background-color: var(--header-background-color);
+
+  /* Article */
+  --article-header-color: #7a7a7a;
+  --article-footer-color: #969696;
+  --article-heading-color: var(--gray-900);
+  --article-heading-active-color: #802f0e;
+
+  /* Right navigation panel */
+  --navpanel-link-color: #292929;
+  --navpanel-link-active-color: #cb4b16;
+
+  /* Plots */
+  --plot-background-color: #fbf0ec;
+  --plot-error-color: #000000;
+
+  /* Colored components */
+  --default-color: #000000;
+  --default-link-active-color: #cb4b16;
+  --default-filled-color: #000000;
+  --default-filled-background-color: #fbf0ec;
+  --default-filled-link-color: #ea7944;
+  --default-filled-link-active-color: #cb4b16;
+
+  --primary-color: #cb4b16;
+  --primary-link-active-color: var(--gray-300);
+  --primary-filled-color: #fbe4d9;
+  --primary-filled-background-color: #ef9069;
+  --primary-filled-link-color: #782f0d;
+  --primary-filled-link-active-color: #2f1205;
+
+  --success-color: #31c25d;
+  --success-link-active-color: #dcf6e3;
+  --success-filled-color: #f4fcf6;
+  --success-filled-background-color: #4dd376;
+  --success-filled-link-color: #c5f2d1;
+  --success-filled-link-active-color: #dcf6e3;
+
+  --warning-color: #c7cf2f;
+  --warning-link-active-color: #f6f6dc;
+  --warning-filled-color: #fcfcf4;
+  --warning-filled-background-color: #d1d34d;
+  --warning-filled-link-color: #f0f1c7;
+  --warning-filled-link-active-color: #f6f6dc;
+
+  --danger-color: #f60000;
+  --danger-link-active-color: #f6dddc;
+  --danger-filled-color: #fdf3f3;
+  --danger-filled-background-color: #e23e3e;
+  --danger-filled-link-color: #f2c7c6;
+  --danger-filled-link-active-color: #f6dddc;
+
+  --info-color: #2e7dc5;
+  --info-link-active-color: #c6ddf2;
+  --info-filled-color: #f4f8fc;
+  --info-filled-background-color: #4c93d3;
+  --info-filled-link-color: #c6ddf2;
+  --info-filled-link-active-color: #dbeaf7;
+
+  --dim-color: #bdbdbd;
+  --dim-link-color: #c0c0c0;
+  --dim-link-active-color: #949494;
+  --dim-filled-color: #7c7c7c;
+  --dim-filled-background-color: #f1f1f1;
+  --dim-filled-link-color: #c0c0c0;
+  --dim-filled-link-active-color: #949494;
+  --dim-button-active-color: #c0c0c0;
+
+  /* Transition */
+  --transition: all 0.3s ease;
+}
