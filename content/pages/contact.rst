@@ -1,8 +1,8 @@
 Contact RNA Forecast
 ####################
-:summary: Contact RNA Forecast
-:title: Contact RNA Forecast
-:description: RNA Forecast contact page
+:summary: Contact RNA Forecast for joint initiatives, partnership inquiries or press requests
+:title: Contact for Projects, Partnerships & Press Requests
+:description: Contact RNA Forecast for project inquiries, partnerships opportunities, media requests, and general information
 :slug: contact
 :banner: Contact Us
 :banner_lead: Get in touch with our team to discuss your RNA engineering needs

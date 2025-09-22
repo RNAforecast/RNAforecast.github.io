@@ -1,10 +1,10 @@
 Home
 ####
 
-:title: Welcome to RNA Forecast
+:title: RNA Structure Consultancy and ViennaRNA Training
 :url:
 :save_as: index.html
-:summary: RNAF summary
+:summary: Professional RNA consultancy and ViennaRNA training to advance RNA structure design, computational analysis, and synthetic biology projects
 
 
 .. container:: r-landing-hero r-welcome

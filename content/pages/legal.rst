@@ -1,8 +1,9 @@
 RNA Forecast Legal Information
 ##############################
 :summary: RNA Forecast Legal Information
-:title: RNA Forecast Legal Information
+:title: Imprint and legal disclosure
 :description: RNA Forecast legal note for compliance with Austrian laws
+:summary: This page provides RNA Forecast's imprint and legal disclosure to ensure full transparency and compliance
 :slug: legal
 
 
