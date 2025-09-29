@@ -1,8 +1,8 @@
 Research at RNA Forecast
 ########################
-:summary: Contact RNA Forecast for joint initiatives, partnership inquiries or press requests
-:title: Contact for Projects, Partnerships & Press Requests
-:description: Contact RNA Forecast for project inquiries, partnerships opportunities, media requests, and general information
+:summary: RNA Forecast advances RNA engineering at the intersection of theory, computation, and biology, focusing on RNA structure prediction, AI-driven rational design, and next-generation RNA therapeutics
+:title: Research – RNA Design, AI & Therapeutics
+:description: Discover how RNA Forecast integrates computational biology, AI-driven RNA folding and design, and therapeutic innovation
 :slug: research
 :fullcolumns: true
 :banner: Research & Innovation
