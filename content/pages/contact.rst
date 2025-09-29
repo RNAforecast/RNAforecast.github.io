@@ -86,7 +86,7 @@ Contact RNA Forecast
 
         .. container:: m-col-m-4 m-pull-m-1 r-pad-lr-none
 
-          .. container:: r-pad-lr-3 r-box-info r-box-shadow
+          .. container:: r-pad-lr-3 r-box r-box-button r-box-shadow
 
               .. container:: r-method-icon
 
@@ -106,7 +106,7 @@ Contact RNA Forecast
 
         .. container:: m-col-m-4 r-pad-lr-none
 
-          .. container:: r-pad-lr-3 r-box-info r-box-shadow
+          .. container:: r-pad-lr-3 r-box r-box-button r-box-shadow
 
             .. container:: r-method-icon
 
@@ -119,7 +119,7 @@ Contact RNA Forecast
               <h5>Technical Support</h5>
 
 
-            Have questions about our services or need technical support? Our team is ready to assist you.
+            Have questions about our services or need support? Our team is ready to assist you.
 
             .. raw:: html
 
@@ -127,7 +127,7 @@ Contact RNA Forecast
 
         .. container:: m-col-m-4 m-push-m-1 r-pad-lr-none
 
-          .. container:: r-pad-lr-3 r-box-info r-box-shadow
+          .. container:: r-pad-lr-3 r-box r-box-button r-box-shadow
 
             .. container:: r-method-icon
 

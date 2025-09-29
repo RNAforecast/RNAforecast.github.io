@@ -16,7 +16,7 @@ DIRECT_TEMPLATES = []
 M_CSS_FILES = ['/css/m-rnaf.css',
                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css']
 
-M_THEME_COLOR = '#cb4b16'
+M_THEME_COLOR = '#003049'
 
 PLUGIN_PATHS = ['plugins']
 PLUGINS = ['m.htmlsanity',
@@ -25,12 +25,8 @@ PLUGINS = ['m.htmlsanity',
            'sitemap',
            'm.images']
 
-#M_BLOG_NAME = 'RNA Forecast Blog'
-#M_BLOG_URL = 'blog/'
-
 M_FAVICON = ('favicon.ico', 'image/x-ico')
 
-# Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
@@ -43,18 +39,17 @@ M_SITE_LOGO_TEXT = ''
 
 M_LINKS_NAVBAR1 = [#('Services', 'services/', 'services', []),
                    #('Training', 'training/', 'training', []),
-                   #('Research', 'research/', 'research', []),
+                   ('Research', 'research/', 'research', []),
                    #('About', 'about/', 'about', []),
                    ('Contact', 'contact/', 'contact', [])]
 
-
-# Social widget
 SOCIAL = (
     ("You can add links in your config file", "#"),
     ("Another social link", "#"),
 )
 
 M_LINKS_FOOTER1 = [('RNA Forecast', '/'),
+                    ('Reseach', 'research/'),
                     ('Contact', 'contact/'),
                     ('Legal', 'legal/')]
 
@@ -71,7 +66,7 @@ M_FINE_PRINT =  """
 © 2025 RNA Forecast e.U. | All rights reserved
 """
 
-STATIC_PATHS = ['static', 'extra', 'css']
+STATIC_PATHS = ['static', 'extra', 'css', 'files']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/favicon.ico': {'path': 'favicon.ico'},

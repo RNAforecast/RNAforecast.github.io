@@ -105,7 +105,7 @@ Home
 
               .. raw:: html
 
-                <h6>Next Workshop</h6><p>September 25, 2025</p>
+                <h6>Next Workshop</h6><p>October 16, 2025</p>
 
           .. container:: m-row r-workshop-item m-nopad
 
