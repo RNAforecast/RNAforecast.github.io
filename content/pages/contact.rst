@@ -6,6 +6,12 @@ Contact RNA Forecast
 :slug: contact
 :banner: Contact Us
 :banner_lead: Get in touch with our team to discuss your RNA engineering needs
+:bannercta: Need Immediate Assistance?
+:bannercta_msg: Our team is available to answer your questions and discuss your RNA engineering needs.
+:bannercta_color: secondary
+:bannercta_link: #top
+:bannercta_icon: fa-paper-plane
+:bannercta_text: Contact Us Now
 
 
 
@@ -14,7 +20,7 @@ Contact RNA Forecast
   .. container:: m-col-m-8 r-contact r-form
 
     .. raw:: html
-
+      <div id="top"></div>
       <h2>Send us a message</h2>
 
       <form target="_blank" action="https://formsubmit.co/hello@rnaforecast.com" method="POST">
@@ -22,11 +28,11 @@ Contact RNA Forecast
           <div class="r-form-row">
             <div class="mb-1">
               <label class="r-form-label" for="name">Full Name</label>
-              <input type="text" name="name" class="r-form-control" required>
+              <input type="text" name="name" id="name" autocomplete="name" class="r-form-control" required>
             </div>
             <div class="mb-1">
               <label class="r-form-label" for="email">Email Address</label>
-              <input type="email" name="email" class="r-form-control" required>
+              <input type="email" name="email" id="email" autocomplete="email" class="r-form-control" required>
             </div>
           </div>
         </div>
@@ -34,17 +40,17 @@ Contact RNA Forecast
           <div class="r-form-row">
             <div class="mb-1">
               <label class="r-form-label" for="company">Company/Organization</label>
-              <input type="text" name="company" class="r-form-control" required>
+              <input type="text" name="company" id="company" autocomplete="organization" class="r-form-control" required>
             </div>
             <div class="mb-1">
               <label class="r-form-label" for="subject">Subject</label>
-              <input type="text" name="subject" class="r-form-control" value="General Inquiry" required>
+              <input type="text" name="subject" id="subject" autocomplete="off" class="r-form-control" value="General Inquiry" required>
             </div>
           </div>
         </div>
         <div class="form-group">
           <label class="r-form-label" for="message">Message</label>
-          <textarea id="message" class="r-form-control" name="message" rows="10" required></textarea>
+          <textarea id="message" autocomplete="off" class="r-form-control" name="message" rows="10" required></textarea>
         </div>
         <button type="submit" class="btn btn-lg btn-dark btn-block">Submit Form</button>
       </form>
