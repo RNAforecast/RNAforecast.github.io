@@ -45,29 +45,27 @@
   </div>
 </nav></header>
 <main>
-<section class="banner-lead">
+<section class="banner banner-lead">
   <h1>Contact Us</h1>
-  <div class ="muted">Get in touch with our team to discuss your RNA engineering needs</div>
+  <div class ="banner-msg">Get in touch with our team to discuss your RNA engineering needs</div>
 </section>
 <article>
   <div class="m-container m-container-inflatable">
     <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">  
+      <div class="m-col-l-10 m-push-l-1">
 <!-- content -->
 <div class="m-row">
 <div class="m-col-m-8 r-contact r-form">
-<h2>Send us a message</h2>
-
 <form target="_blank" action="https://formsubmit.co/hello@rnaforecast.com" method="POST">
   <div class="form-group">
     <div class="r-form-row">
       <div class="mb-1">
         <label class="r-form-label" for="name">Full Name</label>
-        <input type="text" name="name" class="r-form-control" required>
+        <input type="text" name="name" id="name" autocomplete="name" class="r-form-control" required>
       </div>
       <div class="mb-1">
         <label class="r-form-label" for="email">Email Address</label>
-        <input type="email" name="email" class="r-form-control" required>
+        <input type="email" name="email" id="email" autocomplete="email" class="r-form-control" required>
       </div>
     </div>
   </div>
@@ -75,17 +73,17 @@
     <div class="r-form-row">
       <div class="mb-1">
         <label class="r-form-label" for="company">Company/Organization</label>
-        <input type="text" name="company" class="r-form-control" required>
+        <input type="text" name="company" id="company" autocomplete="organization" class="r-form-control" required>
       </div>
       <div class="mb-1">
         <label class="r-form-label" for="subject">Subject</label>
-        <input type="text" name="subject" class="r-form-control" value="General Inquiry" required>
+        <input type="text" name="subject" id="subject" autocomplete="off" class="r-form-control" value="General Inquiry" required>
       </div>
     </div>
   </div>
   <div class="form-group">
     <label class="r-form-label" for="message">Message</label>
-    <textarea id="message" class="r-form-control" name="message" rows="10" required></textarea>
+    <textarea id="message" autocomplete="off" class="r-form-control" name="message" rows="10" required></textarea>
   </div>
   <button type="submit" class="btn btn-lg btn-dark btn-block">Submit Form</button>
 </form></div>
@@ -134,6 +132,20 @@
     </div>
   </div>
 </article>
+<section class="banner banner-cta  banner-cta-secondary">
+  <div class="m-container m-container-inflatable">
+    <div class="m-row r-pad-tb-2">
+      <div class="m-col-l-9 m-pull-l-1">
+        <h2>Need Immediate Assistance?</h2>
+        <div class ="banner-msg">Our team is available to answer your questions and discuss your RNA engineering needs.</div>
+      </div>
+      <div class="m-col-l-3 m-push-l-0">
+        <div class="m-row r-pad-tb-2">
+          <a class="r-button r-button-cta" href="#top"><i class="fas fa-paper-plane"></i>Contact Us Now</a>
+        </div>
+      </div>
+    </div>
+</section>
 </main>
 <footer><nav>
   <div class="m-container">

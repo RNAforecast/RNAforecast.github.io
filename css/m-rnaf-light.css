@@ -44,7 +44,8 @@
   --rnaf-accent: #10b981;
   --rnaf-warning: #f59e0b;
   --rnaf-gradient-hero: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-  --rnaf-background: #EEF0F2;
+  --rnaf-gradient-hero-rev: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+  --rnaf-background: #f8f9fa;
 
   /* Text properties */
   /*--font: 'Roboto Flex', sans-serif;*/

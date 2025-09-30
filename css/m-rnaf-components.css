@@ -1801,6 +1801,8 @@ footer hr {
   font-size: 0.8rem;
   background: transparent;
   text-decoration: none;
+  cursor: button;
+  transition: all 0.3s ease;
 }
 
 .r-button.r-button-normalsize {
@@ -1812,13 +1814,19 @@ a.r-button {
 }
 
 .r-button:hover {
-  background: var(--rnaf-primary);
-  color: var(--white);
+  background-color: var(--gray-300);
   transform: tranlateY(-2px);
 }
 
 .r-button i {
   padding-right:0.3rem;
+}
+
+.r-button-cta{
+  font-size: 1rem;
+  background-color: var(--rnaf-background);
+  border-width: 0px;
+  padding: 1rem 1.3rem;
 }
 
 .r-pub {
