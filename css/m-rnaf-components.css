@@ -558,8 +558,8 @@ figure.m-figure > *:first-child {
 }
 figure.m-figure > *:last-child {
   /* Need !important so the :last-child margin reset doesn't have higher
-     priority than this */
-  margin-bottom: 1rem !important;
+     priority than this
+  margin-bottom: 1rem !important;*/
 }
 figure.m-figure img,
 figure.m-figure svg,
@@ -567,7 +567,7 @@ figure.m-figure video {
   position: relative; /* so it's above the border */
   margin-left: 0;
   margin-right: 0;
-  margin-bottom: 0;
+  margin-bottom: -1rem;
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
@@ -606,6 +606,10 @@ figure.m-figure.m-fullwidth::after {
   display: block;
   margin-top: 1rem;
   height: 1px;
+}
+
+figure.shadow {
+  box-shadow: 1.25rem 1.23rem 1rem rgba(0, 0, 0, .18) !important;
 }
 
 /* Code figure. Not using <figure> because some generators (Doxygen) have it
