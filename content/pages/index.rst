@@ -5,6 +5,7 @@ Home
 :url:
 :save_as: index.html
 :summary: Professional RNA consultancy and ViennaRNA training to advance RNA structure design, computational analysis, and synthetic biology projects
+:fullcolumns: true
 :bannercta: Ready to Transform your Research?
 :bannercta_msg: Let's discuss how RNA Forecast can accelerate your projects.
 :bannercta_color: gradient-rev
@@ -17,11 +18,11 @@ Home
 
   .. container:: m-row
 
-    .. container:: m-container-inflate m-col-l-8 m-left-l m-col-m-6 m-left-m m-center-s m-center-t
+    .. container::  m-col-m-6 m-pull-l-0 m-left-l m-col-m-6 m-left-m m-center-s m-center-t
 
         .. raw:: html
 
-          <h1>Engineering the Future of <em>RNA</em></h1>
+          <br/><br/><h1>Engineering the Future of <em>RNA</em></h1>
 
         RNA Forecast is pioneering synthetic biology through innovative RNA device engineering and synthetic mRNA solutions. Our mission is to provide scientists and innovators with reliable, high-performance biotechnology that accelerates research and opens new avenues for discovery and application.
 
@@ -29,10 +30,13 @@ Home
 
           <a class="r-button r-button-normalsize" href=contact/><i class="fas fa-envelope"></i>Get Started</a>
 
-    .. container::  m-container-inflate  m-right-l m-col-m-6 m-right-m m-col-s-8 m-center-s
+    .. container::   m-push-l-1 m-col-m-6 m-right-m m-col-s-8 m-center-s
 
       .. figure:: static/images/xrRNA_hand01v3.png
+        :figclass: shadow
         :alt: engineered xrRNA
+
+
 
 .. container:: m-row m-container-inflate r-landing-hero
 
