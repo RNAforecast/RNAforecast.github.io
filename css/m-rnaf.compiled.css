@@ -822,7 +822,6 @@ figure.m-figure > *:first-child {
   display: inline;
 }
 figure.m-figure > *:last-child {
-  margin-bottom: 1rem !important;
 }
 figure.m-figure img,
 figure.m-figure svg,
@@ -830,7 +829,7 @@ figure.m-figure video {
   position: relative;
   margin-left: 0;
   margin-right: 0;
-  margin-bottom: 0;
+  margin-bottom: -1rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -865,6 +864,9 @@ figure.m-figure.m-fullwidth::after {
   display: block;
   margin-top: 1rem;
   height: 1px;
+}
+figure.shadow {
+  box-shadow: 1.25rem 1.23rem 1rem rgba(0, 0, 0, .18) !important;
 }
 .m-code-figure, .m-console-figure {
   margin-top: 0;
@@ -2865,7 +2867,7 @@ section.banner-cta h2 {
   font-size: 0.7rem;
 }
 .r-welcome  {
-  padding-top: 12rem;
+  padding-top: 2rem;
   padding-bottom: 12rem;
 }
 .r-welcome p {
