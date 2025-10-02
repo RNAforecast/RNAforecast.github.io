@@ -896,6 +896,16 @@ section.banner-cta h2 {
     justify-content: space-between; /* optional */
   }
 }
+@media screen and (min-width: 1253px) {
+  .r-margin-lr10neg {
+    margin-left: -10rem;
+    margin-right: -10rem;
+  }
+}
+
+.r-pad-b-2 {
+  padding-bottom: 2rem !important;
+}
 
 .r-pad-b-3 {
   padding-bottom: 3rem !important;

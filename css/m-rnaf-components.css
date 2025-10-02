@@ -315,6 +315,13 @@ dl.m-footnote dd span.m-footnote a {
   padding: 0.9375rem 0.9375rem 0.9375rem 0.75rem;
 }
 
+.r-block {
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-radius: var(--border-radius);
+  border-color: var(--line-color);
+}
+
 /* Badge */
 .m-block.m-badge::after {
   content: ' ';
