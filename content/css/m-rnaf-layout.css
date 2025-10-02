@@ -210,7 +210,7 @@ body > header > nav:target #m-navbar-hide {
   }
   body > header > nav #m-navbar-collapse ol {
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 1.2rem;;
   }
   body > header > nav #m-navbar-collapse > .m-row > ol, body > header > nav #m-navbar-collapse > .m-row > ol > li {
     float: left;
@@ -876,11 +876,45 @@ section.banner-cta h2 {
 .r-landing-hero h3 {
   padding-top: 1.5em;
   font-size: 1.3em;
-
   line-height: 1.2em;
   height: 4.5rem;
 }
 
+.r-landing-hero img:hover{
+   transform: scale(1.02);
+   transition: var(--transition);
+}
+
+.r-landing-flex {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .r-landing-flex {
+    display: flex;
+    align-items: center;   /* optional for vertical centering */
+    justify-content: space-between; /* optional */
+  }
+}
+@media screen and (min-width: 1253px) {
+  .r-margin-lr10neg {
+    margin-left: -10rem;
+    margin-right: -10rem;
+  }
+}
+
+.r-pad-b-2 {
+  padding-bottom: 2rem !important;
+}
+
+.r-pad-b-3 {
+  padding-bottom: 3rem !important;
+}
+
+
+.r-landing-vrna img {
+  box-shadow: 0;
+}
 .r-box-white {
   background: var(--white);
   padding-right: 1rem;
@@ -1026,7 +1060,7 @@ section.banner-cta h2 {
 }
 
 .r-welcome  {
-  padding-top: 2rem;
+  padding-top: 8rem;
   padding-bottom: 12rem;
 }
 

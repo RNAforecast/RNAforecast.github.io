@@ -16,13 +16,13 @@ Home
 
 .. container:: r-landing-hero r-welcome
 
-  .. container:: m-row
+  .. container:: m-row r-landing-flex
 
     .. container::  m-col-m-6 m-pull-l-0 m-left-l m-col-m-6 m-left-m m-center-s m-center-t
 
         .. raw:: html
 
-          <br/><br/><h1>Engineering the Future of <em>RNA</em></h1>
+          <h1>Engineering the Future of <em>RNA</em></h1>
 
         RNA Forecast is pioneering synthetic biology through innovative RNA device engineering and synthetic mRNA solutions. Our mission is to provide scientists and innovators with reliable, high-performance biotechnology that accelerates research and opens new avenues for discovery and application.
 
@@ -51,7 +51,7 @@ Home
       .. block-info::  RNA Design & Device Engineeering
         :class: r-block-landing
 
-        Design and optimize synthetic RNA devices for therapeutic and research applications with precision engineering
+        Design and optimize synthetic RNA devices for therapeutic and research applications with precision engineering.
 
         ..
             .. raw:: html
@@ -70,7 +70,7 @@ Home
           :class: r-block-landing
 
 
-          Specialized support in RNA folding, structure prediction, and design for partners in biotech, pharma, and academic research
+          Specialized support in RNA folding, structure prediction, and design for partners in biotech, pharma, and academic research.
 
         ..
           .. button-primary:: {filename}/services.rst
@@ -83,7 +83,7 @@ Home
         .. block-info:: ViennaRNA Training Programme
           :class: r-block-landing
 
-          Comprehensive online and in-person workshops and training programs for ViennaRNA software and RNA structure prediction
+          Comprehensive online and in-person workshops and training programs for ViennaRNA software and RNA structure prediction.
 
 
         ..
@@ -91,7 +91,7 @@ Home
 
             Learn more
 
-.. container:: m-container-inflate m-col-l-16 r-box-white m-row r-box-shadow
+.. container:: r-box-white m-row r-box-shadow r-landing-vrna r-landing-flex r-margin-lr10neg r-block
 
     .. container:: m-col-m-6
 
@@ -101,7 +101,7 @@ Home
 
         .. container:: r-basetext
 
-          Join our expert-led online training sessions to master ViennaRNA software and RNA structure prediction techniques
+          Join our expert-led online training sessions to master ViennaRNA software and RNA structure prediction techniques.
 
           .. container:: m-row r-workshop-item m-nopad
 
@@ -144,3 +144,10 @@ Home
               .. raw:: html
 
                 <h6>Format</h6><p>Online interactive training</p>
+
+
+    .. container::  m-push-l-0 m-col-m-6 m-right-m m-col-s-10 m-center-s r-pad-b-2
+
+      .. figure:: static/images/vrna_training02_435.jpeg
+        :figclass: shadow
+        :alt: engineered xrRNA

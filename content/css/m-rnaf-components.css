@@ -315,6 +315,13 @@ dl.m-footnote dd span.m-footnote a {
   padding: 0.9375rem 0.9375rem 0.9375rem 0.75rem;
 }
 
+.r-block {
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-radius: var(--border-radius);
+  border-color: var(--line-color);
+}
+
 /* Badge */
 .m-block.m-badge::after {
   content: ' ';
@@ -1831,6 +1838,21 @@ a.r-button {
   background-color: var(--rnaf-background);
   border-width: 0px;
   padding: 1rem 1.3rem;
+}
+
+nav .r-button {
+  font-size: 0.95rem;
+  line-height: var(--line-height);
+  background: var(--rnaf-gradient-hero);
+  border: 0;
+  color: white;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+nav .r-button:hover{
+    transform: translateY(-2px);
+    color: white;
 }
 
 .r-pub {

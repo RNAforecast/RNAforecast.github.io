@@ -605,6 +605,12 @@ dl.m-footnote dd span.m-footnote a {
   border-color: #e9ecef;
   padding: 0.9375rem 0.9375rem 0.9375rem 0.75rem;
 }
+.r-block {
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-radius: 0.5rem;
+  border-color: #e9ecef;
+}
 .m-block.m-badge::after {
   content: ' ';
   display: block;
@@ -1968,6 +1974,19 @@ a.r-button {
   border-width: 0px;
   padding: 1rem 1.3rem;
 }
+nav .r-button {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  border: 0;
+  color: white;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+nav .r-button:hover{
+    transform: translateY(-2px);
+    color: white;
+}
 .r-pub {
   font-size: 0.8rem;
 }
@@ -2165,7 +2184,7 @@ body > header > nav:target #m-navbar-hide {
   }
   body > header > nav #m-navbar-collapse ol {
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 1.2rem;;
   }
   body > header > nav #m-navbar-collapse > .m-row > ol, body > header > nav #m-navbar-collapse > .m-row > ol > li {
     float: left;
@@ -2756,6 +2775,35 @@ section.banner-cta h2 {
   line-height: 1.2em;
   height: 4.5rem;
 }
+.r-landing-hero img:hover{
+   transform: scale(1.02);
+   transition: all 0.3s ease;
+}
+.r-landing-flex {
+  display: block;
+}
+@media screen and (min-width: 768px) {
+  .r-landing-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+@media screen and (min-width: 1253px) {
+  .r-margin-lr10neg {
+    margin-left: -10rem;
+    margin-right: -10rem;
+  }
+}
+.r-pad-b-2 {
+  padding-bottom: 2rem !important;
+}
+.r-pad-b-3 {
+  padding-bottom: 3rem !important;
+}
+.r-landing-vrna img {
+  box-shadow: 0;
+}
 .r-box-white {
   background: #ffffff;
   padding-right: 1rem;
@@ -2867,7 +2915,7 @@ section.banner-cta h2 {
   font-size: 0.7rem;
 }
 .r-welcome  {
-  padding-top: 2rem;
+  padding-top: 8rem;
   padding-bottom: 12rem;
 }
 .r-welcome p {
