@@ -822,7 +822,6 @@ figure.m-figure > *:first-child {
   display: inline;
 }
 figure.m-figure > *:last-child {
-  margin-bottom: 1rem !important;
 }
 figure.m-figure img,
 figure.m-figure svg,
@@ -830,7 +829,7 @@ figure.m-figure video {
   position: relative;
   margin-left: 0;
   margin-right: 0;
-  margin-bottom: 0;
+  margin-bottom: -1rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -865,6 +864,9 @@ figure.m-figure.m-fullwidth::after {
   display: block;
   margin-top: 1rem;
   height: 1px;
+}
+figure.shadow {
+  box-shadow: 1.25rem 1.23rem 1rem rgba(0, 0, 0, .18) !important;
 }
 .m-code-figure, .m-console-figure {
   margin-top: 0;
@@ -1966,6 +1968,19 @@ a.r-button {
   border-width: 0px;
   padding: 1rem 1.3rem;
 }
+nav .r-button {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  border: 0;
+  color: white;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+nav .r-button:hover{
+    transform: translateY(-2px);
+    color: white;
+}
 .r-pub {
   font-size: 0.8rem;
 }
@@ -2163,7 +2178,7 @@ body > header > nav:target #m-navbar-hide {
   }
   body > header > nav #m-navbar-collapse ol {
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 1.2rem;;
   }
   body > header > nav #m-navbar-collapse > .m-row > ol, body > header > nav #m-navbar-collapse > .m-row > ol > li {
     float: left;
@@ -2754,6 +2769,26 @@ section.banner-cta h2 {
   line-height: 1.2em;
   height: 4.5rem;
 }
+.r-landing-hero img:hover{
+   transform: scale(1.02);
+   transition: all 0.3s ease;
+}
+.r-landing-flex {
+  display: block;
+}
+@media screen and (min-width: 768px) {
+  .r-landing-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.r-pad-b-3 {
+  padding-bottom: 3rem !important;
+}
+.r-landing-vrna img {
+  box-shadow: 0;
+}
 .r-box-white {
   background: #ffffff;
   padding-right: 1rem;
@@ -2865,7 +2900,7 @@ section.banner-cta h2 {
   font-size: 0.7rem;
 }
 .r-welcome  {
-  padding-top: 12rem;
+  padding-top: 8rem;
   padding-bottom: 12rem;
 }
 .r-welcome p {

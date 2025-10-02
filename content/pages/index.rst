@@ -91,7 +91,7 @@ Home
 
             Learn more
 
-.. container:: m-container-inflate m-col-l-16 r-box-white m-row r-box-shadow
+.. container:: m-container-inflate m-col-l-16 r-box-white m-row r-box-shadow r-landing-vrna r-landing-flex
 
     .. container:: m-col-m-6
 
@@ -144,3 +144,10 @@ Home
               .. raw:: html
 
                 <h6>Format</h6><p>Online interactive training</p>
+
+
+    .. container::  m-push-l-0 m-col-m-6 m-right-m m-col-s-10 m-center-s r-pad-b-3
+
+      .. figure:: static/images/vrna_training01_500.jpeg
+        :figclass: shadow
+        :alt: engineered xrRNA

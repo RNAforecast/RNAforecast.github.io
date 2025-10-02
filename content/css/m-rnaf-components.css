@@ -1833,6 +1833,21 @@ a.r-button {
   padding: 1rem 1.3rem;
 }
 
+nav .r-button {
+  font-size: 0.95rem;
+  line-height: var(--line-height);
+  background: var(--rnaf-gradient-hero);
+  border: 0;
+  color: white;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+nav .r-button:hover{
+    transform: translateY(-2px);
+    color: white;
+}
+
 .r-pub {
   font-size: 0.8rem;
 }
