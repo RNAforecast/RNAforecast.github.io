@@ -52,6 +52,14 @@
   {% endif %}
   {% if OSANO %}
   <script src="https://cmp.osano.com/AzqaZNTUulxcl8Ml/1502bf1a-8776-4742-8b0b-35e18285f582/osano.js"></script>
+  <script>
+document.addEventListener("osanoConsentChanged", function(event) {
+  if (Osano.cm.getConsent().consentGiven) {
+    const btn = document.querySelector(".osano-cm-widget");
+    if (btn) btn.style.display = "none";
+  }
+});
+</script>
   {% endif %}
 </head>
 <body>
