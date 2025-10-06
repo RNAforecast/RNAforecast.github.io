@@ -1878,3 +1878,7 @@ nav .r-button:hover{
 .osano-cm-widget[data-osano-consent="accepted"] .osano-cm-button {
   display: none !important;
 }
+
+.osano-cm-widget {
+  display: none !important;
+}
