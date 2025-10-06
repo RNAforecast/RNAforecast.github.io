@@ -97,3 +97,5 @@ SITEMAP = {
     },
     "exclude": ["blog/archive/", "blog/author/", "authors", "index", "legal"]
 }
+
+OSANO = False

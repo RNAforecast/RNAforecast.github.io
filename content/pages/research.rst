@@ -34,7 +34,7 @@ Research at RNA Forecast
           <p>Combining theory, computation, and biology to expand next-generation RNA technologies</p>
 
 
-.. container:: m-row
+.. container:: m-row r-pad-b-2
 
     .. container:: m-col-m-4 m-pull-m-1 r-pad-lr-none
 

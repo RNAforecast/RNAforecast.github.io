@@ -36,62 +36,70 @@ Home
         :figclass: shadow
         :alt: engineered xrRNA
 
-
-
-.. container:: m-row m-container-inflate r-landing-hero
+.. container:: m-row r-landing-hero r-pad-b-3
 
     .. raw:: html
 
       <h2>Our Core Services</h2>
 
-      <p class="m-text-center">Comprehensive RNA engineering solutions for modern biotechnology challenges</p>
+    .. class:: m-text-center r-pad-b-2
 
-    .. container::  m-col-l-4 r-pad-lr-3
+      Comprehensive RNA engineering solutions for modern biotechnology challenges
 
-      .. block-info::  RNA Design & Device Engineeering
-        :class: r-block-landing
+    .. container:: m-row r-pad-b-2 r-mar-lr-2neg
 
-        Design and optimize synthetic RNA devices for therapeutic and research applications with precision engineering.
+        .. container:: m-col-m-4 m-pull-m-1 r-pad-lr-none
 
-        ..
+          .. container:: r-pad-lr-3 r-box r-box-shadow r-mar-lr-2neg
+
+              .. container:: r-method-icon
+
+                .. raw:: html
+
+                    <i class="fas fas-25 fa-dna r-primary"></i>
+
+              .. raw:: html
+
+                <h5>RNA Design & Device Engineeering</h5>
+
+              Design and optimize synthetic RNA devices for therapeutic and research applications with precision engineering.
+
+
+        .. container:: m-col-m-4 r-pad-lr-none
+
+          .. container:: r-pad-lr-3 r-box r-box-shadow r-mar-lr-2neg
+
+            .. container:: r-method-icon
+
+              .. raw:: html
+
+                  <i class="fas fas-25 fa-atom r-primary"></i>
+
             .. raw:: html
 
-            <img src="static/images/img_RNAengineering100.png">
+              <h5>RNA Structure Consultancy</h5>
 
-        ..
-            .. button-primary:: {filename}/services.rst
-
-            Learn more
-
-    .. container::   m-col-l-4 r-pad-lr-3
+            Specialized support in RNA folding, structure prediction, and design for partners in biotech, pharma, and academic research.
 
 
-        .. block-info:: RNA Structure Consultancy
-          :class: r-block-landing
 
+        .. container:: m-col-m-4 m-push-m-1 r-pad-lr-none
 
-          Specialized support in RNA folding, structure prediction, and design for partners in biotech, pharma, and academic research.
+          .. container:: r-pad-lr-3 r-box r-box-shadow r-mar-lr-2neg
 
-        ..
-          .. button-primary:: {filename}/services.rst
-            :class: r-bottom
+            .. container:: r-method-icon
 
-            Learn more
+              .. raw:: html
 
-    .. container::  m-col-l-4 r-pad-lr-3
+                  <i class="fas fas-25 fa-syringe r-primary"></i>
 
-        .. block-info:: ViennaRNA Training Programme
-          :class: r-block-landing
+            .. raw:: html
 
-          Comprehensive online and in-person workshops and training programs for ViennaRNA software and RNA structure prediction.
+              <h5>ViennaRNA Training Programme</h5>
 
+            Comprehensive online and in-person workshops and training for ViennaRNA software and RNA structure prediction.
 
-        ..
-          .. button-primary:: {filename}/services.rst
-
-            Learn more
-
-.. container:: r-box-white m-row r-box-shadow r-landing-vrna r-landing-flex r-margin-lr10neg r-block
+.. container:: r-box-white m-row r-box-shadow r-landing-vrna r-landing-flex r-margin-lr-10neg r-block
 
     .. container:: m-col-m-6
 

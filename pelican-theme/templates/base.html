@@ -50,6 +50,9 @@
   gtag('config', '{{GOOGLE_ANALYTICS}}');
   </script>
   {% endif %}
+  {% if OSANO %}
+  <script src="https://cmp.osano.com/AzqaZNTUulxcl8Ml/1502bf1a-8776-4742-8b0b-35e18285f582/osano.js"></script>
+  {% endif %}
 </head>
 <body>
 <header><nav id="navigation"{% if page and page.landing %} class="m-navbar-landing"{% elif (page and page.cover) or (article and article.cover) %} class="m-navbar-cover"{% endif %}>
