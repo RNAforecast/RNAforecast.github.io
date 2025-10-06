@@ -2004,6 +2004,9 @@ nav .r-button:hover{
   display: inline;
   color: #212529;
 }
+.osano-cm-widget[data-osano-consent="accepted"] .osano-cm-button {
+  display: none !important;
+}
 
 body > header > nav {
   width: 100%;
@@ -2756,16 +2759,15 @@ section.banner-cta h2 {
     font-size: 0.95rem;
 }
 .r-landing-hero h1 {
-  padding-top: 0.5em;
-  font-size: 3em;
-  font-weight: 500 !important;
-  line-height: 1.2em;
   padding-top: 1rem;
+  font-size: 3em;
+  font-weight: 600 !important;
+  line-height: 1.2em;
 }
 .r-landing-hero h2 {
   padding-top: 0.5em;
   font-size: 2.7em;
-  font-weight: 400 !important;
+  font-weight: 600 !important;
   line-height: 1.2em;
   text-align: center;
 }
@@ -2774,6 +2776,10 @@ section.banner-cta h2 {
   font-size: 1.3em;
   line-height: 1.2em;
   height: 4.5rem;
+}
+.r-landing-hero em{
+  font-style: normal;
+  color: #3b82f6;
 }
 .r-landing-hero img:hover{
    transform: scale(1.02);
@@ -2789,8 +2795,14 @@ section.banner-cta h2 {
     justify-content: space-between;
   }
 }
+@media screen and (min-width: 992px) {
+  .r-mar-lr-2neg {
+    margin-left: -2rem;
+    margin-right: -2rem
+  }
+}
 @media screen and (min-width: 1253px) {
-  .r-margin-lr10neg {
+  .r-margin-lr-10neg {
     margin-left: -10rem;
     margin-right: -10rem;
   }
@@ -2819,10 +2831,6 @@ section.banner-cta h2 {
   font-weight: 500 !important;
   line-height: 1.2em;
   color: #212529;
-}
-.r-landing-hero em{
-  font-style: normal;
-  color: #3b82f6;
 }
 .r-highlight {
   color: #3b82f6;
@@ -2878,8 +2886,9 @@ section.banner-cta h2 {
   width: 50%;
 }
 .r-subhead {
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 .r-subhead h2 {
