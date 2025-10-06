@@ -1874,3 +1874,7 @@ nav .r-button:hover{
   display: inline;
   color: var(--gray-900);
 }
+
+.osano-cm-widget[data-osano-consent="accepted"] .osano-cm-button {
+  display: none !important;
+}
