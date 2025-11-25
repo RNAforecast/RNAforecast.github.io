@@ -49,7 +49,7 @@ SOCIAL = (
 )
 
 M_LINKS_FOOTER1 = [('RNA Forecast', '/'),
-                    ('Reseach', 'research/'),
+                    ('Research', 'research/'),
                     ('Contact', 'contact/'),
                     ('Legal', 'legal/')]
 

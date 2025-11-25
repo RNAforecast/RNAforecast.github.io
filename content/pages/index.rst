@@ -60,7 +60,7 @@ Home
 
               .. raw:: html
 
-                <h5>RNA Design & Device Engineeering</h5>
+                <h5>RNA Design & Device Engineering</h5>
 
               Design and optimize synthetic RNA devices for therapeutic and research applications with precision engineering.
 
@@ -123,7 +123,7 @@ Home
 
               .. raw:: html
 
-                <h6>Next Workshop</h6><p>November 20, 2025</p>
+                <h6>Next Workshop</h6><p>upon request</p>
 
           .. container:: m-row r-workshop-item m-nopad
 
