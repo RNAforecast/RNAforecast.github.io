@@ -901,19 +901,7 @@ section.banner-cta h2 {
   }
 }
 
-.r-mar-lr-2neg {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 @media screen and (min-width: 992px) {
-  .r-mar-lr-2neg {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem
-  }
-}
-
-@media screen and (min-width: 1253px) {
   .r-mar-lr-2neg {
     margin-left: -2rem;
     margin-right: -2rem
