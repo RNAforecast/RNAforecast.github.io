@@ -4,14 +4,7 @@ Contact RNA Forecast
 :title: Contact for Projects, Partnerships & Press Requests
 :description: Contact RNA Forecast for project inquiries, partnerships opportunities, media requests, and general information
 :slug: contact
-:banner: Contact Us
-:banner_lead: Get in touch with our team to discuss your RNA engineering needs
-:bannercta: Need Immediate Assistance?
-:bannercta_msg: Our team is available to answer your questions and discuss your RNA engineering needs.
-:bannercta_color: secondary
-:bannercta_link: #top
-:bannercta_icon: fa-paper-plane
-:bannercta_text: Contact Us Now
+:banner: Get in touch.
 
 
 
@@ -74,79 +67,3 @@ Contact RNA Forecast
         .. raw:: html
 
           <h6>Email</h6><p><a href="mailto:hello@rnaforecast.com">hello@rnaforecast.com</a></p>
-
-.. container:: m-row
-
-    .. container:: r-subhead
-
-        .. raw:: html
-
-          <h2>Multiple Ways to Connect</h2>
-
-          <p>Choose the best way to reach out based on your needs</p>
-
-
-.. container:: m-row
-
-    .. container:: m-row
-
-        .. container:: m-col-m-4 m-pull-m-1 r-pad-lr-none
-
-          .. container:: r-pad-lr-3 r-box r-box-button r-box-shadow
-
-              .. container:: r-method-icon
-
-                .. raw:: html
-
-                    <i class="fas fas-25 fa-handshake r-primary"></i>
-
-              .. raw:: html
-
-                <h5>Joint Initiatives</h5>
-
-              Interested in joining forces? Let’s connect and explore collaboration opportunities.
-
-              .. raw:: html
-
-                <a class="r-button" href=mailto:partner@rnaforecast.com><i class="fas fa-envelope"></i>partner@rnaforecast.com</a>
-
-        .. container:: m-col-m-4 r-pad-lr-none
-
-          .. container:: r-pad-lr-3 r-box r-box-button r-box-shadow
-
-            .. container:: r-method-icon
-
-              .. raw:: html
-
-                  <i class="fas fas-25 fa-cogs r-primary"></i>
-
-            .. raw:: html
-
-              <h5>Technical Support</h5>
-
-
-            Have questions about our services or need support? Our team is ready to assist you.
-
-            .. raw:: html
-
-              <a class="r-button" href=mailto:support@rnaforecast.com><i class="fas fa-envelope"></i>support@rnaforecast.com</a>
-
-        .. container:: m-col-m-4 m-push-m-1 r-pad-lr-none
-
-          .. container:: r-pad-lr-3 r-box r-box-button r-box-shadow
-
-            .. container:: r-method-icon
-
-              .. raw:: html
-
-                  <i class="fas fas-25 fa-newspaper r-primary"></i>
-
-            .. raw:: html
-
-              <h5>Media & Press</h5>
-
-            Media inquiries, press releases, and interview requests. We're happy to share our story.
-
-            .. raw:: html
-
-              <a class="r-button" href=mailto:media@rnaforecast.com><i class="fas fa-envelope"></i>media@rnaforecast.com</a>

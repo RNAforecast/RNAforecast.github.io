@@ -50,8 +50,7 @@ SOCIAL = (
 
 M_LINKS_FOOTER1 = [('RNA Forecast', '/'),
                     ('Research', 'research/'),
-                    ('Contact', 'contact/'),
-                    ('Legal', 'legal/')]
+                    ('Contact', 'contact/')]
 
 #M_LINKS_FOOTER2 = [('Social Media', ''),
 #                   ('LinkedIn', 'https://www.linkedin.com/company/rnaforecast')]
@@ -63,7 +62,7 @@ R_LINKEDIN_URL = 'https://www.linkedin.com/company/rnaforecast'
 DEFAULT_PAGINATION = 10
 
 M_FINE_PRINT =  """
-© 2025 RNA Forecast e.U. | All rights reserved
+© 2025 Michael Wolfinger | All rights reserved
 """
 
 STATIC_PATHS = ['static', 'extra', 'css', 'files']

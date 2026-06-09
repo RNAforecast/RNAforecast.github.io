@@ -1,41 +1,24 @@
-RNA Forecast Legal Information
-##############################
-:summary: RNA Forecast Legal Information
-:title: Imprint and legal disclosure
-:description: RNA Forecast legal note for compliance with Austrian laws
-:summary: This page provides RNA Forecast's imprint and legal disclosure to ensure full transparency and compliance
+Legal Notice
+############
+
 :slug: legal
+:template: page
 
 
-.. container:: r-Impressum
-
-  .. raw:: html
-
-    <h1>Impressum – Legal Notice under Austrian Law</h1>
+RNA Forecast advances RNA structure prediction and design at the
+intersection of computation and synthetic biology.
 
 
-  Informationen und Offenlegung gemäß §5 (1) ECG, § 25 MedienG, und § 14 UGB
+.. rubric:: Impressum
 
-  Firmendaten:
+Informationen und Offenlegung gemäß §5 (1) ECG und § 25 MedienG
 
-  Firmenname: RNA Forecast e.U.
+| Mag. Dr. Michael T. Wolfinger
+| Universität Wien
+| Währinger Straße 17, 1090 Wien
+| `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`_
+| https://rnaforecast.com
 
-  Inhaber: Mag. Dr. Michael T. Wolfinger
+Medieninhaber und inhaltlich Verantwortlicher: Michael T. Wolfinger
 
-  Firmenbuchnummer: FN 597678p
-
-  Firmenbuchgericht: Handelsgericht Wien
-
-  Anschrift: Einwanggasse 47, 1140 Wien
-
-  Web: https://rnaforecast.com
-
-  Email: hello@rnaforecast.com
-
-  Offenlegung nach Mediengesetz:
-
-  Medieninhaber: RNA Forecast e.U.
-
-  Firmensitz: Wien
-
-  Unternehmensgegenstand: Wissenschaft und Forschung. Weltweite Verwertung von Forschungsergebnissen.
+Unternehmensgegenstand: Wissenschaft und Forschung.
