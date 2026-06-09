@@ -21,4 +21,4 @@ Informationen und Offenlegung gemäß §5 (1) ECG und § 25 MedienG
 
 Medieninhaber und inhaltlich Verantwortlicher: Michael T. Wolfinger
 
-Unternehmensgegenstand: Wissenschaft und Forschung.
+Tätigkeitsbereich: Wissenschaft und Forschung.

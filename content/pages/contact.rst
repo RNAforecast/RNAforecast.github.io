@@ -4,7 +4,7 @@ Contact RNA Forecast
 :title: Contact for Projects, Partnerships & Press Requests
 :description: Contact RNA Forecast for project inquiries, partnerships opportunities, media requests, and general information
 :slug: contact
-:banner: Get in touch.
+:banner: Get in touch
 
 
 
