@@ -50,7 +50,8 @@ SOCIAL = (
 
 M_LINKS_FOOTER1 = [('RNA Forecast', '/'),
                     ('Research', 'research/'),
-                    ('Contact', 'contact/')]
+                    ('Contact', 'contact/'),
+                    ('Legal', 'legal/')]
 
 #M_LINKS_FOOTER2 = [('Social Media', ''),
 #                   ('LinkedIn', 'https://www.linkedin.com/company/rnaforecast')]
