@@ -1,9 +1,11 @@
 """The Sitemap plugin generates plain-text or XML sitemaps."""
 
 from datetime import datetime
+from functools import lru_cache
 import logging
 import os.path
 import re
+import subprocess
 from urllib.request import pathname2url
 
 from pelican import contents, signals
@@ -36,6 +38,38 @@ XML_TRANSLATION = """<xhtml:link rel="alternate" hreflang="{}" ref="{}/{}"/>
 XML_FOOTER = """
 </urlset>
 """
+
+
+@lru_cache(maxsize=None)
+def commit_date(source):
+    """When this file was last committed, or None if git cannot say.
+
+    Returns None outside a repository, without git installed, for an
+    uncommitted file, and — importantly — on a shallow clone, where the
+    history is not there to ask. CI therefore needs fetch-depth: 0.
+    """
+    if not source or not os.path.exists(source):
+        return None
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cI", "--", os.path.basename(source)],
+            cwd=os.path.dirname(source) or ".",
+            capture_output=True, text=True, timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if result.returncode != 0 or not result.stdout.strip():
+        return None
+    try:
+        return datetime.fromisoformat(result.stdout.strip())
+    except ValueError:
+        return None
+
+
+def file_mtime(source):
+    if source and os.path.exists(source):
+        return datetime.fromtimestamp(os.path.getmtime(source))
+    return None
 
 
 def format_date(date):
@@ -149,16 +183,17 @@ class SitemapGenerator:
                     # That's it for txt. Short circuit the loop, gain an indent level.
                     continue
 
-                # Prefer the source file's mtime over the build time, so a
-                # rebuild that changed nothing does not advertise every page
-                # as freshly modified.
+                # When the page last actually changed, not when it was last
+                # built. The commit date is the only source that survives CI:
+                # git does not preserve mtimes, so a fresh checkout stamps
+                # every file with the checkout time, which is build time by
+                # another name.
                 lastmod = (
                     getattr(obj, "modified", None) or getattr(obj, "date", None)
                 )
                 if lastmod is None:
                     source = getattr(obj, "source_path", None)
-                    if source and os.path.exists(source):
-                        lastmod = datetime.fromtimestamp(os.path.getmtime(source))
+                    lastmod = commit_date(source) or file_mtime(source)
                 lastmod = format_date(lastmod or self.now)
                 content_type = (
                     "articles"

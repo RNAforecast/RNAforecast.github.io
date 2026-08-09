@@ -2,6 +2,9 @@
 sitemap, llms.txt and the structured-data graph on the real build."""
 
 import re
+import subprocess
+import sys
+from datetime import datetime
 
 import pytest
 
@@ -115,11 +118,47 @@ def test_sitemap_carries_no_noise_fields(site):
     assert '<priority>' not in sitemap
 
 
-def test_lastmod_tracks_content_not_the_build(site):
-    """All-identical timestamps mean it is stamping build time again."""
+def test_lastmod_is_a_valid_w3c_datetime(site):
     stamps = re.findall(r'<lastmod>([^<]+)</lastmod>', read(site / 'sitemap.xml'))
     assert len(stamps) > 1
-    assert len(set(stamps)) > 1
+    for stamp in stamps:
+        assert re.fullmatch(
+            r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}', stamp), stamp
+
+
+def test_lastmod_comes_from_the_commit_date(site, repo):
+    """Not from the build clock.
+
+    Deliberately not asserting that the values differ: pages changed in the
+    same commit share a date, and a fresh CI checkout gives every file the
+    same mtime, so distinctness is not a property of a correct sitemap.
+    """
+    committed = subprocess.run(
+        ['git', 'log', '-1', '--format=%cI', '--', 'content/pages/index.rst'],
+        cwd=repo, capture_output=True, text=True)
+    if committed.returncode != 0 or not committed.stdout.strip():
+        pytest.skip('no git history available')
+
+    expected = datetime.fromisoformat(committed.stdout.strip())
+    home = re.search(
+        r'<loc>[^<]*rnaforecast\.com/</loc>\s*<lastmod>([^<]+)</lastmod>',
+        read(site / 'sitemap.xml'))
+    assert home, 'home page missing from the sitemap'
+    assert datetime.fromisoformat(home.group(1)) == expected
+
+
+def test_rebuilding_does_not_move_lastmod(site, tmp_path, repo):
+    """The whole point: an unchanged rebuild must not look like a change."""
+    again = tmp_path / 'again'
+    result = subprocess.run(
+        [sys.executable, '-m', 'pelican', 'content', '-o', str(again),
+         '-s', 'publishconf.py'],
+        cwd=repo, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+    first = re.findall(r'<lastmod>([^<]+)</lastmod>', read(site / 'sitemap.xml'))
+    second = re.findall(r'<lastmod>([^<]+)</lastmod>', read(again / 'sitemap.xml'))
+    assert first == second and first
 
 
 # --- llms.txt -------------------------------------------------------------

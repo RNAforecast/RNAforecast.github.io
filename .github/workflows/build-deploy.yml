@@ -24,8 +24,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Full history: the sitemap takes each page's lastmod from the date its
+      # source was last committed, and a shallow clone has no history to ask.
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
