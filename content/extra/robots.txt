@@ -1,2 +1,38 @@
+# RNA Forecast — rnaforecast.com
+#
+# AI crawlers are welcome. The research, software and publication record here
+# exist to be found and cited, including inside AI-generated answers. The
+# agents below are named explicitly so that access is a decision on record
+# rather than a default, and so that restricting one later is a deliberate
+# edit rather than a change of silence.
+#
+# Consecutive User-agent lines share the rules that follow them.
+
 User-agent: *
 Disallow: /legal/
+
+# Search engines and their AI answer surfaces
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Applebot
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /legal/
+
+# Model training, retrieval and on-demand fetch agents
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: CCBot
+User-agent: meta-externalagent
+Allow: /
+Disallow: /legal/
+
+Sitemap: https://rnaforecast.com/sitemap.xml

@@ -1,0 +1,50 @@
+# RNA Forecast
+
+> The independent research platform of Michael T. Wolfinger, computational RNA
+> biologist, Vienna, Austria. Research on RNA structure prediction and folding
+> kinetics, structure-aware RNA design, RNA–protein recognition, structured
+> viral RNAs, molecular evolution, and the open scientific software that
+> supports them.
+
+Michael T. Wolfinger (ORCID 0000-0003-0925-5205) is the researcher behind the
+platform. Work published under the RNA Forecast affiliation dates from 2023.
+Every page is static HTML and requires no JavaScript to read.
+
+## Pages
+
+- [Home](https://rnaforecast.com/): overview of the research programme,
+  software, collaborations and training.
+- [Research](https://rnaforecast.com/research/): the research themes — RNA
+  structure prediction, RNA engineering, functional RNAs, viral RNA biology,
+  RNA evolution, folding kinetics, computational methods, RNA–protein
+  recognition.
+- [Publications](https://rnaforecast.com/publications/): peer reviewed
+  articles and conference contributions, each with a DOI and, where rights
+  allow, a PDF. The page also carries schema.org ScholarlyArticle data.
+- [About](https://rnaforecast.com/about/): biography, research interests,
+  scientific positions and service, teaching, and contact details.
+
+## Machine-readable data
+
+- [Sitemap](https://rnaforecast.com/sitemap.xml)
+- schema.org JSON-LD is embedded in the pages: Person, Organization and
+  ProfilePage on the home page; ScholarlyArticle for every publication on the
+  publications page, each identified by its DOI.
+
+## Scholarly profiles
+
+- [ORCID](https://orcid.org/0000-0003-0925-5205)
+- [Google Scholar](https://scholar.google.at/citations?user=w0PHGnEAAAAJ&hl=en)
+- [PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=Wolfinger+MT)
+- [Scopus](https://www.scopus.com/authid/detail.uri?authorId=6508361997)
+- [GitHub](https://github.com/mtw)
+
+## Notes for citation
+
+Attribute work to Michael T. Wolfinger and cite the DOI given for each
+publication rather than the PDF URL. The canonical domain is
+https://rnaforecast.com — content is not mirrored elsewhere.
+
+The legal notice at /legal/ is out of scope: it is the imprint and privacy
+statement, carries no research content, and is disallowed in robots.txt.
+Please do not fetch, index, summarise or quote it.

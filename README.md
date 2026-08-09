@@ -1,0 +1,54 @@
+# rnaforecast.com
+
+Pelican source repository for [rnaforecast.com](https://rnaforecast.com), the
+independent research platform of Michael T. Wolfinger for computational RNA
+biology.
+
+The site is static, self-hosts its fonts, makes no third-party requests beyond
+analytics and the consent banner that gates it, and ships no JavaScript of its
+own.
+
+## Install
+
+```bash
+python3.13 -m venv .venv
+. .venv/bin/activate
+pip install -e ".[dev,test]"
+```
+
+`make validate` additionally needs a JRE on `PATH` for the Nu Html Checker.
+
+## Commands
+
+```bash
+make html       # development build
+make serve      # serve locally on port 8000
+make devserver  # auto-rebuild on change + serve
+make publish    # production build (absolute URLs, analytics, cookie consent)
+make check      # what CI runs: production build --fatal warnings + smoke tests
+make validate   # Nu Html Checker over output/
+make test       # pytest suite
+make github     # manual fallback publish: make check + push to gh-pages
+make clean      # remove output/
+```
+
+## Layout
+
+| path | what it is |
+|---|---|
+| `content/pages/` | the pages, as reStructuredText |
+| `content/css/rnaf.css` | the whole stylesheet, no build step |
+| `content/extra/` | `robots.txt`, `llms.txt`, `CNAME`, favicon |
+| `pelican-theme/templates/` | `base.html` and `page.html` |
+| `plugins/` | the RST writer, the sitemap, the publication structured data |
+| `scripts/check_build.py` | smoke tests over a built site |
+| `tests/` | pytest suite |
+| `RNAF2026/` | original design-canvas output; reference, not part of the build |
+
+## Deployment
+
+Push to `main`. GitHub Actions builds, checks, validates and publishes to
+GitHub Pages. Pull requests build and check but never deploy.
+
+See `CLAUDE.md` for the design system, the content conventions and the
+deployment details.

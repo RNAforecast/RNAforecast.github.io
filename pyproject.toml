@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rnaforecast-com"
+version = "0.1.0"
+description = "Pelican source repository for rnaforecast.com"
+authors = [
+  { name = "Michael T. Wolfinger", email = "michael.wolfinger@rnaforecast.com" }
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  # docutils is the reStructuredText writer, so a minor bump silently changes
+  # the generated HTML. Bounded on purpose, unlike the rest.
+  "docutils>=0.21,<0.24",
+  "pelican>=4.11,<5",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ghp-import>=2.1",
+  "html5validator>=0.4",
+]
+test = [
+  "pytest>=8",
+]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# plugins/ and scripts/ are namespace packages imported straight from the repo.
+pythonpath = ["."]
+addopts = "-q"

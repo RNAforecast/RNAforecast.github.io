@@ -1,0 +1,1039 @@
+/* Self-hosted Barlow + Barlow Condensed (latin, latin-ext). Downloaded from
+   Google Fonts and served from this origin — the site runs behind a cookie
+   consent banner, so it makes no third-party requests. */
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../static/fonts/barlow-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../static/fonts/barlow-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../static/fonts/barlow-500-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../static/fonts/barlow-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../static/fonts/barlow-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../static/fonts/barlow-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../static/fonts/barlow-condensed-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../static/fonts/barlow-condensed-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../static/fonts/barlow-condensed-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../static/fonts/barlow-condensed-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* ══════════════════════════════════════════════════════════════════════════
+   RNA Forecast — site stylesheet.
+
+   Layer 1  tokens ....... the "Industry" design system's :root variables
+   Layer 2  base ......... element defaults; a page of plain prose is already
+                           styled, so reStructuredText needs no classes for it
+   Layer 3  components ... the design system's own classes (.btn, .tag,
+                           .blueprint, .table …). Only the ones the content
+                           actually uses are kept; the rest of the design
+                           system lives in RNAF2026/_ds/ if it is ever needed.
+   Layer 4  site ......... page furniture and the content components that the
+                           .rst pages address by name
+   Layer 5  responsive ... breakpoints and print
+
+   Every value comes from a token. No inline styles anywhere — reStructuredText
+   can emit classes but never a style attribute, which is why the design's
+   inline styling was lifted into layer 4.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Layer 1 — tokens ─────────────────────────────────────────────────── */
+
+:root {
+  --color-bg: #f2f2f3;
+  --color-surface: #e9e9ea;
+  --color-text: #1d1f20;
+  --color-accent: #5980a6;
+  --color-divider: color-mix(in srgb, #1d1f20 16%, transparent);
+  /* The one signal colour: a field the visitor left in an invalid state. */
+  --color-error: #a5443c;
+
+  /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
+     same step of any role matches the others in visual value. */
+  --color-neutral-100: #f5f5f8;
+  --color-neutral-800: #424244;
+
+  --color-accent-100: #eef6ff;
+  --color-accent-600: #597ea3;
+  --color-accent-700: #416180;
+
+  --font-heading: "Barlow Condensed", system-ui, sans-serif;
+  --font-heading-weight: 600;
+  --font-body: "Barlow", system-ui, sans-serif;
+
+  --space-1: 3.4px;
+  --space-2: 6.8px;
+  --space-3: 10.2px;
+  --space-4: 13.6px;
+
+  /* Site-level derivations. The design leans on three recurring text tints
+     and one page measure; naming them keeps layer 4 free of color-mix noise. */
+  --ink-88: color-mix(in srgb, var(--color-text) 88%, transparent);
+  --ink-82: color-mix(in srgb, var(--color-text) 82%, transparent);
+  --ink-70: color-mix(in srgb, var(--color-text) 70%, transparent);
+  --ink-62: color-mix(in srgb, var(--color-text) 62%, transparent);
+  --ink-55: color-mix(in srgb, var(--color-text) 55%, transparent);
+  --ink-45: color-mix(in srgb, var(--color-text) 45%, transparent);
+  --hairline: color-mix(in srgb, var(--color-text) 8%, transparent);
+
+  --shell-max: 1200px;
+  --shell-pad: clamp(16px, 4vw, 72px);
+  --section-gap: clamp(44px, 7vw, 88px);
+}
+
+/* ── Layer 2 — base ───────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 var(--space-2);
+}
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+img { display: block; max-width: 100%; }
+figure { margin: 0; }
+figcaption {
+  font-size: 11px; margin-top: var(--space-1); color: var(--ink-55);
+}
+hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--space-4) 0; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* Skip link — visible only once focused. */
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 10;
+  padding: 10px 16px; background: var(--color-accent); color: var(--color-bg);
+  font-family: var(--font-heading); text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+/* ── Layer 3 — design-system components ───────────────────────────────── */
+
+/* Blueprint frame. The design draws four "+" registration marks just outside
+   the box. Those were four <i class="corner"> children; reStructuredText
+   cannot emit them, so the marks are drawn here as eight hairline gradients
+   on one pseudo-element — .blueprint alone now carries the whole frame. */
+.blueprint {
+  position: relative;
+  border: 1px solid var(--color-divider);
+  border-radius: 0;
+}
+.blueprint::before {
+  content: ""; position: absolute; inset: -6px; pointer-events: none;
+  --mark: var(--ink-55);
+  background-image:
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark));
+  background-size:
+    1px 11px, 11px 1px,   /* top-left    — vertical, horizontal */
+    1px 11px, 11px 1px,   /* top-right   */
+    1px 11px, 11px 1px,   /* bottom-left */
+    1px 11px, 11px 1px;   /* bottom-right */
+  background-position:
+    5px 0,            0 5px,
+    calc(100% - 5px) 0,   100% 5px,
+    5px 100%,         0 calc(100% - 5px),
+    calc(100% - 5px) 100%, 100% calc(100% - 5px);
+  background-repeat: no-repeat;
+}
+/* The overlay image treatments clip their overlay; a blueprint draws its
+   marks outside the box, so when both share a wrapper the frame must win. */
+
+/* — buttons —
+   The design system's .btn, plus the container-driven equivalents.
+   reStructuredText cannot put a class on an inline link, so an action row says
+   what kind of row it is and the links inside take their look from it; in a
+   row the first link is the primary one, as the design has it. */
+.btn,
+.hero-actions a, .actions a, .sec-link a, .actions-primary a,
+.pubs-full .pub-links a {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid var(--color-divider);
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: 0;
+}
+.btn svg { display: block; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* primary — the one solid object on the board */
+.btn-primary,
+.hero-actions a:first-child, .actions-primary a {
+  background: var(--color-accent); color: var(--color-bg);
+  border-color: var(--color-accent);
+}
+.btn-primary:hover,
+.hero-actions a:first-child:hover, .actions-primary a:hover { background: var(--color-accent-600); }
+.btn-primary:active,
+.hero-actions a:first-child:active, .actions-primary a:active { background: var(--color-accent-700); }
+
+/* secondary — outlined */
+.hero-actions a:not(:first-child) { border-color: var(--color-divider); }
+.hero-actions a:not(:first-child):hover, .pubs-full .pub-links a:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+
+/* ghost — text only */
+.actions a, .sec-link a, .pubs-full .pub-links a + a {
+  color: var(--color-accent); padding-inline: var(--space-1);
+  border-color: transparent;
+}
+.actions a:hover, .sec-link a:hover, .pubs-full .pub-links a + a:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+
+.btn-block { width: 100%; margin-top: var(--space-2); }
+.pubs-full .pub-links a { font-size: 12px; padding: 5px 12px; }
+
+/* — tags — */
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px; border-radius: 0;
+  text-decoration: none;
+}
+.tag-neutral { background: var(--color-neutral-100); color: var(--color-neutral-800); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+
+/* — tables — */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table th {
+  text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-62); padding: var(--space-2);
+  border-bottom: 1px solid var(--color-divider);
+}
+table td { padding: var(--space-2); border-bottom: 1px solid var(--hairline); }
+table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, transparent); }
+
+/* ── Layer 4 — site ───────────────────────────────────────────────────── */
+
+/* — the page measure — */
+.shell {
+  max-width: var(--shell-max); margin: 0 auto;
+  padding-inline: var(--shell-pad);
+}
+
+/* — masthead — */
+.site-head { border-bottom: 1px solid var(--color-divider); }
+.nav {
+  display: flex; align-items: center;
+  max-width: var(--shell-max); margin: 0 auto;
+  flex-wrap: wrap;
+  padding: var(--space-3) 0;
+  padding-inline: var(--shell-pad);
+  gap: clamp(12px, 1.6vw, 22px);
+}
+.nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--color-accent); }
+.nav a[aria-current="page"] { color: var(--color-accent-700); font-weight: 700; }
+.nav-brand {
+  display: flex; align-items: center;
+  margin-right: clamp(8px, 2vw, 24px);
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 18px;
+}
+.nav-brand img { height: 26px; width: auto; }
+/* The hamburger is a checkbox — no script. Both are hidden until the
+   breakpoint in layer 5 reveals them. */
+.nav-toggle, .nav-btn { display: none; }
+
+/* — hero — */
+.hero { padding: clamp(44px, 8vw, 112px) 0 clamp(36px, 6vw, 72px); }
+.hero .kicker { margin: 0 0 24px; }
+.hero h1 {
+  font-size: clamp(46px, 8vw, 104px); line-height: 1.02;
+  letter-spacing: 0.005em; text-transform: uppercase; margin: 0;
+}
+.hero-sub {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(20px, 3.2vw, 34px); line-height: 1.1;
+  color: var(--color-accent-700); margin: 8px 0 0;
+}
+.hero-links {
+  margin: 20px 0 0; font-size: 13px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ink-62);
+}
+/* reStructuredText wraps a run of links in a paragraph, so the row itself is
+   laid out on that paragraph rather than on the container. */
+.hero-links p, .hero-actions p, .actions p, .sec-link p, .pub-links p {
+  margin: 0; display: flex; flex-wrap: wrap; align-items: center;
+}
+.hero-links p { gap: 10px; }
+.hero-actions p, .actions p { gap: 12px; }
+.pub-links p { gap: 14px; }
+.hero-links a {
+  color: inherit; text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 25%, transparent);
+  padding-bottom: 1px;
+}
+.hero-links a:hover { color: var(--color-accent-700); border-bottom-color: var(--color-accent); }
+/* The separators are decoration, not content — drawn rather than typed.
+   inline-block keeps the dot outside the link's underline. */
+.hero-links a:not(:last-child)::after {
+  content: "·"; display: inline-block;
+  position: absolute; margin-left: 10px;
+  border: 0; color: var(--ink-62);
+}
+.hero-links a:not(:last-child) { position: relative; margin-right: 10px; }
+.hero-lead {
+  font-size: clamp(16px, 1.4vw, 17px); line-height: 1.6;
+  max-width: 64ch; margin: 28px 0 0; color: var(--ink-88);
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+
+/* The landing hero sets its photograph beside the wordmark as the page's
+   visual anchor. The image keeps its own colour — the system would normally
+   duotone a photograph, but the model's colour coding is the point of it —
+   and wears the blueprint frame so it still reads as part of the system. */
+.hero-split {
+  display: grid; align-items: center;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 4vw, 56px);
+}
+/* Inset from the page edge so the frame — and its registration marks, which
+   sit 6px outside the box — do not run flush with the shell. */
+.hero-figure {
+  margin: 0 clamp(10px, 2.5vw, 36px) 0 0;
+  width: clamp(200px, 24vw, 340px);
+}
+.hero-figure img { width: 100%; height: auto; }
+
+@media (max-width: 700px) {
+  .hero-split { grid-template-columns: 1fr; gap: clamp(24px, 6vw, 36px); }
+  .hero-figure { width: 160px; }
+}
+
+/* Interior pages carry a shorter hero — no subtitle line, tighter rhythm. */
+.hero:not(:has(.hero-sub)) { padding: clamp(40px, 7vw, 88px) 0 clamp(28px, 4vw, 48px); }
+.hero:not(:has(.hero-sub)) .kicker { letter-spacing: 0.1em; margin-bottom: 18px; }
+.hero:not(:has(.hero-sub)) h1 { font-size: clamp(38px, 7vw, 84px); max-width: 16ch; }
+.hero:not(:has(.hero-sub)) .hero-lead { max-width: 66ch; margin-top: 26px; }
+
+/* — sections —
+   Each top-level section of a page carries a kicker above a hairline rule.
+   The kicker is generated: numbered by default from a counter, or named by
+   one of the .k-* classes when the design labels it with a word instead. */
+main > article { counter-reset: section; }
+article > section {
+  /* A column, so the kicker can be hoisted above the heading with `order`.
+     reStructuredText requires a section to start with its title, and the
+     design puts a label above it. */
+  display: flex; flex-direction: column;
+  padding-bottom: var(--section-gap);
+  scroll-margin-top: 24px;
+}
+/* An explicit .. _target: in the .rst becomes a marker span at the top of the
+   section; offset it so the section's kicker and rule stay in view. */
+article > section > span[id] { display: block; scroll-margin-top: 90px; }
+/* The section label. Either generated — a two-digit counter — or written in
+   the .rst as a `.. container:: kicker`, which then supplies the whole string
+   ("03 · Scientific positions") and switches the counter off. */
+article > section { counter-increment: section; }
+article > section::before {
+  content: counter(section, decimal-leading-zero);
+  order: -2;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600; color: var(--color-accent-700);
+  padding-bottom: 12px; margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-divider);
+}
+article > section:has(> .kicker)::before { display: none; }
+article > section > .kicker {
+  order: -1;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600; color: var(--color-accent-700);
+  padding-bottom: 12px; margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-divider);
+}
+article > section > .kicker p { margin: 0; }
+
+article > section > h2 {
+  font-size: clamp(26px, 4vw, 40px); line-height: 1.05;
+  text-transform: uppercase; margin: 0 0 14px;
+}
+article > section > p {
+  font-size: 15px; line-height: 1.6; max-width: 64ch;
+  margin: 0 0 28px; color: var(--ink-82);
+}
+article > section > h3 {
+  font-size: 20px; text-transform: uppercase; letter-spacing: 0.02em;
+  margin: 28px 0 16px;
+}
+
+/* A section may carry one trailing link that the design sets beside the
+   heading. Explicit grid placement puts it there regardless of source order,
+   which is what lets the heading stay a real <h2> in the .rst file. */
+article > section:has(> .sec-link) {
+  display: grid; grid-template-columns: 1fr auto;
+}
+article > section:has(> .sec-link) > * { grid-column: 1 / -1; }
+article > section:has(> .sec-link)::before { grid-row: 1; }
+article > section:has(> .sec-link) > h2 { grid-row: 2; grid-column: 1; }
+article > section:has(> .sec-link) > .sec-link {
+  grid-row: 2; grid-column: 2; justify-self: end; align-self: end;
+  margin-bottom: 14px; white-space: nowrap;
+}
+.sec-link a { text-decoration: none; }
+
+/* A "labelled" section: the design gives these no display heading at all —
+   the numbered label is the heading. The title stays a real <h2> and is
+   styled as that label, so the document outline survives. */
+article > section.labelled::before { display: none; }
+article > section.labelled > h2 {
+  order: -1;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600; color: var(--color-accent-700);
+  padding-bottom: 12px; margin: 0 0 24px;
+  border-bottom: 1px solid var(--color-divider);
+}
+article > section.labelled > h2::before {
+  content: counter(section, decimal-leading-zero) " · ";
+}
+article > section.labelled > p {
+  font-size: clamp(15px, 1.4vw, 16px); line-height: 1.65;
+  max-width: 64ch; margin: 0 0 28px; color: var(--ink-88);
+}
+
+/* Two columns of prose that collapse to one. */
+.split-wide {
+  display: grid; gap: clamp(24px, 3.4vw, 48px); align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+.split-wide > p {
+  font-size: clamp(15px, 1.4vw, 16px); line-height: 1.65;
+  margin: 0; color: var(--ink-88);
+}
+
+.footnote { font-size: 13px; line-height: 1.5; margin: 20px 0 0; color: var(--ink-55); }
+.footnote p { margin: 0; }
+
+/* — research interests: a ruled, wrapping index — */
+.interests ul {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 0; border-top: 1px solid var(--color-divider);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+}
+.interests li {
+  padding: 16px 18px; font-size: 15px;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+}
+.interests li p { margin: 0; }
+
+/* — positions —
+   A label rail on the left, entries on the right. Each group is its own
+   .positions-rail, so "Current" and "Previous" stack rather than sitting in
+   two balanced columns — which stopped working once one group held a single
+   entry and the other five. */
+.positions .kicker-sm { margin-bottom: 16px; }
+.post {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 16px;
+  padding: 14px 0; border-top: 1px solid var(--color-divider);
+}
+.post-years { font-family: var(--font-heading); font-size: 14px; color: var(--ink-55); }
+.post-role { font-size: 15px; font-weight: 600; }
+.post-org { font-size: 13px; color: color-mix(in srgb, var(--color-text) 65%, transparent); }
+.post p { margin: 0; }
+
+/* The description line under an entry. */
+.post-note {
+  font-size: 14px; line-height: 1.6; margin-top: 6px;
+  color: var(--ink-70); max-width: 62ch;
+}
+
+.positions-rail {
+  display: grid; grid-template-columns: 140px minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px); align-items: start;
+  margin-bottom: 34px;
+}
+.positions-rail > .kicker-sm { margin: 6px 0 0; }
+.positions-rail .post {
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 20px; padding: 18px 0;
+}
+/* A heavier rule opens each group; only the final group is closed off, so two
+   groups never meet in a doubled line. */
+.positions-rail .post:first-of-type { border-top: 1px solid var(--color-text); }
+.positions-rail:last-of-type .post:last-child { border-bottom: 1px solid var(--color-divider); }
+.positions-rail .post-years { font-size: 14px; color: var(--ink-70); }
+.positions-rail-now .post-role { color: var(--color-accent); }
+
+@media (max-width: 760px) {
+  .positions-rail { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (max-width: 620px) {
+  .positions-rail .post { grid-template-columns: 1fr; gap: 4px; }
+  .positions-rail .post-years { color: var(--color-accent); }
+}
+
+/* — scientific service plate —
+   Two labelled groups inside one blueprint plate. The group label reuses
+   .kicker-sm, the same marker the positions rail uses, so the two sections
+   read as one system. */
+.service { padding: 26px clamp(18px, 2.6vw, 30px) 30px; }
+.service .bullets ul { gap: 16px; font-size: 15px; max-width: none; }
+.service .bullets li { padding-left: 20px; }
+
+.service-group + .service-group {
+  margin-top: 26px; padding-top: 24px;
+  border-top: 1px solid var(--color-divider);
+}
+.service-group > .kicker-sm { margin-bottom: 14px; }
+/* The community-service items are short, so that group runs two-up on wide
+   viewports; the editorial entries are long and stay in one column. */
+.service-group:last-child .bullets ul {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  column-gap: clamp(20px, 3vw, 40px);
+}
+
+/* — collaboration index — */
+.collab-grid {
+  display: grid; gap: 0; border-top: 1px solid var(--color-divider);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+.collab-cell {
+  padding: 18px 20px 18px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+}
+.collab-org { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.collab-cell p { font-size: 13px; line-height: 1.45; margin: 0; color: var(--ink-70); }
+
+/* — scholarly profiles — */
+.profiles {
+  display: grid; gap: 0; border: 1px solid var(--color-divider);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+}
+.profile {
+  padding: 18px 20px;
+  border-right: 1px solid var(--color-divider);
+  border-bottom: 1px solid var(--color-divider);
+}
+.profile:hover { background: var(--color-accent-100); }
+.profile-k { margin-bottom: 6px; }
+.profile-k a {
+  font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--color-accent-700); text-decoration: none;
+}
+.profile-k a:hover { text-decoration: underline; }
+.profile-k p { margin: 0; }
+.profile > p { font-size: 14px; margin: 0; }
+
+/* Free-standing kicker, for blocks that are not sections. */
+.kicker {
+  display: block; font-size: 13px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 600; color: var(--color-accent-700);
+  margin: 0 0 12px;
+}
+.kicker-sm {
+  display: block; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--color-accent); margin: 0 0 6px;
+}
+/* A row of actions at the foot of a section. */
+.actions { margin-top: 20px; }
+
+/* A row of tag-shaped links (the research theme index, the year index). */
+.tag-row p { margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.tag-row a {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px; text-decoration: none;
+  border: 1px solid var(--color-accent); color: var(--color-accent);
+}
+.tag-row a:hover { background: var(--color-accent-100); }
+
+/* A standalone tag written as a container. */
+.tag p { margin: 0; }
+
+/* — research themes —
+   Each theme is a real section, so its number is the same counter that
+   numbers sections elsewhere — only drawn large, in the left column. */
+.theme-index { padding-bottom: clamp(24px, 4vw, 40px); border-top: 1px solid var(--color-divider); padding-top: 20px; }
+
+article > section.theme {
+  display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  /* the body spans both rows; pinning row 1 to its content keeps the theme
+     title directly under its number instead of drifting down the column */
+  grid-template-rows: auto 1fr;
+  gap: clamp(24px, 3.4vw, 40px);
+  padding: clamp(28px, 3.4vw, 36px) 0;
+  border-top: 1px solid var(--color-divider);
+}
+article > section.theme::before {
+  grid-column: 1; grid-row: 1; align-self: start;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(34px, 4vw, 44px); line-height: 1;
+  color: color-mix(in srgb, var(--color-text) 32%, transparent);
+  border-bottom: 0; padding: 0; margin: 0; text-transform: none;
+  letter-spacing: 0;
+}
+article > section.theme > h2 {
+  grid-column: 1; grid-row: 2; align-self: start;
+  font-size: clamp(22px, 2.6vw, 26px); line-height: 1.08;
+  text-transform: uppercase; margin: 12px 0 0;
+}
+article > section.theme > span[id] { grid-column: 1; grid-row: 1; height: 0; }
+article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
+.theme-body > p {
+  font-size: clamp(15px, 1.4vw, 16px); line-height: 1.6;
+  max-width: 60ch; margin: 0 0 22px; color: var(--ink-88);
+}
+
+/* The four-cell specification grid under each theme. */
+.spec {
+  display: grid; gap: 0; border: 1px solid var(--color-divider);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+.spec-cell { padding: 14px 18px; border-bottom: 1px solid var(--hairline); border-right: 1px solid var(--hairline); }
+.spec-cell p { font-size: 13px; line-height: 1.5; margin: 0; color: var(--ink-82); }
+.spec-k {
+  font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--color-accent-700); font-weight: 600; margin-bottom: 6px;
+}
+.spec-k p { font-size: inherit; color: inherit; letter-spacing: inherit; margin: 0; }
+
+/* A closing row: one line of copy and the page's onward action. */
+.closing {
+  padding: clamp(24px, 4vw, 40px) 0 clamp(48px, 8vw, 96px);
+  border-top: 1px solid var(--color-divider);
+  font-size: 15px; color: var(--ink-70);
+}
+/* Only a row when there is an action to sit opposite the copy. htmlsanity
+   drops the <p> around a lone paragraph, so on a container holding just a
+   sentence flex would scatter its text runs into separate items. */
+.closing:has(> .actions-primary), .closing:has(> .actions) {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  align-items: center; justify-content: space-between;
+}
+.closing:not(:has(> .actions-primary)):not(:has(> .actions)) { max-width: 60ch; }
+.closing > p { font-size: 15px; margin: 0; max-width: 52ch; color: var(--ink-70); }
+
+/* — card grid — */
+.cards {
+  display: grid; gap: clamp(18px, 2.4vw, 28px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+.cards-narrow { grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.cards > .blueprint { padding: 22px 22px 26px; }
+.cards p { font-size: 14px; line-height: 1.55; margin: 0; color: var(--ink-82); }
+
+/* Headings that live inside a container. reStructuredText only makes a real
+   heading out of a section title, so a titled block nested in a component
+   carries its heading as a named container instead. */
+.card-h, .collab-h, .subsection-h {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  line-height: 1.12;
+}
+.card-h {
+  font-size: 20px; text-transform: uppercase; letter-spacing: 0.01em;
+  margin: 0 0 8px;
+}
+.collab-h {
+  font-family: var(--font-body); font-size: 17px; font-weight: 600;
+  margin: 0 0 6px;
+}
+.subsection-h {
+  font-size: 20px; text-transform: uppercase; letter-spacing: 0.02em;
+  margin: 0 0 16px;
+}
+
+/* A two-up split that collapses at the tablet breakpoint. */
+.split {
+  display: grid; gap: clamp(24px, 3.4vw, 40px); align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.split > .blueprint { padding: 22px clamp(16px, 2.4vw, 24px) 26px; }
+.split h2 { margin-top: 0; }
+.split p { max-width: 52ch; }
+
+/* — the spec plate (“In brief”) — */
+.glance { padding: 0; margin-bottom: var(--section-gap); }
+.glance > p:first-child {
+  margin: 0; padding: 14px clamp(14px, 2vw, 20px);
+  border-bottom: 1px solid var(--color-divider);
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase;
+}
+/* docutils renders a definition list as <dl><dt>…<dd>…; grid auto-placement
+   turns each pair into one row of the plate. */
+.glance dl {
+  margin: 0; display: grid; grid-template-columns: 150px minmax(0, 1fr);
+}
+.glance dt {
+  grid-column: 1; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-accent-700); font-weight: 600;
+  padding: 16px 0 16px clamp(14px, 2vw, 20px);
+  border-bottom: 1px solid var(--hairline);
+}
+.glance dd {
+  grid-column: 2; margin: 0; font-size: 15px;
+  padding: 16px clamp(14px, 2vw, 20px) 16px 16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.glance dd p { margin: 0; }
+.glance dt:last-of-type, .glance dd:last-of-type { border-bottom: 0; }
+
+/* — publication list — */
+.pubs { display: flex; flex-direction: column; }
+.pub {
+  display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 20px;
+  padding: 22px 0; border-top: 1px solid var(--color-divider);
+}
+.pubs > .pub:last-child { border-bottom: 1px solid var(--color-divider); }
+.pub-year {
+  font-family: var(--font-heading); font-size: 26px; color: var(--ink-45);
+  margin: 0;
+}
+.pub-body > .tag { margin-bottom: 8px; }
+.pub-title {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.5vw, 17px); line-height: 1.35;
+  margin: 8px 0 6px; font-weight: 600;
+}
+.pub-count {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-accent-700); margin: 0 0 24px;
+}
+.pub-authors { font-size: 13px; line-height: 1.5; color: var(--ink-70); margin: 0; }
+.pub-authors strong { color: var(--color-text); font-weight: 700; }
+.pub-cite { font-size: 13px; font-style: italic; color: var(--ink-62); margin: 0 0 12px; }
+.pub-links {
+  display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+  margin: 10px 0 0; font-size: 12px; color: var(--ink-45);
+}
+.pub-summary { font-size: 14px; line-height: 1.6; max-width: 74ch; margin: 0 0 14px; color: var(--ink-88); }
+
+/* Publications page: a wider meta column and a year band per group. */
+.pubs-full { display: block; }
+.pubs-full .pub {
+  grid-template-columns: 132px minmax(0, 1fr); gap: clamp(16px, 2vw, 24px);
+  padding: 26px 0; border-top: 0;
+  border-bottom: 1px solid var(--color-divider);
+}
+.pub-group { margin-top: 28px; }
+.pub-group-h {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  border-bottom: 2px solid var(--color-text); padding-bottom: 8px;
+  margin: 0 0 4px;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(28px, 3.4vw, 34px); line-height: 1;
+}
+.pub-group-h p { margin: 0; }
+.pub-group-n {
+  font-family: var(--font-body); font-size: 12px; font-weight: 400;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-55);
+}
+.pub-type {
+  font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-45); margin: 10px 0 0;
+}
+.pub-type p { margin: 0; }
+/* The venue badge: solid accent for the headline papers, outlined otherwise. */
+.pub-badge {
+  display: inline-block;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; text-transform: uppercase;
+  letter-spacing: 0.01em; padding: 5px 9px;
+  border: 1px solid var(--color-accent); color: var(--color-accent-700);
+}
+.pub-top .pub-badge {
+  background: var(--color-accent); color: var(--color-bg);
+}
+.pub-badge p { margin: 0; }
+.pub-doi { color: var(--ink-45); margin-left: 6px; }
+.pub-doi p { margin: 0; }
+
+/* The closing "complete record" plate. */
+.record { margin-top: 44px; padding-top: 28px; border-top: 2px solid var(--color-text); }
+.record-h {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(24px, 3vw, 32px); line-height: 1.02;
+  text-transform: uppercase; margin: 0 0 12px;
+}
+.record > p { font-size: 15px; line-height: 1.65; max-width: 66ch; margin: 0 0 14px; color: var(--ink-88); }
+.record-muted p { font-size: 15px; line-height: 1.65; max-width: 66ch; margin: 0 0 20px; color: var(--ink-70); }
+
+/* — collaborations — */
+.collabs {
+  display: grid; gap: 0; border-top: 1px solid var(--color-divider);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+.collabs > .collab {
+  padding: 20px 0; padding-right: clamp(0px, 2vw, 32px);
+  border-bottom: 1px solid var(--color-divider);
+}
+.collabs p { font-size: 14px; line-height: 1.5; margin: 0 0 8px; color: var(--ink-82); }
+.collabs .meta { font-size: 12px; letter-spacing: 0.04em; color: var(--ink-55); margin: 0; }
+
+/* — lists — */
+/* A ruled list: every item but the last carries a hairline. The container
+   wraps the <ul> that reStructuredText emits. */
+.rule-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
+.rule-list li { border-bottom: 1px solid var(--hairline); padding-bottom: 10px; }
+.rule-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.rule-list p { margin: 0; }
+
+/* Square accent bullets, as the design draws them.
+   The marker is positioned rather than laid out as a grid cell: docutils emits
+   simple list items as bare text plus inline elements, and a grid would make
+   each of those runs its own cell. */
+.bullets ul {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: 12px;
+  font-size: 14px; max-width: 58ch;
+}
+.bullets li { position: relative; padding-left: 18px; }
+.bullets li::before {
+  content: ""; position: absolute; left: 0; top: 0.5em;
+  width: 6px; height: 6px; background: var(--color-accent);
+}
+.bullets p { margin: 0; }
+
+/* — portrait pairing — */
+.portrait { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(24px, 3.4vw, 40px); align-items: start; }
+.portrait > figure { margin: 0; aspect-ratio: 240 / 317; min-width: 0; }
+.portrait > figure img { width: 100%; height: 100%; object-fit: cover; }
+.portrait h2 {
+  font-size: clamp(24px, 3.4vw, 36px); line-height: 1.08;
+  text-transform: uppercase; margin: 0 0 14px;
+}
+.portrait p { font-size: clamp(15px, 1.4vw, 16px); line-height: 1.6; max-width: 58ch; margin: 0 0 14px; color: var(--ink-88); }
+
+/* — a bordered subsection inside a column — */
+.subsection { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-divider); }
+.subsection h3 { font-size: 20px; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 16px; }
+
+/* — contact form —
+   Native constraint validation only: `required` on each control, and
+   :user-invalid for the error state. No script anywhere. */
+.contact-form { margin: 0; }
+.field { display: block; margin: 0 0 var(--space-4); }
+.field label {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: var(--ink-70);
+}
+.field abbr, .form-note abbr {
+  color: var(--color-accent-700); text-decoration: none; border: 0;
+}
+.input {
+  width: 100%; min-height: 36px; padding: 8px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: 0;
+}
+.input:hover { border-color: var(--ink-45); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+textarea.input { min-height: 90px; resize: vertical; display: block; }
+/* Only flags a field the visitor has actually left in a bad state. */
+.input:user-invalid { border-color: var(--color-error); }
+.form-note { font-size: 12px; color: var(--ink-55); margin: 0 0 var(--space-3); }
+.contact-form .btn { cursor: pointer; }
+/* FormSubmit's honeypot: bots fill it in, people never see it. */
+.hp { display: none; }
+
+/* Label/value rows (ORCID, Email …). */
+/* The container wraps the <dl> docutils emits, so the grid goes on the list
+   itself — on the wrapper it would put the whole list in the label column. */
+.pairs { margin-top: 16px; font-size: 13px; }
+.pairs dl {
+  margin: 0; display: grid;
+  grid-template-columns: 56px minmax(0, 1fr); gap: 8px 10px;
+}
+.pairs dt { color: var(--ink-55); }
+.pairs dd { margin: 0; }
+.pairs dd p { margin: 0; }
+.pairs-wide { font-size: 14px; margin-top: 0; }
+.pairs-wide dl { grid-template-columns: 88px minmax(0, 1fr); gap: 12px 10px; }
+
+/* — the legal notice reads as a document, not a landing page — */
+.legal .hero { padding: clamp(32px, 5vw, 64px) 0 0; }
+.legal .hero h1 { font-size: clamp(26px, 3.4vw, 34px); text-transform: none; letter-spacing: -0.015em; max-width: none; }
+.legal .hero .hero-lead { font-size: 14px; color: var(--ink-55); margin: 8px 0 32px; max-width: none; }
+.legal article { max-width: 70ch; padding-bottom: clamp(48px, 7vw, 88px); font-size: 15px; line-height: 1.75; }
+.legal article > section { display: block; padding-bottom: 0; }
+.legal article > section::before { display: none; }
+.legal article > section > h2 {
+  font-size: 19px; text-transform: none; letter-spacing: -0.015em;
+  margin: 28px 0 8px;
+}
+.legal article > section > p { font-size: 15px; line-height: 1.75; max-width: none; margin: 0 0 12px; color: var(--color-text); }
+
+/* — footer — */
+.site-foot { border-top: 1px solid var(--color-divider); }
+.foot-inner {
+  max-width: var(--shell-max); margin: 0 auto;
+  padding: 36px var(--shell-pad);
+  display: flex; flex-wrap: wrap; gap: 24px;
+  justify-content: space-between; align-items: flex-start;
+}
+.foot-brand img { height: 20px; width: auto; margin-bottom: 8px; }
+.foot-brand p { font-size: 13px; color: var(--ink-62); margin: 0; }
+.foot-navs { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.foot-navs nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; }
+.foot-navs a { color: inherit; text-decoration: none; }
+.foot-navs a:hover { color: var(--color-accent); }
+
+/* — year index —
+   The design's filter bar was a scripted control. This site ships no
+   JavaScript, so the publications are simply listed in full, grouped by year,
+   with a static jump index in place of the filters. */
+.year-index {
+  border-top: 1px solid var(--color-divider);
+  padding: 22px 0 clamp(20px, 3vw, 32px);
+}
+
+/* ── Layer 5 — responsive and print ───────────────────────────────────── */
+
+@media (max-width: 1024px) and (min-width: 761px) {
+  .portrait { grid-template-columns: 240px 1fr; gap: 32px; }
+}
+
+@media (max-width: 760px) {
+  .portrait { grid-template-columns: 1fr; gap: 28px; }
+  .portrait > figure { max-width: 260px; }
+  .pub { grid-template-columns: 1fr; gap: 12px; }
+  .pubs-full .pub { grid-template-columns: 1fr; gap: 12px; }
+  .pub-year, .pub-type { margin-top: 0; }
+  .pub-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  /* the explicit column placement has to be released too, or the single
+     column grid grows an implicit second one */
+  .glance dl { grid-template-columns: 1fr; }
+  .glance dt { grid-column: 1; padding: 16px clamp(14px, 2vw, 20px) 0; border-bottom: 0; }
+  .glance dd { grid-column: 1; padding: 4px clamp(14px, 2vw, 20px) 16px; }
+  article > section.theme { grid-template-columns: 1fr; gap: 18px; }
+  article > section.theme::before,
+  article > section.theme > h2,
+  article > section.theme > .theme-body { grid-column: 1; grid-row: auto; }
+  article > section.theme > h2 { margin-top: 0; }
+  .portrait { grid-template-columns: 1fr; }
+  .pairs dl, .pairs-wide dl { grid-template-columns: 1fr; gap: 2px 0; }
+  .pairs dt { margin-top: 8px; }
+  .hero-actions .btn { flex: 1 1 auto; text-align: center; }
+  article > section:has(> .sec-link) { display: block; }
+  article > section:has(> .sec-link) > .sec-link { margin: 0 0 20px; }
+}
+
+/* The masthead collapses into a checkbox-driven drawer. No script. */
+@media (max-width: 900px) {
+  .nav { flex-wrap: wrap; align-items: center; row-gap: 0; }
+  .nav-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-left: auto; width: 42px; height: 42px; cursor: pointer;
+    border: 1px solid var(--color-divider); color: var(--color-text);
+    background: transparent;
+  }
+  /* Hidden from view but still in the tab order, so the drawer opens with
+     Space like any checkbox. The label carries the focus ring. */
+  .nav-toggle {
+    display: block; position: absolute;
+    width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  .nav-toggle:focus-visible ~ .nav-btn {
+    outline: 2px solid var(--color-accent); outline-offset: 2px;
+  }
+  .nav-btn:hover { background: var(--color-accent-100); }
+  .nav-btn .x { display: none; }
+  .nav-toggle:checked ~ .nav-btn .menu { display: none; }
+  .nav-toggle:checked ~ .nav-btn .x { display: block; }
+
+  .nav > a:not(.nav-brand) { display: none; }
+  .nav-toggle:checked ~ a:not(.nav-brand) {
+    display: flex; align-items: center;
+    flex-basis: 100%; width: 100%;
+    padding: 13px 2px; margin: 0;
+    border-top: 1px solid var(--color-divider);
+    font-size: 15px;
+  }
+  .nav-toggle:checked ~ a:not(.nav-brand):last-child { padding-bottom: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@media print {
+  .site-head, .site-foot, .skip, .hero-actions, .actions { display: none; }
+  body { background: #fff; font-size: 11pt; }
+  .blueprint::before { display: none; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
+  article > section { break-inside: avoid-page; }
+}

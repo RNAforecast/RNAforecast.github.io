@@ -1,4 +1,4 @@
-PY?=
+PY?=python3
 PELICAN?=pelican
 PELICANOPTS=
 
@@ -38,6 +38,9 @@ help:
 	@echo '   make clean                          remove the generated files         '
 	@echo '   make regenerate                     regenerate files upon modification '
 	@echo '   make publish                        generate using production settings '
+	@echo '   make check                          production build + smoke tests     '
+	@echo '   make validate                       Nu Html Checker over output/ (needs java)'
+	@echo '   make test                           run the pytest suite              '
 	@echo '   make serve [PORT=8000]              serve site at http://localhost:8000'
 	@echo '   make serve-global [SERVER=0.0.0.0]  serve (as root) to $(SERVER):80    '
 	@echo '   make devserver [PORT=8000]          serve and regenerate together      '
@@ -57,10 +60,15 @@ clean:
 regenerate:
 	"$(PELICAN)" -r "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
-serve:
+# `pelican -l` only starts a server rooted at output/ — it does not build.
+# Without this dependency it happily serves whatever `make check`, `make
+# publish` or `make github` left behind: a production build whose absolute
+# https://rnaforecast.com/... asset URLs resolve against the live site, not
+# localhost, so the local preview loads no stylesheet.
+serve: html
 	"$(PELICAN)" -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
-serve-global:
+serve-global: html
 	"$(PELICAN)" -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b $(SERVER)
 
 devserver:
@@ -72,9 +80,26 @@ devserver-global:
 publish:
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
 
-github: publish
+# Production build under --fatal warnings, then smoke-test the result.
+# This is what CI runs; run it locally to see what CI will see.
+check:
+	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS) --fatal warnings
+	"$(PY)" scripts/check_build.py "$(OUTPUTDIR)"
+
+# Nu Html Checker over the built pages. Needs a JRE. CSS checking is left off
+# on purpose: the validator's stylesheet backend predates color-mix(), inset,
+# aspect-ratio and nesting, and reports all of them as errors.
+validate:
+	html5validator --root "$(OUTPUTDIR)"
+
+test:
+	"$(PY)" -m pytest
+
+# Manual fallback publish. CI deploys from main; this pushes the gh-pages
+# branch directly, and still refuses to ship a build that fails the checks.
+github: check
 	ghp-import -m "$(GITHUB_PAGES_COMMIT_MESSAGE)" -b $(GITHUB_PAGES_BRANCH) "$(OUTPUTDIR)" --no-jekyll
 	git push origin $(GITHUB_PAGES_BRANCH)
 
 
-.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish github
+.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish check validate test github

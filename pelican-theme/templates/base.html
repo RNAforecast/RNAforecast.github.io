@@ -1,215 +1,136 @@
 <!DOCTYPE html>
-<html lang="{% if page and page.lang %}{{ page.lang }}{% elif article and article.lang %}{{ article.lang }}{% else %}{{ DEFAULT_LANG }}{%endif %}"{% if not M_DISABLE_SOCIAL_META_TAGS %} prefix="og: http://ogp.me/ns#"{% endif %}>
+<html lang="{% if page and page.lang %}{{ page.lang }}{% else %}{{ DEFAULT_LANG }}{% endif %}">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% block title %}{{ SITENAME|e }}{% endblock title %}</title>
+  {% block meta %}{% endblock meta %}
   {% for href in M_CSS_FILES %}
   <link rel="stylesheet" href="{{ href|format_siteurl|e }}" />
   {% endfor %}
-  {% block head_links %}
-  {% endblock head_links %}
-  {% if FEED_ALL_ATOM_URL %}
-  <link href="{{ FEED_ALL_ATOM_URL|format_siteurl|e }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|e }}" />
-  {% elif FEED_ALL_ATOM %}
-  <link href="{{ FEED_ALL_ATOM|format_siteurl|e }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|e }}" />
+  {% if M_FAVICON %}
+  <link rel="icon" href="{{ M_FAVICON[0]|format_siteurl|e }}" type="{{ M_FAVICON[1]|e }}" />
   {% endif %}
-  {% if category %}
-  {% if CATEGORY_FEED_ATOM_URL %}
-  <link href="{{ CATEGORY_FEED_ATOM_URL.format(slug=category.slug)|format_siteurl }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|e }} | {{ category|e }}" />
-  {% elif CATEGORY_FEED_ATOM %}
-  <link href="{{ CATEGORY_FEED_ATOM.format(slug=category.slug)|format_siteurl }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|e }} | {{ category|e }}" />
-  {% endif %}
-  {% endif %}
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   {% if M_THEME_COLOR %}
   <meta name="theme-color" content="{{ M_THEME_COLOR }}" />
   {% endif %}
-  {% block meta %}
-  {% endblock meta %}
-  {% if not M_DISABLE_SOCIAL_META_TAGS %}
-  {% if M_SOCIAL_TWITTER_SITE %}
-  <meta name="twitter:site" content="{{ M_SOCIAL_TWITTER_SITE }}" />
+  {% if GOOGLE_SITE_VERIFICATION %}
+  <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}" />
   {% endif %}
-  {% if M_SOCIAL_TWITTER_SITE_ID %}
-  <meta name="twitter:site:id" content="{{ M_SOCIAL_TWITTER_SITE_ID }}" />
-  {% endif %}
-  {% block social %}
-  {% endblock social %}
-  {% endif %}
-  {% block extra %}
-  {% endblock extra %}
-  {% if M_HTML_HEADER %}
-  {{ M_HTML_HEADER|rtrim|indent(2) }}
-  {% endif %}
+  {% block social %}{% endblock social %}
+  {% block extra %}{% endblock extra %}
+
+  {#- The consent gate. Order is the whole point and must not be rearranged:
+
+      1. Consent Mode defaults, denied. This has to execute before the Google
+         tag loads, otherwise gtag.js sets its _ga cookies straight away and
+         the banner is decoration.
+      2. The Osano script, before any tracker, so it can block them. Osano's
+         own documentation calls placement at the top of <head> critical.
+      3. Only then the Google tag, which now starts denied and stores nothing
+         until consent arrives. -#}
   {% if GOOGLE_ANALYTICS %}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{GOOGLE_ANALYTICS}}"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '{{GOOGLE_ANALYTICS}}');
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 500
+  });
   </script>
   {% endif %}
   {% if OSANO %}
-  <script src="https://cmp.osano.com/AzqaZNTUulxcl8Ml/1502bf1a-8776-4742-8b0b-35e18285f582/osano.js"></script>
+  <script src="{{ OSANO_SCRIPT }}"></script>
+  {% endif %}
+  {% if GOOGLE_ANALYTICS %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
   <script>
-document.addEventListener("osanoConsentChanged", function(event) {
-  if (Osano.cm.getConsent().consentGiven) {
-    const btn = document.querySelector(".osano-cm-widget");
-    if (btn) btn.style.display = "none";
-  }
-});
-</script>
+  gtag('js', new Date());
+  gtag('config', '{{ GOOGLE_ANALYTICS }}');
+  </script>
+  {% endif %}
+  {% if OSANO and GOOGLE_ANALYTICS %}
+  <script>
+  /* Hand Osano's decision to Consent Mode. Osano can do this itself when
+     "Google Consent Mode" is switched on in its dashboard; repeating it here
+     is idempotent and keeps the site correct if that toggle is ever off.
+     Event name and consent keys per Osano's JavaScript API: the categories
+     are ANALYTICS / MARKETING / PERSONALIZATION, valued ACCEPT or DENY. */
+  window.addEventListener('load', function () {
+    if (!window.Osano || !window.Osano.cm) return;
+    function apply(consent) {
+      if (!consent) return;
+      var yes = function (c) { return c === 'ACCEPT' ? 'granted' : 'denied'; };
+      gtag('consent', 'update', {
+        analytics_storage: yes(consent.ANALYTICS),
+        ad_storage: yes(consent.MARKETING),
+        ad_user_data: yes(consent.MARKETING),
+        ad_personalization: yes(consent.PERSONALIZATION)
+      });
+    }
+    Osano.cm.addEventListener('osano-cm-consent-saved', apply);
+    apply(Osano.cm.getConsent());
+  });
+  </script>
   {% endif %}
 </head>
 <body>
-<header><nav id="navigation"{% if page and page.landing %} class="m-navbar-landing"{% elif (page and page.cover) or (article and article.cover) %} class="m-navbar-cover"{% endif %}>
-  <div class="m-container">
-    <div class="m-row">
-      <a href="{{ SITEURL }}/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m{% if page and page.landing and page.hide_navbar_brand == 'True' %} m-navbar-brand-hidden{% endif %}">
-        {%- if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="" />{% endif -%}
-      </a>
-      {% if M_LINKS_NAVBAR1 or M_LINKS_NAVBAR2 %}
-      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
-      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="{% if M_LINKS_NAVBAR2 %}m-col-t-6{% else %}m-col-t-12{% endif %} m-col-m-none">
-            {% for title, link, slug, sub in M_LINKS_NAVBAR1 %}
-            {% if not sub %}
-            <li><a href="{{ link|format_siteurl|e }}"{% if (page and page.highlight == slug) or slug == page_slug %} id="m-navbar-current"{% endif %}>{{ title|e }}</a></li>
-            {% else %}
-            <li>
-              <a href="{{ link|format_siteurl|e }}"{% if (page and page.highlight == slug) or slug == page_slug %} id="m-navbar-current"{% endif %}>{{ title|e }}</a>
-              <ol>
-                {% for title, link, slug in sub %}
-                <li><a href="{{ link|format_siteurl|e }}"{% if (page and page.highlight == slug) or slug == page_slug %} id="m-navbar-current"{% endif %}>{{ title|e }}</a></li>
-                {% endfor %}
-              </ol>
-            </li>
-            {% endif %}
-            {% endfor %}
-          </ol>
-          {% if M_LINKS_NAVBAR2 %}
-          {% set start = M_LINKS_NAVBAR1|length + 1 %}
-          <ol class="m-col-t-6 m-col-m-none" start="{{ start }}">
-            {% for title, link, slug, sub in M_LINKS_NAVBAR2 %}
-            {% if not sub %}
-            <li><a href="{{ link|format_siteurl|e }}"{% if (page and page.highlight == slug) or slug == page_slug %} id="m-navbar-current"{% endif %}>{{ title|e }}</a></li>
-            {% else %}
-            <li>
-              <a href="{{ link|format_siteurl|e }}"{% if (page and page.highlight == slug) or slug == page_slug %} id="m-navbar-current"{% endif %}>{{ title|e }}</a>
-              <ol>
-                {% for title, link, slug in sub %}
-                <li><a href="{{ link|format_siteurl|e }}"{% if (page and page.highlight == slug) or slug == page_slug %} id="m-navbar-current"{% endif %}>{{ title|e }}</a></li>
-                {% endfor %}
-              </ol>
-            </li>
-            {% endif %}
-            {% endfor %}
-          </ol>
-          {% endif %}
-        </div>
-      </div>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-head">
+  <nav class="nav">
+    {# The only route home from the masthead, so it has to announce itself as
+       one: the logo's alt text says who, not where. #}
+    <a href="{{ SITEURL }}/" class="nav-brand" aria-label="{{ SITENAME|e }} — home">
+      {%- if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}" />
+      {%- else %}{{ SITENAME|e }}{% endif -%}
+    </a>
+    {% if M_LINKS_NAVBAR1 %}
+    {# The checkbox is the control: visually hidden but focusable, so the
+       drawer works from the keyboard. role/tabindex on the label would be
+       invalid HTML and would not toggle on Enter or Space anyway. #}
+    <input type="checkbox" id="navtoggle" class="nav-toggle" />
+    <label for="navtoggle" class="nav-btn" aria-label="Toggle menu"><svg class="menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><svg class="x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></label>
+    {% for title, link, slug in M_LINKS_NAVBAR1 %}
+    <a href="{{ link|format_siteurl|e }}"{% if slug and slug == page_slug %} aria-current="page"{% endif %}>{{ title|e }}</a>
+    {% endfor %}
+    {% endif %}
+  </nav>
+</header>
+
+<main class="shell{% if page and page.page_class %} {{ page.page_class|e }}{% endif %}" id="content">
+{% block hero %}{% endblock hero %}
+{% block main %}{% endblock main %}
+</main>
+
+<footer class="site-foot">
+  <div class="foot-inner">
+    <div class="foot-brand">
+      {% if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}" />{% endif %}
+      {% if R_FOOTER_TAGLINE %}<p>{{ R_FOOTER_TAGLINE|e }}</p>{% endif %}
+    </div>
+    <div class="foot-navs">
+      {% if R_FOOTER_LINKS %}
+      <nav aria-label="Footer">
+        {% for title, link in R_FOOTER_LINKS %}
+        <a href="{{ link|format_siteurl|e }}">{{ title|e }}</a>
+        {% endfor %}
+      </nav>
+      {% endif %}
+      {% if R_FOOTER_PROFILES %}
+      <nav aria-label="Profiles">
+        {% for title, link in R_FOOTER_PROFILES %}
+        <a href="{{ link|e }}" target="_blank" rel="me noopener">{{ title|e }}</a>
+        {% endfor %}
+      </nav>
       {% endif %}
     </div>
   </div>
-</nav></header>
-<main>
-{% block banner %}
-{% endblock %}
-{% block main %}
-{% endblock %}
-{% block bannercta %}
-{% endblock %}
-</main>
-{% if M_LINKS_FOOTER1 or M_LINKS_FOOTER2 or M_LINKS_FOOTER3 or M_LINKS_FOOTER4 or not M_FINE_PRINT is defined or M_FINE_PRINT %}
-<footer><nav>
-  <div class="m-container">
-    {% if M_LINKS_FOOTER1 or M_LINKS_FOOTER2 or M_LINKS_FOOTER3 or M_LINKS_FOOTER4 %}
-    <div class="m-row">
-      <div class="m-col-s-3 m-col-t-6">
-        {% if M_LINKS_FOOTER1 %}
-        <h3>
-          {%- if M_LINKS_FOOTER1[0][1] %}<a href="{{ M_LINKS_FOOTER1[0][1]|format_siteurl|e }}">{% endif %}
-          {{- M_LINKS_FOOTER1[0][0]|e -}}
-          {% if M_LINKS_FOOTER1[0][1] -%}</a>{% endif -%}
-        </h3>
-        <ul>
-          {% for title, link in M_LINKS_FOOTER1 %}{% if loop.index0 != 0 %}
-          <li>{% if title %}<a href="{{ link|format_siteurl|e }}">{{ title|e }}</a>{% else %}&nbsp;{% endif %}</li>
-          {% endif %}{% endfor %}
-        </ul>
-        {% endif %}
-      </div>
-      <div class="m-col-s-3 m-col-t-6">
-        {% if M_LINKS_FOOTER2 %}
-        <h3>
-          {%- if M_LINKS_FOOTER2[0][1] %}<a href="{{ M_LINKS_FOOTER2[0][1]|format_siteurl|e }}">{% endif %}
-          {{- M_LINKS_FOOTER2[0][0]|e -}}
-          {% if M_LINKS_FOOTER2[0][1] %}</a>{% endif -%}
-        </h3>
-        <ul>
-          {% for title, link in M_LINKS_FOOTER2 %}{% if loop.index0 != 0 %}
-          <li>{% if title %}<a href="{{ link|format_siteurl|e }}">{{ title|e }}</a>{% else %}&nbsp;{% endif %}</li>
-          {% endif %}{% endfor %}
-        </ul>
-        {% endif %}
-      </div>
-      <div class="m-clearfix-t"></div>
-      <div class="m-col-s-3 m-col-t-6">
-        {% if M_LINKS_FOOTER3 %}
-        <h3>
-          {%- if M_LINKS_FOOTER3[0][1] %}<a href="{{ M_LINKS_FOOTER3[0][1]|format_siteurl|e }}">{% endif %}
-          {{- M_LINKS_FOOTER3[0][0]|e -}}
-          {% if M_LINKS_FOOTER3[0][1] %}</a>{% endif -%}
-        </h3>
-        <ul>
-          {% for title, link in M_LINKS_FOOTER3 %}{% if loop.index0 != 0 %}
-          <li>{% if title %}<a href="{{ link|format_siteurl|e }}">{{ title|e }}</a>{% else %}&nbsp;{% endif %}</li>
-          {% endif %}{% endfor %}
-        </ul>
-        {% endif %}
-      </div>
-      <div class="m-col-s-3 m-col-t-6">
-        {% if M_LINKS_FOOTER4 %}
-        <h3>
-          {%- if M_LINKS_FOOTER4[0][1] %}<a href="{{ M_LINKS_FOOTER4[0][1]|format_siteurl|e }}">{% endif %}
-          {{- M_LINKS_FOOTER4[0][0]|e -}}
-          {% if M_LINKS_FOOTER4[0][1] %}</a>{% endif -%}
-        </h3>
-        <ul>
-          {% for title, link in M_LINKS_FOOTER4 %}{% if loop.index0 != 0 %}
-          <li>{% if title %}<a href="{{ link|format_siteurl|e }}">{{ title|e }}</a>{% else %}&nbsp;{% endif %}</li>
-          {% endif %}{% endfor %}
-        </ul>
-        {% elif M_LINKS_FOOTER4 is not defined %}
-        <h3><a href="{{ M_BLOG_URL|format_siteurl|e }}">Blog</a></h3>
-        <ul>
-          {% for cat, null in categories %}
-          <li><a href="{{ cat.url|format_siteurl|e }}">{{ cat|e }}</a></li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-      </div>
-    </div>
-    {% endif %}
-    {% if not M_FINE_PRINT is defined or M_FINE_PRINT %}
-    <hr/>
-    <div class="m-row">
-      <div class="m-col-t-2">
-        <div class="r-socialmedia">
-          <a href="{{ R_LINKEDIN_URL }}">LinkedIn</a>
-        </div>
-      </div>
-      <div class="m-col-t-8 m-push-l-2 m-push-m-2 m-push-s-2 m-push-t-2">
-        <div class="r-fineprint">
-        {{ (M_FINE_PRINT)|render_rst|rtrim|indent(8) }}
-      </div>
-    </div>
-    {% endif %}
-  </div>
-</nav></footer>
-{% endif %}
+</footer>
 </body>
 </html>

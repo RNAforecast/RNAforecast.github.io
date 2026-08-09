@@ -4,67 +4,228 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static website for RNA Forecast (rnaforecast.com), a biotechnology consultancy. Built with **Pelican** (Python static site generator) using a custom **m.css** Material Design theme.
+Static website for RNA Forecast (rnaforecast.com), Michael T. Wolfinger's
+independent research platform for computational RNA biology. Built with
+**Pelican** (Python static site generator) on a custom theme implementing the
+"Industry" design system.
+
+**The site ships no JavaScript.** Every interaction — the mobile navigation, all
+hover and focus states — is CSS only. The only `<script>` in a development build
+is the JSON-LD block, which is structured data for search engines, not code.
+A production build adds the consent gate from `base.html` — the Consent Mode
+defaults, the Google tag, and the bridge that hands Osano's decision to it —
+plus their two external scripts. `scripts/check_build.py` allows exactly those
+and fails on anything else. Do not introduce client-side scripting.
+
+## Packaging
+
+`pyproject.toml` (setuptools, `py-modules = []` — this is a source repository,
+not an importable library) declares the dependencies. Install with
+`pip install -e ".[dev,test]"`. `docutils` carries an upper bound because it is
+the RST writer and a minor bump changes the generated HTML; nothing else is
+pinned tightly. Requires Python 3.13, matching the michaelwolfinger.com repo.
+
+`tests/` is a pytest suite. `tests/conftest.py` runs one production build per
+session into a temporary directory; `test_build.py` and `test_seo.py` assert
+against it, `test_scholarly.py` unit-tests the structured-data extractor
+against both publication layouts, and `test_checker.py` injects each fault
+class into a copy of the build to prove `scripts/check_build.py` still catches
+it. `plugins/` and `scripts/` are imported as namespace packages via
+`pythonpath = ["."]`.
 
 ## Build Commands
 
 ```bash
-# Development build
-make html
-
-# Serve locally (port 8000)
-make serve
-
-# Auto-rebuild on file changes + serve
-make devserver
-
-# Production build (uses publishconf.py, sets absolute URLs + analytics)
-make publish
-
-# Build and push to gh-pages branch
-make github
-
-# Remove output directory
-make clean
+make html       # development build
+make serve      # serve locally on port 8000
+make devserver  # auto-rebuild on change + serve
+make publish    # production build (absolute URLs, analytics, cookie consent)
+make check      # what CI runs: production build --fatal warnings + smoke tests
+make validate   # Nu Html Checker over output/ (needs a JRE)
+make test       # pytest suite
+make github     # manual fallback publish: make check + push to gh-pages
+make clean      # remove output/
 ```
 
 ## Architecture
 
-### Configuration Split
+### Configuration split
 
-- `pelicanconf.py` — development config; relative URLs, OSANO cookie consent disabled, no analytics
-- `publishconf.py` — extends pelicanconf.py for production; sets `SITEURL=https://rnaforecast.com`, enables Google Analytics (G-XDJC7M3EQS), enables OSANO consent, enables `DELETE_OUTPUT_DIRECTORY`
+- `pelicanconf.py` — development; relative URLs, no analytics, `OSANO = False`
+- `publishconf.py` — production; sets `SITEURL`, enables Google Analytics and OSANO
+
+Navigation, footer and the site logo are data, not markup:
+
+```python
+M_LINKS_NAVBAR1 = [('Label', '/url/', 'slug')]  # slug marks the current page
+R_FOOTER_TAGLINE = "..."
+R_FOOTER_LINKS = [('Label', '/url/')]
+R_FOOTER_PROFILES = [('Label', 'https://...')]  # external, rel="me noopener"
+```
+
+`FORMATTED_FIELDS` lists the page metadata fields whose value is
+reStructuredText and must reach the template as rendered HTML
+(`hero_links`, `hero_actions`, `hero_body`).
 
 ### Content
 
-All pages live in `content/pages/` as reStructuredText (`.rst`). The site has four pages: index, research, contact, legal. Pages use Pelican metadata headers and custom m.css roles/directives for components (hero sections, CTAs, cards).
+Five pages in `content/pages/` as reStructuredText: index, research,
+publications, about, legal. There is no blog; `ARTICLE_PATHS` points at a
+directory that does not exist to keep the article generator quiet.
 
-### Theme & CSS Pipeline
+Page metadata drives the hero; the body is ordinary RST:
 
-The theme in `pelican-theme/` uses the m.css framework. Custom stylesheets are in `content/css/`:
+```rst
+:hero_kicker:        small label above the title
+:hero_title:         the page's <h1>
+:hero_sub:           subtitle line (home page only; its presence selects the tall hero)
+:hero_links:         a run of links, RST
+:hero_lead:          the lead paragraph
+:hero_actions:       a run of links rendered as buttons; the first is primary
+:hero_portrait:      image path — switches the hero to the portrait layout (about)
+:hero_body:          multi-paragraph RST for the portrait hero
+:page_class:         extra class on <main> (legal)
+```
 
-- `m-rnaf-layout.css` + `m-rnaf-components.css` + `m-rnaf-light.css` — source files
-- `m-rnaf.compiled.css` — **compiled output**, the file actually served; do not edit directly
-- `postprocess.py` + `pp_rnaf.sh` — CSS post-processor/minifier; run `./content/css/pp_rnaf.sh` after editing source CSS files to regenerate the compiled CSS
+Use **anonymous** hyperlink references (double underscore, ``` `text <url>`__ ```)
+in metadata and in link rows. A named reference creates an implicit target, which
+collides with section ids elsewhere in the same document and produces suffixed
+ids like `software-1`.
 
-The compiled CSS is committed to the repo. When modifying styles, edit the source files and regenerate `m-rnaf.compiled.css`.
+### Writing content against the design
 
-### Plugins
+reStructuredText can emit a class but never an inline style, an id, or a
+`data-` attribute. The stylesheet is built around that:
 
-Custom plugins in `plugins/m/` provide m.css integration:
-- `htmlsanity.py` — HTML sanitization and formatting
-- `components.py` — m.css component directives (panels, grid, etc.)
-- `images.py` — responsive image handling
-- `link.py` — link processing
+- **Prose needs no classes.** Element defaults style `p`, `h2`, `ul`, `figure`,
+  `table` and friends, so a plain page already looks finished.
+- **Components are one wrapper, one class**: `.. container:: blueprint glance`.
+  Children are styled by descendant and child selectors, never by their own class.
+- **Section labels.** A top-level section gets a two-digit counter above a rule
+  automatically. To label it in words instead, add `.. container:: kicker` inside
+  the section — CSS `order` hoists it above the heading. On pages where the label
+  *is* the heading, put `.. class:: labelled` before the section title.
+- **Section ids** come from `.. _name:` before the title, which docutils renders
+  as an anchor span inside the section.
+- **Links take their look from their row**: `.. container:: actions` (ghost),
+  `actions-primary` (solid), `hero-actions` (first solid, rest outlined),
+  `tag-row` (tag-shaped). There is no way to class an inline link.
+- **Headings inside a container** are not possible; use `.. container:: card-h`,
+  `collab-h`, `subsection-h`, `pub-title` and similar named containers.
 
-`plugins/sitemap.py` generates the XML sitemap.
+### Theme
+
+`pelican-theme/templates/` holds exactly two templates: `base.html` (document
+shell, masthead, footer) and `page.html` (hero variants, article). The masthead's
+mobile drawer is a checkbox plus `:checked ~` selectors.
+
+`plugins/m/htmlsanity.py` is the only m.css remnant, kept for its clean HTML5
+writer (`<section>`, `<figure>`, unprefixed container classes) and the
+`format_siteurl` / `render_rst` Jinja filters. It is load-bearing, not
+optional: without it the templates fail on the first `format_siteurl` call and
+the generated markup no longer matches the stylesheet. It is a *writer*, not a
+validator — `make validate` does the checking.
+
+`plugins/sitemap.py` writes the sitemap. `plugins/scholarly.py` derives
+schema.org `ScholarlyArticle` data from the publication markup Pelican has
+already rendered, and hands it to the template as `page.jsonld`. Deriving it
+from the page rather than a parallel data file means the bibliography cannot
+drift from the prose; it reads both publication layouts (the full listing on
+`/publications/`, the compact one on the home page).
+
+### CSS
+
+`content/css/rnaf.css` is the whole stylesheet — one plain file, no build step,
+no preprocessor, served as-is. It is organised in five layers: tokens, base
+elements, design-system components, site components, responsive and print.
+
+Take every value from a token (`var(--color-*)`, `--space-*`, `--ink-*`,
+`--shell-*`). Do not hard-code a hex below `:root`.
+
+Two things worth knowing before editing:
+
+- The blueprint frame's four `+` registration marks are drawn as eight
+  background gradients on `.blueprint::before`. The design used four child
+  elements, which RST cannot produce.
+- Fixed grid columns must be `minmax(0, 1fr)`, and any explicit `grid-column`
+  needs releasing in the mobile breakpoint, or the grid keeps its second column.
+
+Fonts (Barlow, Barlow Condensed) are self-hosted in `content/static/fonts/`.
+The site makes **no third-party requests** — it runs behind a cookie consent
+banner, so a font CDN would be exactly what that banner exists to gate.
 
 ### Deployment
 
-GitHub Actions (`static.yml`) deploys the `gh-pages` branch to GitHub Pages on push to `main`. The workflow deploys the repository as-is (no build step in CI) — the `output/` directory is pre-built locally and pushed via `make github` / `inv gh-pages` (uses `ghp-import`).
+CI builds and publishes. `.github/workflows/build-deploy.yml` installs the
+package with `pip install -e ".[dev,test]"`, runs `make test`, `make check` and
+`make validate`, and deploys `output/` to GitHub Pages as an artifact. Push to
+`main` publishes; pull requests build and check but never deploy. Pages must be
+set to **build type "GitHub Actions"** — with the legacy "deploy from a branch"
+setting, the `gh-pages` builder races the workflow and whichever finishes last
+wins.
 
-`gh-pages` is always fully regenerated, so force-push is required: use `git push origin gh-pages -f` if `make github` fails due to a diverged remote.
+`make check` is the gate: a production build under `--fatal warnings`, then
+`scripts/check_build.py`. That script verifies the expected pages exist, that
+every reference to the site's own files resolves (including absolute
+`https://rnaforecast.com/…` links), that `CNAME` is intact, that no page
+requests anything from a host outside analytics and the consent banner, that
+every `url()` in the stylesheet resolves (the self-hosted fonts are referenced
+from nowhere else), that the contact form still posts only to its declared
+endpoint — a form action is a data flow, and the disclosure in the legal notice
+has to keep matching it — that every JSON-LD block parses and the publication
+graph covers every paper and DOI on the page, that the share card is present at
+1200×630, and that `robots.txt`, the sitemap and its exclusions agree with the
+pages on disk.
+Run it locally to see what CI will see. Its `REQUIRED` list names the pages
+the site must publish — update it when adding or retiring a page.
 
-### URL Structure
+`make validate` runs the Nu Html Checker over the built pages and needs a JRE.
+CSS checking is deliberately off: the validator's stylesheet backend predates
+`color-mix()`, `inset`, `aspect-ratio` and nesting and reports every use of
+them as an error.
 
-Pages are output as `{slug}/index.html` (directory-style URLs), configured via `PAGE_URL = '{slug}/'` and `PAGE_SAVE_AS = '{slug}/index.html'` in pelicanconf.py.
+`make github` remains as a manual fallback that pushes the `gh-pages` branch
+directly via `ghp-import`; it runs `make check` first. `gh-pages` is fully
+regenerated each time, so force-push is expected:
+`git push origin gh-pages -f` if it fails on a diverged remote.
+
+### SEO and machine readers
+
+AI crawlers are allowed on purpose: `content/extra/robots.txt` names the search,
+answer-engine and model-training agents explicitly, so access is a decision on
+record rather than a default. It also carries the `Sitemap:` line.
+`content/extra/llms.txt` is the site summary for LLM consumers; keep it in step
+when a page is added or retired.
+
+Structured data is all emitted by `plugins/scholarly.py`, one JSON-LD block per
+page. The site's own identity lives in `R_SITE_GRAPH` in `pelicanconf.py` as
+data, not as a raw HTML block in `index.rst`: any `@id` or `url` there starting
+with `#` or `/` gets `SITEURL` prefixed at build time. That is what keeps the
+production domain out of a local preview — a development build contains no
+`rnaforecast.com` anywhere except the contact form's `_next` field, which
+FormSubmit requires to be absolute. Keep `#michael-t-wolfinger` in
+`R_SITE_GRAPH` in step with `AUTHOR_FRAGMENT` in the plugin, or the site graph
+and the publication graph will describe two different people.
+
+**The consent gate in `base.html` is order-dependent and must not be
+rearranged**: Consent Mode defaults (everything denied) first, then the Osano
+script, then the Google tag. Defaults after the tag means gtag.js sets its
+cookies before anyone is asked, and a CMP loaded after the tracker cannot block
+it. `check_build.py` asserts this ordering. `GOOGLE_SITE_VERIFICATION` in
+`pelicanconf.py` emits the Search Console meta tag when set; it is empty by
+default because DNS verification is the better option.
+
+`M_SOCIAL_IMAGE` points at `static/images/og-card.png`, 1200×630. Every page
+declares `twitter:card=summary_large_image`, so that file must exist at that
+size or the checker fails.
+
+### URL structure
+
+Directory-style: `PAGE_URL = '{slug}/'`, `PAGE_SAVE_AS = '{slug}/index.html'`.
+The former `/contact/` page is retired; contact now lives at `/about/#contact`.
+
+### Design source
+
+`RNAF2026/` holds the original design-canvas output the site was converted from
+(`*.dc.html`, the `_ds/` design-system bundle, `responsive.css`). It is reference
+material, not part of the build.

@@ -1,182 +1,411 @@
-Research at RNA Forecast
-########################
-:summary: RNA Forecast advances RNA engineering at the intersection of theory, computation, and biology, focusing on RNA structure prediction, AI-driven rational design, and next-generation RNA therapeutics
-:title: Research – RNA Design, AI & Therapeutics
-:description: Discover how RNA Forecast integrates computational biology, AI-driven RNA folding and design, and therapeutic innovation
+Research
+########
+
+:title: Research, RNA Forecast | Michael T. Wolfinger
 :slug: research
-:fullcolumns: true
-:banner: Research & Innovation
-:banner_lead: Advancing RNA engineering and synthetic biology through cross-disciplinary innovation
+:description: Eight research themes at RNA Forecast: RNA structure prediction, engineering, functional RNAs, viral RNA biology, evolution and folding kinetics.
+:summary: Eight connected research themes in computational RNA biology, each grounded in published results, open software and active collaboration.
+:og_type: article
+:hero_kicker: Research
+:hero_title: Computational RNA biology
+:hero_lead: Research spans several connected areas of computational RNA biology, linked by a common focus on RNA structure, dynamics, evolution, and function. Each area below is grounded in peer reviewed results, open software and collaborative work.
+:hero_image: static/images/research-2gis.jpg
+:hero_image_webp: static/images/research-2gis.webp
+:hero_image_alt: The S-adenosylmethionine riboswitch regulatory element, PDB 2GIS, drawn as a cartoon model
+:hero_image_width: 680
+:hero_image_height: 823
 
-.. role:: link-flat-strong(link)
-  :class: m-flat m-text m-strong
+.. container:: theme-index
 
-.. role:: link-flat(link)
-  :class: m-flat m-text
+  .. container:: tag-row
 
-.. role:: ul
-  :class: m-text m-ul
+    `01 Structure prediction <#t1>`__
+    `02 RNA engineering <#t2>`__
+    `03 Functional RNAs <#t3>`__
+    `04 Viral RNA biology <#t4>`__
+    `05 RNA evolution <#t5>`__
+    `06 Folding kinetics <#t6>`__
+    `07 Computational methods <#t7>`__
+    `08 RNA protein recognition <#t8>`__
 
-.. role:: doi(link)
-  :class: doi
+.. _t1:
 
-.. role:: title
-  :class: r-pub-title
+.. class:: theme
 
-.. container:: m-row
+RNA structure prediction
+------------------------
 
-    .. container:: r-subhead
+.. container:: theme-body
 
-        .. raw:: html
+  Predicting RNA secondary structure and the full Boltzmann ensemble, and
+  mapping structure in living cells. This is the methodological core the other
+  areas build on.
 
-          <h2>Research Focus Areas</h2>
+  .. container:: spec
 
-          <p>Combining theory, computation, and biology to expand next-generation RNA technologies</p>
+    .. container:: spec-cell
 
+      .. container:: spec-k
 
-.. container:: m-row r-pad-b-2
+        Representative publications
 
-    .. container:: m-col-m-4 m-pull-m-1 r-pad-lr-none
+      Borovská et al., Nature Biotechnology (2025)
 
-      .. container:: r-pad-lr-3 r-box r-box-shadow
+    .. container:: spec-cell
 
-          .. container:: r-method-icon
+      .. container:: spec-k
 
-            .. raw:: html
+        Software
 
-                <i class="fas fas-25 fa-dna r-primary"></i>
+      ViennaRNA · RNAConSnake
 
-          .. raw:: html
+    .. container:: spec-cell
 
-            <h5>RNA Structure Prediction</h5>
+      .. container:: spec-k
 
-          Developing and applying advanced algorithms to capture RNA structures, folding dynamics, and kinetic pathways with high accuracy.
+        Collaboration
 
+      University of Groningen · University of Vienna (TBI)
 
-    .. container:: m-col-m-4 r-pad-lr-none
+    .. container:: spec-cell
 
-      .. container:: r-pad-lr-3 r-box r-box-shadow
+      .. container:: spec-k
 
-        .. container:: r-method-icon
+        Status
 
-          .. raw:: html
+      Active
 
-              <i class="fas fas-25 fa-atom r-primary"></i>
+.. _t2:
 
-        .. raw:: html
+.. class:: theme
 
-          <h5>Rational RNA Design</h5>
+RNA engineering
+---------------
 
+.. container:: theme-body
 
-        Building AI-driven design systems that enable sequence generation with target structures and programmable kinetic folding routes.
+  Rational, de novo design of RNAs with defined mechanical and functional
+  properties, turning sequence and structure principles into programmable
+  molecules.
 
+  .. container:: spec
 
-    .. container:: m-col-m-4 m-push-m-1 r-pad-lr-none
+    .. container:: spec-cell
 
-      .. container:: r-pad-lr-3 r-box r-box-shadow
+      .. container:: spec-k
 
-        .. container:: r-method-icon
+        Representative publications
 
-          .. raw:: html
+      Walter et al., Nucleic Acids Res. (2026)
 
-              <i class="fas fas-25 fa-syringe r-primary"></i>
+    .. container:: spec-cell
 
-        .. raw:: html
+      .. container:: spec-k
 
-          <h5>RNA Therapeutics</h5>
+        Software
 
-        Building next-generation RNA-based therapies that combine robust stability, exceptional specificity to meet diverse medical challenges.
+      ViennaRNA design routines
 
-.. container:: m-row
+    .. container:: spec-cell
 
-    .. container:: r-subhead
+      .. container:: spec-k
 
-        .. raw:: html
+        Collaboration
 
-          <h2>Recent Publications</h2>
+      Leipzig University · University of Vienna (TBI)
 
-          <p>Our research contributions to the scientific community</p>
+    .. container:: spec-cell
 
-.. container:: m-container-inflatable r-pub
+      .. container:: spec-k
 
-  .. container:: m-row
+        Status
 
-    .. container::  m-col-m-12
+      Active
 
-      | :title:`Rational design of mechanically active RNAs: de novo engineering of functional exoribonuclease-resistant RNAs`
-      | Jule Walter, Leonhard Sidl, Katrin Gutenbrunner, Denis Skibinski, Tim Kolberg, Ivo L. Hofacker, Hua-Ting Yao, Mario Mörl, :ul:`Michael T. Wolfinger`
-      | *Nucleic Acids Res.* 54(9):gkag473 (2026)
-      | :doi:`doi:10.1093/nar/gkag473 <https://doi.org/10.1093/nar/gkag473>` | :link-flat:`PDF <{static}/files/papers/Walter-2026.pdf>` | :label-flat-info:`Journal article`
-      | This paper reports the rational, de novo engineering of functional exoribonuclease-resistant RNAs (xrRNAs), establishing sequence–structure design principles that link mechanical RNA topology to XRN1 resistance and expanding the toolkit for programmable synthetic RNA biology.
+.. _t3:
 
-    .. raw:: html
+.. class:: theme
 
-      <hr>
+Functional RNAs
+---------------
 
-    .. container::  m-col-m-12
+.. container:: theme-body
 
-      | :title:`Identification of conserved RNA regulatory switches in living cells using RNA secondary structure ensemble mapping and covariation analysis`
-      | Ivana Borovská, Chundan Zhang, Sarah-Luisa J. Dülk, Edoardo Morandi, Marta F. S. Cardoso, Billal M. Bourkia, Daphne A. L. van den Homberg, :ul:`Michael T. Wolfinger`, Willem A. Velema, Danny Incarnato
-      | *Nature Biotechnology.* (2025)
-      | :doi:`doi:10.1038/s41587-025-02739-0 <https://doi.org/10.1038/s41587-025-02739-0>` | :link-flat:`PDF <{static}/files/papers/Borovska-2025.pdf>` | :label-flat-info:`Journal article`
-      | This paper reports the discovery of conserved RNA regulatory switches in living cells by integrating RNA secondary structure ensemble mapping with covariation analysis, revealing structural elements that control gene expression at the RNA level.
+  Identifying RNA elements that regulate gene expression, riboswitches and
+  structured regulatory motifs, and the covariation signatures that reveal
+  them.
 
-    .. raw:: html
+  .. container:: spec
 
-      <hr>
+    .. container:: spec-cell
 
-    .. container::  m-col-m-12
+      .. container:: spec-k
 
-      | :title:`From structure to function: Computational insights into Musashi-RNA complexes in the context of viral pathogenesis`
-      | Nitchakan Darai, Leonhard Sidl, Thanyada Rungrotmongkol, Peter Wolschann, :ul:`Michael T. Wolfinger`
-      | *Science Asia* 51S(1) 2025s013:1-10 (2025)
-      | :doi:`doi:10.2306/scienceasia1513-1874.2025.s013 <https://doi.org/10.2306/scienceasia1513-1874.2025.s013>` | :link-flat:`PDF <{static}/files/papers/Darai-2025.pdf>` | :label-flat-info:`Review article`
-      | This paper reviews computational and structural insights into Musashi–RNA complexes, emphasizing how Musashi proteins interact with viral RNAs to modulate replication and pathogenesis, and exploring implications for antiviral strategies and synthetic biology.
+        Representative publications
 
-    .. raw:: html
+      Mrozovich et al., Nucleic Acids Res. (2023) · Borovská et al., Nature Biotechnology (2025)
 
-      <hr>
+    .. container:: spec-cell
 
-    .. container::  m-col-m-12
+      .. container:: spec-k
 
-      | :title:`KinPFN: Bayesian approximation of RNA folding kinetics using prior-data fitted networks`
-      | Dominik Scheuer, Frederic Runge, Jörg K.H. Franke, Michael T. Wolfinger, Christoph Flamm, Frank Hutter
-      | *The Thirteenth International Conference on Learning Representations (ICLR'25)* (2025)
-      | :doi:`doi:10.5281/zenodo.15233965 <https://doi.org/10.5281/zenodo.15233965>` | :link-flat:`PDF <{static}/files/papers/Scheuer-2025.pdf>` | :label-flat-info:`Conference article`
-      | This paper presents :strong:`KinPFN`, a deep-learning method based on prior-data fitted networks that approximates RNA folding-time distributions from only a few simulated examples, enabling orders-of-magnitude faster and accurate modeling of RNA folding kinetics and related biological processes.
+        Software
 
-    .. raw:: html
+      RNAConSnake · covariation analysis
 
-      <hr>
+    .. container:: spec-cell
 
-    .. container::  m-col-m-12
+      .. container:: spec-k
 
-      | :title:`Bayesian approximation of RNA folding times`
-      | Dominik Scheuer, Frederic Runge, Jörg K.H. Franke, Michael T. Wolfinger, Christoph Flamm, Frank Hutter
-      | *ICLR 2025 Workshop on AI for Nucleic Acids* (2025)
-      | :doi:`doi:10.5281/zenodo.15228717 <https://doi.org/10.5281/zenodo.15228717>` | :link-flat:`PDF <{static}/files/papers/Scheuer-2025__AI4NA.pdf>` | :label-flat-info:`Conference article`
-      | This paper highlights the methodological foundations of KinPFN by detailing its synthetic prior design and in-context learning strategy, and demonstrates how these innovations enable rapid, accurate approximation of RNA folding-time distributions as a lightweight extension to existing kinetic simulators.
+        Collaboration
 
-    .. raw:: html
+      University of Lethbridge · University of Groningen
 
-      <hr>
+    .. container:: spec-cell
 
-    .. container::  m-col-m-12
+      .. container:: spec-k
 
-      | :title:`Pan-flavivirus analysis reveals sfRNA-independent, 3’UTR-biased siRNA production from an insect-specific flavivirus`
-      | Benoit Besson, Gijs J. Overheul, :ul:`Michael T. Wolfinger`, Sandra Junglen, Ronald P. van Rij
-      | *Journal of Virology* e01215-24 (2024)
-      | :doi:`doi:10.1128/jvi.01215-24 <https://doi.org/10.1128/jvi.01215-24>` | :link-flat:`Preprint PDF <{static}/files/papers/Besson-2024__PREPRINT.pdf>` | :label-flat-info:`Journal article`
-      | This paper shows that mosquito-specific flaviviruses, such as Kamiti River virus, exploit their unusually long RNA tail to drive a distinct small-RNA immune reaction in mosquitoes, pointing to a novel way these viruses interact with insect hosts.
+        Status
 
-    .. raw:: html
+      Active
 
-      <hr>
+.. _t4:
 
-    .. container::  m-col-m-12
+.. class:: theme
 
-      | :title:`Xinyang flavivirus, from Haemaphysalis flava ticks in Henan province, China, defines a basal, likely tick-only flavivirus clade`
-      | Lan-Lan Wang, Qia Cheng, Natalee D. Newton, :ul:`Michael T. Wolfinger`, Mahali S. Morgan, Andrii Slonchak, Alexander A. Khromykh, Tian-Yin Cheng, Rhys H. Parry
-      | *Journal of General Virology* 105(5) (2024)
-      | :doi:`doi:10.1099/jgv.0.001991 <https://doi.org/10.1099/jgv.0.001991>` | :link-flat:`PDF <{static}/files/papers/Wang-2024.pdf>` | :label-flat-info:`Journal article`
-      | This paper describes the discovery of Xinyang flavivirus, a new tick-only virus from China that represents a previously unknown branch of the flavivirus family, highlighting how unexplored viral diversity in ticks can reveal new evolutionary paths and potential influences on tick-borne disease cycles.
+Viral RNA biology
+-----------------
+
+.. container:: theme-body
+
+  Structured RNA in RNA viruses: subgenomic flaviviral RNAs, protein RNA
+  recognition in pathogenesis, and the discovery of novel viruses.
+
+  .. container:: spec
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Representative publications
+
+      Besson et al., J. Virology (2024) · Wang et al., J. Gen. Virology (2024) ·
+      Darai et al., ScienceAsia (2025)
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Software
+
+      Structure & covariation toolchain
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Collaboration
+
+      Radboud University Nijmegen · The University of Queensland ·
+      Chulalongkorn University
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Status
+
+      Continuing
+
+.. _t5:
+
+.. class:: theme
+
+RNA evolution
+-------------
+
+.. container:: theme-body
+
+  Reading evolutionary signal in RNA, covariation as evidence of conserved
+  structure, and phylogenetic placement of newly discovered viral clades.
+
+  .. container:: spec
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Representative publications
+
+      McBroome et al., Nature Microbiol. (2024) · Wang et al., J. Gen. Virology (2024)
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Software
+
+      Nextstrain resources · ViennaRNA covariation analysis
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Collaboration
+
+      University of California Santa Cruz · The University of Queensland
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Status
+
+      Continuing
+
+.. _t6:
+
+.. class:: theme
+
+RNA folding kinetics
+--------------------
+
+.. container:: theme-body
+
+  How RNA folds over time, not just where it lands. Approximating folding time
+  distributions fast enough to be used routinely alongside structure
+  prediction.
+
+  .. container:: spec
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Representative publications
+
+      Scheuer et al., ICLR '25
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Software
+
+      KinPFN
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Collaboration
+
+      University of Freiburg · University of Vienna (TBI)
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Status
+
+      Active
+
+.. _t7:
+
+.. class:: theme
+
+Computational methods
+---------------------
+
+.. container:: theme-body
+
+  Method development where it accelerates a well defined RNA analysis problem,
+  prior data fitted networks, in-context learning, and reproducible workflows.
+
+  .. container:: spec
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Representative publications
+
+      Scheuer et al., ICLR '25 & AI for Nucleic Acids Workshop (2025)
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Software
+
+      KinPFN · RNAConSnake
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Collaboration
+
+      University of Freiburg · University of Vienna (TBI)
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Status
+
+      Active
+
+.. _t8:
+
+.. class:: theme
+
+RNA protein recognition
+-----------------------
+
+.. container:: theme-body
+
+  Structure-guided analysis of how proteins recognise RNA, including modelling
+  and refinement workflows applied to viral RNA protein complexes.
+
+  .. container:: spec
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Representative publications
+
+      Darai et al., Bull. Chem. Soc. Jpn (2023) · Darai et al., ScienceAsia (2025)
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Software
+
+      Molecular modelling workflows
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Collaboration
+
+      Chulalongkorn University · University of Vienna
+
+    .. container:: spec-cell
+
+      .. container:: spec-k
+
+        Status
+
+      Continuing
+
+.. container:: closing
+
+  The evidence for each theme sits in the publication record.
+
+  .. container:: actions-primary
+
+    `See all publications </publications/>`__
