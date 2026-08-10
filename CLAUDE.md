@@ -43,7 +43,6 @@ make publish    # production build (absolute URLs, analytics, cookie consent)
 make check      # what CI runs: production build --fatal warnings + smoke tests
 make validate   # Nu Html Checker over output/ (needs a JRE)
 make test       # pytest suite
-make github     # manual fallback publish: make check + push to gh-pages
 make clean      # remove output/
 ```
 
@@ -159,10 +158,12 @@ banner, so a font CDN would be exactly what that banner exists to gate.
 CI builds and publishes. `.github/workflows/build-deploy.yml` installs the
 package with `pip install -e ".[dev,test]"`, runs `make test`, `make check` and
 `make validate`, and deploys `output/` to GitHub Pages as an artifact. Push to
-`main` publishes; pull requests build and check but never deploy. Pages must be
-set to **build type "GitHub Actions"** — with the legacy "deploy from a branch"
-setting, the `gh-pages` builder races the workflow and whichever finishes last
-wins.
+`main` publishes; pull requests build and check but never deploy.
+
+**Push to `main` is the only publish path.** There is no `gh-pages` branch and
+no manual target — Pages is set to build type "GitHub Actions", so a branch
+push would not reach the site anyway. Do not reintroduce a `ghp-import` step:
+under this setting it succeeds, reports nothing wrong, and changes nothing.
 
 `make check` is the gate: a production build under `--fatal warnings`, then
 `scripts/check_build.py`. That script verifies the expected pages exist, that
@@ -183,11 +184,6 @@ the site must publish — update it when adding or retiring a page.
 CSS checking is deliberately off: the validator's stylesheet backend predates
 `color-mix()`, `inset`, `aspect-ratio` and nesting and reports every use of
 them as an error.
-
-`make github` remains as a manual fallback that pushes the `gh-pages` branch
-directly via `ghp-import`; it runs `make check` first. `gh-pages` is fully
-regenerated each time, so force-push is expected:
-`git push origin gh-pages -f` if it fails on a diverged remote.
 
 ### SEO and machine readers
 

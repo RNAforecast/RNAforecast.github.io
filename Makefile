@@ -8,9 +8,6 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
-GITHUB_PAGES_BRANCH=gh-pages
-GITHUB_PAGES_COMMIT_MESSAGE=Generate Pelican site
-
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
@@ -45,7 +42,6 @@ help:
 	@echo '   make serve-global [SERVER=0.0.0.0]  serve (as root) to $(SERVER):80    '
 	@echo '   make devserver [PORT=8000]          serve and regenerate together      '
 	@echo '   make devserver-global               regenerate and serve on 0.0.0.0    '
-	@echo '   make github                         upload the web site via gh-pages   '
 	@echo '                                                                          '
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   '
 	@echo 'Set the RELATIVE variable to 1 to enable relative urls                    '
@@ -62,7 +58,7 @@ regenerate:
 
 # `pelican -l` only starts a server rooted at output/ — it does not build.
 # Without this dependency it happily serves whatever `make check`, `make
-# publish` or `make github` left behind: a production build whose absolute
+# publish` left behind: a production build whose absolute
 # https://rnaforecast.com/... asset URLs resolve against the live site, not
 # localhost, so the local preview loads no stylesheet.
 serve: html
@@ -95,11 +91,5 @@ validate:
 test:
 	"$(PY)" -m pytest
 
-# Manual fallback publish. CI deploys from main; this pushes the gh-pages
-# branch directly, and still refuses to ship a build that fails the checks.
-github: check
-	ghp-import -m "$(GITHUB_PAGES_COMMIT_MESSAGE)" -b $(GITHUB_PAGES_BRANCH) "$(OUTPUTDIR)" --no-jekyll
-	git push origin $(GITHUB_PAGES_BRANCH)
 
-
-.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish check validate test github
+.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish check validate test

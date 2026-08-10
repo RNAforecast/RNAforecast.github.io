@@ -28,7 +28,6 @@ make publish    # production build (absolute URLs, analytics, cookie consent)
 make check      # what CI runs: production build --fatal warnings + smoke tests
 make validate   # Nu Html Checker over output/
 make test       # pytest suite
-make github     # manual fallback publish: make check + push to gh-pages
 make clean      # remove output/
 ```
 
@@ -47,8 +46,10 @@ make clean      # remove output/
 
 ## Deployment
 
-Push to `main`. GitHub Actions builds, checks, validates and publishes to
-GitHub Pages. Pull requests build and check but never deploy.
+Push to `main`. That is the only way the site is published: GitHub Actions
+builds, checks, validates and uploads to GitHub Pages. Pull requests build and
+check but never deploy. There is no `gh-pages` branch and no manual publish
+path.
 
 See `CLAUDE.md` for the design system, the content conventions and the
 deployment details.
