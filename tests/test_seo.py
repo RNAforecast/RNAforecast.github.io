@@ -242,6 +242,21 @@ def test_every_publication_reaches_the_graph(site):
     assert all('@id' in a for a in articles), 'every paper should carry its DOI'
 
 
+def test_every_publication_is_fully_described(site):
+    """The fields academic and LLM consumers need to tie a paper together."""
+    articles = nodes_of(site / 'publications' / 'index.html', 'ScholarlyArticle')
+    assert len(articles) == 12
+    for article in articles:
+        assert article['name'] and article['headline']
+        assert article['url'].startswith('https://doi.org/')
+        assert article['identifier']['propertyID'] == 'DOI'
+        assert article['datePublished']
+        assert article['isPartOf']['name']
+        assert article['abstract'] and article['description']
+        assert len(article['author']) > 1
+        assert any(a.get('@id') == AUTHOR_ID for a in article['author'])
+
+
 def test_every_doi_on_the_page_is_described(site):
     page = site / 'publications' / 'index.html'
     linked = set(re.findall(r'https://doi\.org/(10\.[^"\'<\s]+)', read(page)))

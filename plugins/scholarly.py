@@ -199,7 +199,10 @@ def article_from(pub, fallback_year, author_id):
 
     summary = text_of(pub, 'pub-summary')
     if summary:
+        # abstract is the scholarly property; description is what generic
+        # consumers read.
         article['abstract'] = summary
+        article['description'] = summary
 
     if cite:
         article['citation'] = cite
