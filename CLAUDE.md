@@ -39,11 +39,11 @@ it. `plugins/` and `scripts/` are imported as namespace packages via
 make html       # development build
 make serve      # serve locally on port 8000
 make devserver  # auto-rebuild on change + serve
-make publish    # production build (absolute URLs, analytics, cookie consent)
+make publish    # production build into output-publish/ (absolute URLs, analytics)
 make check      # what CI runs: production build --fatal warnings + smoke tests
-make validate   # Nu Html Checker over output/ (needs a JRE)
+make validate   # Nu Html Checker over output-publish/ (needs a JRE)
 make test       # pytest suite
-make clean      # remove output/
+make clean      # remove both output dirs
 ```
 
 ## Architecture
@@ -157,13 +157,19 @@ banner, so a font CDN would be exactly what that banner exists to gate.
 
 CI builds and publishes. `.github/workflows/build-deploy.yml` installs the
 package with `pip install -e ".[dev,test]"`, runs `make test`, `make check` and
-`make validate`, and deploys `output/` to GitHub Pages as an artifact. Push to
+`make validate`, and deploys `output-publish/` to Pages as an artifact. Push to
 `main` publishes; pull requests build and check but never deploy.
 
 **Push to `main` is the only publish path.** There is no `gh-pages` branch and
 no manual target — Pages is set to build type "GitHub Actions", so a branch
 push would not reach the site anyway. Do not reintroduce a `ghp-import` step:
 under this setting it succeeds, reports nothing wrong, and changes nothing.
+
+The two builds never share a directory: `make html`/`serve` write the
+development build to `output/`, `make publish`/`check`/`validate` write the
+production build to `output-publish/`. Sharing one directory left absolute
+`https://rnaforecast.com/…` URLs where the local server expected relative
+ones, so the preview pointed at the live site.
 
 `make check` is the gate: a production build under `--fatal warnings`, then
 `scripts/check_build.py`. That script verifies the expected pages exist, that

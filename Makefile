@@ -5,6 +5,11 @@ PELICANOPTS=
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/output
+# The production build goes somewhere else on purpose. Sharing one directory
+# means `make check` leaves absolute rnaforecast.com URLs where the local
+# server expects a development build, and the preview silently points at the
+# live site.
+PUBLISHDIR=$(BASEDIR)/output-publish
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
@@ -34,7 +39,7 @@ help:
 	@echo '   make html                           (re)generate the web site          '
 	@echo '   make clean                          remove the generated files         '
 	@echo '   make regenerate                     regenerate files upon modification '
-	@echo '   make publish                        generate using production settings '
+	@echo '   make publish                        production build into output-publish/'
 	@echo '   make check                          production build + smoke tests     '
 	@echo '   make validate                       Nu Html Checker over output/ (needs java)'
 	@echo '   make test                           run the pytest suite              '
@@ -52,6 +57,7 @@ html:
 
 clean:
 	[ ! -d "$(OUTPUTDIR)" ] || rm -rf "$(OUTPUTDIR)"
+	[ ! -d "$(PUBLISHDIR)" ] || rm -rf "$(PUBLISHDIR)"
 
 regenerate:
 	"$(PELICAN)" -r "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
@@ -72,16 +78,16 @@ devserver-global:
 	"$(PELICAN)" -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b 0.0.0.0
 
 publish:
-	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
+	"$(PELICAN)" "$(INPUTDIR)" -o "$(PUBLISHDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
 
 check:
-	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS) --fatal warnings
-	"$(PY)" scripts/check_build.py "$(OUTPUTDIR)"
+	"$(PELICAN)" "$(INPUTDIR)" -o "$(PUBLISHDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS) --fatal warnings
+	"$(PY)" scripts/check_build.py "$(PUBLISHDIR)"
 
 # Needs a JRE. CSS checking is off on purpose: the validator's stylesheet
 # backend predates color-mix(), inset, aspect-ratio and nesting.
 validate:
-	html5validator --root "$(OUTPUTDIR)"
+	html5validator --root "$(PUBLISHDIR)"
 
 test:
 	"$(PY)" -m pytest

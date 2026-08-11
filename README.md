@@ -24,11 +24,11 @@ pip install -e ".[dev,test]"
 make html       # development build
 make serve      # serve locally on port 8000
 make devserver  # auto-rebuild on change + serve
-make publish    # production build (absolute URLs, analytics, cookie consent)
+make publish    # production build into output-publish/ (absolute URLs, analytics)
 make check      # what CI runs: production build --fatal warnings + smoke tests
-make validate   # Nu Html Checker over output/
+make validate   # Nu Html Checker over output-publish/
 make test       # pytest suite
-make clean      # remove output/
+make clean      # remove both output dirs
 ```
 
 ## Layout

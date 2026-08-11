@@ -1,6 +1,7 @@
 .DS_Store
 **/__pycache__
 output/
+output-publish/
 
 # Virtual environments
 .venv/
