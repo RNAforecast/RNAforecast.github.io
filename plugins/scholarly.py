@@ -220,9 +220,40 @@ def absolutise(value, site_url, key=None):
         return {k: absolutise(v, site_url, k) for k, v in value.items()}
     if isinstance(value, list):
         return [absolutise(v, site_url, key) for v in value]
-    if key in ('@id', 'url') and isinstance(value, str) and value[:1] in ('#', '/'):
+    if (key in ('@id', 'url', 'image')
+            and isinstance(value, str) and value[:1] in ('#', '/')):
         return f'{site_url}{"/" if value[0] == "#" else ""}{value}'
     return value
+
+
+def referenced_ids(value, found=None):
+    """Every bare {"@id": ...} reference anywhere in a graph."""
+    found = set() if found is None else found
+    if isinstance(value, dict):
+        if set(value) == {'@id'}:
+            found.add(value['@id'])
+        for item in value.values():
+            referenced_ids(item, found)
+    elif isinstance(value, list):
+        for item in value:
+            referenced_ids(item, found)
+    return found
+
+
+def resolve_references(nodes, available):
+    """Append any referenced node that is defined elsewhere in the site graph.
+
+    A page whose Person carries `affiliation: {"@id": "…#organization"}` should
+    ship the Organization too, or the reference dangles for anything reading
+    that page on its own.
+    """
+    present = {n.get('@id') for n in nodes if n.get('@id')}
+    by_id = {n.get('@id'): n for n in available if n.get('@id')}
+    for ref in sorted(referenced_ids(nodes) - present):
+        if ref in by_id:
+            nodes.append(by_id[ref])
+            present.add(ref)
+    return nodes
 
 
 def build_graph(content, page_url, page_name, site_url):
@@ -285,11 +316,16 @@ def attach(page_generator):
     settings = page_generator.settings
     siteurl = settings.get('SITEURL', '')
     site_graph = settings.get('R_SITE_GRAPH') or []
+    page_graphs = settings.get('R_PAGE_GRAPHS') or {}
+    author_id = absolutise(AUTHOR_FRAGMENT, siteurl, '@id')
+    person = next((n for n in site_graph
+                   if n.get('@id') == AUTHOR_FRAGMENT), None)
 
     for page in page_generator.pages:
         is_home = getattr(page, 'save_as', '') == 'index.html'
         has_pubs = page.content and 'pub-title' in page.content
-        if not is_home and not has_pubs:
+        extra = page_graphs.get(page.slug)
+        if not is_home and not has_pubs and not extra:
             continue
 
         page_url = f'{siteurl}/{page.url}' if siteurl else f'/{page.url}'
@@ -299,9 +335,15 @@ def attach(page_generator):
         if is_home:
             # The site's own identity leads the graph; the featured papers
             # follow, minus the duplicate Person node they carry.
-            author_id = absolutise('#michael-t-wolfinger', siteurl, '@id')
             nodes = [n for n in nodes if n.get('@id') != author_id]
             nodes = absolutise(site_graph, siteurl) + nodes
+        elif extra:
+            # A page-specific graph describes the same Person, so the node
+            # travels with it rather than being left dangling by @id.
+            nodes = [n for n in nodes if n.get('@id') != author_id]
+            lead = [person] if person else []
+            nodes = absolutise(lead + extra, siteurl) + nodes
+            nodes = resolve_references(nodes, absolutise(site_graph, siteurl))
 
         if not nodes:
             continue

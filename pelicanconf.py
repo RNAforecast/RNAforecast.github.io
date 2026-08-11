@@ -101,6 +101,8 @@ R_SITE_GRAPH = [
         "jobTitle": "Computational RNA Biologist",
         "email": "mailto:michael.wolfinger@rnaforecast.com",
         "url": "https://michaelwolfinger.com/",
+        "image": "/static/images/mtw.jpg",
+        "affiliation": {"@id": "#organization"},
         "identifier": "https://orcid.org/0000-0003-0925-5205",
         "knowsAbout": [
             "Computational RNA biology",
@@ -140,7 +142,10 @@ R_SITE_GRAPH = [
                     "addressCountry": "AT"},
     },
     {
-        "@type": "ProfilePage",
+        # The home page is about the platform, not the person. The
+        # ProfilePage — the type Google reads to work out whose profile a
+        # page is — belongs on /about/, in R_PAGE_GRAPHS below.
+        "@type": "WebPage",
         "@id": "#webpage",
         "url": "/",
         "name": "RNA Forecast, Michael T. Wolfinger",
@@ -148,6 +153,21 @@ R_SITE_GRAPH = [
         "mainEntity": {"@id": "#organization"},
     },
 ]
+
+# Extra schema.org nodes for individual pages, keyed by slug. The Person node
+# from R_SITE_GRAPH is prepended automatically, so each page stands on its own
+# while still describing one entity by @id.
+R_PAGE_GRAPHS = {
+    "about": [
+        {
+            "@type": "ProfilePage",
+            "@id": "/about/#profilepage",
+            "url": "/about/",
+            "name": "About Michael T. Wolfinger",
+            "mainEntity": {"@id": "#michael-t-wolfinger"},
+        },
+    ],
+}
 
 SITEMAP = {
     "format": "xml",

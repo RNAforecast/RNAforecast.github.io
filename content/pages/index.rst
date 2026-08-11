@@ -186,7 +186,7 @@ RNA Forecast contributes original research in computational RNA biology through 
 
       .. container:: pub-title
 
-        Investigating RNA RNA interactions through computational and biophysical
+        Investigating RNA-RNA interactions through computational and biophysical
         analysis
 
       .. container:: pub-authors
@@ -371,12 +371,9 @@ Teaching and advanced training
 
   .. container:: split-main
 
-    Michael T. Wolfinger has taught computational biology, bioinformatics and RNA analysis at
-    universities in Austria and Germany for more than two decades.
+    Michael T. Wolfinger has taught computational biology, bioinformatics and RNA analysis at universities in Austria and Germany for more than two decades.
 
-    Alongside university teaching, RNA Forecast runs advanced workshops on the
-    ViennaRNA ecosystem and computational RNA analysis for academic and
-    industrial audiences.
+    Through RNA Forecast, Michael also develops and delivers advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial audiences.
 
     .. container:: actions
 
@@ -434,7 +431,7 @@ Michael T. Wolfinger
 
       .. container:: bullets
 
-        - Editorial roles across journals in computational biology, bioinformatics, virology, and molecular biology
+        - Associate Editor and Editorial Board roles across journals in computational biology, bioinformatics, virology, and molecular biology
         - Regular peer reviewer for leading journals including Nature Portfolio, Nucleic Acids Research, RNA, and RNA Biology
         - Open source software contribution and maintenance in the ViennaRNA
           ecosystem

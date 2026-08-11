@@ -182,11 +182,57 @@ def test_llms_txt_links_resolve(site):
 
 # --- structured data on the built site ------------------------------------
 
+def test_the_about_page_is_a_profile_page_for_the_person(site):
+    """The type Google reads to work out whose profile a page is."""
+    page = site / 'about' / 'index.html'
+    profile, = nodes_of(page, 'ProfilePage')
+    assert profile['mainEntity'] == {'@id': AUTHOR_ID}
+    assert profile['url'] == 'https://rnaforecast.com/about/'
+
+
+def test_only_the_about_page_claims_to_be_a_profile(site):
+    """The home page is about the platform, not the person."""
+    for rel in ['index.html', 'research/index.html', 'publications/index.html']:
+        assert nodes_of(site / rel, 'ProfilePage') == [], rel
+
+
+def test_the_person_carries_identity_and_affiliation(site):
+    person, = nodes_of(site / 'about' / 'index.html', 'Person')
+    assert person['@id'] == AUTHOR_ID
+    assert person['identifier'] == 'https://orcid.org/0000-0003-0925-5205'
+    assert person['image'].startswith('https://rnaforecast.com/')
+    assert person['affiliation'] == {'@id': 'https://rnaforecast.com/#organization'}
+    assert person['knowsAbout']
+    for profile in ['orcid.org', 'scholar.google', 'github.com', 'scopus.com']:
+        assert any(profile in s for s in person['sameAs']), profile
+
+
+def test_no_page_graph_leaves_a_dangling_reference(site):
+    """A page must ship every node it points at, or it cannot be read alone."""
+    for page in sorted(site.rglob('*.html')):
+        for graph in graphs_in(page):
+            nodes = graph.get('@graph', [])
+            present = {n.get('@id') for n in nodes if n.get('@id')}
+
+            def refs(value, out):
+                if isinstance(value, dict):
+                    if set(value) == {'@id'}:
+                        out.add(value['@id'])
+                    for item in value.values():
+                        refs(item, out)
+                elif isinstance(value, list):
+                    for item in value:
+                        refs(item, out)
+                return out
+
+            assert not (refs(nodes, set()) - present), page.name
+
+
 def test_the_home_page_declares_the_person_and_organization(site):
     types = {node.get('@type')
              for graph in graphs_in(site / 'index.html')
              for node in graph.get('@graph', [])}
-    assert {'Person', 'Organization', 'ProfilePage'} <= types
+    assert {'Person', 'Organization', 'WebPage'} <= types
 
 
 def test_every_publication_reaches_the_graph(site):
