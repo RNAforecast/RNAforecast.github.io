@@ -20,15 +20,6 @@
   {% block social %}{% endblock social %}
   {% block extra %}{% endblock extra %}
 
-  {#- The consent gate. Order is the whole point and must not be rearranged:
-
-      1. Consent Mode defaults, denied. This has to execute before the Google
-         tag loads, otherwise gtag.js sets its _ga cookies straight away and
-         the banner is decoration.
-      2. The Osano script, before any tracker, so it can block them. Osano's
-         own documentation calls placement at the top of <head> critical.
-      3. Only then the Google tag, which now starts denied and stores nothing
-         until consent arrives. -#}
   {% if GOOGLE_ANALYTICS %}
   <script>
   window.dataLayer = window.dataLayer || [];
@@ -54,46 +45,21 @@
   gtag('config', '{{ GOOGLE_ANALYTICS }}');
   </script>
   {% endif %}
-  {% if OSANO and GOOGLE_ANALYTICS %}
-  <script>
-  /* Hand Osano's decision to Consent Mode. Osano can do this itself when
-     "Google Consent Mode" is switched on in its dashboard; repeating it here
-     is idempotent and keeps the site correct if that toggle is ever off.
-     Event name and consent keys per Osano's JavaScript API: the categories
-     are ANALYTICS / MARKETING / PERSONALIZATION, valued ACCEPT or DENY. */
-  window.addEventListener('load', function () {
-    if (!window.Osano || !window.Osano.cm) return;
-    function apply(consent) {
-      if (!consent) return;
-      var yes = function (c) { return c === 'ACCEPT' ? 'granted' : 'denied'; };
-      gtag('consent', 'update', {
-        analytics_storage: yes(consent.ANALYTICS),
-        ad_storage: yes(consent.MARKETING),
-        ad_user_data: yes(consent.MARKETING),
-        ad_personalization: yes(consent.PERSONALIZATION)
-      });
-    }
-    Osano.cm.addEventListener('osano-cm-consent-saved', apply);
-    apply(Osano.cm.getConsent());
-  });
-  </script>
-  {% endif %}
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
 
 <header class="site-head">
   <nav class="nav">
-    {# The only route home from the masthead, so it has to announce itself as
-       one: the logo's alt text says who, not where. #}
+    {# The only route home from the masthead, so it must announce itself. #}
     <a href="{{ SITEURL }}/" class="nav-brand" aria-label="{{ SITENAME|e }} — home">
       {%- if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}" />
       {%- else %}{{ SITENAME|e }}{% endif -%}
     </a>
     {% if M_LINKS_NAVBAR1 %}
-    {# The checkbox is the control: visually hidden but focusable, so the
-       drawer works from the keyboard. role/tabindex on the label would be
-       invalid HTML and would not toggle on Enter or Space anyway. #}
+    {# The checkbox is the control: hidden but focusable, so the drawer works
+       from the keyboard. role/tabindex on the label is invalid and does not
+       toggle anyway. #}
     <input type="checkbox" id="navtoggle" class="nav-toggle" />
     <label for="navtoggle" class="nav-btn" aria-label="Toggle menu"><svg class="menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><svg class="x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></label>
     {% for title, link, slug in M_LINKS_NAVBAR1 %}

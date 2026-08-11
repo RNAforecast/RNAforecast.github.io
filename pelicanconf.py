@@ -16,8 +16,6 @@ ARTICLE_PATHS = ['articles']  # no blog; keeps the article generator quiet
 
 M_CSS_FILES = ['/css/rnaf.css']
 
-# Page metadata whose value is reStructuredText and should reach the template
-# as rendered HTML rather than flattened text.
 FORMATTED_FIELDS = ['summary', 'hero_links', 'hero_actions', 'hero_body']
 
 M_THEME_COLOR = '#5980a6'
@@ -38,15 +36,11 @@ AUTHOR_FEED_RSS = None
 M_SITE_LOGO = 'static/images/rnaforecast-logo.svg'
 M_SOCIAL_TWITTER_SITE = '@mtwolfinger'
 
-# The card every share of the site renders. 1200x630 — the size Open Graph,
-# Bluesky, LinkedIn, Slack and Mastodon all expect. Must be a raster image;
-# no consumer renders SVG.
+# 1200x630, the size every share consumer expects. Raster only; none render SVG.
 M_SOCIAL_IMAGE = 'static/images/og-card.png'
 
-# (label, url, slug) — slug marks the current page in the masthead.
-# No 'Home' entry: the wordmark is the link home, and the footer carries an
-# explicit one. The wordmark's aria-label in base.html is what makes that
-# route discoverable to a screen reader, so keep the two together.
+# (label, url, slug) — slug marks the current page. No 'Home': the wordmark
+# links home, and its aria-label in base.html is what announces that.
 M_LINKS_NAVBAR1 = [('Research', '/research/', 'research'),
                    ('Publications', '/publications/', 'publications'),
                    ('Software', '/#software', ''),
@@ -81,16 +75,10 @@ EXTRA_PATH_METADATA = {
 PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
 
-# changefreq and priority are omitted: search engines ignore both, and a
-# uniform value on every URL carries no information. lastmod comes from the
-# source file's mtime, so it only moves when the page actually changes.
-# The site's own schema.org graph, emitted on the home page by plugins/
-# scholarly.py. Written as data rather than as a raw HTML block in index.rst so
-# that the domain is not baked into the content: any "@id" or "url" starting
-# with "#" or "/" is prefixed with SITEURL at build time, which means a local
-# preview carries no rnaforecast.com at all and production carries it
-# everywhere. Keep "#michael-t-wolfinger" in step with AUTHOR_FRAGMENT in the
-# plugin — the publication graph refers to the same node.
+# Data, not markup, so the domain is not baked into content: any "@id" or
+# "url" starting with "#" or "/" gets SITEURL prefixed at build time, which
+# keeps rnaforecast.com out of a local preview. Keep "#michael-t-wolfinger"
+# in step with AUTHOR_FRAGMENT in plugins/scholarly.py.
 R_SITE_GRAPH = [
     {
         "@type": "Person",
@@ -142,9 +130,8 @@ R_SITE_GRAPH = [
                     "addressCountry": "AT"},
     },
     {
-        # The home page is about the platform, not the person. The
-        # ProfilePage — the type Google reads to work out whose profile a
-        # page is — belongs on /about/, in R_PAGE_GRAPHS below.
+        # The home page is about the platform, not the person; ProfilePage
+        # belongs on /about/, in R_PAGE_GRAPHS below.
         "@type": "WebPage",
         "@id": "#webpage",
         "url": "/",
@@ -154,9 +141,8 @@ R_SITE_GRAPH = [
     },
 ]
 
-# Extra schema.org nodes for individual pages, keyed by slug. The Person node
-# from R_SITE_GRAPH is prepended automatically, so each page stands on its own
-# while still describing one entity by @id.
+# Extra nodes per page, keyed by slug. The Person node is prepended
+# automatically, so each page's graph stands on its own.
 R_PAGE_GRAPHS = {
     "about": [
         {
@@ -175,15 +161,12 @@ SITEMAP = {
     "exclude": ["legal", "thanks", "404"]
 }
 
-# Consent management. Off in development so a local preview sets no cookies at
-# all; publishconf.py turns it on. The script URL carries the account and
-# configuration ids, so it lives here rather than in the template.
+# Off in development so a local preview sets no cookies; publishconf.py
+# turns it on.
 OSANO = False
 OSANO_SCRIPT = ('https://cmp.osano.com/AzqaZNTUulxcl8Ml/'
                 '1502bf1a-8776-4742-8b0b-35e18285f582/osano.js')
 
-# Google Search Console ownership token — the content= value of the
-# google-site-verification meta tag. Empty means the tag is not emitted.
-# A DNS TXT record at the registrar verifies the whole domain instead and
-# survives redesigns; use this only if you would rather verify by meta tag.
+# Search Console token; empty means no meta tag. A DNS TXT record verifies
+# the whole domain instead and survives redesigns.
 GOOGLE_SITE_VERIFICATION = ''

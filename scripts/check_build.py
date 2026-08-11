@@ -22,7 +22,6 @@ import struct
 import sys
 from urllib.parse import unquote, urlsplit
 
-# Pages and assets the site must always publish.
 REQUIRED = [
     'index.html',
     'research/index.html',
@@ -38,41 +37,30 @@ REQUIRED = [
     'static/images/og-card.png',
 ]
 
-# The share card every consumer expects at this exact size.
 OG_CARD = 'static/images/og-card.png'
 OG_CARD_SIZE = (1200, 630)
 
-# Hard cap on the meta description. Search results truncate around 155-160
-# characters, so anything past this is written for nobody.
+# Search results truncate around 155-160 characters.
 MAX_DESCRIPTION = 150
 
 SITE_HOST = 'rnaforecast.com'
 
-# Hosts a page may fetch a subresource from: analytics and the consent banner
-# that gates it, and nothing else.
 ALLOWED_HOSTS = {SITE_HOST, 'www.googletagmanager.com', 'cmp.osano.com'}
 
-# Where a form may post. A form action is a data flow rather than a
-# subresource: it sends what a visitor typed to another operator. A new host
-# here needs a matching disclosure in the legal notice, so it must not slip in
-# unnoticed.
+# A form action is a data flow, not a subresource: a new host here needs a
+# matching disclosure in the legal notice.
 FORM_ACTION_HOSTS = {SITE_HOST, 'formsubmit.co'}
 
-# Elements whose href/src is fetched by the browser rather than followed by
-# the reader.
 SUBRESOURCE_TAGS = {
     'link', 'script', 'img', 'source', 'iframe', 'video', 'audio', 'embed',
 }
-# Elements whose href the reader follows.
 LINK_TAGS = {'a', 'area'}
 
-# The site ships no JavaScript of its own. Production adds exactly two inline
-# blocks from base.html — the analytics config and the consent widget — plus
-# the JSON-LD graph, which is data. Anything else is new script that crept in.
+# The site ships no JavaScript of its own; only the Consent Mode defaults and
+# the Google tag are allowed inline. Anything else is script that crept in.
 ALLOWED_INLINE = (
-    'window.dataLayer',            # Consent Mode defaults, denied
-    "gtag('js'",                   # the Google tag itself
-    'osano-cm-consent-saved',      # Osano -> Consent Mode bridge
+    'window.dataLayer',
+    "gtag('js'",
 )
 
 TAG = re.compile(r'<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>')
@@ -82,7 +70,6 @@ FORM = re.compile(r'<form\b([^>]*)>', re.I)
 ACTION = re.compile(r'\baction\s*=\s*["\']([^"\']*)["\']', re.I)
 CSS_URL = re.compile(r'url\(\s*["\']?([^"\')]+)["\']?\s*\)')
 
-# href/src values that reference no file at all.
 NON_FILE = re.compile(r'^(#|mailto:|tel:|data:|javascript:)', re.I)
 
 
@@ -197,7 +184,6 @@ def check_share_card(root, problems):
         problems.append(f'{OG_CARD}: is {size[0]}x{size[1]}, '
                         f'expected {OG_CARD_SIZE[0]}x{OG_CARD_SIZE[1]}')
 
-    # twitter:card promises a large image; every page must actually offer one.
     for page in sorted(html_files(root)):
         with open(page, encoding='utf-8') as f:
             source = f.read()
@@ -301,8 +287,8 @@ def check_jsonld(root, problems):
             except json.JSONDecodeError as exc:
                 problems.append(f'{shown}: JSON-LD does not parse ({exc})')
 
-        # The publications page derives its graph from its own markup, so a
-        # markup change could silently stop producing articles. Compare counts.
+        # The graph is derived from the page's own markup, so a markup change
+        # could silently stop producing articles.
         listed = source.count('class="pub-title"')
         if not listed:
             continue
@@ -315,7 +301,6 @@ def check_jsonld(root, problems):
             problems.append(f'{shown}: {listed} publications on the page but '
                             f'{len(articles)} in the JSON-LD graph')
 
-        # Every DOI linked in the prose must appear in the graph.
         page_dois = set(re.findall(r'https://doi\.org/(10\.[^"\'<\s]+)', source))
         graph_dois = {node['identifier']['value']
                       for node in articles
@@ -337,8 +322,7 @@ def check_excluded_paths(root, problems):
         with open(robots_path, encoding='utf-8') as f:
             robots = f.read()
 
-        # Every record needs the rule: a named agent group does not inherit
-        # the rules of the "*" group.
+        # A named agent group does not inherit the "*" rules.
         records = [r for r in re.split(r'\n\s*\n', robots)
                    if re.search(r'(?im)^User-agent:', r)]
         for record in records:
@@ -381,7 +365,6 @@ def check_robots_and_sitemap(root, problems):
         if target and not os.path.isfile(target):
             problems.append(f'sitemap.xml: {loc} does not exist')
 
-    # Pages excluded on purpose must stay out of the sitemap.
     for slug in ('legal', 'thanks', '404'):
         if re.search(rf'<loc>[^<]*/{slug}(/|\.html)?</loc>', sitemap):
             problems.append(f'sitemap.xml: lists /{slug}/, which is excluded')

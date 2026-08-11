@@ -29,8 +29,8 @@ from pelican import signals
 
 logger = logging.getLogger(__name__)
 
-# The site's own author. AUTHOR_FRAGMENT must match the @id of the Person node
-# the home page declares, so the two graphs describe one entity rather than two.
+# AUTHOR_FRAGMENT must match the Person @id in R_SITE_GRAPH, or the site graph
+# and the publication graph describe two different people.
 AUTHOR_NAME = 'Michael T. Wolfinger'
 AUTHOR_FRAGMENT = '#michael-t-wolfinger'
 AUTHOR_ORCID = 'https://orcid.org/0000-0003-0925-5205'
@@ -51,10 +51,8 @@ class Node:
         self.id = attrs.get('id', '')
         self.href = attrs.get('href', '')
         self.children = []
-        # Text and child nodes interleaved in document order. Keeping the
-        # order matters: an author list is "Borovská, <strong>Wolfinger
-        # MT</strong>, Incarnato", and collecting the direct text first would
-        # move the emphasised name to the end of the list.
+        # Document order matters: an emphasised name in the middle of an
+        # author list must not end up at the end of it.
         self.parts = []
 
     def add_text(self, text):
@@ -269,7 +267,6 @@ def build_graph(content, page_url, page_name, site_url):
             if article:
                 articles.append(article)
 
-    # Publications outside a year group, so a restructure loses nothing silently.
     grouped = {id(pub) for group in tree.root.find_all('pub-group')
                for pub in group.find_all('pub')}
     for pub in tree.root.find_all('pub'):
@@ -283,10 +280,8 @@ def build_graph(content, page_url, page_name, site_url):
 
     graph = [author_node(author_id)]
 
-    # Only the full listing is a CollectionPage. A page that merely features a
-    # few papers (the home page) contributes the articles without claiming to
-    # be the bibliography — and without competing with the WebPage node that
-    # page already declares.
+    # Only the full listing is a CollectionPage; a page that merely features
+    # papers is not the bibliography.
     if tree.root.find('pub-group'):
         graph.append({
             '@type': 'CollectionPage',
@@ -333,13 +328,9 @@ def attach(page_generator):
         nodes = graph['@graph'] if graph else []
 
         if is_home:
-            # The site's own identity leads the graph; the featured papers
-            # follow, minus the duplicate Person node they carry.
             nodes = [n for n in nodes if n.get('@id') != author_id]
             nodes = absolutise(site_graph, siteurl) + nodes
         elif extra:
-            # A page-specific graph describes the same Person, so the node
-            # travels with it rather than being left dangling by @id.
             nodes = [n for n in nodes if n.get('@id') != author_id]
             lead = [person] if person else []
             nodes = absolutise(lead + extra, siteurl) + nodes

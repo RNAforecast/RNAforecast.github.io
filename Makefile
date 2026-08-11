@@ -56,11 +56,9 @@ clean:
 regenerate:
 	"$(PELICAN)" -r "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
-# `pelican -l` only starts a server rooted at output/ — it does not build.
-# Without this dependency it happily serves whatever `make check`, `make
-# publish` left behind: a production build whose absolute
-# https://rnaforecast.com/... asset URLs resolve against the live site, not
-# localhost, so the local preview loads no stylesheet.
+# `pelican -l` serves output/ without building it. Without this dependency it
+# serves whatever `make check` left behind — a production build whose absolute
+# URLs resolve against the live site, so the preview loads no stylesheet.
 serve: html
 	"$(PELICAN)" -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
@@ -76,15 +74,12 @@ devserver-global:
 publish:
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
 
-# Production build under --fatal warnings, then smoke-test the result.
-# This is what CI runs; run it locally to see what CI will see.
 check:
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS) --fatal warnings
 	"$(PY)" scripts/check_build.py "$(OUTPUTDIR)"
 
-# Nu Html Checker over the built pages. Needs a JRE. CSS checking is left off
-# on purpose: the validator's stylesheet backend predates color-mix(), inset,
-# aspect-ratio and nesting, and reports all of them as errors.
+# Needs a JRE. CSS checking is off on purpose: the validator's stylesheet
+# backend predates color-mix(), inset, aspect-ratio and nesting.
 validate:
 	html5validator --root "$(OUTPUTDIR)"
 

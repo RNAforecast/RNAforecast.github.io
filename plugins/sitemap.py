@@ -129,7 +129,6 @@ class SitemapGenerator:
         # https://github.com/pelican-plugins/sitemap/pull/3#discussion_r436390684
         if pelican == self._main_pelican:
             self._write_out(pelican)
-            # Reset for autoreload
             self._main_pelican = None
             self.page_queue = []
 
@@ -155,7 +154,6 @@ class SitemapGenerator:
             return pathname2url(os.path.relpath(path, output_path))
 
         def clean_url(url):
-            # Strip trailing 'index.html'
             return re.sub(r"(?:^|(?<=/))index.html$", "", url)
 
         def is_excluded(item):
@@ -180,14 +178,10 @@ class SitemapGenerator:
             for pageurl, obj in page_queue:
                 if not is_xml:
                     fd.write(siteurl + "/" + pageurl + "\n")
-                    # That's it for txt. Short circuit the loop, gain an indent level.
                     continue
 
-                # When the page last actually changed, not when it was last
-                # built. The commit date is the only source that survives CI:
-                # git does not preserve mtimes, so a fresh checkout stamps
-                # every file with the checkout time, which is build time by
-                # another name.
+                # The commit date, not the mtime: git does not preserve
+                # mtimes, so in CI every file carries the checkout time.
                 lastmod = (
                     getattr(obj, "modified", None) or getattr(obj, "date", None)
                 )
@@ -203,13 +197,11 @@ class SitemapGenerator:
                     else "indexes"
                 )
 
-                # see if changefreq specified in metadata headers; fall back to config
                 changefreq = getattr(obj, "changefreq", changefreqs[content_type])
                 if changefreq not in CHANGEFREQ_VALUES:
                     log.error(f"sitemap: Invalid 'changefreqs' value: {changefreq!r}")
                     changefreq = changefreqs[content_type]
 
-                # see if priority specified in metadata headers; fall back to config
                 priority_raw = getattr(obj, "priority", priorities[content_type])
                 try:
                     priority = float(priority_raw)
@@ -224,7 +216,6 @@ class SitemapGenerator:
                     XML_TRANSLATION.format(
                         trans.lang,
                         siteurl,
-                        # save_as path is already output-relative
                         clean_url(pathname2url(trans.save_as)),
                     )
                     for trans in getattr(obj, "translations", ())

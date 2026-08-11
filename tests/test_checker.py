@@ -68,7 +68,7 @@ def test_the_analytics_and_consent_blocks_are_allowed(site):
     """Production legitimately emits these; they must not be flagged."""
     html = read(site / 'index.html')
     assert 'window.dataLayer' in html
-    assert 'osano-cm-consent-saved' in html
+    assert "gtag('js'" in html
     assert problems_for(site) == []
 
 

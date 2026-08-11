@@ -111,8 +111,6 @@
   /* The one signal colour: a field the visitor left in an invalid state. */
   --color-error: #a5443c;
 
-  /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
-     same step of any role matches the others in visual value. */
   --color-neutral-100: #f5f5f8;
   --color-neutral-800: #424244;
 
@@ -129,8 +127,6 @@
   --space-3: 10.2px;
   --space-4: 13.6px;
 
-  /* Site-level derivations. The design leans on three recurring text tints
-     and one page measure; naming them keeps layer 4 free of color-mix noise. */
   --ink-88: color-mix(in srgb, var(--color-text) 88%, transparent);
   --ink-82: color-mix(in srgb, var(--color-text) 82%, transparent);
   --ink-70: color-mix(in srgb, var(--color-text) 70%, transparent);
@@ -181,7 +177,6 @@ hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--spa
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 ::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
 
-/* Skip link — visible only once focused. */
 .skip {
   position: absolute; left: -9999px; top: 0; z-index: 10;
   padding: 10px 16px; background: var(--color-accent); color: var(--color-bg);
@@ -210,9 +205,9 @@ hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--spa
     linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark));
   background-size:
     1px 11px, 11px 1px,   /* top-left    — vertical, horizontal */
-    1px 11px, 11px 1px,   /* top-right   */
-    1px 11px, 11px 1px,   /* bottom-left */
-    1px 11px, 11px 1px;   /* bottom-right */
+    1px 11px, 11px 1px,   
+    1px 11px, 11px 1px,   
+    1px 11px, 11px 1px;   
   background-position:
     5px 0,            0 5px,
     calc(100% - 5px) 0,   100% 5px,
@@ -220,8 +215,6 @@ hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--spa
     calc(100% - 5px) 100%, 100% calc(100% - 5px);
   background-repeat: no-repeat;
 }
-/* The overlay image treatments clip their overlay; a blueprint draws its
-   marks outside the box, so when both share a wrapper the frame must win. */
 
 /* — buttons —
    The design system's .btn, plus the container-driven equivalents.
@@ -242,7 +235,6 @@ hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--spa
 .btn svg { display: block; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* primary — the one solid object on the board */
 .btn-primary,
 .hero-actions a:first-child, .actions-primary a {
   background: var(--color-accent); color: var(--color-bg);
@@ -253,11 +245,9 @@ hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--spa
 .btn-primary:active,
 .hero-actions a:first-child:active, .actions-primary a:active { background: var(--color-accent-700); }
 
-/* secondary — outlined */
 .hero-actions a:not(:first-child) { border-color: var(--color-divider); }
 .hero-actions a:not(:first-child):hover, .pubs-full .pub-links a:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
 
-/* ghost — text only */
 .actions a, .sec-link a, .pubs-full .pub-links a + a {
   color: var(--color-accent); padding-inline: var(--space-1);
   border-color: transparent;
@@ -348,8 +338,6 @@ table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, tran
   padding-bottom: 1px;
 }
 .hero-links a:hover { color: var(--color-accent-700); border-bottom-color: var(--color-accent); }
-/* The separators are decoration, not content — drawn rather than typed.
-   inline-block keeps the dot outside the link's underline. */
 .hero-links a:not(:last-child)::after {
   content: "·"; display: inline-block;
   position: absolute; margin-left: 10px;
@@ -362,10 +350,6 @@ table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, tran
 }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
 
-/* The landing hero sets its photograph beside the wordmark as the page's
-   visual anchor. The image keeps its own colour — the system would normally
-   duotone a photograph, but the model's colour coding is the point of it —
-   and wears the blueprint frame so it still reads as part of the system. */
 .hero-split {
   display: grid; align-items: center;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -384,7 +368,6 @@ table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, tran
   .hero-figure { width: 160px; }
 }
 
-/* Interior pages carry a shorter hero — no subtitle line, tighter rhythm. */
 .hero:not(:has(.hero-sub)) { padding: clamp(40px, 7vw, 88px) 0 clamp(28px, 4vw, 48px); }
 .hero:not(:has(.hero-sub)) .kicker { letter-spacing: 0.1em; margin-bottom: 18px; }
 .hero:not(:has(.hero-sub)) h1 { font-size: clamp(38px, 7vw, 84px); max-width: 16ch; }
@@ -406,9 +389,6 @@ article > section {
 /* An explicit .. _target: in the .rst becomes a marker span at the top of the
    section; offset it so the section's kicker and rule stay in view. */
 article > section > span[id] { display: block; scroll-margin-top: 90px; }
-/* The section label. Either generated — a two-digit counter — or written in
-   the .rst as a `.. container:: kicker`, which then supplies the whole string
-   ("03 · Scientific positions") and switches the counter off. */
 article > section { counter-increment: section; }
 article > section::before {
   content: counter(section, decimal-leading-zero);
@@ -441,9 +421,6 @@ article > section > h3 {
   margin: 28px 0 16px;
 }
 
-/* A section may carry one trailing link that the design sets beside the
-   heading. Explicit grid placement puts it there regardless of source order,
-   which is what lets the heading stay a real <h2> in the .rst file. */
 article > section:has(> .sec-link) {
   display: grid; grid-template-columns: 1fr auto;
 }
@@ -456,9 +433,6 @@ article > section:has(> .sec-link) > .sec-link {
 }
 .sec-link a { text-decoration: none; }
 
-/* A "labelled" section: the design gives these no display heading at all —
-   the numbered label is the heading. The title stays a real <h2> and is
-   styled as that label, so the document outline survives. */
 article > section.labelled::before { display: none; }
 article > section.labelled > h2 {
   order: -1;
@@ -475,7 +449,6 @@ article > section.labelled > p {
   max-width: 64ch; margin: 0 0 28px; color: var(--ink-88);
 }
 
-/* Two columns of prose that collapse to one. */
 .split-wide {
   display: grid; gap: clamp(24px, 3.4vw, 48px); align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -515,7 +488,6 @@ article > section.labelled > p {
 .post-org { font-size: 13px; color: color-mix(in srgb, var(--color-text) 65%, transparent); }
 .post p { margin: 0; }
 
-/* The description line under an entry. */
 .post-note {
   font-size: 14px; line-height: 1.6; margin-top: 6px;
   color: var(--ink-70); max-width: 62ch;
@@ -531,8 +503,6 @@ article > section.labelled > p {
   grid-template-columns: 110px minmax(0, 1fr);
   gap: 20px; padding: 18px 0;
 }
-/* A heavier rule opens each group; only the final group is closed off, so two
-   groups never meet in a doubled line. */
 .positions-rail .post:first-of-type { border-top: 1px solid var(--color-text); }
 .positions-rail:last-of-type .post:last-child { border-bottom: 1px solid var(--color-divider); }
 .positions-rail .post-years { font-size: 14px; color: var(--ink-70); }
@@ -559,8 +529,6 @@ article > section.labelled > p {
   border-top: 1px solid var(--color-divider);
 }
 .service-group > .kicker-sm { margin-bottom: 14px; }
-/* The community-service items are short, so that group runs two-up on wide
-   viewports; the editorial entries are long and stay in one column. */
 .service-group:last-child .bullets ul {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   column-gap: clamp(20px, 3vw, 40px);
@@ -598,7 +566,6 @@ article > section.labelled > p {
 .profile-k p { margin: 0; }
 .profile > p { font-size: 14px; margin: 0; }
 
-/* Free-standing kicker, for blocks that are not sections. */
 .kicker {
   display: block; font-size: 13px; letter-spacing: 0.1em;
   text-transform: uppercase; font-weight: 600; color: var(--color-accent-700);
@@ -608,10 +575,8 @@ article > section.labelled > p {
   display: block; font-size: 11px; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--color-accent); margin: 0 0 6px;
 }
-/* A row of actions at the foot of a section. */
 .actions { margin-top: 20px; }
 
-/* A row of tag-shaped links (the research theme index, the year index). */
 .tag-row p { margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .tag-row a {
   display: inline-flex; align-items: center; font-size: 11px;
@@ -620,7 +585,6 @@ article > section.labelled > p {
 }
 .tag-row a:hover { background: var(--color-accent-100); }
 
-/* A standalone tag written as a container. */
 .tag p { margin: 0; }
 
 /* — research themes —
@@ -630,8 +594,6 @@ article > section.labelled > p {
 
 article > section.theme {
   display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
-  /* the body spans both rows; pinning row 1 to its content keeps the theme
-     title directly under its number instead of drifting down the column */
   grid-template-rows: auto 1fr;
   gap: clamp(24px, 3.4vw, 40px);
   padding: clamp(28px, 3.4vw, 36px) 0;
@@ -657,7 +619,6 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
   max-width: 60ch; margin: 0 0 22px; color: var(--ink-88);
 }
 
-/* The four-cell specification grid under each theme. */
 .spec {
   display: grid; gap: 0; border: 1px solid var(--color-divider);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
@@ -670,15 +631,11 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 }
 .spec-k p { font-size: inherit; color: inherit; letter-spacing: inherit; margin: 0; }
 
-/* A closing row: one line of copy and the page's onward action. */
 .closing {
   padding: clamp(24px, 4vw, 40px) 0 clamp(48px, 8vw, 96px);
   border-top: 1px solid var(--color-divider);
   font-size: 15px; color: var(--ink-70);
 }
-/* Only a row when there is an action to sit opposite the copy. htmlsanity
-   drops the <p> around a lone paragraph, so on a container holding just a
-   sentence flex would scatter its text runs into separate items. */
 .closing:has(> .actions-primary), .closing:has(> .actions) {
   display: flex; flex-wrap: wrap; gap: 16px;
   align-items: center; justify-content: space-between;
@@ -695,9 +652,6 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 .cards > .blueprint { padding: 22px 22px 26px; }
 .cards p { font-size: 14px; line-height: 1.55; margin: 0; color: var(--ink-82); }
 
-/* Headings that live inside a container. reStructuredText only makes a real
-   heading out of a section title, so a titled block nested in a component
-   carries its heading as a named container instead. */
 .card-h, .collab-h, .subsection-h {
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
   line-height: 1.12;
@@ -715,7 +669,6 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
   margin: 0 0 16px;
 }
 
-/* A two-up split that collapses at the tablet breakpoint. */
 .split {
   display: grid; gap: clamp(24px, 3.4vw, 40px); align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
@@ -732,8 +685,6 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
   font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase;
 }
-/* docutils renders a definition list as <dl><dt>…<dd>…; grid auto-placement
-   turns each pair into one row of the plate. */
 .glance dl {
   margin: 0; display: grid; grid-template-columns: 150px minmax(0, 1fr);
 }
@@ -782,7 +733,6 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 }
 .pub-summary { font-size: 14px; line-height: 1.6; max-width: 74ch; margin: 0 0 14px; color: var(--ink-88); }
 
-/* Publications page: a wider meta column and a year band per group. */
 .pubs-full { display: block; }
 .pubs-full .pub {
   grid-template-columns: 132px minmax(0, 1fr); gap: clamp(16px, 2vw, 24px);
@@ -807,7 +757,6 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
   color: var(--ink-45); margin: 10px 0 0;
 }
 .pub-type p { margin: 0; }
-/* The venue badge: solid accent for the headline papers, outlined otherwise. */
 .pub-badge {
   display: inline-block;
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
@@ -822,7 +771,6 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 .pub-doi { color: var(--ink-45); margin-left: 6px; }
 .pub-doi p { margin: 0; }
 
-/* The closing "complete record" plate. */
 .record { margin-top: 44px; padding-top: 28px; border-top: 2px solid var(--color-text); }
 .record-h {
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
@@ -845,17 +793,11 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 .collabs .meta { font-size: 12px; letter-spacing: 0.04em; color: var(--ink-55); margin: 0; }
 
 /* — lists — */
-/* A ruled list: every item but the last carries a hairline. The container
-   wraps the <ul> that reStructuredText emits. */
 .rule-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
 .rule-list li { border-bottom: 1px solid var(--hairline); padding-bottom: 10px; }
 .rule-list li:last-child { border-bottom: 0; padding-bottom: 0; }
 .rule-list p { margin: 0; }
 
-/* Square accent bullets, as the design draws them.
-   The marker is positioned rather than laid out as a grid cell: docutils emits
-   simple list items as bare text plus inline elements, and a grid would make
-   each of those runs its own cell. */
 .bullets ul {
   list-style: none; margin: 0; padding: 0; display: grid; gap: 12px;
   font-size: 14px; max-width: 58ch;
@@ -902,16 +844,11 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 .input:hover { border-color: var(--ink-45); }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
 textarea.input { min-height: 90px; resize: vertical; display: block; }
-/* Only flags a field the visitor has actually left in a bad state. */
 .input:user-invalid { border-color: var(--color-error); }
 .form-note { font-size: 12px; color: var(--ink-55); margin: 0 0 var(--space-3); }
 .contact-form .btn { cursor: pointer; }
-/* FormSubmit's honeypot: bots fill it in, people never see it. */
 .hp { display: none; }
 
-/* Label/value rows (ORCID, Email …). */
-/* The container wraps the <dl> docutils emits, so the grid goes on the list
-   itself — on the wrapper it would put the whole list in the label column. */
 .pairs { margin-top: 16px; font-size: 13px; }
 .pairs dl {
   margin: 0; display: grid;
@@ -973,8 +910,6 @@ textarea.input { min-height: 90px; resize: vertical; display: block; }
   .pubs-full .pub { grid-template-columns: 1fr; gap: 12px; }
   .pub-year, .pub-type { margin-top: 0; }
   .pub-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  /* the explicit column placement has to be released too, or the single
-     column grid grows an implicit second one */
   .glance dl { grid-template-columns: 1fr; }
   .glance dt { grid-column: 1; padding: 16px clamp(14px, 2vw, 20px) 0; border-bottom: 0; }
   .glance dd { grid-column: 1; padding: 4px clamp(14px, 2vw, 20px) 16px; }
@@ -991,7 +926,6 @@ textarea.input { min-height: 90px; resize: vertical; display: block; }
   article > section:has(> .sec-link) > .sec-link { margin: 0 0 20px; }
 }
 
-/* The masthead collapses into a checkbox-driven drawer. No script. */
 @media (max-width: 900px) {
   .nav { flex-wrap: wrap; align-items: center; row-gap: 0; }
   .nav-btn {
@@ -1000,8 +934,6 @@ textarea.input { min-height: 90px; resize: vertical; display: block; }
     border: 1px solid var(--color-divider); color: var(--color-text);
     background: transparent;
   }
-  /* Hidden from view but still in the tab order, so the drawer opens with
-     Space like any checkbox. The label carries the focus ring. */
   .nav-toggle {
     display: block; position: absolute;
     width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
