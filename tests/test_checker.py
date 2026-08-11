@@ -167,6 +167,23 @@ def test_the_shipped_consent_order_is_correct(site):
     assert problems_for(site) == []
 
 
+def test_a_field_parsed_as_a_list_is_caught(sabotaged):
+    """"J. General Virology" became <ol start="10">, losing the "J." and
+    printing "10." on the page."""
+    page = sabotaged / 'publications' / 'index.html'
+    page.write_text(read(page).replace(
+        '<div class="pub-badge">\nJournal of General Virology</div>',
+        '<div class="pub-badge">\n<ol start="10">\n<li>General Virology</li>\n</ol>\n</div>',
+        1))
+    assert_reports(sabotaged, 'was parsed as a list')
+
+
+def test_no_publication_field_is_a_list(site):
+    html = read(site / 'publications' / 'index.html')
+    assert '<ol start=' not in html
+    assert 'Journal of General Virology' in html
+
+
 def test_a_wrong_sized_share_card_is_caught(sabotaged):
     card = sabotaged / check_build.OG_CARD
     card.write_bytes(b'not a png at all')

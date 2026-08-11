@@ -341,6 +341,31 @@ def check_excluded_paths(root, problems):
                                 f'"{label}", which is excluded')
 
 
+def check_no_accidental_lists(root, problems):
+    """Catch reStructuredText turning a line into an enumerated list.
+
+    A publication field starting with something docutils reads as an
+    enumerator — "J. General Virology", where J is the 10th letter — becomes
+    <ol start="10"><li>…</li></ol>, and the marker shows up on the page while
+    the text loses its first token. The fields here are always plain text, so
+    any list inside one is this bug.
+    """
+    block = re.compile(
+        r'<div class="(pub-badge|pub-title|pub-authors|pub-cite|pub-doi|'
+        r'pub-summary|pub-year|tag[^"]*)">(.*?)</div>', re.S)
+
+    for page in sorted(html_files(root)):
+        shown = os.path.relpath(page, root)
+        with open(page, encoding='utf-8') as f:
+            source = f.read()
+        for cls, body in block.findall(source):
+            if '<ol' in body or '<ul' in body:
+                text = ' '.join(re.sub(r'<[^>]+>', ' ', body).split())[:50]
+                problems.append(
+                    f'{shown}: .{cls} was parsed as a list, not text — an RST '
+                    f'enumerator swallowed the first token: "{text}"')
+
+
 def check_robots_and_sitemap(root, problems):
     robots_path = os.path.join(root, 'robots.txt')
     if os.path.isfile(robots_path):
@@ -394,6 +419,7 @@ def check(root):
     check_consent_order(root, problems)
     check_stylesheet_assets(root, problems)
     check_jsonld(root, problems)
+    check_no_accidental_lists(root, problems)
     check_excluded_paths(root, problems)
     check_robots_and_sitemap(root, problems)
 

@@ -335,7 +335,7 @@ Publications
 
         .. container:: pub-badge
 
-          J. General Virology
+          Journal of General Virology
 
         .. container:: pub-type
 
