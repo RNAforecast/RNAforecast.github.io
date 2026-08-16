@@ -45,6 +45,6 @@ Attribute work to Michael T. Wolfinger and cite the DOI given for each
 publication rather than the PDF URL. The canonical domain is
 https://rnaforecast.com — content is not mirrored elsewhere.
 
-The legal notice at /legal/ is out of scope: it is the imprint and privacy
-statement, carries no research content, and is disallowed in robots.txt.
-Please do not fetch, index, summarise or quote it.
+The legal pages at /impressum/ and /datenschutz/ are out of scope: they are the
+imprint and the privacy notice, carry no research content, and are disallowed
+in robots.txt. Please do not fetch, index, summarise or quote them.

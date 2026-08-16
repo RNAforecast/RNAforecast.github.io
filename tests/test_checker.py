@@ -51,14 +51,14 @@ def test_a_third_party_subresource_is_caught(sabotaged):
 
 def test_an_outbound_link_is_not_mistaken_for_a_request(sabotaged):
     """DOI and ORCID links are followed by readers, not fetched by browsers."""
-    page = sabotaged / 'legal' / 'index.html'
+    page = sabotaged / 'impressum' / 'index.html'
     page.write_text(read(page).replace(
         '<body>', '<body><a href="https://doi.org/10.1234/xyz">DOI</a>', 1))
     assert problems_for(sabotaged) == []
 
 
 def test_stray_inline_script_is_caught(sabotaged):
-    page = sabotaged / 'legal' / 'index.html'
+    page = sabotaged / 'impressum' / 'index.html'
     page.write_text(read(page).replace(
         '</body>', '<script>alert("hi")</script></body>', 1))
     assert_reports(sabotaged, 'unexpected inline <script>')
@@ -202,7 +202,7 @@ def test_an_excluded_page_appearing_in_the_sitemap_is_caught(sabotaged):
     sitemap = sabotaged / 'sitemap.xml'
     sitemap.write_text(read(sitemap).replace(
         '</urlset>',
-        '<url><loc>https://rnaforecast.com/legal/</loc></url></urlset>'))
+        '<url><loc>https://rnaforecast.com/impressum/</loc></url></urlset>'))
     assert_reports(sabotaged, 'which is excluded')
 
 

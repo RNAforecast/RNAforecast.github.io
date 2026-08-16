@@ -7,7 +7,8 @@ from scripts import check_build
 from conftest import read
 
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
-         'about/index.html', 'legal/index.html', 'thanks/index.html',
+         'about/index.html', 'impressum/index.html',
+         'datenschutz/index.html', 'thanks/index.html',
          '404.html']
 
 

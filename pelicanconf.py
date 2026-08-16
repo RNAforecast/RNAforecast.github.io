@@ -57,7 +57,8 @@ R_FOOTER_LINKS = [('Home', '/'),
                   ('Publications', '/publications/'),
                   ('Teaching', '/#training'),
                   ('About', '/about/'),
-                  ('Legal Notice', '/legal/')]
+                  ('Impressum', '/impressum/'),
+                  ('Privacy', '/datenschutz/')]
 
 R_FOOTER_PROFILES = [('GitHub', 'https://github.com/mtw'),
                      ('ORCID', 'https://orcid.org/0000-0003-0925-5205'),
@@ -158,7 +159,7 @@ R_PAGE_GRAPHS = {
 SITEMAP = {
     "format": "xml",
     "hints": False,
-    "exclude": ["legal", "thanks", "404"]
+    "exclude": ["impressum", "datenschutz", "thanks", "404"]
 }
 
 # Off in development so a local preview sets no cookies; publishconf.py

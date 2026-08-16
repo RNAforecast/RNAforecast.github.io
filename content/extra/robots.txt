@@ -9,7 +9,8 @@
 # Consecutive User-agent lines share the rules that follow them.
 
 User-agent: *
-Disallow: /legal/
+Disallow: /impressum/
+Disallow: /datenschutz/
 
 # Search engines and their AI answer surfaces
 User-agent: Googlebot
@@ -19,7 +20,8 @@ User-agent: DuckDuckBot
 User-agent: Applebot
 User-agent: Applebot-Extended
 Allow: /
-Disallow: /legal/
+Disallow: /impressum/
+Disallow: /datenschutz/
 
 # Model training, retrieval and on-demand fetch agents
 User-agent: GPTBot
@@ -33,6 +35,7 @@ User-agent: Perplexity-User
 User-agent: CCBot
 User-agent: meta-externalagent
 Allow: /
-Disallow: /legal/
+Disallow: /impressum/
+Disallow: /datenschutz/
 
 Sitemap: https://rnaforecast.com/sitemap.xml

@@ -68,9 +68,20 @@ reStructuredText and must reach the template as rendered HTML
 
 ### Content
 
-Five pages in `content/pages/` as reStructuredText: index, research,
-publications, about, legal. There is no blog; `ARTICLE_PATHS` points at a
-directory that does not exist to keep the article generator quiet.
+Six pages in `content/pages/` as reStructuredText: index, research,
+publications, about, impressum, datenschutz — plus `thanks` and `404`, which
+are only reached by being sent there. There is no blog; `ARTICLE_PATHS` points
+at a directory that does not exist to keep the article generator quiet.
+
+`impressum` is the Austrian § 25 MedienG disclosure — media owner, address,
+responsible for content, editorial policy — and `datenschutz` is the GDPR
+privacy notice. They are two pages on purpose: the imprint has to stay short
+and unmistakable. Both carry a private residential address, so both are
+`Disallow`ed in `robots.txt`, excluded from the sitemap and declared out of
+scope in `llms.txt`; `EXCLUDED_PATHS` and `EXCLUDED_SLUGS` in
+`scripts/check_build.py` are what keep those three files agreeing. Both use
+`:page_class: legal`, which is the "reads as a document" style, not a page
+name. There is no `/legal/` URL.
 
 Page metadata drives the hero; the body is ordinary RST:
 
@@ -83,7 +94,7 @@ Page metadata drives the hero; the body is ordinary RST:
 :hero_actions:       a run of links rendered as buttons; the first is primary
 :hero_portrait:      image path — switches the hero to the portrait layout (about)
 :hero_body:          multi-paragraph RST for the portrait hero
-:page_class:         extra class on <main> (legal)
+:page_class:         extra class on <main> (impressum, datenschutz)
 ```
 
 Use **anonymous** hyperlink references (double underscore, ``` `text <url>`__ ```)
@@ -165,6 +176,18 @@ no manual target — Pages is set to build type "GitHub Actions", so a branch
 push would not reach the site anyway. Do not reintroduce a `ghp-import` step:
 under this setting it succeeds, reports nothing wrong, and changes nothing.
 
+**Cloudflare sits in front of GitHub Pages** — the apex record is proxied, so
+every request is answered at the edge first. Three consequences worth knowing.
+One redirect lives there and nowhere in this repository: `/legal` and `/legal/`
+→ `https://rnaforecast.com/impressum/`, a 301 Single Redirect Rule, left over
+from the page's old URL. DNS is there too, so the Search Console verification
+record is a Cloudflare TXT entry rather than anything in the build. And
+Cloudflare can inject JavaScript into the served
+HTML at the edge — Bot Fight Mode and Cloudflare Web Analytics both do — which
+`check_build.py` cannot see, because it reads the build on disk and never the
+served page. Both must stay off, or the site stops being JavaScript-free
+without anything in CI noticing.
+
 The two builds never share a directory: `make html`/`serve` write the
 development build to `output/`, `make publish`/`check`/`validate` write the
 production build to `output-publish/`. Sharing one directory left absolute
@@ -178,8 +201,8 @@ every reference to the site's own files resolves (including absolute
 requests anything from a host outside analytics and the consent banner, that
 every `url()` in the stylesheet resolves (the self-hosted fonts are referenced
 from nowhere else), that the contact form still posts only to its declared
-endpoint — a form action is a data flow, and the disclosure in the legal notice
-has to keep matching it — that every JSON-LD block parses and the publication
+endpoint — a form action is a data flow, and the disclosure in the privacy
+notice has to keep matching it — that every JSON-LD block parses and the publication
 graph covers every paper and DOI on the page, that the share card is present at
 1200×630, and that `robots.txt`, the sitemap and its exclusions agree with the
 pages on disk.
@@ -215,7 +238,16 @@ script, then the Google tag. Defaults after the tag means gtag.js sets its
 cookies before anyone is asked, and a CMP loaded after the tracker cannot block
 it. `check_build.py` asserts this ordering. `GOOGLE_SITE_VERIFICATION` in
 `pelicanconf.py` emits the Search Console meta tag when set; it is empty by
-default because DNS verification is the better option.
+default because DNS verification is the better option — a TXT record in
+Cloudflare, on a domain property, which covers every scheme and subdomain at
+once and cannot be broken by a change to the pages.
+
+Search Console is independent of Google Analytics and survives its removal, but
+the *verification* may not: GA4's `gtag.js` is itself an accepted verification
+method, and with no meta tag, no HTML verification file and no TXT record in
+place, that is what a property here would be resting on. Check Settings →
+Ownership verification and get a DNS record verified **before** removing the
+Google tag, or the property un-verifies.
 
 `M_SOCIAL_IMAGE` points at `static/images/og-card.png`, 1200×630. Every page
 declares `twitter:card=summary_large_image`, so that file must exist at that

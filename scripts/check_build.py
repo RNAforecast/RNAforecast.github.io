@@ -27,7 +27,8 @@ REQUIRED = [
     'research/index.html',
     'publications/index.html',
     'about/index.html',
-    'legal/index.html',
+    'impressum/index.html',
+    'datenschutz/index.html',
     '404.html',
     'CNAME',
     'robots.txt',
@@ -36,6 +37,13 @@ REQUIRED = [
     'css/rnaf.css',
     'static/images/og-card.png',
 ]
+
+# The imprint and the privacy notice: linked from every page for the people
+# who need them, but not research content, and carrying a private address.
+EXCLUDED_PATHS = ('/impressum/', '/datenschutz/')
+
+# Absent from the sitemap: the two above, plus the pages nobody navigates to.
+EXCLUDED_SLUGS = ('impressum', 'datenschutz', 'thanks', '404')
 
 OG_CARD = 'static/images/og-card.png'
 OG_CARD_SIZE = (1200, 630)
@@ -312,10 +320,8 @@ def check_jsonld(root, problems):
 def check_excluded_paths(root, problems):
     """Pages kept out of search results and away from LLM readers.
 
-    The legal notice is the imprint and privacy statement: linked from every
-    page for the people who need it, but not research content. Keeping it out
-    means all three of robots.txt, llms.txt and the sitemap have to agree, and
-    each is edited separately.
+    Keeping EXCLUDED_PATHS out means all three of robots.txt, llms.txt and the
+    sitemap have to agree, and each is edited separately.
     """
     robots_path = os.path.join(root, 'robots.txt')
     if os.path.isfile(robots_path):
@@ -327,18 +333,21 @@ def check_excluded_paths(root, problems):
                    if re.search(r'(?im)^User-agent:', r)]
         for record in records:
             agents = re.findall(r'(?im)^User-agent:\s*(\S+)', record)
-            if not re.search(r'(?im)^Disallow:\s*/legal/\s*$', record):
-                problems.append(f'robots.txt: {", ".join(agents)} may crawl '
-                                f'/legal/, which is excluded')
+            for path in EXCLUDED_PATHS:
+                if not re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$',
+                                 record):
+                    problems.append(f'robots.txt: {", ".join(agents)} may '
+                                    f'crawl {path}, which is excluded')
 
     llms_path = os.path.join(root, 'llms.txt')
     if os.path.isfile(llms_path):
         with open(llms_path, encoding='utf-8') as f:
             llms = f.read()
         for label, url in re.findall(r'\[([^\]]+)\]\((https?://[^)]+)\)', llms):
-            if '/legal/' in url:
-                problems.append(f'llms.txt: links to the legal notice as '
-                                f'"{label}", which is excluded')
+            for path in EXCLUDED_PATHS:
+                if path in url:
+                    problems.append(f'llms.txt: links to {path} as "{label}", '
+                                    f'which is excluded')
 
 
 def check_no_accidental_lists(root, problems):
@@ -390,7 +399,7 @@ def check_robots_and_sitemap(root, problems):
         if target and not os.path.isfile(target):
             problems.append(f'sitemap.xml: {loc} does not exist')
 
-    for slug in ('legal', 'thanks', '404'):
+    for slug in EXCLUDED_SLUGS:
         if re.search(rf'<loc>[^<]*/{slug}(/|\.html)?</loc>', sitemap):
             problems.append(f'sitemap.xml: lists /{slug}/, which is excluded')
 

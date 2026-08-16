@@ -8,10 +8,13 @@ from datetime import datetime
 
 import pytest
 
+from scripts import check_build
+
 from conftest import graphs_in, nodes_of, read
 
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
-         'about/index.html', 'legal/index.html']
+         'about/index.html', 'impressum/index.html',
+         'datenschutz/index.html']
 
 AUTHOR_ID = 'https://rnaforecast.com/#michael-t-wolfinger'
 
@@ -71,32 +74,38 @@ def test_no_crawler_is_blanket_disallowed(site):
     assert not re.search(r'(?im)^Disallow:\s*/\s*$', robots(site))
 
 
-def test_the_legal_page_stays_out_of_the_index(site):
-    assert re.search(r'(?im)^Disallow:\s*/legal/\s*$', robots(site))
+@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
+def test_the_legal_pages_stay_out_of_the_index(site, path):
+    assert re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$', robots(site))
 
 
-def test_every_robots_record_excludes_the_legal_page(site):
+@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
+def test_every_robots_record_excludes_the_legal_pages(site, path):
     """A named agent group does not inherit the rules of the '*' group."""
     records = [r for r in re.split(r'\n\s*\n', robots(site))
                if re.search(r'(?im)^User-agent:', r)]
     assert len(records) >= 3
     for record in records:
         agents = re.findall(r'(?im)^User-agent:\s*(\S+)', record)
-        assert re.search(r'(?im)^Disallow:\s*/legal/\s*$', record), agents
+        assert re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$',
+                         record), agents
 
 
-def test_llms_txt_does_not_point_at_the_legal_page(site):
+@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
+def test_llms_txt_does_not_point_at_the_legal_pages(site, path):
     llms = read(site / 'llms.txt')
     links = re.findall(r'\[([^\]]+)\]\((https?://[^)]+)\)', llms)
-    assert not [u for _, u in links if '/legal/' in u]
+    assert not [u for _, u in links if path in u]
 
 
-def test_llms_txt_says_the_legal_page_is_out_of_scope(site):
-    assert '/legal/ is out of scope' in read(site / 'llms.txt')
+def test_llms_txt_says_the_legal_pages_are_out_of_scope(site):
+    llms = read(site / 'llms.txt')
+    assert '/impressum/ and /datenschutz/ are out of scope' in llms
 
 
-def test_the_legal_page_is_absent_from_the_sitemap(site):
-    assert '/legal/' not in read(site / 'sitemap.xml')
+@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
+def test_the_legal_pages_are_absent_from_the_sitemap(site, path):
+    assert path not in read(site / 'sitemap.xml')
 
 
 # --- sitemap --------------------------------------------------------------

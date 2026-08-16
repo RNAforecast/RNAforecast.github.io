@@ -1,71 +1,38 @@
-Legal notice
-############
+Privacy notice
+##############
 
-:title: Legal notice, RNA Forecast
-:slug: legal
-:description: Legal notice for rnaforecast.com — responsible for content, copyright, external links and privacy.
-:summary: Legal notice for rnaforecast.com.
+:title: Privacy notice, RNA Forecast
+:slug: datenschutz
+:description: Privacy notice for rnaforecast.com — what is processed, on what legal basis, who receives it, how long it is kept and your rights.
+:summary: Privacy notice for rnaforecast.com.
 :page_class: legal
-:hero_title: Legal notice
-:hero_lead: Last updated August 2026
+:hero_title: Privacy notice
+:hero_lead: Datenschutzerklärung · Last updated August 2026
 
-Nature of this website
-----------------------
-
-RNA Forecast is the independent research platform of Michael T. Wolfinger. The
-website documents scientific research, publications, software, teaching
-activities and collaborations in computational RNA biology.
-
-Its purpose, in the sense of the disclosure required by § 25 of the Austrian
-Media Act, is to document and communicate that scientific work. It carries no
-advertising and pursues no political affiliation.
-
-Unless explicitly stated otherwise, this website does not offer commercial
-products or regulated professional services.
-
-Copyright
----------
-
-Copyright © Michael T. Wolfinger. Unless otherwise stated, the text, figures,
-software and photographs on this site remain the property of their respective
-authors.
-
-Scientific publications remain subject to the copyright policies of their
-respective publishers.
-
-Open source software
---------------------
-
-Software released through RNA Forecast is distributed under its respective open
-source licence. Please refer to the individual repositories for licence
-information.
-
-External links
---------------
-
-Despite careful review, no responsibility is assumed for the contents of
-external websites. Responsibility for those pages remains with their respective
-operators.
-
-Privacy
--------
-
-.. container:: subsection-h
-
-  Controller
+Controller
+----------
 
 The controller for the processing described below, within the meaning of
-Article 4(7) GDPR, is Michael T. Wolfinger at the address given above. No data
-protection officer is appointed, as none is required under Article 37 GDPR.
+Article 4(7) GDPR, is:
 
-.. container:: subsection-h
+| Dr. Michael T. Wolfinger
+| Währinger Strasse 17/3
+| 1090 Vienna, Austria
+| `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
 
-  What is processed, and on what basis
+No data protection officer is appointed, as none is required under
+Article 37 GDPR. The `Impressum </impressum/>`__ carries the remaining
+disclosures about who operates this site.
 
-**Server logs.** This site is hosted on GitHub Pages. GitHub records technical
-access data, including your IP address, in order to deliver the site and to
-protect it against misuse. Legal basis: Article 6(1)(f) GDPR, the legitimate
-interest in operating a secure website.
+What is processed, and on what basis
+------------------------------------
+
+**Server logs.** This site is hosted on GitHub Pages and delivered through
+Cloudflare, which sits in front of it as a content delivery network and
+terminates the encrypted connection. Both record technical access data,
+including your IP address, in order to deliver the site and to protect it
+against misuse. Legal basis: Article 6(1)(f) GDPR, the legitimate interest in
+operating a secure website.
 
 **Analytics.** With your consent, Google Analytics 4 measures how the site is
 used. Google Analytics 4 does not store IP addresses. Legal basis:
@@ -91,21 +58,19 @@ to reply to you. Legal basis: Article 6(1)(f) GDPR.
 No automated decision-making or profiling within the meaning of Article 22 GDPR
 takes place on this site.
 
-.. container:: subsection-h
+Recipients and transfers outside the EU
+---------------------------------------
 
-  Recipients and transfers outside the EU
-
-The processors named above — GitHub, Google, Osano and FormSubmit — act on
-behalf of RNA Forecast, and processing may involve transfers to the United
+The processors named above — GitHub, Cloudflare, Google, Osano and FormSubmit —
+act on behalf of RNA Forecast, and processing may involve transfers to the United
 States. Such transfers are made on the basis of the European Commission's
 adequacy decision for the EU–US Data Privacy Framework where the recipient is
 certified under it, and otherwise on the basis of the European Commission's
 standard contractual clauses. Data is not sold, and is not passed to anyone
 else except where the law requires it.
 
-.. container:: subsection-h
-
-  Retention
+Retention
+---------
 
 Enquiries received by email or through the contact form are kept for as long as
 needed to deal with the matter, and thereafter only where a statutory retention
@@ -113,9 +78,8 @@ period applies. Analytics data is deleted after the retention period set in
 Google Analytics. Records of consent are kept for as long as needed to
 demonstrate that consent was given.
 
-.. container:: subsection-h
-
-  Your rights
+Your rights
+-----------
 
 You have the right to obtain confirmation of whether your data is processed and
 to access it (Article 15 GDPR), to have inaccurate data corrected
@@ -138,23 +102,8 @@ authority responsible for Austria is:
 | Barichgasse 40–42, 1030 Vienna, Austria
 | `dsb@dsb.gv.at <mailto:dsb@dsb.gv.at>`__ · `dsb.gv.at <https://www.dsb.gv.at>`__
 
-.. container:: subsection-h
-
-  Changes
+Changes
+-------
 
 This notice is updated when the site or the services behind it change. The date
 of the current version is given at the top of this page.
-
-Media owner and responsible for content
----------------------------------------
-
-| Dr. Michael T. Wolfinger
-| Währinger Strasse 17/3
-| 1090 Vienna, Austria
-
-Contact
--------
-
-| Email: `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
-| GitHub: `github.com/mtw <https://github.com/mtw>`__
-| ORCID: `0000-0003-0925-5205 <https://orcid.org/0000-0003-0925-5205>`__
