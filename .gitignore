@@ -3,16 +3,11 @@
 output/
 output-publish/
 
-# Virtual environments
 .venv/
 .venv312/
 
-# Editable install and test artefacts
 *.egg-info/
 .pytest_cache/
 
-# Design-canvas output the site was converted from: 3+ MB of generated HTML
-# and assets, kept locally as the reference for the design system (see
-# RNAF2026/_ds/ for the components pruned out of rnaf.css). Reference
-# material, not part of the build — deliberately not versioned here.
+CLAUDE.md
 RNAF2026/
