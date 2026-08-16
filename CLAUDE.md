@@ -9,19 +9,38 @@ independent research platform for computational RNA biology. Built with
 **Pelican** (Python static site generator) on a custom theme implementing the
 "Industry" design system.
 
-**The site ships no JavaScript.** Every interaction — the mobile navigation, all
-hover and focus states — is CSS only. The only `<script>` in any build is the
-JSON-LD block, which is structured data for search engines, not code;
-`scripts/check_build.py` fails on every other script, inline or external, and
-`ALLOWED_HOSTS` is now the site's own host and nothing else. Do not introduce
-client-side scripting.
+**The site ships no JavaScript of its own.** Every interaction — the mobile
+navigation, all hover and focus states — is CSS only, and that part is not
+negotiable: do not add client-side scripting to the templates or the content.
+The only `<script>` in any build is the JSON-LD block, which is structured data
+for search engines, not code; `scripts/check_build.py` fails on every other
+script, inline or external, and `ALLOWED_HOSTS` is the site's own host and
+nothing else.
 
-Google Analytics and the Osano consent banner were removed once Cloudflare's
-edge analytics replaced them: statistics are derived from request logs at the
-proxy, so nothing runs in the browser, nothing is stored on the device, and no
-consent is needed. Re-adding any tracker brings the whole banner back with it —
-the § 165 TKG 2021 consent requirement follows the device storage, not the
-vendor.
+Google Analytics and the Osano consent banner are gone. Cloudflare Web
+Analytics replaced them, and it is **not** log-derived — it is a beacon,
+`static.cloudflareinsights.com/beacon.min.js`, which Cloudflare injects at the
+edge. So the served page does carry one third-party script that is in neither
+the build nor this repository, and `check_build.py` cannot see it: the checker
+reads the build on disk, never the served page. That is deliberate, not a
+regression — the product has no server-side mode, so the beacon is the price of
+the numbers. It is cookieless and storage-free, which is why it needs
+disclosure (it has it, in `/datenschutz/`) but no consent banner. The no-third-
+party rule is relaxed exactly this far and no further; do not loosen
+`ALLOWED_HOSTS` to match, since the build itself must stay clean.
+
+Re-adding a tracker that writes to the device brings the whole consent banner
+back with it — the § 165 TKG 2021 requirement follows the device storage, not
+the vendor.
+
+A second edge inject, `/cdn-cgi/scripts/…/email-decode.min.js` (Scrape Shield's
+Email Address Obfuscation), rewrites every `mailto:` to
+`/cdn-cgi/l/email-protection#…` and restores it on load. It leaves the address
+readable as text but breaks the link without JavaScript, including on
+`/impressum/`. It earns nothing and should be switched off.
+
+Verify the served page, not the build, when any of this is in question: load it
+in a real browser and read `performance.getEntriesByType('resource')`.
 
 ## Packaging
 
@@ -167,8 +186,10 @@ Two things worth knowing before editing:
   needs releasing in the mobile breakpoint, or the grid keeps its second column.
 
 Fonts (Barlow, Barlow Condensed) are self-hosted in `content/static/fonts/`.
-The site makes **no third-party requests** at all, which is what lets it run
-without a cookie banner; a font CDN would be enough to end that.
+The build itself makes **no third-party requests** — on the served page the
+only one is Cloudflare's analytics beacon, described above. Keep it that way: a
+font CDN would be a request this repository is responsible for, and unlike the
+beacon it would buy nothing.
 
 ### Deployment
 
@@ -188,11 +209,11 @@ One redirect lives there and nowhere in this repository: `/legal` and `/legal/`
 → `https://rnaforecast.com/impressum/`, a 301 Single Redirect Rule, left over
 from the page's old URL. DNS is there too, so the Search Console verification
 record is a Cloudflare TXT entry rather than anything in the build. And
-Cloudflare can inject JavaScript into the served
-HTML at the edge — Bot Fight Mode and Cloudflare Web Analytics both do — which
-`check_build.py` cannot see, because it reads the build on disk and never the
-served page. Both must stay off, or the site stops being JavaScript-free
-without anything in CI noticing.
+Cloudflare can inject JavaScript into the served HTML at the edge, which
+`check_build.py` cannot see. Web Analytics and Email Address Obfuscation both
+do today; see the overview above for which is wanted and which is not. Bot
+Fight Mode would be a third — leave it off, since its challenge script is
+neither disclosed nor wanted.
 
 The two builds never share a directory: `make html`/`serve` write the
 development build to `output/`, `make publish`/`check`/`validate` write the

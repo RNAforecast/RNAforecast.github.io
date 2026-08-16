@@ -34,13 +34,17 @@ including your IP address, in order to deliver the site and to protect it
 against misuse. Legal basis: Article 6(1)(f) GDPR, the legitimate interest in
 operating a secure website.
 
-**Audience measurement.** Visitor statistics are derived by Cloudflare from
-those same access logs — page views, referrers and countries in aggregate. No
-cookie is set, nothing is stored on your device, no identifier follows you
-between sites, and no profile is built. Legal basis: Article 6(1)(f) GDPR, the
+**Audience measurement.** Cloudflare Web Analytics counts visits. A small
+script from Cloudflare, added to each page as it is delivered, reports the page
+you viewed, the page that referred you, your approximate location by country,
+your browser and device type, and how quickly the page loaded. It sets no
+cookie, writes nothing to your device's storage, and creates no identifier that
+follows you between sites or between visits, so no profile is built and you are
+not recognised when you come back. Legal basis: Article 6(1)(f) GDPR, the
 legitimate interest in knowing which parts of the site are read. Because
-nothing is stored on or read from your device, § 165 TKG 2021 does not apply
-and no consent banner is required.
+nothing is stored on or read from your device, § 165 TKG 2021 does not apply,
+this measurement runs without consent and no consent banner is required; you
+may object to it under Article 21 GDPR.
 
 **Contact form.** The form is delivered by FormSubmit, which forwards the name,
 email address and message you enter to RNA Forecast by email. Providing those
@@ -59,7 +63,8 @@ Recipients and transfers outside the EU
 ---------------------------------------
 
 The processors named above — GitHub, Cloudflare and FormSubmit — act on behalf
-of RNA Forecast, and processing may involve transfers to the United States. Such transfers are made on the basis of the European Commission's
+of RNA Forecast, and processing may involve transfers to the United States.
+Such transfers are made on the basis of the European Commission's
 adequacy decision for the EU–US Data Privacy Framework where the recipient is
 certified under it, and otherwise on the basis of the European Commission's
 standard contractual clauses. Data is not sold, and is not passed to anyone
@@ -70,9 +75,10 @@ Retention
 
 Enquiries received by email or through the contact form are kept for as long as
 needed to deal with the matter, and thereafter only where a statutory retention
-period applies. Access logs and the aggregate statistics derived from them are
-kept for the retention period of the hosting and delivery services, which is
-short and measured in days rather than years.
+period applies. Access logs are kept for the retention period of the hosting
+and delivery services, which is short and measured in days rather than years.
+The aggregate visit figures held by Cloudflare Web Analytics are kept for that
+service's own retention period.
 
 Your rights
 -----------
