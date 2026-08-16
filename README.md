@@ -50,6 +50,3 @@ Push to `main`. That is the only way the site is published: GitHub Actions
 builds, checks, validates and uploads to GitHub Pages. Pull requests build and
 check but never deploy. There is no `gh-pages` branch and no manual publish
 path.
-
-See `CLAUDE.md` for the design system, the content conventions and the
-deployment details.
