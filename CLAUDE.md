@@ -34,10 +34,26 @@ back with it — the § 165 TKG 2021 requirement follows the device storage, not
 the vendor.
 
 A second edge inject, `/cdn-cgi/scripts/…/email-decode.min.js` (Scrape Shield's
-Email Address Obfuscation), rewrites every `mailto:` to
-`/cdn-cgi/l/email-protection#…` and restores it on load. It leaves the address
-readable as text but breaks the link without JavaScript, including on
-`/impressum/`. It earns nothing and should be switched off.
+Email Address Obfuscation), is also deliberate. It rewrites the `href` of every
+`mailto:` to `/cdn-cgi/l/email-protection#…` and restores it on load. It is
+same-origin, so it adds no third-party host, sets no cookie and stores nothing;
+it needs no separate disclosure, since Cloudflare is already a named processor
+in `/datenschutz/`. It touches only the `href` — anchor text, the JSON-LD
+`email` fields and the FormSubmit action are all served intact. The one cost is
+that with JavaScript off the link opens a Cloudflare interstitial instead of a
+mail client; the address itself stays readable as text beside it, which is what
+§ 5 ECG and § 25 MedienG actually require.
+
+**Authoring constraint that follows from it:** always write an email address as
+a link whose visible text is the address (``` `a@b <mailto:a@b>`__ ```). A bare
+address in prose is not inside an anchor, and Cloudflare replaces those with a
+`[email protected]` placeholder in a `data-cfemail` span — unreadable without
+JavaScript, which on `/impressum/` would be a real problem. Check the served
+page after adding one:
+
+```bash
+curl -s https://rnaforecast.com/impressum/ | grep -c 'data-cfemail'   # must be 0
+```
 
 Verify the served page, not the build, when any of this is in question: load it
 in a real browser and read `performance.getEntriesByType('resource')`.
@@ -211,9 +227,9 @@ from the page's old URL. DNS is there too, so the Search Console verification
 record is a Cloudflare TXT entry rather than anything in the build. And
 Cloudflare can inject JavaScript into the served HTML at the edge, which
 `check_build.py` cannot see. Web Analytics and Email Address Obfuscation both
-do today; see the overview above for which is wanted and which is not. Bot
-Fight Mode would be a third — leave it off, since its challenge script is
-neither disclosed nor wanted.
+do today, and both are wanted; see the overview above. Bot Fight Mode would be
+a third — leave it off, since its challenge script is neither disclosed nor
+wanted.
 
 The two builds never share a directory: `make html`/`serve` write the
 development build to `output/`, `make publish`/`check`/`validate` write the
