@@ -242,12 +242,13 @@ default because DNS verification is the better option — a TXT record in
 Cloudflare, on a domain property, which covers every scheme and subdomain at
 once and cannot be broken by a change to the pages.
 
-Search Console is independent of Google Analytics and survives its removal, but
-the *verification* may not: GA4's `gtag.js` is itself an accepted verification
-method, and with no meta tag, no HTML verification file and no TXT record in
-place, that is what a property here would be resting on. Check Settings →
-Ownership verification and get a DNS record verified **before** removing the
-Google tag, or the property un-verifies.
+Search Console is independent of Google Analytics and survives its removal. The
+property is verified twice over — by the `google-site-verification` TXT record
+on the apex and, redundantly, by GA4's `gtag.js`, which is itself an accepted
+verification method. The DNS record is what makes removing the Google tag safe;
+do not delete it. Note that a public resolver may return only the SPF record for
+the apex, so check TXT against the Cloudflare nameservers before concluding the
+verification record is missing.
 
 `M_SOCIAL_IMAGE` points at `static/images/og-card.png`, 1200×630. Every page
 declares `twitter:card=summary_large_image`, so that file must exist at that
