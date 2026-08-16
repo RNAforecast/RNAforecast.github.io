@@ -19,32 +19,6 @@
   {% endif %}
   {% block social %}{% endblock social %}
   {% block extra %}{% endblock extra %}
-
-  {% if GOOGLE_ANALYTICS %}
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-    functionality_storage: 'granted',
-    security_storage: 'granted',
-    wait_for_update: 500
-  });
-  </script>
-  {% endif %}
-  {% if OSANO %}
-  <script src="{{ OSANO_SCRIPT }}"></script>
-  {% endif %}
-  {% if GOOGLE_ANALYTICS %}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
-  <script>
-  gtag('js', new Date());
-  gtag('config', '{{ GOOGLE_ANALYTICS }}');
-  </script>
-  {% endif %}
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>

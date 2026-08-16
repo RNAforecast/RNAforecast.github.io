@@ -34,16 +34,13 @@ including your IP address, in order to deliver the site and to protect it
 against misuse. Legal basis: Article 6(1)(f) GDPR, the legitimate interest in
 operating a secure website.
 
-**Analytics.** With your consent, Google Analytics 4 measures how the site is
-used. Google Analytics 4 does not store IP addresses. Legal basis:
-Article 6(1)(a) GDPR, your consent, together with § 165 TKG 2021 for the
-storage of information on your device. Without consent, no analytics cookies
-are set and no measurement takes place.
-
-**Consent management.** The consent banner is provided by Osano. Your choices,
-and the record of them, are stored so that the site can honour them and
-demonstrate that consent was obtained. Legal basis: Article 6(1)(c) GDPR, the
-obligation to document consent, and Article 6(1)(f) GDPR.
+**Audience measurement.** Visitor statistics are derived by Cloudflare from
+those same access logs — page views, referrers and countries in aggregate. No
+cookie is set, nothing is stored on your device, no identifier follows you
+between sites, and no profile is built. Legal basis: Article 6(1)(f) GDPR, the
+legitimate interest in knowing which parts of the site are read. Because
+nothing is stored on or read from your device, § 165 TKG 2021 does not apply
+and no consent banner is required.
 
 **Contact form.** The form is delivered by FormSubmit, which forwards the name,
 email address and message you enter to RNA Forecast by email. Providing those
@@ -61,9 +58,8 @@ takes place on this site.
 Recipients and transfers outside the EU
 ---------------------------------------
 
-The processors named above — GitHub, Cloudflare, Google, Osano and FormSubmit —
-act on behalf of RNA Forecast, and processing may involve transfers to the United
-States. Such transfers are made on the basis of the European Commission's
+The processors named above — GitHub, Cloudflare and FormSubmit — act on behalf
+of RNA Forecast, and processing may involve transfers to the United States. Such transfers are made on the basis of the European Commission's
 adequacy decision for the EU–US Data Privacy Framework where the recipient is
 certified under it, and otherwise on the basis of the European Commission's
 standard contractual clauses. Data is not sold, and is not passed to anyone
@@ -74,9 +70,9 @@ Retention
 
 Enquiries received by email or through the contact form are kept for as long as
 needed to deal with the matter, and thereafter only where a statutory retention
-period applies. Analytics data is deleted after the retention period set in
-Google Analytics. Records of consent are kept for as long as needed to
-demonstrate that consent was given.
+period applies. Access logs and the aggregate statistics derived from them are
+kept for the retention period of the hosting and delivery services, which is
+short and measured in days rather than years.
 
 Your rights
 -----------
@@ -88,10 +84,8 @@ restricted (Article 18 GDPR), to receive data you provided in a portable form
 (Article 20 GDPR), and to object at any time to processing based on legitimate
 interests (Article 21 GDPR).
 
-Where processing rests on your consent, you may withdraw it at any time with
-effect for the future, and withdrawing is as easy as giving it: reopen the
-consent banner and change your choice. Withdrawal does not affect the
-lawfulness of processing carried out beforehand.
+No processing on this site rests on consent, so there is no consent to
+withdraw: the site sets no cookies and stores nothing on your device.
 
 To exercise any of these rights, write to the email address above.
 

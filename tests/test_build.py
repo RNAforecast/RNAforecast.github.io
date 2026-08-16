@@ -40,7 +40,7 @@ def test_the_retired_contact_page_is_gone(site):
 
 
 def test_no_page_ships_its_own_javascript(site):
-    """Only the analytics config, the consent widget and JSON-LD are allowed."""
+    """JSON-LD is the only script the site emits, in any build."""
     for page in sorted(site.rglob('*.html')):
         problems = []
         check_build.check_page(str(site), str(page), problems)

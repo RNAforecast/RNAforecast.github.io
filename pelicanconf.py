@@ -162,12 +162,6 @@ SITEMAP = {
     "exclude": ["impressum", "datenschutz", "thanks", "404"]
 }
 
-# Off in development so a local preview sets no cookies; publishconf.py
-# turns it on.
-OSANO = False
-OSANO_SCRIPT = ('https://cmp.osano.com/AzqaZNTUulxcl8Ml/'
-                '1502bf1a-8776-4742-8b0b-35e18285f582/osano.js')
-
 # Search Console token; empty means no meta tag. A DNS TXT record verifies
 # the whole domain instead and survives redesigns.
 GOOGLE_SITE_VERIFICATION = ''

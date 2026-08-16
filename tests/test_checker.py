@@ -64,11 +64,11 @@ def test_stray_inline_script_is_caught(sabotaged):
     assert_reports(sabotaged, 'unexpected inline <script>')
 
 
-def test_the_analytics_and_consent_blocks_are_allowed(site):
-    """Production legitimately emits these; they must not be flagged."""
+def test_the_build_ships_no_script_but_json_ld(site):
+    """The only <script> left is structured data, which must not be flagged."""
     html = read(site / 'index.html')
-    assert 'window.dataLayer' in html
-    assert "gtag('js'" in html
+    assert '<script type="application/ld+json">' in html
+    assert 'googletagmanager' not in html and 'osano' not in html
     assert problems_for(site) == []
 
 
@@ -121,49 +121,6 @@ def test_a_form_posting_somewhere_new_is_caught(sabotaged):
 
 def test_the_declared_form_endpoint_is_accepted(site):
     assert 'formsubmit.co' in read(site / 'index.html')
-    assert problems_for(site) == []
-
-
-def test_analytics_loading_before_the_consent_defaults_is_caught(sabotaged):
-    """The failure that makes a consent banner decorative."""
-    page = sabotaged / 'index.html'
-    html = read(page)
-    start = html.index("<script>\n  window.dataLayer")
-    end = html.index('</script>', start) + len('</script>')
-    block = html[start:end]
-    html = html[:start] + html[end:]
-    # move the defaults to after the Google tag
-    tag_end = html.index('</script>', html.index('googletagmanager.com/gtag/js'))
-    page.write_text(html[:tag_end] + block + html[tag_end:])
-    assert_reports(sabotaged, 'come after the Google tag')
-
-
-def test_the_cmp_loading_after_analytics_is_caught(sabotaged):
-    page = sabotaged / 'index.html'
-    html = read(page)
-    osano = '  <script src="https://cmp.osano.com/'
-    start = html.index(osano)
-    end = html.index('</script>', start) + len('</script>') + 1
-    block = html[start:end]
-    html = html[:start] + html[end:]
-    tag_end = html.index('</script>', html.index('googletagmanager.com/gtag/js')) + 9
-    page.write_text(html[:tag_end] + '\n' + block + html[tag_end:])
-    assert_reports(sabotaged, 'loads after the Google tag')
-
-
-def test_analytics_granted_by_default_is_caught(sabotaged):
-    page = sabotaged / 'index.html'
-    page.write_text(read(page).replace("analytics_storage: 'denied'",
-                                       "analytics_storage: 'granted'"))
-    assert_reports(sabotaged, 'not denied by default')
-
-
-def test_the_shipped_consent_order_is_correct(site):
-    html = read(site / 'index.html')
-    default = html.index("gtag('consent', 'default'")
-    cmp_at = html.index('osano.js')
-    tag = html.index('googletagmanager.com/gtag/js')
-    assert default < cmp_at < tag, 'defaults, then the CMP, then the tag'
     assert problems_for(site) == []
 
 

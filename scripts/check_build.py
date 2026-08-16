@@ -3,8 +3,8 @@
 
 Checks that the build produced the pages and assets we expect, that every
 reference to the site's own files resolves, and that the pages still request
-nothing from a third party — the site runs behind a cookie consent banner, so
-an unnoticed CDN reference is exactly what that banner exists to gate.
+nothing from a third party — the site sets no cookies and needs no consent
+banner, and an unnoticed CDN reference is what would quietly end that.
 
 Outbound links (<a href> to doi.org, ORCID, GitHub …) are not requests and are
 left alone; only subresources — stylesheets, scripts, images, fonts — are held
@@ -53,23 +53,16 @@ MAX_DESCRIPTION = 150
 
 SITE_HOST = 'rnaforecast.com'
 
-ALLOWED_HOSTS = {SITE_HOST, 'www.googletagmanager.com', 'cmp.osano.com'}
+ALLOWED_HOSTS = {SITE_HOST}
 
 # A form action is a data flow, not a subresource: a new host here needs a
-# matching disclosure in the legal notice.
+# matching disclosure in the privacy notice.
 FORM_ACTION_HOSTS = {SITE_HOST, 'formsubmit.co'}
 
 SUBRESOURCE_TAGS = {
     'link', 'script', 'img', 'source', 'iframe', 'video', 'audio', 'embed',
 }
 LINK_TAGS = {'a', 'area'}
-
-# The site ships no JavaScript of its own; only the Consent Mode defaults and
-# the Google tag are allowed inline. Anything else is script that crept in.
-ALLOWED_INLINE = (
-    'window.dataLayer',
-    "gtag('js'",
-)
 
 TAG = re.compile(r'<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>')
 ATTR = re.compile(r'\b(href|src|srcset)\s*=\s*["\']([^"\']*)["\']', re.I)
@@ -135,9 +128,9 @@ def check_page(root, page, problems):
             continue
         if 'application/ld+json' in attrs.lower():
             continue
-        if not any(marker in body for marker in ALLOWED_INLINE):
-            first = ' '.join(body.split())[:60]
-            problems.append(f'{shown}: unexpected inline <script>: {first}')
+        # JSON-LD is the only script the site emits; anything else crept in.
+        first = ' '.join(body.split())[:60]
+        problems.append(f'{shown}: unexpected inline <script>: {first}')
 
     for attrs in FORM.findall(source):
         action = ACTION.search(attrs)
@@ -209,39 +202,6 @@ def check_share_card(root, problems):
             if length > MAX_DESCRIPTION:
                 problems.append(f'{shown}: meta description is {length} chars, '
                                 f'over the {MAX_DESCRIPTION} cap')
-
-
-def check_consent_order(root, problems):
-    """The consent gate only works in one order.
-
-    Consent Mode defaults must run before the Google tag loads, or gtag.js
-    stores its cookies before anyone has been asked; and the CMP must come
-    before the tag it is supposed to gate. Both are ordering properties, so
-    nothing else in the build would notice them being wrong.
-    """
-    for page in sorted(html_files(root)):
-        shown = os.path.relpath(page, root)
-        with open(page, encoding='utf-8') as f:
-            source = f.read()
-
-        tag = source.find('googletagmanager.com/gtag/js')
-        if tag == -1:
-            continue
-
-        default = source.find("gtag('consent', 'default'")
-        if default == -1:
-            problems.append(f'{shown}: Google tag without Consent Mode defaults')
-        elif default > tag:
-            problems.append(f'{shown}: Consent Mode defaults come after the '
-                            f'Google tag, so cookies are set before consent')
-
-        if "analytics_storage: 'denied'" not in source:
-            problems.append(f'{shown}: analytics_storage is not denied by default')
-
-        cmp_at = source.find('osano.js')
-        if cmp_at != -1 and cmp_at > tag:
-            problems.append(f'{shown}: the consent platform loads after the '
-                            f'Google tag it is meant to gate')
 
 
 def check_stylesheet_assets(root, problems):
@@ -425,7 +385,6 @@ def check(root):
         check_page(root, page, problems)
 
     check_share_card(root, problems)
-    check_consent_order(root, problems)
     check_stylesheet_assets(root, problems)
     check_jsonld(root, problems)
     check_no_accidental_lists(root, problems)

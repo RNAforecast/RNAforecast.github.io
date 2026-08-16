@@ -10,12 +10,18 @@ independent research platform for computational RNA biology. Built with
 "Industry" design system.
 
 **The site ships no JavaScript.** Every interaction — the mobile navigation, all
-hover and focus states — is CSS only. The only `<script>` in a development build
-is the JSON-LD block, which is structured data for search engines, not code.
-A production build adds the consent gate from `base.html` — the Consent Mode
-defaults, the Google tag, and the bridge that hands Osano's decision to it —
-plus their two external scripts. `scripts/check_build.py` allows exactly those
-and fails on anything else. Do not introduce client-side scripting.
+hover and focus states — is CSS only. The only `<script>` in any build is the
+JSON-LD block, which is structured data for search engines, not code;
+`scripts/check_build.py` fails on every other script, inline or external, and
+`ALLOWED_HOSTS` is now the site's own host and nothing else. Do not introduce
+client-side scripting.
+
+Google Analytics and the Osano consent banner were removed once Cloudflare's
+edge analytics replaced them: statistics are derived from request logs at the
+proxy, so nothing runs in the browser, nothing is stored on the device, and no
+consent is needed. Re-adding any tracker brings the whole banner back with it —
+the § 165 TKG 2021 consent requirement follows the device storage, not the
+vendor.
 
 ## Packaging
 
@@ -39,7 +45,7 @@ it. `plugins/` and `scripts/` are imported as namespace packages via
 make html       # development build
 make serve      # serve locally on port 8000
 make devserver  # auto-rebuild on change + serve
-make publish    # production build into output-publish/ (absolute URLs, analytics)
+make publish    # production build into output-publish/ (absolute URLs)
 make check      # what CI runs: production build --fatal warnings + smoke tests
 make validate   # Nu Html Checker over output-publish/ (needs a JRE)
 make test       # pytest suite
@@ -50,8 +56,8 @@ make clean      # remove both output dirs
 
 ### Configuration split
 
-- `pelicanconf.py` — development; relative URLs, no analytics, `OSANO = False`
-- `publishconf.py` — production; sets `SITEURL`, enables Google Analytics and OSANO
+- `pelicanconf.py` — development; relative URLs
+- `publishconf.py` — production; sets `SITEURL` and absolute URLs, nothing else
 
 Navigation, footer and the site logo are data, not markup:
 
@@ -161,8 +167,8 @@ Two things worth knowing before editing:
   needs releasing in the mobile breakpoint, or the grid keeps its second column.
 
 Fonts (Barlow, Barlow Condensed) are self-hosted in `content/static/fonts/`.
-The site makes **no third-party requests** — it runs behind a cookie consent
-banner, so a font CDN would be exactly what that banner exists to gate.
+The site makes **no third-party requests** at all, which is what lets it run
+without a cookie banner; a font CDN would be enough to end that.
 
 ### Deployment
 
@@ -198,12 +204,11 @@ ones, so the preview pointed at the live site.
 `scripts/check_build.py`. That script verifies the expected pages exist, that
 every reference to the site's own files resolves (including absolute
 `https://rnaforecast.com/…` links), that `CNAME` is intact, that no page
-requests anything from a host outside analytics and the consent banner, that
-every `url()` in the stylesheet resolves (the self-hosted fonts are referenced
+requests anything from a host other than its own, that every `url()` in the stylesheet resolves (the self-hosted fonts are referenced
 from nowhere else), that the contact form still posts only to its declared
 endpoint — a form action is a data flow, and the disclosure in the privacy
-notice has to keep matching it — that every JSON-LD block parses and the publication
-graph covers every paper and DOI on the page, that the share card is present at
+notice has to keep matching it — that every JSON-LD block parses and the
+publication graph covers every paper and DOI on the page, that the share card is present at
 1200×630, and that `robots.txt`, the sitemap and its exclusions agree with the
 pages on disk.
 Run it locally to see what CI will see. Its `REQUIRED` list names the pages
@@ -232,23 +237,17 @@ FormSubmit requires to be absolute. Keep `#michael-t-wolfinger` in
 `R_SITE_GRAPH` in step with `AUTHOR_FRAGMENT` in the plugin, or the site graph
 and the publication graph will describe two different people.
 
-**The consent gate in `base.html` is order-dependent and must not be
-rearranged**: Consent Mode defaults (everything denied) first, then the Osano
-script, then the Google tag. Defaults after the tag means gtag.js sets its
-cookies before anyone is asked, and a CMP loaded after the tracker cannot block
-it. `check_build.py` asserts this ordering. `GOOGLE_SITE_VERIFICATION` in
-`pelicanconf.py` emits the Search Console meta tag when set; it is empty by
+`GOOGLE_SITE_VERIFICATION` in `pelicanconf.py` emits the Search Console meta tag when set; it is empty by
 default because DNS verification is the better option — a TXT record in
 Cloudflare, on a domain property, which covers every scheme and subdomain at
 once and cannot be broken by a change to the pages.
 
-Search Console is independent of Google Analytics and survives its removal. The
-property is verified twice over — by the `google-site-verification` TXT record
-on the apex and, redundantly, by GA4's `gtag.js`, which is itself an accepted
-verification method. The DNS record is what makes removing the Google tag safe;
-do not delete it. Note that a public resolver may return only the SPF record for
-the apex, so check TXT against the Cloudflare nameservers before concluding the
-verification record is missing.
+Search Console is independent of Google Analytics and outlived it here. The
+property was verified twice over — by the `google-site-verification` TXT record
+on the apex and, redundantly, by GA4's `gtag.js` — so removing the tag left it
+verified. That TXT record is now the only thing holding it: do not delete it.
+Note that a public resolver may return only the SPF record for the apex, so
+check TXT against the Cloudflare nameservers before concluding it is missing.
 
 `M_SOCIAL_IMAGE` points at `static/images/og-card.png`, 1200×630. Every page
 declares `twitter:card=summary_large_image`, so that file must exist at that
