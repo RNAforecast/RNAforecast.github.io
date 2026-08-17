@@ -37,10 +37,11 @@ operating a secure website.
 **Audience measurement.** Cloudflare Web Analytics counts visits. A small
 script from Cloudflare, added to each page as it is delivered, reports the page
 you viewed, the page that referred you, your approximate location by country,
-your browser and device type, and how quickly the page loaded. It sets no
-cookie, writes nothing to your device's storage, and creates no identifier that
-follows you between sites or between visits, so no profile is built and you are
-not recognised when you come back. Legal basis: Article 6(1)(f) GDPR, the
+your browser and device type, and how the page performed in your browser,
+including the loading and responsiveness measurements known as Core Web Vitals.
+It sets no cookie, neither writes to nor reads from your device's storage, and
+creates no identifier that follows you between sites or between visits, so no
+profile is built and you are not recognised when you come back. Legal basis: Article 6(1)(f) GDPR, the
 legitimate interest in knowing which parts of the site are read. Because
 nothing is stored on or read from your device, § 165 TKG 2021 does not apply,
 this measurement runs without consent and no consent banner is required; you
