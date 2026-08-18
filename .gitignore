@@ -10,4 +10,5 @@ output-publish/
 .pytest_cache/
 
 CLAUDE.md
+AGENTS.md
 RNAF2026/
