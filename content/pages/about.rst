@@ -391,10 +391,10 @@ Contact
         `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
 
       Location
-        Vienna, Austria
+        Purkersdorf (Vienna metropolitan area), Austria
 
       ORCID
         `0000-0003-0925-5205 <https://orcid.org/0000-0003-0925-5205>`__
 
       Affiliation
-        RNA Forecast, Vienna, Austria
+        RNA Forecast, Purkersdorf / Vienna, Austria

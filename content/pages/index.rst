@@ -35,7 +35,7 @@ Home
     Research, scientific collaboration, open software, scientific service, advanced training
 
   Location
-    Vienna, Austria
+    Purkersdorf (Vienna metropolitan area), Austria
 
 Research
 --------

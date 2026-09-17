@@ -50,7 +50,7 @@ M_LINKS_NAVBAR1 = [('Research', '/research/', 'research'),
                    ('Contact', '/#contact', '')]
 
 R_FOOTER_TAGLINE = ('Independent research platform · Computational RNA biology '
-                    '· Vienna, Austria')
+                    '· Purkersdorf / Vienna, Austria')
 
 R_FOOTER_LINKS = [('Home', '/'),
                   ('Research', '/research/'),
@@ -127,7 +127,8 @@ R_SITE_GRAPH = [
         "member": {"@id": "#michael-t-wolfinger"},
         "areaServed": "Worldwide",
         "address": {"@type": "PostalAddress",
-                    "addressLocality": "Vienna",
+                    "postalCode": "3002",
+                    "addressLocality": "Purkersdorf",
                     "addressCountry": "AT"},
     },
     {
