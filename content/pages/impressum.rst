@@ -7,14 +7,17 @@ Impressum
 :summary: Impressum for rnaforecast.com.
 :page_class: legal
 :hero_title: Impressum
-:hero_lead: Disclosure under § 25 of the Austrian Media Act · Last updated August 2026
+:hero_lead: Disclosure under § 25 of the Austrian Media Act · Last updated September 2026
 
 Media owner and responsible for content
 ---------------------------------------
 
-| Dr. Michael T. Wolfinger
-| Währinger Strasse 17/3
-| 1090 Vienna, Austria
+| RNA Forecast e.U.
+| Proprietor: Mag. Dr. Michael T. Wolfinger
+| Registered address: Linzer Straße 30–32/2/5, 3002 Purkersdorf, Austria
+| Austrian Commercial Register number: FN 597678p
+| Register court: Landesgericht St. Pölten
+| VAT identification number: ATU78022612
 
 Responsible for the content of this website: Dr. Michael T. Wolfinger.
 
@@ -30,12 +33,7 @@ website documents scientific research, publications, software, teaching
 activities and collaborations in computational RNA biology.
 
 Its basic direction, in the sense of the disclosure required by § 25 of the
-Austrian Media Act, is to document and communicate that scientific work. The
-site carries no advertising, pursues no political or ideological affiliation,
-and is not operated for commercial gain.
-
-Unless explicitly stated otherwise, this website does not offer commercial
-products or regulated professional services.
+Austrian Media Act, is to document and communicate that scientific work.
 
 Copyright
 ---------

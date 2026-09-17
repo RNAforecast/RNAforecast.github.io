@@ -7,7 +7,7 @@ Privacy notice
 :summary: Privacy notice for rnaforecast.com.
 :page_class: legal
 :hero_title: Privacy notice
-:hero_lead: Datenschutzerklärung · Last updated August 2026
+:hero_lead: Datenschutzerklärung · Last updated September 2026
 
 Controller
 ----------
@@ -15,9 +15,9 @@ Controller
 The controller for the processing described below, within the meaning of
 Article 4(7) GDPR, is:
 
-| Dr. Michael T. Wolfinger
-| Währinger Strasse 17/3
-| 1090 Vienna, Austria
+| RNA Forecast e.U.
+| Proprietor: Mag. Dr. Michael T. Wolfinger
+| Linzer Straße 30–32/2/5, 3002 Purkersdorf, Austria
 | `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
 
 No data protection officer is appointed, as none is required under
