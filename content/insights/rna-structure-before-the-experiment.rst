@@ -337,12 +337,12 @@ References
      parameters for inosine-uridine pairs in RNA duplexes. *Biochemistry*
      46:4625–4634 (2007).
      `doi:10.1021/bi0616910 <https://doi.org/10.1021/bi0616910>`__
-  .. [#shabangu2026psi] Shabangu TS, Kierzek E, Arteaga S, Hiltke OM, Mathews
-     DH. Nearest neighbor parameters for estimating the folding stability of
-     RNA including pseudouridine. *bioRxiv* (2026). Preprint.
+  .. [#shabangu2026psi] Shabangu TS, Kierzek E, Arteaga S, et al. Nearest
+     neighbor parameters for estimating the folding stability of RNA including
+     pseudouridine. *bioRxiv* (2026). Preprint.
      `doi:10.64898/2026.05.16.725682 <https://doi.org/10.64898/2026.05.16.725682>`__
-  .. [#kierzek2026m1psi] Kierzek E, Shabangu TS, Hiltke OM, Arteaga S, Mathews
-     DH. RNA folding nearest neighbor parameters including the modification
+  .. [#kierzek2026m1psi] Kierzek E, Shabangu TS, Hiltke OM, et al. RNA folding
+     nearest neighbor parameters including the modification
      1-methyl-pseudouridine. *bioRxiv* (2026). Preprint.
      `doi:10.64898/2026.04.09.717343 <https://doi.org/10.64898/2026.04.09.717343>`__
   .. [#varenyk2023] Varenyk Y, Spicher T, Hofacker IL, Lorenz R. Modified RNAs

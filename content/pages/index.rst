@@ -143,7 +143,7 @@ RNA Forecast contributes original research in computational RNA biology through 
       .. container:: pub-links
 
         `doi:10.1038/s41587-025-02739-0 ↗ <https://doi.org/10.1038/s41587-025-02739-0>`_
-        Nat. Biotechnol. 44:989–1001
+        Nat. Biotechnol. 44(6):989 to 1001
 
   .. container:: pub
 
@@ -165,12 +165,12 @@ RNA Forecast contributes original research in computational RNA biology through 
       .. container:: pub-authors
 
         McBroome J, de Bernardi Schneider A, Roemer C, **Wolfinger MT**,
-        Hinrichs AS, O'Toole A, Ruis C, Turakhia Y, Rambaut A, Corbett-Detig R
+        Hinrichs AS, O'Toole AN, Ruis C, Turakhia Y, Rambaut A, Corbett-Detig R
 
       .. container:: pub-links
 
         `doi:10.1038/s41564-023-01587-5 ↗ <https://doi.org/10.1038/s41564-023-01587-5>`_
-        Nat. Microbiol. 9:550 to 560
+        Nat. Microbiol. 9(2):550 to 560
 
   .. container:: pub
 
@@ -191,7 +191,7 @@ RNA Forecast contributes original research in computational RNA biology through 
 
       .. container:: pub-authors
 
-        Mrozowich T, Park S, Waldl M, Henrickson A, Tersteeg S, Nelson CR,
+        Mrozowich T, Park SM, Waldl M, Henrickson A, Tersteeg S, Nelson CR,
         De Klerk A, Demeler B, Hofacker IL, **Wolfinger MT**, Patel TR
 
       .. container:: pub-links

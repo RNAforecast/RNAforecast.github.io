@@ -142,6 +142,12 @@ def format_authors(entry):
     names = []
     for person in entry.get('author', []):
         family = person.get('family', '').strip()
+        # "van den Homberg" parses as family "Homberg" with a particle; drop
+        # the particle and the name is no longer the author's name.
+        particle = (person.get('non-dropping-particle')
+                    or person.get('dropping-particle') or '').strip()
+        if particle:
+            family = f'{particle} {family}'
         given = person.get('given', '').strip()
         if not family:
             names.append(person.get('literal', '').strip())
