@@ -260,7 +260,12 @@ def test_every_publication_reaches_the_graph(site):
 def test_every_publication_is_fully_described(site):
     """The fields academic and LLM consumers need to tie a paper together."""
     articles = nodes_of(site / 'publications' / 'index.html', 'ScholarlyArticle')
-    assert len(articles) == 12
+    # The page's own count line is the single source for how many there
+    # are, so adding a paper cannot leave this test asserting a stale
+    # number that happens to still pass.
+    stated = int(re.search(r'(\d+) published papers',
+                           read(site / 'publications' / 'index.html')).group(1))
+    assert len(articles) == stated
     for article in articles:
         assert article['name'] and article['headline']
         assert article['url'].startswith('https://doi.org/')

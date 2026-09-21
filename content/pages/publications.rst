@@ -13,7 +13,7 @@ Publications
 
 .. container:: pub-count
 
-  12 published papers and conference contributions · 2023 to 2026
+  13 published papers and conference contributions · 2023 to 2026
 
 .. container:: year-index
 
@@ -34,13 +34,58 @@ Publications
 
     .. container:: pub-group-n
 
-      2 publications
+      3 publications
 
   .. container:: pubs pubs-full
 
-    .. _pub-walter-2026:
+    .. _pub-aman-2026:
 
     .. container:: pub pub-top
+
+      .. container:: pub-meta
+
+        .. container:: pub-badge
+
+          Int. J. Mol. Sci.
+
+        .. container:: pub-type
+
+          Journal article
+
+      .. container:: pub-body
+
+        .. container:: pub-title
+
+          Computational analysis of sequence editability in the theophylline
+          RNA aptamer as a functional RNA module
+
+        .. container:: pub-authors
+
+          Aman, Sidl, Darai, Wolschann, Rungrotmongkol,
+          **Michael T. Wolfinger**
+
+        .. container:: pub-cite
+
+          Int. J. Mol. Sci. 27(16):7228 (2026)
+
+        .. container:: pub-summary
+
+          Examines how far the sequence of the theophylline aptamer can be
+          altered while retaining its function, assessing its editability as a
+          reusable module in engineered RNA constructs.
+
+        .. container:: pub-links
+
+          `DOI ↗ <https://doi.org/10.3390/ijms27167228>`__
+          `PDF </files/papers/Aman-2026.pdf>`__
+
+          .. container:: pub-doi
+
+            doi:10.3390/ijms27167228
+
+    .. _pub-walter-2026:
+
+    .. container:: pub
 
       .. container:: pub-meta
 
@@ -87,7 +132,7 @@ Publications
 
     .. _pub-borovska-2026:
 
-    .. container:: pub
+    .. container:: pub pub-top
 
       .. container:: pub-meta
 

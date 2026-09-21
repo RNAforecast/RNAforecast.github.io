@@ -87,7 +87,7 @@ RNA Forecast contributes original research in computational RNA biology through 
 
 .. container:: pub-count
 
-  12 published papers and conference contributions · 2023 to 2026
+  13 published papers and conference contributions · 2023 to 2026
 
 .. container:: pubs
 
