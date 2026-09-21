@@ -974,6 +974,24 @@ a.m-footnote:hover { text-decoration: underline; }
 .insight-foot a { text-decoration: none; }
 .insight-foot a:hover { text-decoration: underline; }
 
+/* A pointer from a research theme to the Insight that develops it. Quiet on
+   purpose: it sits under the theme's spec plate as a footnote to it, not as
+   another call to action. */
+.related-insight {
+  margin-top: clamp(16px, 2vw, 22px);
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+}
+.related-insight .kicker-sm { margin-bottom: 4px; }
+.related-insight p { margin: 0; font-size: 14px; line-height: 1.5; }
+.related-insight a {
+  color: var(--color-text); text-decoration: none;
+  border-bottom: 1px solid var(--color-divider); padding-bottom: 1px;
+}
+.related-insight a:hover {
+  color: var(--color-accent-700); border-bottom-color: var(--color-accent);
+}
+
 /* — the Insights library — */
 .insight-list { list-style: none; margin: 0; padding: 0; }
 .insight-item { border-top: 1px solid var(--color-divider); padding: 28px 0; }

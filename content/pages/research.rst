@@ -75,6 +75,14 @@ RNA structure prediction
 
       Active
 
+  .. container:: related-insight
+
+    .. container:: kicker-sm
+
+      Related Insight
+
+    `RNA Structure Before the Experiment — An ensemble view of therapeutic RNA design </insights/rna-structure-before-the-experiment/>`__
+
 .. _t2:
 
 .. class:: theme

@@ -154,6 +154,20 @@ def test_an_insight_links_into_the_rest_of_the_site(published):
                    for path in ['/research/', '/publications/'])
 
 
+def test_the_research_page_points_at_the_insight_that_develops_it(site,
+                                                                  published):
+    """Research hub → Insight → cited publications, not a separate branch.
+
+    The Insight links back into /research/ and /publications/; this is the
+    other half of that loop, so the section is reachable from the research
+    themes it belongs to and not only from the masthead.
+    """
+    research = read(site / 'research' / 'index.html')
+    linked = {f'/insights/{page.parent.name}/' for page in published
+              if f'/insights/{page.parent.name}/' in research}
+    assert linked, 'no research theme links to an Insight'
+
+
 def test_insights_are_in_the_sitemap(site, published):
     sitemap = read(site / 'sitemap.xml')
     for page in published:
