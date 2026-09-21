@@ -336,6 +336,49 @@ def check_no_accidental_lists(root, problems):
                     f'enumerator swallowed the first token: "{text}"')
 
 
+def check_fragment_links(root, problems):
+    """A link to #something must land on something.
+
+    The research page points at individual publications, and a page anchor is
+    the one kind of internal link that breaks silently: the page still loads,
+    so nothing looks wrong, and the reader simply arrives at the top of a long
+    list instead of at the paper.
+    """
+    ids = {}
+    for page in html_files(root):
+        with open(page, encoding='utf-8') as f:
+            source = f.read()
+        ids[os.path.abspath(page)] = set(re.findall(r'\bid="([^"]+)"', source))
+
+    for page in sorted(html_files(root)):
+        shown = os.path.relpath(page, root)
+        with open(page, encoding='utf-8') as f:
+            source = f.read()
+
+        for tag, attrs in TAG.findall(source):
+            if tag.lower() not in LINK_TAGS:
+                continue
+            for ref in references(attrs):
+                if '#' not in ref or ref.startswith(('mailto:', 'tel:')):
+                    continue
+                path, _, fragment = ref.partition('#')
+                if not fragment or urlsplit(ref).netloc not in ('', SITE_HOST):
+                    continue
+
+                target = (os.path.abspath(page) if not path
+                          else local_path(root, page, path))
+                if target is None:
+                    continue
+                target = os.path.abspath(target)
+                if target not in ids:
+                    continue  # a missing page is reported by check_page
+                if fragment not in ids[target]:
+                    problems.append(
+                        f'{shown}: link to {ref} lands nowhere — '
+                        f'{os.path.relpath(target, root)} has no id '
+                        f'"{fragment}"')
+
+
 def check_venue_badges_alternate(root, problems):
     """Venue badges alternate down each year: filled, outline, filled …
 
@@ -346,7 +389,9 @@ def check_venue_badges_alternate(root, problems):
     """
     group = re.compile(r'<div class="pub-group" id="y(\d{4})">(.*?)'
                        r'(?=<div class="pub-group"|\Z)', re.S)
-    entry = re.compile(r'<div class="pub([^"]*)">')
+    # `[^>]*` matters: each entry also carries an id, and without it this
+    # regex matches nothing and the check silently passes on everything.
+    entry = re.compile(r'<div class="pub([^"]*)"[^>]*>')
 
     for page in sorted(html_files(root)):
         with open(page, encoding='utf-8') as f:
@@ -424,6 +469,7 @@ def check(root):
     check_jsonld(root, problems)
     check_no_accidental_lists(root, problems)
     check_venue_badges_alternate(root, problems)
+    check_fragment_links(root, problems)
     check_excluded_paths(root, problems)
     check_robots_and_sitemap(root, problems)
 

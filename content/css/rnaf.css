@@ -624,6 +624,16 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
 }
 .spec-cell { padding: 14px 18px; border-bottom: 1px solid var(--hairline); border-right: 1px solid var(--hairline); }
+/* A representative publication links to its entry on /publications/. Inside
+   the plate the link is the text itself, so it keeps the text's colour and
+   takes a hairline underline rather than the accent treatment. */
+.spec-cell a {
+  color: inherit; text-decoration: none;
+  border-bottom: 1px solid var(--color-divider);
+}
+.spec-cell a:hover {
+  color: var(--color-accent-700); border-bottom-color: var(--color-accent);
+}
 .spec-cell p { font-size: 13px; line-height: 1.5; margin: 0; color: var(--ink-82); }
 .spec-k {
   font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
@@ -704,6 +714,9 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 
 /* — publication list — */
 .pubs { display: flex; flex-direction: column; }
+/* Each entry is a link target from the research page, so it should not land
+   flush against the top of the viewport. */
+.pub { scroll-margin-top: 24px; }
 .pub {
   display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 20px;
   padding: 22px 0; border-top: 1px solid var(--color-divider);

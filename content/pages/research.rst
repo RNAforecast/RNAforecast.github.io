@@ -49,7 +49,7 @@ RNA structure prediction
 
         Representative publications
 
-      Borovská et al., Nature Biotechnology (2026)
+      `Borovská et al., Nature Biotechnology (2026) </publications/#pub-borovska-2026>`__
 
     .. container:: spec-cell
 
@@ -104,7 +104,7 @@ RNA engineering
 
         Representative publications
 
-      Walter et al., Nucleic Acids Res. (2026)
+      `Walter et al., Nucleic Acids Res. (2026) </publications/#pub-walter-2026>`__
 
     .. container:: spec-cell
 
@@ -151,7 +151,8 @@ Functional RNAs
 
         Representative publications
 
-      Mrozovich et al., Nucleic Acids Res. (2023) · Borovská et al., Nature Biotechnology (2026)
+      `Mrozowich et al., Nucleic Acids Res. (2023) </publications/#pub-mrozowich-2023>`__ ·
+      `Borovská et al., Nature Biotechnology (2026) </publications/#pub-borovska-2026>`__
 
     .. container:: spec-cell
 
@@ -197,8 +198,9 @@ Viral RNA biology
 
         Representative publications
 
-      Besson et al., J. Virology (2024) · Wang et al., J. Gen. Virology (2024) ·
-      Darai et al., ScienceAsia (2025)
+      `Besson et al., J. Virology (2024) </publications/#pub-besson-2024>`__ ·
+      `Wang et al., J. Gen. Virology (2024) </publications/#pub-wang-2024>`__ ·
+      `Darai et al., ScienceAsia (2025) </publications/#pub-darai-2025>`__
 
     .. container:: spec-cell
 
@@ -245,7 +247,8 @@ RNA evolution
 
         Representative publications
 
-      McBroome et al., Nature Microbiol. (2024) · Wang et al., J. Gen. Virology (2024)
+      `McBroome et al., Nature Microbiol. (2024) </publications/#pub-mcbroome-2024>`__ ·
+      `Wang et al., J. Gen. Virology (2024) </publications/#pub-wang-2024>`__
 
     .. container:: spec-cell
 
@@ -292,7 +295,7 @@ RNA folding kinetics
 
         Representative publications
 
-      Scheuer et al., ICLR '25
+      `Scheuer et al., ICLR '25 </publications/#pub-scheuer-2025-iclr>`__
 
     .. container:: spec-cell
 
@@ -338,7 +341,8 @@ Computational methods
 
         Representative publications
 
-      Scheuer et al., ICLR '25 & AI for Nucleic Acids Workshop (2025)
+      `Scheuer et al., ICLR '25 </publications/#pub-scheuer-2025-iclr>`__ ·
+      `AI for Nucleic Acids Workshop (2025) </publications/#pub-scheuer-2025-workshop>`__
 
     .. container:: spec-cell
 
@@ -384,7 +388,8 @@ RNA protein recognition
 
         Representative publications
 
-      Darai et al., Bull. Chem. Soc. Jpn (2023) · Darai et al., ScienceAsia (2025)
+      `Darai et al., Bull. Chem. Soc. Jpn (2023) </publications/#pub-darai-2023>`__ ·
+      `Darai et al., ScienceAsia (2025) </publications/#pub-darai-2025>`__
 
     .. container:: spec-cell
 

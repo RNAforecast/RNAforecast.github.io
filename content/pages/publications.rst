@@ -38,6 +38,8 @@ Publications
 
   .. container:: pubs pubs-full
 
+    .. _pub-walter-2026:
+
     .. container:: pub pub-top
 
       .. container:: pub-meta
@@ -82,6 +84,8 @@ Publications
           .. container:: pub-doi
 
             doi:10.1093/nar/gkag473
+
+    .. _pub-borovska-2026:
 
     .. container:: pub
 
@@ -142,6 +146,8 @@ Publications
 
   .. container:: pubs pubs-full
 
+    .. _pub-darai-2025:
+
     .. container:: pub pub-top
 
       .. container:: pub-meta
@@ -184,6 +190,8 @@ Publications
           .. container:: pub-doi
 
             doi:10.2306/scienceasia1513-1874.2025.s013
+
+    .. _pub-scheuer-2025-iclr:
 
     .. container:: pub
 
@@ -228,6 +236,8 @@ Publications
           .. container:: pub-doi
 
             doi:10.5281/zenodo.15233965
+
+    .. _pub-scheuer-2025-workshop:
 
     .. container:: pub pub-top
 
@@ -286,6 +296,8 @@ Publications
 
   .. container:: pubs pubs-full
 
+    .. _pub-besson-2024:
+
     .. container:: pub pub-top
 
       .. container:: pub-meta
@@ -328,6 +340,8 @@ Publications
           .. container:: pub-doi
 
             doi:10.1128/jvi.01215-24
+
+    .. _pub-wang-2024:
 
     .. container:: pub
 
@@ -373,6 +387,8 @@ Publications
 
             doi:10.1099/jgv.0.001991
 
+    .. _pub-mcbroome-2024:
+
     .. container:: pub pub-top
 
       .. container:: pub-meta
@@ -415,6 +431,8 @@ Publications
           .. container:: pub-doi
 
             doi:10.1038/s41564-023-01587-5
+
+    .. _pub-gemmill-2024:
 
     .. container:: pub
 
@@ -472,6 +490,8 @@ Publications
 
   .. container:: pubs pubs-full
 
+    .. _pub-darai-2023:
+
     .. container:: pub pub-top
 
       .. container:: pub-meta
@@ -516,6 +536,8 @@ Publications
 
             doi:10.1246/bcsj.20230092
 
+    .. _pub-mrozowich-2023:
+
     .. container:: pub
 
       .. container:: pub-meta
@@ -558,6 +580,8 @@ Publications
           .. container:: pub-doi
 
             doi:10.1093/nar/gkad223
+
+    .. _pub-ochsenreiter-2023:
 
     .. container:: pub pub-top
 

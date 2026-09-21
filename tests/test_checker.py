@@ -181,14 +181,33 @@ def test_two_adjacent_badges_of_the_same_kind_are_caught(sabotaged):
     """Badges alternate down each year; it had drifted in three of four."""
     page = sabotaged / 'publications' / 'index.html'
     html = read(page)
-    page.write_text(html.replace('<div class="pub">', '<div class="pub pub-top">', 1))
+    page.write_text(html.replace('<div class="pub" id=', '<div class="pub pub-top" id=', 1))
     assert_reports(sabotaged, 'do not alternate')
+
+
+def test_a_link_to_a_nonexistent_anchor_is_caught(sabotaged):
+    """The page still loads, so only a check can see this one."""
+    page = sabotaged / 'research' / 'index.html'
+    page.write_text(read(page).replace('/publications/#pub-walter-2026',
+                                       '/publications/#pub-nobody-1999', 1))
+    assert_reports(sabotaged, 'lands nowhere')
+
+
+def test_the_research_page_anchors_all_resolve(site):
+    """Every representative publication points at a real entry."""
+    import re
+    research = read(site / 'research' / 'index.html')
+    publications = read(site / 'publications' / 'index.html')
+    targets = set(re.findall(r'href="/publications/#([\w-]+)"', research))
+    assert len(targets) >= 8, targets
+    for target in sorted(targets):
+        assert f'id="{target}"' in publications, target
 
 
 def test_a_missing_fill_is_caught(sabotaged):
     page = sabotaged / 'publications' / 'index.html'
     html = read(page)
-    page.write_text(html.replace('<div class="pub pub-top">', '<div class="pub">', 1))
+    page.write_text(html.replace('<div class="pub pub-top" id=', '<div class="pub" id=', 1))
     assert_reports(sabotaged, 'do not alternate')
 
 
