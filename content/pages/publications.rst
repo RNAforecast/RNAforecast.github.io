@@ -634,11 +634,12 @@ Publications
 
   .. container:: record-muted
 
-    The complete, continuously updated bibliography is available through ORCID,
-    PubMed and Google Scholar.
+    The full record is kept on his personal site, and the continuously updated
+    bibliography is also available through ORCID, PubMed and Google Scholar.
 
   .. container:: hero-actions
 
-    `Full bibliography on ORCID → <https://orcid.org/0000-0003-0925-5205>`__
+    `Full publication record → <https://michaelwolfinger.com/publications/>`__
+    `ORCID → <https://orcid.org/0000-0003-0925-5205>`__
     `Google Scholar → <https://scholar.google.at/citations?user=w0PHGnEAAAAJ&hl=en>`__
     `PubMed → <https://pubmed.ncbi.nlm.nih.gov/?term=Wolfinger+MT>`__

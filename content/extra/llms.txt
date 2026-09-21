@@ -40,6 +40,9 @@ Every page is static HTML and requires no JavaScript to read.
 
 ## Scholarly profiles
 
+- [Full publication record](https://michaelwolfinger.com/publications/): the
+  complete bibliography, extending back to 2001. The publications page on this
+  site lists only work carrying the RNA Forecast affiliation.
 - [ORCID](https://orcid.org/0000-0003-0925-5205)
 - [Google Scholar](https://scholar.google.at/citations?user=w0PHGnEAAAAJ&hl=en)
 - [PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=Wolfinger+MT)
