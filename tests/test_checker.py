@@ -177,6 +177,21 @@ def test_a_page_without_a_canonical_is_caught(sabotaged):
     assert_reports(sabotaged, 'no canonical link')
 
 
+def test_two_adjacent_badges_of_the_same_kind_are_caught(sabotaged):
+    """Badges alternate down each year; it had drifted in three of four."""
+    page = sabotaged / 'publications' / 'index.html'
+    html = read(page)
+    page.write_text(html.replace('<div class="pub">', '<div class="pub pub-top">', 1))
+    assert_reports(sabotaged, 'do not alternate')
+
+
+def test_a_missing_fill_is_caught(sabotaged):
+    page = sabotaged / 'publications' / 'index.html'
+    html = read(page)
+    page.write_text(html.replace('<div class="pub pub-top">', '<div class="pub">', 1))
+    assert_reports(sabotaged, 'do not alternate')
+
+
 @pytest.mark.parametrize('data, expected', [
     (b'\x89PNG\r\n\x1a\n' + b'\x00' * 8 + (1200).to_bytes(4, 'big')
      + (630).to_bytes(4, 'big'), (1200, 630)),

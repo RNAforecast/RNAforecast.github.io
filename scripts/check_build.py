@@ -336,6 +336,40 @@ def check_no_accidental_lists(root, problems):
                     f'enumerator swallowed the first token: "{text}"')
 
 
+def check_venue_badges_alternate(root, problems):
+    """Venue badges alternate down each year: filled, outline, filled …
+
+    `.pub-top` fills the badge; without it the badge is the blue outline. The
+    alternation is a rhythm, not a statement about the paper, so two adjacent
+    badges of the same kind read as meaning something that is not there.
+    Nothing enforced it and it had drifted in three of the four year groups.
+    """
+    group = re.compile(r'<div class="pub-group" id="y(\d{4})">(.*?)'
+                       r'(?=<div class="pub-group"|\Z)', re.S)
+    entry = re.compile(r'<div class="pub([^"]*)">')
+
+    for page in sorted(html_files(root)):
+        with open(page, encoding='utf-8') as f:
+            source = f.read()
+        if 'pub-group' not in source:
+            continue
+        shown = os.path.relpath(page, root)
+
+        for year, body in group.findall(source):
+            flags = [m for m in entry.findall(body)
+                     if m in ('', ' pub-top')]
+            for i, flag in enumerate(flags):
+                filled = 'pub-top' in flag
+                if filled == (i % 2 == 0):
+                    continue
+                problems.append(
+                    f'{shown}: venue badges do not alternate in {year}: '
+                    f'publication {i + 1} is '
+                    f'{"filled" if filled else "outlined"} where it should be '
+                    f'{"outlined" if filled else "filled"}')
+                break
+
+
 def check_robots_and_sitemap(root, problems):
     robots_path = os.path.join(root, 'robots.txt')
     if os.path.isfile(robots_path):
@@ -389,6 +423,7 @@ def check(root):
     check_stylesheet_assets(root, problems)
     check_jsonld(root, problems)
     check_no_accidental_lists(root, problems)
+    check_venue_badges_alternate(root, problems)
     check_excluded_paths(root, problems)
     check_robots_and_sitemap(root, problems)
 

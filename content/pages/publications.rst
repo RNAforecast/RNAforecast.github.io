@@ -185,7 +185,7 @@ Publications
 
             doi:10.2306/scienceasia1513-1874.2025.s013
 
-    .. container:: pub pub-top
+    .. container:: pub
 
       .. container:: pub-meta
 
@@ -229,7 +229,7 @@ Publications
 
             doi:10.5281/zenodo.15233965
 
-    .. container:: pub
+    .. container:: pub pub-top
 
       .. container:: pub-meta
 
@@ -472,7 +472,7 @@ Publications
 
   .. container:: pubs pubs-full
 
-    .. container:: pub
+    .. container:: pub pub-top
 
       .. container:: pub-meta
 
@@ -516,7 +516,7 @@ Publications
 
             doi:10.1246/bcsj.20230092
 
-    .. container:: pub pub-top
+    .. container:: pub
 
       .. container:: pub-meta
 
@@ -559,7 +559,7 @@ Publications
 
             doi:10.1093/nar/gkad223
 
-    .. container:: pub
+    .. container:: pub pub-top
 
       .. container:: pub-meta
 
