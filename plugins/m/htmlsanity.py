@@ -512,7 +512,12 @@ class SaneHtmlTranslator(HTMLTranslator):
 
     # Footnote list. Replacing the classes with just .m-footnote.
     def visit_footnote(self, node):
-        previous_node = node.parent[node.parent.index(node)-1]
+        # `parent[index - 1]` wraps round to the *last* child when this is the
+        # first one, so a footnote list that opens its parent — a list inside
+        # a container, say — saw a footnote behind it and never opened the
+        # <dl>, leaving <dt>/<dd> loose and a stray </dl> at the end.
+        index = node.parent.index(node)
+        previous_node = node.parent[index - 1] if index else None
         if not isinstance(previous_node, type(node)):
             self.body.append('<dl class="m-footnote">\n')
 
@@ -535,17 +540,22 @@ class SaneHtmlTranslator(HTMLTranslator):
         self.body.append(self.starttag(node.parent, 'dt', ''))
 
     def depart_label(self, node):
-        if self.settings.footnote_backlinks:
-            backrefs = node.parent['backrefs']
-            if len(backrefs) == 1:
-                self.body.append('</a>')
-        self.body.append('.</dt>\n<dd><span class="m-footnote">')
+        # Older docutils opened a backlink <a> around the label itself and this
+        # closed it. It no longer does, so that close tag was emitted with
+        # nothing to close: a stray </a> in every footnote referenced exactly
+        # once, which the Nu validator rejects. Reading `backrefs` outside the
+        # backlinks check was the second bug — a NameError with them turned off.
+        backrefs = (node.parent['backrefs']
+                    if self.settings.footnote_backlinks else [])
+        self.body.append('.</dt>\n<dd>')
         if len(backrefs) == 1:
-            self.body.append('<a href="#{}">^</a>'.format(backrefs[0]))
-        else:
-            self.body.append('^ ')
-            self.body.append(format(' '.join('<a href="#{}">{}</a>'.format(ref, chr(ord('a') + i)) for i, ref in enumerate(backrefs))))
-        self.body.append('</span> ')
+            self.body.append('<span class="m-footnote">'
+                             '<a href="#{}">^</a></span> '.format(backrefs[0]))
+        elif backrefs:
+            links = ' '.join('<a href="#{}">{}</a>'.format(ref, chr(ord('a') + i))
+                             for i, ref in enumerate(backrefs))
+            self.body.append(
+                '<span class="m-footnote">^ {}</span> '.format(links))
 
     def visit_line_block(self, node):
         self.body.append(self.starttag(node, 'p'))

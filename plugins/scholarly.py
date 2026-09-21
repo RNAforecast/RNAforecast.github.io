@@ -1,4 +1,4 @@
-"""Emit schema.org ScholarlyArticle data for the publications page.
+"""Emit schema.org data: ScholarlyArticle for publications, Article for Insights.
 
 The publication list is written as reStructuredText containers, and RST cannot
 produce a <script> block or a data- attribute. Rather than keep a second copy
@@ -18,6 +18,11 @@ It looks for the markup the page actually uses:
 The result lands on the page object as `page.jsonld`, which page.html emits.
 scripts/check_build.py asserts that every publication on the page reached the
 graph, so a markup change that silently breaks extraction fails the build.
+
+Insights are different: an article's metadata already says everything the
+Article node needs, so nothing is scraped. Each Insight gets an Article node
+and /insights/ a CollectionPage listing them, and both carry the Person and
+Organization nodes they reference so the graph stands on its own.
 """
 
 import json
@@ -310,6 +315,127 @@ def to_script_body(graph):
                 .replace('>', '\\u003e'))
 
 
+def site_nodes(settings, siteurl, *ids):
+    """The named nodes of R_SITE_GRAPH, absolutised, in the order given.
+
+    An Insight's graph references the Person as its author and the
+    Organization as its publisher, so both have to travel with it: a page
+    that points at an @id it does not define cannot be read on its own.
+    """
+    site_graph = settings.get('R_SITE_GRAPH') or []
+    by_id = {node.get('@id'): node for node in site_graph}
+    return [absolutise(by_id[i], siteurl) for i in ids if i in by_id]
+
+
+def article_node(article, settings, siteurl):
+    """One schema.org Article, built from the article's own metadata."""
+    url = f'{siteurl}/{article.url}' if siteurl else f'/{article.url}'
+    author_id = absolutise(AUTHOR_FRAGMENT, siteurl, '@id')
+    org_id = absolutise('#organization', siteurl, '@id')
+
+    image = getattr(article, 'hero_image', None) or settings.get('M_SOCIAL_IMAGE')
+    description = getattr(article, 'description', '') or ''
+    if not description:
+        description = re.sub(r'<[^>]+>', ' ', getattr(article, 'summary', '') or '')
+        description = ' '.join(description.split())
+
+    node = {
+        '@type': 'Article',
+        '@id': f'{url}#article',
+        'headline': article.title,
+        'name': article.title,
+        'url': url,
+        'mainEntityOfPage': {'@type': 'WebPage', '@id': url},
+        'datePublished': article.date.date().isoformat(),
+        'dateModified': (getattr(article, 'modified', None)
+                         or article.date).date().isoformat(),
+        'inLanguage': getattr(article, 'lang', None) or 'en',
+        'author': {'@id': author_id},
+        'publisher': {'@id': org_id},
+        'isAccessibleForFree': True,
+    }
+    if description:
+        node['description'] = description
+    # The bibliographic abstract, the same text the deposit record carries.
+    # `abstract` is the scholarly property; `description` is what generic
+    # consumers read — the publications page makes the same distinction.
+    # `bib_abstract`, because docutils reserves `abstract` for a body topic.
+    abstract = getattr(article, 'bib_abstract', None)
+    if abstract:
+        node['abstract'] = abstract
+    if image:
+        node['image'] = absolutise(f'/{image.lstrip("/")}', siteurl, 'image')
+    keywords = [tag.name for tag in getattr(article, 'tags', None) or []]
+    if keywords:
+        node['keywords'] = keywords
+
+    # From metadata.yaml, by way of the generated article: an Insight that has
+    # been deposited says so here too, so the page and the archival record
+    # describe one publication rather than two.
+    version = getattr(article, 'version', None)
+    if version:
+        node['version'] = version
+    series = getattr(article, 'series', None)
+    number = getattr(article, 'number', None)
+    if series:
+        part = {'@type': 'PublicationIssue', 'name': series}
+        if number:
+            part['issueNumber'] = number
+        node['isPartOf'] = part
+    doi = getattr(article, 'doi', None)
+    if doi:
+        node['identifier'] = {'@type': 'PropertyValue',
+                              'propertyID': 'DOI', 'value': doi}
+        node['sameAs'] = f'https://doi.org/{doi}'
+    license_ = getattr(article, 'license', None)
+    if license_:
+        node['license'] = license_
+    return node
+
+
+def attach_articles(article_generator):
+    """Article JSON-LD for every published Insight."""
+    settings = article_generator.settings
+    siteurl = settings.get('SITEURL', '')
+
+    for article in article_generator.articles:
+        nodes = site_nodes(settings, siteurl, AUTHOR_FRAGMENT, '#organization')
+        nodes.append(article_node(article, settings, siteurl))
+        article.jsonld = to_script_body(
+            {'@context': 'https://schema.org', '@graph': nodes})
+        logger.info('scholarly: Article node on %s', article.slug)
+
+
+def insights_nodes(page, articles, settings, siteurl):
+    """The library page: a CollectionPage whose list names each Insight.
+
+    A plain ItemList of names and URLs, not @id references: the landing page
+    does not carry the article nodes themselves, and a reference to a node it
+    does not define would dangle.
+    """
+    page_url = f'{siteurl}/{page.url}' if siteurl else f'/{page.url}'
+    items = [
+        {'@type': 'ListItem', 'position': i, 'name': article.title,
+         'url': f'{siteurl}/{article.url}' if siteurl else f'/{article.url}'}
+        for i, article in enumerate(
+            sorted(articles, key=lambda a: a.date, reverse=True), start=1)
+    ]
+    collection = {
+        '@type': 'CollectionPage',
+        '@id': f'{page_url}#webpage',
+        'url': page_url,
+        'name': page.title,
+        'about': {'@id': absolutise('#organization', siteurl, '@id')},
+    }
+    if items:
+        collection['mainEntity'] = {
+            '@type': 'ItemList', 'numberOfItems': len(items),
+            'itemListOrder': 'https://schema.org/ItemListOrderDescending',
+            'itemListElement': items,
+        }
+    return [collection]
+
+
 def attach(page_generator):
     settings = page_generator.settings
     siteurl = settings.get('SITEURL', '')
@@ -322,8 +448,9 @@ def attach(page_generator):
     for page in page_generator.pages:
         is_home = getattr(page, 'save_as', '') == 'index.html'
         has_pubs = page.content and 'pub-title' in page.content
+        is_insights = page.slug == 'insights'
         extra = page_graphs.get(page.slug)
-        if not is_home and not has_pubs and not extra:
+        if not is_home and not has_pubs and not extra and not is_insights:
             continue
 
         page_url = f'{siteurl}/{page.url}' if siteurl else f'/{page.url}'
@@ -333,6 +460,11 @@ def attach(page_generator):
         if is_home:
             nodes = [n for n in nodes if n.get('@id') != author_id]
             nodes = absolutise(site_graph, siteurl) + nodes
+        elif is_insights:
+            articles = page_generator.context.get('articles') or []
+            nodes = site_nodes(settings, siteurl,
+                               AUTHOR_FRAGMENT, '#organization')
+            nodes += insights_nodes(page, articles, settings, siteurl)
         elif extra:
             nodes = [n for n in nodes if n.get('@id') != author_id]
             lead = [person] if person else []
@@ -351,3 +483,4 @@ def attach(page_generator):
 
 def register():
     signals.page_generator_finalized.connect(attach)
+    signals.article_generator_finalized.connect(attach_articles)

@@ -13,7 +13,7 @@ from scripts import check_build
 from conftest import graphs_in, nodes_of, read
 
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
-         'about/index.html', 'impressum/index.html',
+         'insights/index.html', 'about/index.html', 'impressum/index.html',
          'datenschutz/index.html']
 
 AUTHOR_ID = 'https://rnaforecast.com/#michael-t-wolfinger'
@@ -111,14 +111,20 @@ def test_the_legal_pages_are_absent_from_the_sitemap(site, path):
 # --- sitemap --------------------------------------------------------------
 
 def test_sitemap_lists_the_public_pages(site):
+    """The fixed pages, plus however many Insights are published."""
     sitemap = read(site / 'sitemap.xml')
     locs = set(re.findall(r'<loc>([^<]+)</loc>', sitemap))
-    assert locs == {
+    expected = {
         'https://rnaforecast.com/',
         'https://rnaforecast.com/about/',
+        'https://rnaforecast.com/insights/',
         'https://rnaforecast.com/publications/',
         'https://rnaforecast.com/research/',
     }
+    assert expected <= locs
+    insights = {loc for loc in locs - expected
+                if loc.startswith('https://rnaforecast.com/insights/')}
+    assert locs == expected | insights, locs - expected - insights
 
 
 def test_sitemap_carries_no_noise_fields(site):

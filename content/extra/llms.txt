@@ -21,6 +21,12 @@ Every page is static HTML and requires no JavaScript to read.
 - [Publications](https://rnaforecast.com/publications/): peer reviewed
   articles and conference contributions, each with a DOI and, where rights
   allow, a PDF. The page also carries schema.org ScholarlyArticle data.
+- [Insights](https://rnaforecast.com/insights/): a curated library of
+  scientific perspectives on RNA structure, folding landscapes, structural
+  ensembles and computational RNA design. Individual pieces live one level
+  below that page, each at its own slug, and each carries schema.org Article
+  data. Editorial analysis, not peer reviewed work: cite the publications page
+  for results, and attribute an Insight to its own URL.
 - [About](https://rnaforecast.com/about/): biography, research interests,
   scientific positions and service, teaching, and contact details.
 
@@ -29,7 +35,8 @@ Every page is static HTML and requires no JavaScript to read.
 - [Sitemap](https://rnaforecast.com/sitemap.xml)
 - schema.org JSON-LD is embedded in the pages: Person, Organization and
   ProfilePage on the home page; ScholarlyArticle for every publication on the
-  publications page, each identified by its DOI.
+  publications page, each identified by its DOI; Article on every Insight, and
+  a CollectionPage listing them at /insights/.
 
 ## Scholarly profiles
 

@@ -7,15 +7,27 @@ from scripts import check_build
 from conftest import read
 
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
-         'about/index.html', 'impressum/index.html',
+         'insights/index.html', 'about/index.html', 'impressum/index.html',
          'datenschutz/index.html', 'thanks/index.html',
          '404.html']
+
+
+def insights(site):
+    """The published Insights, however many there happen to be."""
+    return sorted(p for p in site.glob('insights/*/index.html'))
 
 
 def test_checker_passes_on_a_real_build(site):
     problems, pages = check_build.check(str(site))
     assert problems == [], '\n'.join(problems)
-    assert pages == len(PAGES)
+    assert pages == len(PAGES) + len(insights(site))
+
+
+def test_the_build_contains_nothing_unexpected(site):
+    """Every page is either a known page or an Insight — no stray archive,
+    tag or category listing crept back in with the article generator."""
+    built = {str(p.relative_to(site)) for p in site.rglob('*.html')}
+    assert built == set(PAGES) | {str(p.relative_to(site)) for p in insights(site)}
 
 
 @pytest.mark.parametrize('rel', check_build.REQUIRED)

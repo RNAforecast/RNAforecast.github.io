@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="{% if page and page.lang %}{{ page.lang }}{% else %}{{ DEFAULT_LANG }}{% endif %}">
+{# `doc` is whatever this template is about — a page or an article. The child
+   template sets it before extending, so the head below is written once. #}
+<html lang="{% if doc and doc.lang %}{{ doc.lang }}{% else %}{{ DEFAULT_LANG }}{% endif %}">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}{{ SITENAME|e }}{% endblock title %}</title>
-  {% block meta %}{% endblock meta %}
+  {# The :title: metadata is the complete browser title — the design's values
+     already carry the site name, so nothing is appended here. #}
+  <title>{% block title %}{% if doc %}{{ doc.title|e }}{% else %}{{ SITENAME|e }}{% endif %}{% endblock title %}</title>
+  {% block meta %}
+  {% if doc %}
+  {% if doc.description %}
+  <meta name="description" content="{{ doc.description|striptags|e }}" />
+  {% endif %}
+  {% if doc.robots %}
+  <meta name="robots" content="{{ doc.robots|e }}" />
+  {% endif %}
+  <link rel="canonical" href="{{ doc.url|format_siteurl|e }}" />
+  {% endif %}
+  {% endblock meta %}
   {% for href in M_CSS_FILES %}
   <link rel="stylesheet" href="{{ href|format_siteurl|e }}" />
   {% endfor %}
@@ -17,8 +31,32 @@
   {% if GOOGLE_SITE_VERIFICATION %}
   <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}" />
   {% endif %}
-  {% block social %}{% endblock social %}
-  {% block extra %}{% endblock extra %}
+  {% block social %}
+  {% if doc %}
+  <meta property="og:type" content="{{ doc.og_type|default(default_og_type|default('website', true), true) }}" />
+  <meta property="og:site_name" content="{{ SITENAME|e }}" />
+  <meta property="og:title" content="{{ doc.title|e }}" />
+  <meta property="og:url" content="{{ doc.url|format_siteurl|e }}" />
+  {% if doc.summary or doc.description %}
+  <meta property="og:description" content="{{ (doc.summary or doc.description)|striptags|e }}" />
+  {% endif %}
+  <meta name="twitter:card" content="summary_large_image" />
+  {% if M_SOCIAL_TWITTER_SITE %}
+  <meta name="twitter:site" content="{{ M_SOCIAL_TWITTER_SITE }}" />
+  {% endif %}
+  {% if M_SOCIAL_IMAGE %}
+  <meta property="og:image" content="{{ M_SOCIAL_IMAGE|format_siteurl }}" />
+  <meta name="twitter:image" content="{{ M_SOCIAL_IMAGE|format_siteurl }}" />
+  {% endif %}
+  {% endif %}
+  {% endblock social %}
+  {% block extra %}
+  {%- if doc and doc.jsonld %}
+  <script type="application/ld+json">
+{{ doc.jsonld|safe }}
+  </script>
+  {%- endif %}
+  {% endblock extra %}
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -43,7 +81,7 @@
   </nav>
 </header>
 
-<main class="shell{% if page and page.page_class %} {{ page.page_class|e }}{% endif %}" id="content">
+<main class="shell{% block main_class %}{% endblock main_class %}{% if doc and doc.page_class %} {{ doc.page_class|e }}{% endif %}" id="content">
 {% block hero %}{% endblock hero %}
 {% block main %}{% endblock main %}
 </main>

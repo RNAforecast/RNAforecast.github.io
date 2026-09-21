@@ -1,45 +1,8 @@
+{% set doc = page %}
 {% set page_slug = page.slug %}
 {% extends "base.html" %}
 
-{# The :title: metadata is the complete browser title — the design's values
-   already carry the site name, so nothing is appended here. #}
-{% block title %}{{ page.title|e }}{% endblock title %}
-
-{% block meta %}
-  {% if page.description %}
-  <meta name="description" content="{{ page.description|striptags|e }}" />
-  {% endif %}
-  {% if page.robots %}
-  <meta name="robots" content="{{ page.robots|e }}" />
-  {% endif %}
-  <link rel="canonical" href="{{ page.url|format_siteurl|e }}" />
-{% endblock meta %}
-
-{% block social %}
-  <meta property="og:type" content="{{ page.og_type|default('website') }}" />
-  <meta property="og:site_name" content="{{ SITENAME|e }}" />
-  <meta property="og:title" content="{{ page.title|e }}" />
-  <meta property="og:url" content="{{ page.url|format_siteurl|e }}" />
-  {% if page.summary or page.description %}
-  <meta property="og:description" content="{{ (page.summary or page.description)|striptags|e }}" />
-  {% endif %}
-  <meta name="twitter:card" content="summary_large_image" />
-  {% if M_SOCIAL_TWITTER_SITE %}
-  <meta name="twitter:site" content="{{ M_SOCIAL_TWITTER_SITE }}" />
-  {% endif %}
-  {% if M_SOCIAL_IMAGE %}
-  <meta property="og:image" content="{{ M_SOCIAL_IMAGE|format_siteurl }}" />
-  <meta name="twitter:image" content="{{ M_SOCIAL_IMAGE|format_siteurl }}" />
-  {% endif %}
-{% endblock social %}
-
-{% block extra %}
-  {%- if page.jsonld %}
-  <script type="application/ld+json">
-{{ page.jsonld|safe }}
-  </script>
-  {%- endif %}
-{% endblock extra %}
+{# Head, metadata and JSON-LD come from base.html, which reads `doc`. #}
 
 {% block hero %}
 {% if page.hero_portrait %}

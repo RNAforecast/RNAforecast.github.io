@@ -1,0 +1,30 @@
+{# The /insights/ library. An ordinary page — hero, metadata and sitemap
+   handling all come from page.html — with the published article list
+   appended after the page's own prose. `articles` holds published articles
+   only; drafts never reach it. #}
+{% extends "page.html" %}
+
+{% block main %}
+<article>
+{{ page.content|trim }}
+
+{% if articles %}
+<ol class="insight-list" reversed>
+  {% for article in articles|sort(attribute='date', reverse=True) %}
+  <li class="insight-item">
+    <article>
+      <h2 class="insight-item-h"><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title|e }}</a></h2>
+      {% if article.subtitle %}<p class="insight-item-sub">{{ article.subtitle|e }}</p>{% endif %}
+      {% if article.summary %}<div class="insight-item-sum">{{ article.summary }}</div>{% endif %}
+      <p class="insight-item-meta">
+        <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+      </p>
+    </article>
+  </li>
+  {% endfor %}
+</ol>
+{% else %}
+<p class="insight-empty">The first Insights are in preparation.</p>
+{% endif %}
+</article>
+{% endblock main %}

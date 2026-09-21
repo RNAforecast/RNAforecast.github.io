@@ -12,7 +12,34 @@ DEFAULT_LANG = 'en'
 THEME = 'pelican-theme'
 THEME_STATIC_DIR = 'static'
 DIRECT_TEMPLATES = []
-ARTICLE_PATHS = ['articles']  # no blog; keeps the article generator quiet
+
+# Insights are Pelican articles under the hood; the public wording is always
+# "Insights", never "blog". The landing page at /insights/ is an ordinary
+# Pelican page (content/pages/insights.rst) that iterates the article list,
+# so it keeps the site's hero, metadata and sitemap handling.
+ARTICLE_PATHS = ['insights']
+ARTICLE_URL = 'insights/{slug}/'
+ARTICLE_SAVE_AS = 'insights/{slug}/index.html'
+
+# Drafts are not written at all: an unlisted URL is still a published URL.
+# Pelican's writer skips an empty save_as.
+DRAFT_URL = ''
+DRAFT_SAVE_AS = ''
+
+# Tags and categories stay in the source as metadata, but a handful of
+# articles cannot fill a taxonomy: those pages would be thin and duplicate.
+# Emptying CATEGORY_SAVE_AS also stops Pelican assigning a category at all,
+# and its draft writer reads one — hence the default here, which is never
+# rendered: no template prints it and no URL contains it.
+DEFAULT_METADATA = {'category': 'Insights'}
+CATEGORY_SAVE_AS = ''
+CATEGORY_URL = ''
+TAG_SAVE_AS = ''
+TAG_URL = ''
+AUTHOR_SAVE_AS = ''
+AUTHOR_URL = ''
+
+DEFAULT_DATE_FORMAT = '%-d %B %Y'
 
 M_CSS_FILES = ['/css/rnaf.css']
 
@@ -43,6 +70,7 @@ M_SOCIAL_IMAGE = 'static/images/og-card.png'
 # links home, and its aria-label in base.html is what announces that.
 M_LINKS_NAVBAR1 = [('Research', '/research/', 'research'),
                    ('Publications', '/publications/', 'publications'),
+                   ('Insights', '/insights/', 'insights'),
                    ('Software', '/#software', ''),
                    ('Collaborations', '/#collaborations', ''),
                    ('Teaching & Training', '/#training', ''),
@@ -55,6 +83,7 @@ R_FOOTER_TAGLINE = ('Independent research platform · Computational RNA biology 
 R_FOOTER_LINKS = [('Home', '/'),
                   ('Research', '/research/'),
                   ('Publications', '/publications/'),
+                  ('Insights', '/insights/'),
                   ('Teaching', '/#training'),
                   ('About', '/about/'),
                   ('Impressum', '/impressum/'),

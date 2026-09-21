@@ -26,6 +26,7 @@ REQUIRED = [
     'index.html',
     'research/index.html',
     'publications/index.html',
+    'insights/index.html',
     'about/index.html',
     'impressum/index.html',
     'datenschutz/index.html',
