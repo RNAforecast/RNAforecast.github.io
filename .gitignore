@@ -12,3 +12,6 @@ output-publish/
 CLAUDE.md
 AGENTS.md
 RNAF2026/
+
+build/
+local/

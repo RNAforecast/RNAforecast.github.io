@@ -1,0 +1,92 @@
+# Canonical publication metadata for one Insight.
+# Authoritative for everything the PDF and the website both state. Nothing
+# below is repeated by hand anywhere else: the Pelican front matter and the
+# PDF title page are both generated from this file.
+title: RNA Structure Before the Experiment
+subtitle: An ensemble view of therapeutic RNA design
+slug: rna-structure-before-the-experiment
+
+author: Michael T. Wolfinger
+# Two affiliations on purpose, and they are not interchangeable.
+# `affiliation` is the display line on the PDF title page: the registered
+# entity, its seat, and enough geography for an international reader.
+# `affiliation_formal` is what goes into a deposit record (Zenodo), where the
+# metadata should name the registered seat and nothing else — Purkersdorf is
+# not administratively in Vienna, and a repository record should not imply it.
+# The website is the branding layer and says neither; it says "RNA Forecast".
+affiliation: RNA Forecast e.U., Purkersdorf, Vienna metropolitan area, Austria
+affiliation_formal: RNA Forecast e.U., Purkersdorf, Austria
+
+date: 2026-09-21
+modified: 2026-09-21
+version: "1.0"
+
+series: RNA Forecast Insights
+number: 1
+
+# The version DOI reserved on Zenodo, bare — no https://doi.org/ prefix. It
+# identifies this exact deposit; a revised version gets its own.
+doi: 10.5281/zenodo.22872982
+# Optional, and purely a convenience: the DOI above already resolves here, and
+# it keeps resolving if Zenodo changes its URL shape again (it has once).
+zenodo_url: https://zenodo.org/records/22872982
+
+# `license` is the machine-readable value (schema.org, the deposit's licence
+# selector). `copyright` is the human statement, and it names a natural
+# person on purpose: under Austrian law only a person can be an author, so
+# the e.U. is the publisher rather than the rights holder.
+license: CC BY 4.0
+copyright: Copyright 2026 Michael T. Wolfinger. Licensed under CC BY 4.0.
+
+# The resource type chosen in the deposit form; repeated here so the record
+# and this file cannot drift.
+resource_type: Publication / Working paper
+
+# Zenodo defaults the publisher to "Zenodo", which is the archive, not the
+# publisher. The series is issued by RNA Forecast, and the page's schema.org
+# data already names it as publisher — so the two records agree. The legal
+# entity is carried by affiliation_formal, not repeated here: "RNA Forecast
+# e.U." reads badly in a citation string.
+publisher: RNA Forecast
+
+status: published
+
+# Four texts, four jobs. Do not make one of them do another's work:
+#   abstract     the deposit record (Zenodo) and the article's schema.org
+#                data — self-contained, searchable, says what the piece does
+#   description  the HTML meta description and search snippet, under 150
+#                characters, or scripts/check_build.py fails the build
+#   summary      the card on /insights/ and the social preview
+#   \begin{lead} in manuscript.tex: the article's opening paragraph, written
+#                to be read rather than indexed
+abstract: >-
+  RNA therapeutics are designed as sequences, but the resulting molecules
+  occupy folding landscapes that can change as they are synthesized,
+  translated, bound, modified and degraded. Sequence changes can therefore
+  alter structural ensembles, accessibility and folding behaviour even when
+  their intended effect lies elsewhere. This perspective examines how
+  ensemble-aware RNA structure analysis can make such consequences explicit
+  before an experiment is run. Using examples from mRNA design, target
+  accessibility, cotranscriptional folding and modified nucleotides, it
+  discusses both the value and the limitations of thermodynamic structure
+  models. Structural analysis does not predict therapeutic efficacy, but it
+  can help identify relevant differences between variants, expose assumptions
+  in a design and formulate experimentally testable hypotheses.
+
+description: >-
+  How ensemble-aware RNA structure analysis makes the structural
+  consequences of sequence choices visible before an experiment is run.
+
+summary: >-
+  RNA therapeutics are designed as sequences, but a sequence change is also an
+  intervention in a folding landscape. An ensemble-aware view of structure will
+  not predict whether a construct works. However, it can make the structural
+  consequences of sequence changes explicit and turn them into hypotheses that
+  can be experimentally tested.
+
+tags:
+  - RNA structure
+  - RNA therapeutics
+  - mRNA
+  - RNA folding
+  - RNA ensembles

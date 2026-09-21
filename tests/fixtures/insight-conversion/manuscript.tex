@@ -1,0 +1,53 @@
+\begin{lead}
+Lead paragraph with an en dash 1990--2020, an em dash --- like this --- and
+``quotations''.
+\end{lead}
+
+\section{Inline citations and unicode}
+
+One citation \cite{mueller2020}, two at once \cite{mueller2020,pre2026}, an
+italic species \emph{Escherichia coli}, N\textsuperscript{6}-methyladenosine,
+the 5′ and 3′ ends, Greek letters $\alpha$, $\beta$ and $\Delta G$, and a
+\href{https://example.org/}{hyperlink}.
+
+A scientific footnote sits here.\footnote{The footnote text.}
+
+\subsection{A subsection}
+
+\begin{equation}
+\Delta G = \Delta H - T \Delta S
+\label{eq:gibbs}
+\end{equation}
+
+The equation above defines the free energy.
+
+\section{A table and a figure}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+\hline
+Quantity & Value \\
+\hline
+Unpaired probability & 0.42 \\
+Ensemble diversity & 11.3 \\
+\hline
+\end{tabular}
+\caption{A caption.}
+\label{tab:one}
+\end{table}
+
+Table~\ref{tab:one} says so.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{figures/diagram.png}
+\caption{A figure caption.}
+\label{fig:one}
+\end{figure}
+
+Figure~\ref{fig:one} shows it.
+
+\begin{quote}
+A quotation.
+\end{quote}

@@ -1,0 +1,157 @@
+% Reusable RNA Forecast Insights PDF template.
+%
+% scripts/build_insight.py substitutes the %%TOKENS%% from metadata.yaml and
+% \input{manuscript} to produce build/insights/<slug>/main.tex. An unsubstituted
+% token is a LaTeX comment, never stray text on the page.
+%
+% Article text never belongs here. This file owns PDF presentation only:
+% title page, typography, running heads, bibliography style.
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- typography ----------------------------------------------------------
+% The PDF is set in Source Sans Pro: a neutral, highly legible sans designed
+% for continuous text, which is what a reader does with seven pages of
+% argument. The website's Barlow cannot be used here — it is not in TeX Live,
+% and the copies this repository ships are woff2 subsets, which LaTeX cannot
+% read — so the two are relatives rather than the same face.
+%
+% Headings take the semibold weight rather than bold, matching the website,
+% where --font-heading-weight is 600.
+%
+% To change it, replace these three lines. All of these are pdflatex-ready and
+% present in TeX Live; each sets the document sans by default:
+%   \usepackage[sfdefault,scaled=1.02]{roboto}    closest in shape to Barlow
+%   \usepackage[sfdefault,scaled=1.02]{FiraSans}  warm, humanist
+%   \usepackage[sfdefault]{inter}                 modern, screen-first
+%   \usepackage[default]{lato}                    soft, corporate-report
+%   \usepackage[sfdefault]{opensans}              plain and unobtrusive
+% \headingfont must name a weight the chosen face actually has: Roboto has a
+% condensed cut (\fontseries{bc}), most of the others only \bfseries.
+\usepackage[default,scale=1.02]{sourcesanspro}
+\usepackage{newtxsf}  % sans-serif maths, so ΔG does not arrive in Computer Modern
+\newcommand{\headingfont}{\fontseries{sb}\selectfont}
+\usepackage[a4paper,margin=32mm,top=28mm,bottom=30mm]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% Headings in the condensed cut, numbers in the accent colour — the same
+% relationship the website's section rules have.
+\titleformat{\section}
+  {\headingfont\Large}{\textcolor{rnafaccent}{\thesection}}{0.8em}{}
+\titleformat{\subsection}
+  {\headingfont\large}{\textcolor{rnafaccent}{\thesubsection}}{0.8em}{}
+\titlespacing*{\section}{0pt}{1.8em}{0.5em}
+\titlespacing*{\subsection}{0pt}{1.4em}{0.4em}
+
+% Characters the prose uses that the T1 encoding does not carry. Declared, not
+% avoided: the manuscript should read naturally and 5′ is the right character.
+\DeclareUnicodeCharacter{2032}{\ensuremath{{}^\prime}}
+\DeclareUnicodeCharacter{2033}{\ensuremath{{}^{\prime\prime}}}
+\DeclareUnicodeCharacter{00B7}{\textperiodcentered}
+\DeclareUnicodeCharacter{2212}{-}
+\DeclareUnicodeCharacter{202F}{\,}
+
+\usepackage[backend=bibtex,style=numeric,sorting=none,doi=true,url=false,
+            isbn=false,eprint=false,giveninits=true,maxbibnames=8,
+            minbibnames=8]{biblatex}
+\addbibresource{references.bib}
+
+% "Preprint" after the entry, so a preprint is never mistaken for a
+% peer-reviewed paper. biblatex prints the `pubstate` field itself; this only
+% sets how it looks. Do not also add it in a bibmacro — it then appears twice.
+\DeclareFieldFormat{pubstate}{\mkbibbrackets{\MakeCapital{#1}}}
+
+% The bibliography sets one step down from the body: it is reference matter,
+% consulted rather than read through.
+\renewcommand*{\bibfont}{\small}
+
+\definecolor{rnafaccent}{HTML}{416180}
+\definecolor{rnafink}{HTML}{1D1F20}
+\color{rnafink}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7em}
+\setlist{itemsep=0.2em,topsep=0.4em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\fancyhead[L]{\footnotesize\color{rnafaccent}%%SERIES%%\ %%NUMBER%%}
+\fancyhead[R]{\footnotesize\color{rnafaccent}%%SHORTTITLE%%}
+
+% The opening paragraph. The web renders it as the page lead; here it is set
+% slightly larger, which is the same editorial intent.
+\newenvironment{lead}{\par\bigskip\large}{\par\bigskip\normalsize}
+
+% The conceptual chain. A single semantic environment in both outputs: here a
+% ruled block, on the web a .blueprint .chain container. Never two unrelated
+% hand-made versions.
+% The manuscript supplies the steps as an ordinary enumerate; the environment
+% only frames it and sets the marker, so the LaTeX source stays semantic.
+\newenvironment{chain}
+  {\begin{center}\begin{minipage}{0.86\linewidth}\vspace{0.4em}%
+   {\color{rnafaccent}\rule{\linewidth}{0.4pt}}\vspace{0.4em}%
+   \setlist[enumerate]{label=\textcolor{rnafaccent}{$\downarrow$},
+                       leftmargin=2.4em,itemsep=0.35em,topsep=0.2em}}
+  {\vspace{0.4em}{\color{rnafaccent}\rule{\linewidth}{0.4pt}}%
+   \end{minipage}\end{center}}
+
+\hypersetup{
+  pdftitle={%%TITLE%%},
+  pdfauthor={%%AUTHOR%%},
+  pdfsubject={%%SUBTITLE%%},
+  pdfkeywords={%%KEYWORDS%%},
+}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+{\footnotesize\color{rnafaccent}\textsc{%%SERIES%%}\\[0.2em]
+No.~%%NUMBER%%}
+
+\vspace{1.4em}
+
+{\LARGE\headingfont %%TITLE%%\par}
+
+\vspace{0.4em}
+
+{\large\headingfont\color{rnafaccent}%%SUBTITLE%%\par}
+
+\vspace{1.6em}
+
+{%%AUTHOR%%\\
+\small\emph{%%AFFILIATION%%}}
+
+\vspace{1.2em}
+
+{\footnotesize
+%%DATELONG%%\\
+Version %%VERSION%%%%DOILINE%%%%RIGHTSLINE%%}
+
+\vspace{2em}
+
+\hrule
+
+\vspace{1.6em}
+
+\input{manuscript}
+
+\printbibliography[title={References}]
+
+\vfill
+
+{\footnotesize\color{rnafaccent}\textbf{Cite this Insight}\\
+\color{rnafink}%%CITATION%%}
+
+\end{document}

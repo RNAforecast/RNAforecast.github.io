@@ -1,0 +1,51 @@
+..
+   GENERATED FILE — DO NOT EDIT DIRECTLY.
+   Every word below comes from the canonical scientific source:
+     insights/{{ meta.slug }}/manuscript.tex
+     insights/{{ meta.slug }}/references.bib
+     insights/{{ meta.slug }}/metadata.yaml
+   Edit those and run: make insight-web SLUG={{ meta.slug }}
+   An edit made here is lost on the next build, and CI fails when this file
+   does not match what the sources produce.
+
+{{ meta.title }}
+{{ '#' * meta.title|length }}
+
+:subtitle: {{ meta.subtitle }}
+:slug: {{ meta.slug }}
+:date: {{ meta.date }}
+:modified: {{ meta.modified }}
+:author: {{ meta.author }}
+:status: {{ meta.status }}
+:description: {{ meta.description }}
+:summary: {{ meta.summary }}
+{#- Not `:abstract:`: docutils claims that name as a bibliographic field,
+    turns it into a topic in the document body, and Pelican never sees it —
+    so the abstract would print above the lead, saying the same thing twice. -#}
+{%- if meta.abstract %}
+:bib_abstract: {{ meta.abstract }}
+{%- endif %}
+:tags: {{ meta.tags|join(', ') }}
+:version: {{ meta.version }}
+:series: {{ meta.series }}
+:number: {{ meta.number }}
+{%- if meta.doi %}
+:doi: {{ meta.doi }}
+{%- endif %}
+{%- if meta.zenodo_url %}
+:zenodo_url: {{ meta.zenodo_url }}
+{%- endif %}
+{%- if meta.license %}
+:license: {{ meta.license }}
+{%- endif %}
+
+{{ body }}
+
+{% if references -%}
+{{ references_title }}
+{{ '-' * references_title|length }}
+
+.. container:: refs
+
+{{ references }}
+{%- endif %}

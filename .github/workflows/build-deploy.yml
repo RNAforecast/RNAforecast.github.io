@@ -45,6 +45,14 @@ jobs:
           distribution: temurin
           java-version: "21"
 
+      # An Insight's scientific source is LaTeX; content/insights/*.rst is
+      # generated from it. pandoc lets CI regenerate those and fail if the
+      # committed file does not match, which is what stops anyone correcting
+      # the science in the generated file. No LaTeX here: the PDF is built
+      # locally for Zenodo, and CI does not need it.
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
       - name: Install
         run: pip install -e ".[dev,test]"
 
