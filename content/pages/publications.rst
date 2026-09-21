@@ -159,7 +159,7 @@ Publications
 
         .. container:: pub-cite
 
-          Nature Biotechnology 44:989–1001 (2026)
+          Nature Biotechnology 44(6):989 to 1001 (2026)
 
         .. container:: pub-summary
 
@@ -210,7 +210,7 @@ Publications
         .. container:: pub-title
 
           From structure to function: computational insights into Musashi RNA
-          complexes in the context of viral pathogenesis
+          complexes in the context of viral pathogenesis and beyond
 
         .. container:: pub-authors
 
@@ -368,7 +368,7 @@ Publications
 
         .. container:: pub-cite
 
-          Journal of Virology e01215-24 (2024)
+          Journal of Virology 98(11):e01215-24 (2024)
 
         .. container:: pub-summary
 
@@ -405,7 +405,8 @@ Publications
         .. container:: pub-title
 
           Xinyang flavivirus, from Haemaphysalis flava ticks in Henan
-          province, China, defines a basal, likely tick only flavivirus clade
+          Province, China, defines a basal, likely tick only Orthoflavivirus
+          clade
 
         .. container:: pub-authors
 
@@ -414,7 +415,7 @@ Publications
 
         .. container:: pub-cite
 
-          Journal of General Virology 105(5) (2024)
+          Journal of General Virology 105(5):001991 (2024)
 
         .. container:: pub-summary
 
@@ -460,7 +461,7 @@ Publications
 
         .. container:: pub-cite
 
-          Nature Microbiology 9:550 to 560 (2024)
+          Nature Microbiology 9(2):550 to 560 (2024)
 
         .. container:: pub-summary
 
@@ -500,7 +501,8 @@ Publications
 
         .. container:: pub-authors
 
-          Gemmill, Nelson, Badmalia, Pereira, **Michael T. Wolfinger**, Patel
+          Gemmill, Nelson, Badmalia, Pereira, Kerr, **Michael T. Wolfinger**,
+          Patel
 
         .. container:: pub-cite
 
@@ -553,8 +555,8 @@ Publications
 
         .. container:: pub-title
 
-          A structural refinement technique for protein RNA complexes using a
-          combination of AI based modeling and flexible docking: a study of
+          A structural refinement technique for protein RNA complexes based on
+          a combination of AI based modeling and flexible docking: a study of
           Musashi 1 protein
 
         .. container:: pub-authors
