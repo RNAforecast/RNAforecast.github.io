@@ -34,7 +34,7 @@ Publications
 
     .. container:: pub-group-n
 
-      1 publication
+      2 publications
 
   .. container:: pubs pubs-full
 
@@ -83,21 +83,7 @@ Publications
 
             doi:10.1093/nar/gkag473
 
-.. _y2025:
-
-.. container:: pub-group
-
-  .. container:: pub-group-h
-
-    2025
-
-    .. container:: pub-group-n
-
-      4 publications
-
-  .. container:: pubs pubs-full
-
-    .. container:: pub pub-top
+    .. container:: pub
 
       .. container:: pub-meta
 
@@ -124,7 +110,7 @@ Publications
 
         .. container:: pub-cite
 
-          Nature Biotechnology (2025)
+          Nature Biotechnology 44:989–1001 (2026)
 
         .. container:: pub-summary
 
@@ -142,7 +128,21 @@ Publications
 
             doi:10.1038/s41587-025-02739-0
 
-    .. container:: pub
+.. _y2025:
+
+.. container:: pub-group
+
+  .. container:: pub-group-h
+
+    2025
+
+    .. container:: pub-group-n
+
+      3 publications
+
+  .. container:: pubs pubs-full
+
+    .. container:: pub pub-top
 
       .. container:: pub-meta
 

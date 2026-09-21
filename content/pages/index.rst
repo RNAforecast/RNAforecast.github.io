@@ -122,7 +122,7 @@ RNA Forecast contributes original research in computational RNA biology through 
 
     .. container:: pub-year
 
-      2025
+      2026
 
     .. container:: pub-body
 
@@ -143,7 +143,7 @@ RNA Forecast contributes original research in computational RNA biology through 
       .. container:: pub-links
 
         `doi:10.1038/s41587-025-02739-0 ↗ <https://doi.org/10.1038/s41587-025-02739-0>`_
-        Nat. Biotechnol.
+        Nat. Biotechnol. 44:989–1001
 
   .. container:: pub
 

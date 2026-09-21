@@ -49,7 +49,7 @@ RNA structure prediction
 
         Representative publications
 
-      Borovská et al., Nature Biotechnology (2025)
+      Borovská et al., Nature Biotechnology (2026)
 
     .. container:: spec-cell
 
@@ -151,7 +151,7 @@ Functional RNAs
 
         Representative publications
 
-      Mrozovich et al., Nucleic Acids Res. (2023) · Borovská et al., Nature Biotechnology (2025)
+      Mrozovich et al., Nucleic Acids Res. (2023) · Borovská et al., Nature Biotechnology (2026)
 
     .. container:: spec-cell
 
