@@ -18,9 +18,9 @@ RNA Structure Before the Experiment
 :modified: 2026-09-21
 :author: Michael T. Wolfinger
 :status: published
-:description: How ensemble-aware RNA structure analysis makes the structural consequences of sequence choices visible before an experiment is run.
-:summary: RNA therapeutics are designed as sequences, but a sequence change is also an intervention in a folding landscape. An ensemble-aware view of structure will not predict whether a construct works. However, it can make the structural consequences of sequence changes explicit and turn them into hypotheses that can be experimentally tested.
-:bib_abstract: RNA therapeutics are designed as sequences, but the resulting molecules occupy folding landscapes that can change as they are synthesized, translated, bound, modified and degraded. Sequence changes can therefore alter structural ensembles, accessibility and folding behaviour even when their intended effect lies elsewhere. This perspective examines how ensemble-aware RNA structure analysis can make such consequences explicit before an experiment is run. Using examples from mRNA design, target accessibility, cotranscriptional folding and modified nucleotides, it discusses both the value and the limitations of thermodynamic structure models. Structural analysis does not predict therapeutic efficacy, but it can help identify relevant differences between variants, expose assumptions in a design and formulate experimentally testable hypotheses.
+:description: How ensemble-aware RNA structure analysis reveals structural consequences of sequence choices before experimental testing.
+:summary: Whether RNA is the therapeutic molecule or the therapeutic target, structural effects are often hidden behind a sequence-level view. Ensemble-aware RNA structure analysis can reveal these effects and help turn them into experimentally testable hypotheses.
+:bib_abstract: Whether RNA itself is the therapeutic molecule or the therapeutic target, design decisions are often made primarily at the sequence level. The RNA molecule, however, occupies a folding landscape that can change during synthesis, binding, modification, translation, and degradation. For RNA constructs, sequence changes can alter structural ensembles, accessibility and folding behaviour. For RNA targets, these same structural properties influence which sites and conformations are available for interaction. This perspective examines how ensemble-aware RNA structure analysis can make such effects explicit before an experiment is run. Using examples from mRNA design, target accessibility, cotranscriptional folding and modified nucleotides, it discusses both the value and the limitations of thermodynamic structure models. Structural analysis does not predict therapeutic efficacy, but it can reveal relevant differences between variants, make design assumptions explicit and help formulate experimentally testable hypotheses.
 :tags: RNA structure, RNA therapeutics, mRNA, RNA folding, RNA ensembles
 :version: 1.0
 :series: RNA Forecast Insights
@@ -206,7 +206,7 @@ specific effect that can be measured and, in principle, ruled out.
 
 For such an analysis to be informative, the modelling assumptions need to be
 stated clearly. This includes the energy model and parameter set, temperature
-and, where applicable, ionic conditionss, the regions that were analysed, and the size of the
+and, where applicable, ionic conditions, the regions that were analysed, and the size of the
 predicted effect relative to variation among comparable sequences. The report
 should also make clear which observation would be inconsistent with the proposed
 interpretation.
@@ -334,7 +334,7 @@ References
      434:167632 (2022).
      `doi:10.1016/j.jmb.2022.167632 <https://doi.org/10.1016/j.jmb.2022.167632>`__
   .. [#wright2007] Wright DJ, Rice JL, Yanker DM, Znosko BM. Nearest neighbor
-     parameters for inosineuridine pairs in RNA duplexes. *Biochemistry*
+     parameters for inosine-uridine pairs in RNA duplexes. *Biochemistry*
      46:4625–4634 (2007).
      `doi:10.1021/bi0616910 <https://doi.org/10.1021/bi0616910>`__
   .. [#shabangu2026psi] Shabangu TS, Kierzek E, Arteaga S, Hiltke OM, Mathews

@@ -188,6 +188,20 @@ def test_a_doi_would_reach_both_the_page_and_its_structured_data(site, meta):
         assert 'Cite this Insight' not in html
 
 
+def test_the_citation_block_says_which_version_it_is(site, meta):
+    """The deposit is versioned, so a citation of it has to be too —
+    otherwise the page and the Zenodo record identify the work differently."""
+    if meta['status'] != 'published' or not meta.get('doi'):
+        pytest.skip('no published DOI, so no citation block')
+    html = read(site / 'insights' / SLUG / 'index.html')
+    # From the heading to the start of the next block, which is the CTA.
+    block = html.split('Cite this Insight', 1)[1].split('insight-cta', 1)[0]
+    assert block.strip(), 'the citation block came out empty'
+    for needed in (meta['author'], str(meta['series']), str(meta['number']),
+                   f"Version {meta['version']}", str(meta['doi'])):
+        assert needed in block, needed
+
+
 # --- the conversion itself ------------------------------------------------
 
 @needs_pandoc

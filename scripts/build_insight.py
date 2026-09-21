@@ -704,6 +704,9 @@ def build_web(slug, meta, out_dir=CONTENT, quiet=False):
 def citation_line(meta):
     parts = [f"{meta['author']}.", f"{meta['title']}:", f"{meta['subtitle']}."]
     parts.append(f"{meta['series']} {meta['number']} ({meta['date'].year}).")
+    # The deposit is versioned, so the citation says which version it is.
+    if meta.get('version'):
+        parts.append(f"Version {meta['version']}.")
     if meta.get('doi'):
         parts.append(f"doi:{meta['doi']}")
     return ' '.join(parts)

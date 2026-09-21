@@ -59,8 +59,11 @@
 {% if article.doi %}
 <div class="blueprint insight-cite">
   <div class="card-h">Cite this Insight</div>
+  {# The version belongs here: Zenodo identifies the record by it, and a
+     citation that omits it cannot say which version was read. #}
   <p>{{ article.author.name|e }}. {{ article.title|e }}: {{ article.subtitle|e }}.
     {{ article.series|e }} {{ article.number|e }} ({{ article.date.year }}).
+    {%- if article.version %} Version {{ article.version|e }}.{% endif %}
     <a href="https://doi.org/{{ article.doi|e }}">doi:{{ article.doi|e }}</a></p>
   {% if article.license %}<p class="insight-cite-note">Licensed {{ article.license|e }}.</p>{% endif %}
 </div>

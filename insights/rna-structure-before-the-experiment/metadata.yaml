@@ -59,30 +59,32 @@ status: published
 #   summary      the card on /insights/ and the social preview
 #   \begin{lead} in manuscript.tex: the article's opening paragraph, written
 #                to be read rather than indexed
-abstract: >-
-  RNA therapeutics are designed as sequences, but the resulting molecules
-  occupy folding landscapes that can change as they are synthesized,
-  translated, bound, modified and degraded. Sequence changes can therefore
-  alter structural ensembles, accessibility and folding behaviour even when
-  their intended effect lies elsewhere. This perspective examines how
-  ensemble-aware RNA structure analysis can make such consequences explicit
-  before an experiment is run. Using examples from mRNA design, target
-  accessibility, cotranscriptional folding and modified nucleotides, it
-  discusses both the value and the limitations of thermodynamic structure
-  models. Structural analysis does not predict therapeutic efficacy, but it
-  can help identify relevant differences between variants, expose assumptions
-  in a design and formulate experimentally testable hypotheses.
+abstract:
+  Whether RNA itself is the therapeutic molecule or the therapeutic target,
+  design decisions are often made primarily at the sequence level. The RNA
+  molecule, however, occupies a folding landscape that can change during
+  synthesis, binding, modification, translation, and
+  degradation. For RNA constructs, sequence changes can alter structural
+  ensembles, accessibility and folding behaviour. For RNA targets, these same
+  structural properties influence which sites and conformations are available
+  for interaction. This perspective examines how ensemble-aware RNA structure
+  analysis can make such effects explicit before an experiment is run. Using
+  examples from mRNA design, target accessibility, cotranscriptional folding
+  and modified nucleotides, it discusses both the value and the limitations of
+  thermodynamic structure models. Structural analysis does not predict
+  therapeutic efficacy, but it can reveal relevant differences between
+  variants, make design assumptions explicit and help formulate experimentally
+  testable hypotheses.
 
 description: >-
-  How ensemble-aware RNA structure analysis makes the structural
-  consequences of sequence choices visible before an experiment is run.
+  How ensemble-aware RNA structure analysis reveals structural consequences of
+  sequence choices before experimental testing.
 
 summary: >-
-  RNA therapeutics are designed as sequences, but a sequence change is also an
-  intervention in a folding landscape. An ensemble-aware view of structure will
-  not predict whether a construct works. However, it can make the structural
-  consequences of sequence changes explicit and turn them into hypotheses that
-  can be experimentally tested.
+  Whether RNA is the therapeutic molecule or the therapeutic target, structural
+  effects are often hidden behind a sequence-level view. Ensemble-aware RNA
+  structure analysis can reveal these effects and help turn them into
+  experimentally testable hypotheses.
 
 tags:
   - RNA structure
