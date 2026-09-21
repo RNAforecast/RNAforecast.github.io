@@ -91,8 +91,17 @@ def check_bibliography(slug, problems, warnings):
         warnings.append(f'{slug}: {key} is never cited')
 
 
-def check_generated_rst(slug, meta, problems):
-    """The committed article must be exactly what the sources produce."""
+def check_generated_rst(slug, meta, problems, warnings=None):
+    """The committed article must be exactly what the sources produce.
+
+    Byte equality only means something when the same pandoc is doing the
+    producing: its RST writer's output moves between versions, and CI's
+    pandoc is rarely the one on the author's machine. So the generated file
+    records which pandoc made it, and a mismatch downgrades this to a warning
+    — otherwise every CI run after a pandoc upgrade would fail with nothing
+    actually wrong. On matching versions it stays a hard failure, which is
+    what keeps anyone from correcting the science in the generated file.
+    """
     committed = os.path.join(bi.CONTENT, f'{slug}.rst')
     if not os.path.isfile(committed):
         problems.append(f'{slug}: content/insights/{slug}.rst has not been '
@@ -111,11 +120,20 @@ def check_generated_rst(slug, meta, problems):
         actual = f.read()
 
     if expected != actual:
-        problems.append(
-            f'{slug}: content/insights/{slug}.rst does not match its sources. '
-            f'Either it was edited by hand — which is never the way to change '
-            f'an Insight — or the sources changed and it was not rebuilt. '
-            f'Run: make insight-web SLUG={slug}')
+        recorded = re.search(r'Generated with pandoc (\S+?)\.', actual)
+        running = bi.pandoc_version()
+        if recorded and recorded.group(1) != running:
+            (warnings if warnings is not None else problems).append(
+                f'{slug}: content/insights/{slug}.rst was generated with '
+                f'pandoc {recorded.group(1)} and this is pandoc {running}, '
+                f'so it cannot be compared byte for byte. Rebuild it on one '
+                f'version to check it properly.')
+        else:
+            problems.append(
+                f'{slug}: content/insights/{slug}.rst does not match its '
+                f'sources. Either it was edited by hand — which is never the '
+                f'way to change an Insight — or the sources changed and it '
+                f'was not rebuilt. Run: make insight-web SLUG={slug}')
 
     if 'DO NOT EDIT' not in actual.split('\n\n')[0]:
         problems.append(f'{slug}: generated RST has lost its DO-NOT-EDIT header')
@@ -178,7 +196,7 @@ def check(slug, html_dir, problems, warnings):
 
     check_figures(slug, problems)
     check_bibliography(slug, problems, warnings)
-    check_generated_rst(slug, meta, problems)
+    check_generated_rst(slug, meta, problems, warnings)
     if html_dir:
         check_rendered_html(slug, meta, html_dir, problems)
 

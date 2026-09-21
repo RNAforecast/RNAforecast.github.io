@@ -7,6 +7,7 @@
    Edit those and run: make insight-web SLUG=rna-structure-before-the-experiment
    An edit made here is lost on the next build, and CI fails when this file
    does not match what the sources produce.
+   Generated with pandoc 3.11.
 
 RNA Structure Before the Experiment
 ###################################

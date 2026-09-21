@@ -196,8 +196,10 @@ def test_regenerating_reproduces_the_committed_article(repo, slugs):
     problems, warnings = [], []
     for slug in slugs:
         meta = build_insight.load_metadata(slug)
-        check_insight.check_generated_rst(slug, meta, problems)
+        check_insight.check_generated_rst(slug, meta, problems, warnings)
     assert problems == [], '\n'.join(problems)
+    for warning in warnings:
+        print(f'note: {warning}')
 
 
 @needs_pandoc
@@ -284,6 +286,28 @@ def test_a_figure_keeps_the_anchor_its_label_asked_for(converted):
     body, _, _ = converted
     assert '   :name: fig:one' in body
     assert '\n   name: fig:one' not in body
+
+
+@pytest.mark.parametrize('emitted', [
+    '   name: fig:one\n',          # pandoc 3.11: the option, minus its colon
+    '   :name: fig:one\n',         # a version that writes it correctly
+    '   :alt: \n',                 # the pandoc on CI: no name at all
+    '',                            # nothing but the directive
+])
+def test_a_figure_is_named_whatever_pandoc_did(emitted):
+    """The anchor comes from the manuscript, not from pandoc's RST writer.
+
+    That writer has emitted a figure's name three different ways across
+    versions, so relying on any of them makes the build depend on which
+    pandoc happens to be installed — which is how CI and a laptop start
+    producing different articles from one source.
+    """
+    tex = r'\begin{figure}\includegraphics{f.png}\caption{C}\label{fig:one}\end{figure}'
+    body = f'.. figure:: f.png\n{emitted}\n   C\n\nFigure `1 <#fig-one>`__.\n'
+    named = build_insight.name_figures(body, tex)
+    assert '   :name: fig:one' in named
+    assert named.count(':name:') == 1
+    assert '\n   name: fig:one' not in named
 
 
 @needs_pandoc
