@@ -784,7 +784,14 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 .pub-doi { color: var(--ink-45); margin-left: 6px; }
 .pub-doi p { margin: 0; }
 
-.record { margin-top: 44px; padding-top: 28px; border-top: 2px solid var(--color-text); }
+/* The last block on the page, so it carries the space before the footer
+   itself — the same measure .closing gives the other pages, or the action
+   row ends up sitting on the footer's rule. */
+.record {
+  margin-top: 44px; padding-top: 28px;
+  padding-bottom: clamp(48px, 8vw, 96px);
+  border-top: 2px solid var(--color-text);
+}
 .record-h {
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
   font-size: clamp(24px, 3vw, 32px); line-height: 1.02;
