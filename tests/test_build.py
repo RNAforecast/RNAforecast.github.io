@@ -1,5 +1,7 @@
 """The build produces what it should, and the smoke checker agrees."""
 
+import re
+
 import pytest
 
 from scripts import check_build
@@ -61,4 +63,22 @@ def test_no_page_ships_its_own_javascript(site):
 
 
 def test_production_build_uses_absolute_urls(site):
-    assert 'href="https://rnaforecast.com/css/rnaf.css"' in read(site / 'index.html')
+    assert re.search(r'href="https://rnaforecast\.com/css/rnaf\.css(\?v=\w+)?"',
+                     read(site / 'index.html'))
+
+
+def test_the_stylesheet_url_carries_its_own_fingerprint(site, repo):
+    """Cloudflare caches the CSS for hours at the edge.
+
+    Without a digest in the URL, a deploy ships new HTML against the
+    previous stylesheet and the site renders unstyled until that cache
+    expires — which is what happened the first time Insights went live.
+    """
+    import hashlib
+    digest = hashlib.sha256(
+        (repo / 'content' / 'css' / 'rnaf.css').read_bytes()).hexdigest()[:10]
+
+    for page in sorted(site.rglob('*.html')):
+        html = read(page)
+        assert f'/css/rnaf.css?v={digest}"' in html, page
+        assert 'rnaf.css"' not in html, f'{page}: unfingerprinted stylesheet'

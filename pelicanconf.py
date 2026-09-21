@@ -41,7 +41,22 @@ AUTHOR_URL = ''
 
 DEFAULT_DATE_FORMAT = '%-d %B %Y'
 
-M_CSS_FILES = ['/css/rnaf.css']
+# Fingerprinted with the stylesheet's own content. Cloudflare caches the CSS
+# at the edge for hours, so without this a deploy ships new HTML against the
+# previous stylesheet and the site renders unstyled until the cache expires —
+# which is exactly what happened when Insights first went live. A new digest
+# is a URL the edge has never seen, so it fetches it; an unchanged stylesheet
+# keeps its URL and stays cached.
+def _fingerprint(path):
+    import hashlib
+    import os
+    full = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        'content', path.lstrip('/'))
+    with open(full, 'rb') as f:
+        return f'{path}?v={hashlib.sha256(f.read()).hexdigest()[:10]}'
+
+
+M_CSS_FILES = [_fingerprint('/css/rnaf.css')]
 
 FORMATTED_FIELDS = ['summary', 'hero_links', 'hero_actions', 'hero_body']
 
