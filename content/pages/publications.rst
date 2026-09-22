@@ -5,7 +5,7 @@ Publications
 :slug: publications
 :description: Peer reviewed research published under the RNA Forecast affiliation by Michael T. Wolfinger and others.
 :summary: Peer reviewed work published under the RNA Forecast affiliation since 2023.
-:og_type: article
+:og_type: website
 :hero_kicker: Publications
 :hero_title: Peer reviewed work
 :hero_lead: This page lists publications that include RNA Forecast among the author affiliations. Together they reflect the development of the platform's research programme since 2023.
@@ -13,7 +13,7 @@ Publications
 
 .. container:: pub-count
 
-  13 published papers and conference contributions · 2023 to 2026
+  13 published papers and conference contributions · 2023–2026
 
 .. container:: year-index
 
@@ -159,7 +159,7 @@ Publications
 
         .. container:: pub-cite
 
-          Nature Biotechnology 44(6):989 to 1001 (2026)
+          Nature Biotechnology 44(6):989–1001 (2026)
 
         .. container:: pub-summary
 
@@ -218,7 +218,7 @@ Publications
 
         .. container:: pub-cite
 
-          ScienceAsia 51S(1) 2025s013:1 to 10 (2025)
+          ScienceAsia 51S(1) 2025s013:1–10 (2025)
 
         .. container:: pub-summary
 
@@ -461,7 +461,7 @@ Publications
 
         .. container:: pub-cite
 
-          Nature Microbiology 9(2):550 to 560 (2024)
+          Nature Microbiology 9(2):550–560 (2024)
 
         .. container:: pub-summary
 
@@ -506,7 +506,7 @@ Publications
 
         .. container:: pub-cite
 
-          Biochemistry and Cell Biology 102(1):96 to 105 (2024)
+          Biochemistry and Cell Biology 102(1):96–105 (2024)
 
         .. container:: pub-summary
 
@@ -566,7 +566,7 @@ Publications
 
         .. container:: pub-cite
 
-          Bulletin of the Chemical Society of Japan 96(7):677 to 685 (2023)
+          Bulletin of the Chemical Society of Japan 96(7):677–685 (2023)
 
         .. container:: pub-summary
 
@@ -611,7 +611,7 @@ Publications
 
         .. container:: pub-cite
 
-          Nucleic Acids Res. 51(9):4588 to 4601 (2023)
+          Nucleic Acids Res. 51(9):4588–4601 (2023)
 
         .. container:: pub-summary
 
@@ -654,7 +654,7 @@ Publications
 
         .. container:: pub-cite
 
-          Biospektrum 29(2):156 to 158 (2023)
+          Biospektrum 29(2):156–158 (2023)
 
         .. container:: pub-summary
 

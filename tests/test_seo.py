@@ -17,6 +17,7 @@ PAGES = ['index.html', 'research/index.html', 'publications/index.html',
          'datenschutz/index.html']
 
 AUTHOR_ID = 'https://rnaforecast.com/#michael-t-wolfinger'
+ORG_ID = 'https://rnaforecast.com/#organization'
 
 
 @pytest.mark.parametrize('rel', PAGES)
@@ -214,7 +215,10 @@ def test_only_the_about_page_claims_to_be_a_profile(site):
 def test_the_person_carries_identity_and_affiliation(site):
     person, = nodes_of(site / 'about' / 'index.html', 'Person')
     assert person['@id'] == AUTHOR_ID
-    assert person['identifier'] == 'https://orcid.org/0000-0003-0925-5205'
+    assert person['identifier'] == {
+        '@type': 'PropertyValue', 'propertyID': 'ORCID',
+        'value': 'https://orcid.org/0000-0003-0925-5205'}
+    assert person['worksFor'] == {'@id': ORG_ID}
     assert person['image'].startswith('https://rnaforecast.com/')
     assert person['affiliation'] == {'@id': 'https://rnaforecast.com/#organization'}
     assert person['knowsAbout']
@@ -273,7 +277,9 @@ def test_every_publication_is_fully_described(site):
         assert article['identifier']['propertyID'] == 'DOI'
         assert article['datePublished']
         assert article['isPartOf']['name']
-        assert article['abstract'] and article['description']
+        assert article['description']
+        # The site's one-line gloss is not the paper's published abstract.
+        assert 'abstract' not in article
         assert len(article['author']) > 1
         assert any(a.get('@id') == AUTHOR_ID for a in article['author'])
 
@@ -348,7 +354,7 @@ def test_the_insight_cites_what_it_cites(site):
     page = site / 'insights' / 'rna-structure-before-the-experiment' / 'index.html'
     if not page.is_file():
         pytest.skip('no published Insight')
-    article, = nodes_of(page, 'Article')
+    article, = nodes_of(page, 'ScholarlyArticle')
     cited = {c['identifier']['value'] for c in article['citation']}
     on_page = set(re.findall(r'https://doi\.org/(10\.[^"\'<\s]+)', read(page)))
     own = article['identifier']['value']
@@ -360,7 +366,7 @@ def test_the_licence_is_a_url(site):
     page = site / 'insights' / 'rna-structure-before-the-experiment' / 'index.html'
     if not page.is_file():
         pytest.skip('no published Insight')
-    article, = nodes_of(page, 'Article')
+    article, = nodes_of(page, 'ScholarlyArticle')
     assert article['license'].startswith('https://creativecommons.org/')
 
 
@@ -390,3 +396,40 @@ def test_publication_dates_do_not_drift_from_the_page(site, repo):
         assert doi in articles, f'{doi} is in R_PUB_DATES but not on the page'
         assert articles[doi]['datePublished'] == date
         assert re.search(rf'\({date[:4]}\)', page), f'{doi}: year disagrees'
+
+
+# --- how the site situates its own pages -----------------------------------
+
+def test_a_breadcrumb_leaf_is_a_name_not_a_browser_title(site):
+    """Google renders the breadcrumb `name` verbatim, and `:title:` carries
+    the site name because it is the whole <title>."""
+    expected = {'research': 'Research', 'publications': 'Publications',
+                'insights': 'Insights', 'about': 'About'}
+    for slug, name in expected.items():
+        crumb, = nodes_of(site / slug / 'index.html', 'BreadcrumbList')
+        leaf = crumb['itemListElement'][-1]
+        assert leaf['name'] == name, (slug, leaf['name'])
+        assert leaf['item'] == f'https://rnaforecast.com/{slug}/'
+
+
+def test_every_page_node_belongs_to_the_website(site):
+    for page in ['index.html', 'research/index.html', 'publications/index.html',
+                 'insights/index.html', 'about/index.html']:
+        nodes = [n for graph in graphs_in(site / page)
+                 for n in graph['@graph']]
+        pages = [n for n in nodes
+                 if n.get('@type') in ('WebPage', 'CollectionPage',
+                                       'ProfilePage')]
+        assert pages, page
+        for node in pages:
+            assert node['isPartOf'] == {'@id': 'https://rnaforecast.com/#website'}
+            assert node['inLanguage'] == 'en'
+        assert any(n.get('@id') == 'https://rnaforecast.com/#website'
+                   for n in nodes), f'{page} references a node it does not ship'
+
+
+def test_the_organization_offers_a_way_to_reach_it(site):
+    org, = nodes_of(site / 'index.html', 'Organization')
+    assert org['contactPoint']['email']
+    assert org['contactPoint']['url'].startswith('https://rnaforecast.com/')
+    assert org['sameAs'] and org['logo']['width'] == 1000

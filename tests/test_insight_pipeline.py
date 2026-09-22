@@ -116,7 +116,7 @@ def test_the_abstract_is_bibliographic_data_not_page_text(site, meta):
     if meta['status'] != 'published' or not meta.get('abstract'):
         pytest.skip('no published abstract')
     html = read(site / 'insights' / SLUG / 'index.html')
-    article, = nodes_of(site / 'insights' / SLUG / 'index.html', 'Article')
+    article, = nodes_of(site / 'insights' / SLUG / 'index.html', 'ScholarlyArticle')
     assert article['abstract'] == ' '.join(meta['abstract'].split())
     assert article['abstract'] != article['description']
 

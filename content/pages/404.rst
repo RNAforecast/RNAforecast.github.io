@@ -10,8 +10,8 @@ Page not found
 :robots: noindex, follow
 :hero_kicker: 404
 :hero_title: Page not found
-:hero_lead: The page you asked for does not exist, or has moved since it was linked. The sections below cover everything on the site.
-:hero_actions: `Home </>`__ `Research </research/>`__ `Publications </publications/>`__ `About </about/>`__
+:hero_lead: The page you asked for does not exist, or has moved since it was linked. The sections below cover the main parts of the site.
+:hero_actions: `Home </>`__ `Research </research/>`__ `Publications </publications/>`__ `Insights </insights/>`__ `About </about/>`__
 
 .. container:: closing
 

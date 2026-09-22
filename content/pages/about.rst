@@ -243,7 +243,7 @@ Teaching & advanced training
 
 .. container:: split-wide
 
-  Michael has taught computational biology, bioinformatics and RNA analysis at universities in Austria and Germany for more than twenty years, from graduate courses to invited lectures. A fuller record is kept on his `personal site <https://michaelwolfinger.com/teaching/>`__.
+  Michael has taught computational biology, bioinformatics and RNA analysis at universities in Austria and Germany for more than twenty years, from graduate courses to invited lectures. A fuller record is kept in the `teaching portfolio <https://michaelwolfinger.com/teaching/>`__ on his personal site.
 
   Through RNA Forecast, he also develops and delivers advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial groups, drawing directly on methods and workflows used in his research.
 

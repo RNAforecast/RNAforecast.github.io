@@ -121,7 +121,7 @@ def test_an_insights_canonical_matches_its_location(site, published):
 
 def test_an_insight_carries_article_structured_data(published):
     for page in published:
-        article, = nodes_of(page, 'Article')
+        article, = nodes_of(page, 'ScholarlyArticle')
         assert article['headline']
         assert article['description']
         assert re.fullmatch(r'\d{4}-\d{2}-\d{2}', article['datePublished'])
@@ -258,3 +258,16 @@ def test_every_published_doi_has_its_pdf_on_the_site(published):
         html = read(page)
         if meta(html, 'citation_doi'):
             assert meta(html, 'citation_pdf_url'), page
+
+
+def test_an_insight_is_scholarly_and_carries_its_subtitle_and_pdf(published):
+    for page in published:
+        article, = nodes_of(page, 'ScholarlyArticle')
+        html = read(page)
+        subtitle = re.search(r'<div class="hero-sub">([^<]*)</div>', html)
+        if subtitle:
+            assert article['alternativeHeadline'] == subtitle[1]
+        pdf = re.findall(r'<meta name="citation_pdf_url" content="([^"]*)"', html)
+        if pdf:
+            assert article['encoding']['contentUrl'] == pdf[0]
+            assert article['encoding']['encodingFormat'] == 'application/pdf'

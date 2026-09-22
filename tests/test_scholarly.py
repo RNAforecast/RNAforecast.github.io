@@ -72,7 +72,7 @@ def test_full_listing_yields_a_complete_article():
     assert article['identifier']['value'] == '10.1093/nar/gkag473'
     assert article['datePublished'] == '2026'
     assert article['isPartOf']['name'] == 'Nucleic Acids Research'
-    assert article['abstract'].startswith('Reports the rational')
+    assert article['description'].startswith('Reports the rational')
 
 
 def test_compact_layout_recovers_doi_journal_and_year():
@@ -167,3 +167,24 @@ def test_entities_in_markup_are_decoded():
     article, = articles(COMPACT)
     names = [a.get('name', '') for a in article['author']]
     assert any('á' in name for name in names), names
+
+
+# --- author names ---------------------------------------------------------
+
+def test_a_surname_particle_is_not_read_as_a_given_name():
+    """Regression: "van den Homberg" came out familyName "van den",
+    givenName "Homberg", because any capitalised last word was taken for
+    initials. Only initials may be."""
+    for name in ['van den Homberg', 'van Rij', 'de Bernardi Schneider',
+                 'De Klerk', 'Aman']:
+        person = scholarly.make_author(name, '#someone')
+        assert person['familyName'] == name, name
+        assert 'givenName' not in person, name
+
+
+def test_initials_are_still_recognised():
+    for name, family, given in [('van den Homberg DAL', 'van den Homberg', 'DAL'),
+                                ('Walter J', 'Walter', 'J'),
+                                ('Yao H-T', 'Yao', 'H-T')]:
+        person = scholarly.make_author(name, '#someone')
+        assert (person['familyName'], person['givenName']) == (family, given)

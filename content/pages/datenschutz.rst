@@ -101,7 +101,7 @@ authority responsible for Austria is:
 
 | Österreichische Datenschutzbehörde
 | Barichgasse 40–42, 1030 Vienna, Austria
-| `dsb@dsb.gv.at <mailto:dsb@dsb.gv.at>`__ · `dsb.gv.at <https://www.dsb.gv.at>`__
+| `dsb@dsb.gv.at <mailto:dsb@dsb.gv.at>`__ · `dsb.gv.at <https://dsb.gv.at/>`__
 
 Changes
 -------

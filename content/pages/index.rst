@@ -87,7 +87,7 @@ RNA Forecast contributes original research in computational RNA biology through 
 
 .. container:: pub-count
 
-  13 published papers and conference contributions · 2023 to 2026
+  13 published papers and conference contributions · 2023–2026
 
 .. container:: pubs
 
@@ -143,7 +143,7 @@ RNA Forecast contributes original research in computational RNA biology through 
       .. container:: pub-links
 
         `doi:10.1038/s41587-025-02739-0 ↗ <https://doi.org/10.1038/s41587-025-02739-0>`_
-        Nat. Biotechnol. 44(6):989 to 1001
+        Nat. Biotechnol. 44(6):989–1001
 
   .. container:: pub
 
@@ -170,7 +170,7 @@ RNA Forecast contributes original research in computational RNA biology through 
       .. container:: pub-links
 
         `doi:10.1038/s41564-023-01587-5 ↗ <https://doi.org/10.1038/s41564-023-01587-5>`_
-        Nat. Microbiol. 9(2):550 to 560
+        Nat. Microbiol. 9(2):550–560
 
   .. container:: pub
 
@@ -197,7 +197,7 @@ RNA Forecast contributes original research in computational RNA biology through 
       .. container:: pub-links
 
         `doi:10.1093/nar/gkad223 ↗ <https://doi.org/10.1093/nar/gkad223>`_
-        Nucleic Acids Res. 51(9):4588 to 4601
+        Nucleic Acids Res. 51(9):4588–4601
 
   .. container:: pub
 
@@ -324,7 +324,7 @@ publications.
 
     .. container:: meta
 
-      Research collaboration · 2020 to 2024
+      Research collaboration · 2020–2024
 
   .. container:: collab
 
@@ -336,7 +336,7 @@ publications.
 
     .. container:: meta
 
-      Research collaboration · 2023 to 2025
+      Research collaboration · 2023–2025
 
   .. container:: collab
 

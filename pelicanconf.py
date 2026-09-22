@@ -68,7 +68,7 @@ PLUGINS = ['m.htmlsanity',   # the HTML5 RST writer the whole stylesheet targets
            'scholarly',      # schema.org data derived from the publications page
            'sitemap']
 
-M_FAVICON = ('favicon.ico', 'image/x-ico')
+M_FAVICON = ('favicon.ico', 'image/x-icon')
 
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
@@ -159,7 +159,11 @@ R_SITE_GRAPH = [
         "url": "https://michaelwolfinger.com/",
         "image": "/static/images/mtw.jpg",
         "affiliation": {"@id": "#organization"},
-        "identifier": "https://orcid.org/0000-0003-0925-5205",
+        "worksFor": {"@id": "#organization"},
+        # A typed identifier says *which* identifier scheme this is; a bare
+        # URL leaves a consumer to recognise orcid.org by sight.
+        "identifier": {"@type": "PropertyValue", "propertyID": "ORCID",
+                       "value": "https://orcid.org/0000-0003-0925-5205"},
         "knowsAbout": [
             "Computational RNA biology",
             "RNA secondary structure prediction",
@@ -201,6 +205,22 @@ R_SITE_GRAPH = [
         "founder": {"@id": "#michael-t-wolfinger"},
         "member": {"@id": "#michael-t-wolfinger"},
         "areaServed": "Worldwide",
+        # The enquiry channel the site actually offers, which was described
+        # in prose and nowhere in the graph.
+        "contactPoint": {"@type": "ContactPoint",
+                         "contactType": "Research and collaboration enquiries",
+                         "email": "michael.wolfinger@rnaforecast.com",
+                         "url": "/#contact",
+                         "availableLanguage": ["en", "de"]},
+        "sameAs": ["https://michaelwolfinger.com/",
+                   "https://github.com/mtw"],
+        "knowsAbout": [
+            "Computational RNA biology",
+            "RNA secondary structure prediction",
+            "RNA folding kinetics",
+            "RNA design",
+            "Viral RNA biology",
+        ],
         "address": {"@type": "PostalAddress",
                     "postalCode": "3002",
                     "addressLocality": "Purkersdorf",

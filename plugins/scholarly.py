@@ -168,7 +168,10 @@ def make_author(name, author_id):
 
     person = {'@type': 'Person', 'name': name}
     parts = name.split()
-    if len(parts) > 1 and re.fullmatch(r'[A-Z][A-Za-z-]*', parts[-1]):
+    # Only initials may be taken for a given name. Matching any capitalised
+    # last word split the particle names instead — "van den Homberg" became
+    # familyName "van den", givenName "Homberg".
+    if len(parts) > 1 and re.fullmatch(r'[A-Z]+(?:-[A-Z]+)*', parts[-1]):
         person['familyName'] = ' '.join(parts[:-1])
         person['givenName'] = parts[-1]
     else:
@@ -228,9 +231,9 @@ def article_from(pub, fallback_year, author_id, dates=None):
 
     summary = text_of(pub, 'pub-summary')
     if summary:
-        # abstract is the scholarly property; description is what generic
-        # consumers read.
-        article['abstract'] = summary
+        # `description` only: this line is the site's own one-sentence gloss,
+        # and a consumer reading `abstract` would take it for the abstract
+        # the paper was published with.
         article['description'] = summary
 
     if cite:
@@ -367,6 +370,18 @@ def cited_dois(content):
     return list(dict.fromkeys(d.rstrip('.,;') for d in found))
 
 
+def page_label(page):
+    """The breadcrumb leaf: the page's own name, not its browser title.
+
+    `:title:` carries the site name because it is the complete <title>, and
+    Google renders the breadcrumb `name` verbatim — "Publications, RNA
+    Forecast | Michael T. Wolfinger" is not a breadcrumb.
+    """
+    label = (getattr(page, 'hero_kicker', None)
+             or getattr(page, 'hero_title', None) or page.title)
+    return re.split(r'\s*[|,]\s*', label)[0].strip()
+
+
 def breadcrumb(trail, siteurl):
     """A BreadcrumbList for a page nested below the root."""
     return {
@@ -391,7 +406,10 @@ def article_node(article, settings, siteurl):
         description = ' '.join(description.split())
 
     node = {
-        '@type': 'Article',
+        # A DOI, a deposited abstract, a version, a licence and a reference
+        # list: ScholarlyArticle is a subtype of Article, so nothing a
+        # generic consumer reads is lost by being precise here.
+        '@type': 'ScholarlyArticle',
         '@id': f'{url}#article',
         'headline': article.title,
         'name': article.title,
@@ -405,6 +423,12 @@ def article_node(article, settings, siteurl):
         'publisher': {'@id': org_id},
         'isAccessibleForFree': True,
     }
+    subtitle = getattr(article, 'subtitle', None)
+    if subtitle:
+        # The Scholar tags, the library listing and the deposit record all
+        # carry "title: subtitle"; alternativeHeadline is where the graph
+        # says the same thing.
+        node['alternativeHeadline'] = subtitle
     if description:
         node['description'] = description
     # The bibliographic abstract, the same text the deposit record carries.
@@ -448,6 +472,15 @@ def article_node(article, settings, siteurl):
         node['identifier'] = {'@type': 'PropertyValue',
                               'propertyID': 'DOI', 'value': doi}
         node['sameAs'] = f'https://doi.org/{doi}'
+    # The archival PDF, published beside the article for Google Scholar.
+    # citation_pdf_url in the head already points at it; this is the same
+    # file for a consumer reading the graph.
+    if article.slug in (settings.get('INSIGHT_PDFS') or {}):
+        node['encoding'] = {
+            '@type': 'MediaObject',
+            'encodingFormat': 'application/pdf',
+            'contentUrl': f'{url}{article.slug}.pdf',
+        }
     license_ = getattr(article, 'license', None)
     if license_:
         # schema.org's range for license is a URL or a CreativeWork; the
@@ -505,7 +538,7 @@ def insights_nodes(page, articles, settings, siteurl):
         '@type': 'CollectionPage',
         '@id': f'{page_url}#webpage',
         'url': page_url,
-        'name': page.title,
+        'name': page_label(page),
         'about': {'@id': absolutise('#organization', siteurl, '@id')},
     }
     if items:
@@ -531,6 +564,24 @@ def full_person(settings, siteurl, fallback_id):
     return author_node(fallback_id)
 
 
+PAGE_TYPES = {'WebPage', 'CollectionPage', 'ProfilePage', 'AboutPage',
+              'ContactPage'}
+
+
+def situate(nodes, siteurl):
+    """Attach every page node to the site it is a page of.
+
+    Only /research/ carried `isPartOf` and `inLanguage`, so every other page
+    node floated free of the WebSite node.
+    """
+    for node in nodes:
+        if node.get('@type') in PAGE_TYPES:
+            node.setdefault('isPartOf',
+                            {'@id': absolutise('#website', siteurl, '@id')})
+            node.setdefault('inLanguage', 'en')
+    return nodes
+
+
 def attach(page_generator):
     settings = page_generator.settings
     siteurl = settings.get('SITEURL', '')
@@ -549,7 +600,8 @@ def attach(page_generator):
             continue
 
         page_url = f'{siteurl}/{page.url}' if siteurl else f'/{page.url}'
-        graph = build_graph(page.content or '', page_url, page.title, siteurl,
+        graph = build_graph(page.content or '', page_url, page_label(page),
+                            siteurl,
                             full_person(settings, siteurl, author_id),
                             settings.get('R_PUB_DATES'))
         nodes = graph['@graph'] if graph else []
@@ -574,12 +626,13 @@ def attach(page_generator):
         # Whatever a page's nodes point at travels with them. The fuller
         # Person carries an affiliation, so /publications/ now references the
         # Organization and has to ship it too.
-        nodes = resolve_references(nodes, absolutise(site_graph, siteurl))
+        nodes = resolve_references(situate(nodes, siteurl),
+                                   absolutise(site_graph, siteurl))
 
         if page.url and page.url not in ('', 'index.html'):
             nodes.append(breadcrumb(
                 [('Home', f'{siteurl}/' if siteurl else '/'),
-                 (page.title, page_url)], siteurl))
+                 (page_label(page), page_url)], siteurl))
 
         page.jsonld = to_script_body(
             {'@context': 'https://schema.org', '@graph': nodes})

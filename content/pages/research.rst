@@ -5,7 +5,7 @@ Research
 :slug: research
 :description: Eight research themes at RNA Forecast: RNA structure prediction, engineering, functional RNAs, viral RNA biology, evolution and folding kinetics.
 :summary: Eight connected research themes in computational RNA biology, each grounded in published results, open software and active collaboration.
-:og_type: article
+:og_type: website
 :hero_kicker: Research
 :hero_title: Computational RNA biology
 :hero_lead: Research spans several connected areas of computational RNA biology, linked by a common focus on RNA structure, dynamics, evolution, and function. Each area below is grounded in peer reviewed results, open software and collaborative work.

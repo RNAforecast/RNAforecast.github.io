@@ -8,7 +8,8 @@
 
 Michael T. Wolfinger (ORCID 0000-0003-0925-5205) is the researcher behind the
 platform. Work published under the RNA Forecast affiliation dates from 2023.
-Every page is static HTML and requires no JavaScript to read.
+Every page is static HTML and requires no JavaScript to read; email
+addresses are shown as plain text.
 
 ## Pages
 
@@ -27,6 +28,10 @@ Every page is static HTML and requires no JavaScript to read.
   below that page, each at its own slug, and each carries schema.org Article
   data. Editorial analysis, not peer reviewed work: cite the publications page
   for results, and attribute an Insight to its own URL.
+- [RNA Structure Before the Experiment: An ensemble view of therapeutic RNA
+  design](https://rnaforecast.com/insights/rna-structure-before-the-experiment/):
+  Insight 1, 21 September 2026, doi:10.5281/zenodo.22872982. The same text is
+  deposited as a PDF working paper on Zenodo and served beside the page.
 - [About](https://rnaforecast.com/about/): biography, research interests,
   scientific positions and service, teaching, and contact details.
 
