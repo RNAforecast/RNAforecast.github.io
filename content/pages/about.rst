@@ -10,6 +10,8 @@ About
 :hero_title: Michael T. Wolfinger
 :hero_portrait: static/images/mtw.jpg
 :hero_portrait_alt: Michael T. Wolfinger
+:hero_portrait_width: 240
+:hero_portrait_height: 317
 :hero_body: Michael T. Wolfinger is a computational RNA biologist whose research focuses on RNA structure, folding dynamics, RNA–protein interactions, viral RNA biology, and the computational design of functional RNAs. His work combines algorithm development, evolutionary analysis, molecular modelling, and open scientific software to better understand how RNA structure determines biological function.
 :hero_actions: `Publications </publications/>`__ `Research </research/>`__ `Contact → <#contact>`__
 

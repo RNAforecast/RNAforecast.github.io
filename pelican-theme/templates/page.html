@@ -10,7 +10,8 @@
   {% if page.hero_kicker %}<span class="kicker">{{ page.hero_kicker|e }}</span>{% endif %}
   <div class="portrait">
     <figure class="blueprint">
-      <img src="{{ page.hero_portrait|format_siteurl|e }}" alt="{{ page.hero_portrait_alt|default(page.hero_title, true)|e }}" />
+      <img src="{{ page.hero_portrait|format_siteurl|e }}" alt="{{ page.hero_portrait_alt|default(page.hero_title, true)|e }}"
+           {% if page.hero_portrait_width %}width="{{ page.hero_portrait_width }}" height="{{ page.hero_portrait_height }}"{% endif %} />
     </figure>
     <div class="portrait-main">
       <h1>{{ page.hero_title|default(page.title, true)|e }}</h1>
