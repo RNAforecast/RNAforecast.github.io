@@ -74,7 +74,8 @@
   <nav class="nav" aria-label="Main">
     {# The only route home from the masthead, so it must announce itself. #}
     <a href="{{ SITEURL }}/" class="nav-brand" aria-label="{{ SITENAME|e }} — home">
-      {%- if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}" />
+      {%- if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}"
+           {%- if M_SITE_LOGO_SIZE %} width="{{ M_SITE_LOGO_SIZE[0] }}" height="{{ M_SITE_LOGO_SIZE[1] }}"{% endif %} />
       {%- else %}{{ SITENAME|e }}{% endif -%}
     </a>
     {% if M_LINKS_NAVBAR1 %}
@@ -100,7 +101,9 @@
 <footer class="site-foot">
   <div class="foot-inner">
     <div class="foot-brand">
-      {% if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}" />{% endif %}
+      {% if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}"
+           {%- if M_SITE_LOGO_SIZE %} width="{{ M_SITE_LOGO_SIZE[0] }}" height="{{ M_SITE_LOGO_SIZE[1] }}"{% endif %}
+           loading="lazy" />{% endif %}
       {% if R_FOOTER_TAGLINE %}<p>{{ R_FOOTER_TAGLINE|e }}</p>{% endif %}
     </div>
     <div class="foot-navs">

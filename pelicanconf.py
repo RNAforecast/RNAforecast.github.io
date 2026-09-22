@@ -77,6 +77,10 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 M_SITE_LOGO = 'static/images/rnaforecast-logo.svg'
+# The logo's intrinsic ratio, from the SVG's viewBox. The stylesheet sets the
+# height and leaves the width automatic, so without these the masthead reflows
+# once the SVG has loaded.
+M_SITE_LOGO_SIZE = (2526, 750)
 M_SOCIAL_TWITTER_SITE = '@mtwolfinger'
 
 # 1200x630, the size every share consumer expects. Raster only; none render SVG.

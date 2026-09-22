@@ -149,6 +149,32 @@ RNA Forecast contributes original research in computational RNA biology through 
 
     .. container:: pub-year
 
+      2025
+
+    .. container:: pub-body
+
+      .. container:: tag tag-neutral
+
+        ICLR '25
+
+      .. container:: pub-title
+
+        KinPFN: Bayesian approximation of RNA folding kinetics using prior data
+        fitted networks
+
+      .. container:: pub-authors
+
+        Scheuer D, Runge F, Franke JKH, **Wolfinger MT**, Flamm C, Hutter F
+
+      .. container:: pub-links
+
+        `doi:10.5281/zenodo.15233965 ↗ <https://doi.org/10.5281/zenodo.15233965>`_
+        Thirteenth Int. Conf. on Learning Representations
+
+  .. container:: pub
+
+    .. container:: pub-year
+
       2024
 
     .. container:: pub-body
@@ -199,31 +225,6 @@ RNA Forecast contributes original research in computational RNA biology through 
         `doi:10.1093/nar/gkad223 ↗ <https://doi.org/10.1093/nar/gkad223>`_
         Nucleic Acids Res. 51(9):4588–4601
 
-  .. container:: pub
-
-    .. container:: pub-year
-
-      2025
-
-    .. container:: pub-body
-
-      .. container:: tag tag-neutral
-
-        ICLR '25
-
-      .. container:: pub-title
-
-        KinPFN: Bayesian approximation of RNA folding kinetics using prior data
-        fitted networks
-
-      .. container:: pub-authors
-
-        Scheuer D, Runge F, Franke JKH, **Wolfinger MT**, Flamm C, Hutter F
-
-      .. container:: pub-links
-
-        `doi:10.5281/zenodo.15233965 ↗ <https://doi.org/10.5281/zenodo.15233965>`_
-        Thirteenth Int. Conf. on Learning Representations
 
 .. _software:
 

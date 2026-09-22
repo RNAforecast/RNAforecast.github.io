@@ -82,3 +82,12 @@ def test_the_stylesheet_url_carries_its_own_fingerprint(site, repo):
         html = read(page)
         assert f'/css/rnaf.css?v={digest}"' in html, page
         assert 'rnaf.css"' not in html, f'{page}: unfingerprinted stylesheet'
+
+
+def test_every_image_reserves_its_space(site):
+    """A missing width/height is a layout shift; RST cannot emit either, so
+    the plugin measures the file and the theme carries the logo's ratio."""
+    import re
+    for page in sorted(site.rglob('*.html')):
+        for tag in re.findall(r'<img[^>]*>', read(page)):
+            assert 'width=' in tag and 'height=' in tag, f'{page}: {tag}'
