@@ -828,6 +828,17 @@ def build_pdf(slug, meta):
             print(f'warning: {slug}: bibtex: {line.strip()}', file=sys.stderr)
 
     print(f'pdf: {os.path.relpath(final, REPO)}')
+
+    # Google Scholar only follows a citation_pdf_url that sits in the same
+    # directory as the article page, so the PDF is also published on the
+    # site — at /insights/<slug>/<slug>.pdf, via EXTRA_PATH_METADATA in
+    # pelicanconf.py. This copy is committed: CI builds no LaTeX.
+    served = os.path.join(REPO, 'content', 'static', 'insights', slug,
+                          f'{slug}.pdf')
+    os.makedirs(os.path.dirname(served), exist_ok=True)
+    shutil.copy2(final, served)
+    print(f'pdf: {os.path.relpath(served, REPO)} (served beside the article)')
+
     deposit = write_deposit_metadata(slug, meta, out_dir)
     print(f'zenodo: {os.path.relpath(deposit, REPO)}')
     if not meta.get('doi'):

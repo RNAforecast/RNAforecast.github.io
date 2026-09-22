@@ -121,6 +121,28 @@ EXTRA_PATH_METADATA = {
 PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
 
+# Each Insight's archival PDF, published beside the article it belongs to.
+# Google Scholar follows a citation_pdf_url only when the PDF sits "in the
+# same subdirectory as the HTML abstract", so /static/… would not do: the file
+# is kept under content/static/insights/<slug>/ and written out to
+# insights/<slug>/<slug>.pdf. `make insight-pdf` puts it there.
+def _insight_pdfs():
+    import glob
+    import os
+    here = os.path.dirname(os.path.abspath(__file__))
+    found = {}
+    for pdf in sorted(glob.glob(os.path.join(here, 'content', 'static',
+                                             'insights', '*', '*.pdf'))):
+        slug = os.path.basename(os.path.dirname(pdf))
+        if os.path.basename(pdf) == f'{slug}.pdf':
+            found[slug] = os.path.relpath(pdf, os.path.join(here, 'content'))
+    return found
+
+
+INSIGHT_PDFS = _insight_pdfs()
+for _slug, _source in INSIGHT_PDFS.items():
+    EXTRA_PATH_METADATA[_source] = {'path': f'insights/{_slug}/{_slug}.pdf'}
+
 # Data, not markup, so the domain is not baked into content: any "@id" or
 # "url" starting with "#" or "/" gets SITEURL prefixed at build time, which
 # keeps rnaforecast.com out of a local preview. Keep "#michael-t-wolfinger"

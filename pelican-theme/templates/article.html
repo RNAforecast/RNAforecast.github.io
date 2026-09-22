@@ -12,6 +12,35 @@
 {# "Reads as a document": one prose column, no numbered section rules. #}
 {% block main_class %} insight{% endblock main_class %}
 
+{# Highwire Press tags, which is what Google Scholar reads — it ignores the
+   JSON-LD. Scholar treats an Insight as a working paper: series and number
+   become the report institution and number. The PDF must sit in the same
+   directory as this page, which is why INSIGHT_PDFS publishes it there. #}
+{% block meta %}{{ super() }}
+  {% set name = article.author.name.split(' ') %}
+  <meta name="citation_title" content="{{ article.title|e }}{% if article.subtitle %}: {{ article.subtitle|e }}{% endif %}" />
+  <meta name="citation_author" content="{{ name[-1]|e }}, {{ name[:-1]|join(' ')|e }}" />
+  <meta name="citation_publication_date" content="{{ article.date.strftime('%Y/%m/%d') }}" />
+  {% if article.series %}
+  <meta name="citation_technical_report_institution" content="{{ article.series|e }}" />
+  {% endif %}
+  {% if article.number %}
+  <meta name="citation_technical_report_number" content="{{ article.number|e }}" />
+  {% endif %}
+  {% if article.doi %}
+  <meta name="citation_doi" content="{{ article.doi|e }}" />
+  {% endif %}
+  <meta name="citation_language" content="en" />
+  {% if article.tags %}
+  <meta name="citation_keywords" content="{{ article.tags|map(attribute='name')|join('; ')|e }}" />
+  {% endif %}
+  <meta name="citation_abstract_html_url" content="{{ article.url|format_siteurl|e }}" />
+  <meta name="citation_fulltext_html_url" content="{{ article.url|format_siteurl|e }}" />
+  {% if article.slug in INSIGHT_PDFS %}
+  <meta name="citation_pdf_url" content="{{ (article.url ~ article.slug ~ '.pdf')|format_siteurl|e }}" />
+  {% endif %}
+{% endblock meta %}
+
 {% block social %}{{ super() }}
   <meta property="article:published_time" content="{{ article.date.isoformat() }}" />
   {% if article.modified %}
@@ -65,7 +94,10 @@
     {{ article.series|e }} {{ article.number|e }} ({{ article.date.year }}).
     {%- if article.version %} Version {{ article.version|e }}.{% endif %}
     <a href="https://doi.org/{{ article.doi|e }}">doi:{{ article.doi|e }}</a></p>
-  {% if article.license %}<p class="insight-cite-note">Licensed {{ article.license|e }}.</p>{% endif %}
+  {% if article.license or article.slug in INSIGHT_PDFS %}<p class="insight-cite-note">
+    {%- if article.license %}Licensed {{ article.license|e }}.{% endif %}
+    {%- if article.slug in INSIGHT_PDFS %} <a href="{{ (article.url ~ article.slug ~ '.pdf')|format_siteurl|e }}">Download the PDF</a>.{% endif -%}
+  </p>{% endif %}
 </div>
 {% endif %}
 

@@ -212,3 +212,49 @@ def test_an_insight_ships_no_javascript_of_its_own(published):
         problems = []
         check_build.check_page(str(page.parents[2]), str(page), problems)
         assert [p for p in problems if 'inline <script>' in p] == []
+
+
+# --- Google Scholar -------------------------------------------------------
+
+def meta(html, name):
+    return re.findall(rf'<meta name="{name}" content="([^"]*)" />', html)
+
+
+def test_an_insight_carries_the_tags_google_scholar_reads(published):
+    """Scholar ignores JSON-LD; it needs Highwire tags, and at least a title,
+    the first author's full name and a year to include a page at all."""
+    for page in published:
+        html = read(page)
+        assert len(meta(html, 'citation_title')) == 1
+        author, = meta(html, 'citation_author')
+        assert re.fullmatch(r'[^,]+, [^,]+', author), author
+        date, = meta(html, 'citation_publication_date')
+        assert re.fullmatch(r'\d{4}/\d{2}/\d{2}', date), date
+
+
+def test_a_doi_in_the_citation_block_is_also_a_scholar_tag(published):
+    for page in published:
+        html = read(page)
+        block = re.search(r'Cite this Insight</h2>(.*?)</div>', html, re.S)
+        if block:
+            shown, = re.findall(r'href="https://doi\.org/([^"]+)"', block[1])
+            assert meta(html, 'citation_doi') == [shown]
+
+
+def test_the_scholar_pdf_sits_beside_the_article(site, published):
+    """citation_pdf_url must point into the page's own directory, or Scholar
+    does not follow it — and the file has to be there."""
+    for page in published:
+        html = read(page)
+        for url in meta(html, 'citation_pdf_url'):
+            here = f'https://rnaforecast.com/insights/{page.parent.name}/'
+            assert url.startswith(here) and '/' not in url[len(here):], url
+            assert (page.parent / url[len(here):]).is_file(), url
+            assert f'href="{url}"' in html, 'PDF is not linked visibly'
+
+
+def test_every_published_doi_has_its_pdf_on_the_site(published):
+    for page in published:
+        html = read(page)
+        if meta(html, 'citation_doi'):
+            assert meta(html, 'citation_pdf_url'), page
