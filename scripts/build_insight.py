@@ -159,6 +159,16 @@ def initials(given):
     return ''.join(out)
 
 
+def version_date(meta):
+    """When the version in hand was issued.
+
+    Zenodo dates each version by when that version was published, and the
+    PDF's title page is that version's artifact. The website keeps `date` as
+    the original publication and shows `modified` as the update.
+    """
+    return meta.get('modified') or meta['date']
+
+
 def format_authors(entry):
     names = []
     for person in entry.get('author', []):
@@ -762,7 +772,7 @@ def write_deposit_metadata(slug, meta, out_dir):
         f'Authors: {meta["author"]} '
         f'({meta.get("affiliation_formal") or meta["affiliation"]})'
         + (f' [ORCID: {meta["orcid"]}]' if meta.get('orcid') else ''),
-        f'Publication date: {meta["date"].isoformat()}',
+        f'Publication date: {version_date(meta).isoformat()}',
         f'Version: {meta["version"]}',
         f'Resource type: {meta.get("resource_type", "Publication")}',
         f'Publisher: {meta.get("publisher", "")}',
@@ -815,7 +825,12 @@ def build_pdf(slug, meta):
         'SERIES': meta['series'],
         'NUMBER': str(meta['number']),
         'VERSION': str(meta['version']),
-        'DATELONG': meta['date'].strftime('%-d %B %Y'),
+        # The date this *version* was issued, not the date the Insight first
+        # appeared. The two differ as soon as a correction is deposited, and
+        # the PDF is the artifact of one version: printing `date` here made
+        # the served file disagree with the deposited one on nothing but the
+        # date, which no file size or page count would ever catch.
+        'DATELONG': version_date(meta).strftime('%-d %B %Y'),
         'KEYWORDS': ', '.join(meta['tags']),
         'DOILINE': (f"\\\\\nDOI: \\href{{https://doi.org/{doi}}}{{{doi}}}"
                     if doi else ''),

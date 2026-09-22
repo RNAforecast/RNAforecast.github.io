@@ -45,6 +45,7 @@ help:
 	@echo '   make test                           run the pytest suite              '
 	@echo '   make insight SLUG=<slug>            build one Insight: PDF + website  '
 	@echo '   make insight-check SLUG=<slug>      validate an Insight               '
+	@echo '   make insight-deposit SLUG=<slug>    check the served PDF against Zenodo'
 	@echo '   make insights                       rebuild every Insight for the web '
 	@echo '   make new-insight TITLE="..."        scaffold a new Insight            '
 	@echo '   make serve [PORT=8000]              serve site at http://localhost:8000'
@@ -97,6 +98,7 @@ check:
 #   make insight-web SLUG=<slug>    website article only (needs pandoc)
 #   make insight-pdf SLUG=<slug>    archival PDF only (needs LaTeX)
 #   make insight-check SLUG=<slug>  validate sources and generated files
+#   make insight-deposit SLUG=<slug> served PDF vs the Zenodo record (network)
 #   make insights                   rebuild every Insight
 #   make new-insight TITLE="..."    scaffold a new one
 
@@ -114,6 +116,11 @@ insight-pdf:
 
 insight-check:
 	"$(PY)" scripts/check_insight.py $(SLUG)
+
+# Reaches the network: the served PDF and its metadata against the Zenodo
+# record the DOI names. Run it after depositing a version, not in CI.
+insight-deposit:
+	"$(PY)" scripts/check_insight.py $(SLUG) --deposit
 
 # An Insight is a directory with a metadata.yaml in it — not every entry under
 # insights/, which also holds the templates and the README.
@@ -137,4 +144,4 @@ test:
 	"$(PY)" -m pytest
 
 
-.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish check validate test insight insight-web insight-pdf insight-check insights new-insight
+.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish check validate test insight insight-web insight-pdf insight-check insights new-insight insight-deposit

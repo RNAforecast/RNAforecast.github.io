@@ -15,18 +15,18 @@ RNA Structure Before the Experiment
 :subtitle: An ensemble view of therapeutic RNA design
 :slug: rna-structure-before-the-experiment
 :date: 2026-09-21
-:modified: 2026-09-21
+:modified: 2026-09-22
 :author: Michael T. Wolfinger
 :status: published
 :description: How ensemble-aware RNA structure analysis reveals structural consequences of sequence choices before experimental testing.
 :summary: Whether RNA is the therapeutic molecule or the therapeutic target, structural effects are often hidden behind a sequence-level view. Ensemble-aware RNA structure analysis can reveal these effects and help turn them into experimentally testable hypotheses.
 :bib_abstract: Whether RNA itself is the therapeutic molecule or the therapeutic target, design decisions are often made primarily at the sequence level. The RNA molecule, however, occupies a folding landscape that can change during synthesis, binding, modification, translation, and degradation. For RNA constructs, sequence changes can alter structural ensembles, accessibility and folding behaviour. For RNA targets, these same structural properties influence which sites and conformations are available for interaction. This perspective examines how ensemble-aware RNA structure analysis can make such effects explicit before an experiment is run. Using examples from mRNA design, target accessibility, cotranscriptional folding and modified nucleotides, it discusses both the value and the limitations of thermodynamic structure models. Structural analysis does not predict therapeutic efficacy, but it can reveal relevant differences between variants, make design assumptions explicit and help formulate experimentally testable hypotheses.
 :tags: RNA structure, RNA therapeutics, mRNA, RNA folding, RNA ensembles
-:version: 1.0
+:version: 1.1
 :series: RNA Forecast Insights
 :number: 1
-:doi: 10.5281/zenodo.22872982
-:zenodo_url: https://zenodo.org/records/22872982
+:doi: 10.5281/zenodo.22903918
+:zenodo_url: https://zenodo.org/records/22903918
 :license: CC BY 4.0
 
 .. container:: lead
