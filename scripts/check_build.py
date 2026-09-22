@@ -336,6 +336,34 @@ def check_no_accidental_lists(root, problems):
                     f'enumerator swallowed the first token: "{text}"')
 
 
+LINK_TEXT = re.compile(r'<a\b[^>]*>(.*?)</a>', re.S | re.I)
+LITERAL_EMAIL = re.compile(r'[\w.+-]+@[\w-]+\.[\w.-]+')
+
+
+def check_email_text_is_escaped(root, problems):
+    """An address shown as link text must escape its @ as &#64;.
+
+    Cloudflare's Email Address Obfuscation runs at the edge, where no build
+    check can see it. It scans the served HTML for literal addresses and
+    replaces the anchor's *text* with a "[email protected]" placeholder —
+    unreadable without JavaScript, which this site does not ship. docutils
+    escapes the @ for every address written in RST, so Cloudflare skips those
+    and rewrites only the href. A hand-written template is the one place that
+    can get it wrong, and it did.
+    """
+    for page in sorted(html_files(root)):
+        shown = os.path.relpath(page, root)
+        with open(page, encoding='utf-8') as f:
+            source = f.read()
+        for text in LINK_TEXT.findall(source):
+            found = LITERAL_EMAIL.search(re.sub(r'<[^>]+>', '', text))
+            if found:
+                problems.append(
+                    f'{shown}: link text contains the literal address '
+                    f'{found.group(0)}; escape the @ as &#64; or Cloudflare '
+                    f'replaces it with a [email protected] placeholder')
+
+
 def check_fragment_links(root, problems):
     """A link to #something must land on something.
 
@@ -470,6 +498,7 @@ def check(root):
     check_no_accidental_lists(root, problems)
     check_venue_badges_alternate(root, problems)
     check_fragment_links(root, problems)
+    check_email_text_is_escaped(root, problems)
     check_excluded_paths(root, problems)
     check_robots_and_sitemap(root, problems)
 

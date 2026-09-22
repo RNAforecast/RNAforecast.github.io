@@ -185,6 +185,24 @@ def test_two_adjacent_badges_of_the_same_kind_are_caught(sabotaged):
     assert_reports(sabotaged, 'do not alternate')
 
 
+def test_an_unescaped_email_in_link_text_is_caught(sabotaged):
+    """Cloudflare replaces such text at the edge, where no build sees it."""
+    page = sabotaged / 'about' / 'index.html'
+    # docutils escapes the @ in both the href and the text; only the text
+    # is what Cloudflare rewrites, so that is what this unescapes.
+    page.write_text(read(page).replace('>michael.wolfinger&#64;rnaforecast.com</a>',
+                                       '>michael.wolfinger@rnaforecast.com</a>', 1))
+    assert_reports(sabotaged, 'literal address')
+
+
+def test_every_shown_address_is_escaped(site):
+    for page in sorted(site.rglob('*.html')):
+        problems = []
+        check_build.check_email_text_is_escaped(str(site), problems)
+        assert problems == [], problems
+        break
+
+
 def test_a_link_to_a_nonexistent_anchor_is_caught(sabotaged):
     """The page still loads, so only a check can see this one."""
     page = sabotaged / 'research' / 'index.html'

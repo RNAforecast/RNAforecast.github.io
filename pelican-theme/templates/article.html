@@ -77,7 +77,13 @@
     proposals and workshops are welcome — see
     <a href="{{ SITEURL }}/research/">research themes</a>, the
     <a href="{{ SITEURL }}/publications/">publication record</a>, or write to
-    <a href="mailto:michael.wolfinger@rnaforecast.com">michael.wolfinger@rnaforecast.com</a>.</p>
+    {#- The visible address escapes its @ as &#64;, which is what docutils
+        emits for every address written in RST. Cloudflare's Email Address
+        Obfuscation scans the served HTML for literal addresses and replaces
+        the anchor text with a "[email protected]" placeholder; with the
+        entity it rewrites only the href, leaving the address readable
+        without JavaScript. This page was the one place that got it wrong. -#}
+    <a href="mailto:michael.wolfinger@rnaforecast.com">michael.wolfinger&#64;rnaforecast.com</a>.</p>
 </div>
 
 <nav class="insight-foot" aria-label="Insights">
