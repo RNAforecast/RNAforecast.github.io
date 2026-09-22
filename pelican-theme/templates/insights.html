@@ -9,7 +9,7 @@
 {{ page.content|trim }}
 
 {% if articles %}
-<ol class="insight-list" reversed>
+<ol class="insight-list" role="list" reversed>
   {% for article in articles|sort(attribute='date', reverse=True) %}
   <li class="insight-item">
     <article>

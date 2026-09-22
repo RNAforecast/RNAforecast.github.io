@@ -644,7 +644,7 @@ Publications
 
       .. container:: pub-body
 
-        .. container:: pub-title
+        .. container:: pub-title lang-de
 
           Strukturierte RNAs in Viren
 

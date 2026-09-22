@@ -43,8 +43,10 @@
 {{ body }}
 
 {% if references -%}
+{# The body's sections use '=', so References must too, or docutils
+   nests it inside the last one and it reads as a subsection. #}
 {{ references_title }}
-{{ '-' * references_title|length }}
+{{ '=' * references_title|length }}
 
 .. container:: refs
 

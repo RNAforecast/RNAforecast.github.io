@@ -19,6 +19,11 @@
   <link rel="canonical" href="{{ doc.url|format_siteurl|e }}" />
   {% endif %}
   {% endblock meta %}
+  {# Without this the browser cannot see the fonts until the CSS has parsed. #}
+  <link rel="preload" href="{{ '/static/fonts/barlow-400-latin.woff2'|format_siteurl|e }}"
+        as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="{{ '/static/fonts/barlow-condensed-600-latin.woff2'|format_siteurl|e }}"
+        as="font" type="font/woff2" crossorigin />
   {% for href in M_CSS_FILES %}
   <link rel="stylesheet" href="{{ href|format_siteurl|e }}" />
   {% endfor %}
@@ -43,9 +48,13 @@
   <meta name="twitter:card" content="summary_large_image" />
   {% if M_SOCIAL_TWITTER_SITE %}
   <meta name="twitter:site" content="{{ M_SOCIAL_TWITTER_SITE }}" />
+  <meta name="twitter:creator" content="{{ M_SOCIAL_TWITTER_SITE }}" />
   {% endif %}
   {% if M_SOCIAL_IMAGE %}
   <meta property="og:image" content="{{ M_SOCIAL_IMAGE|format_siteurl }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{{ SITENAME|e }} — {{ doc.title|e }}" />
   <meta name="twitter:image" content="{{ M_SOCIAL_IMAGE|format_siteurl }}" />
   {% endif %}
   {% endif %}
@@ -62,7 +71,7 @@
 <a class="skip" href="#content">Skip to content</a>
 
 <header class="site-head">
-  <nav class="nav">
+  <nav class="nav" aria-label="Main">
     {# The only route home from the masthead, so it must announce itself. #}
     <a href="{{ SITEURL }}/" class="nav-brand" aria-label="{{ SITENAME|e }} — home">
       {%- if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|format_siteurl|e }}" alt="{{ SITENAME|e }}" />
@@ -72,8 +81,8 @@
     {# The checkbox is the control: hidden but focusable, so the drawer works
        from the keyboard. role/tabindex on the label is invalid and does not
        toggle anyway. #}
-    <input type="checkbox" id="navtoggle" class="nav-toggle" />
-    <label for="navtoggle" class="nav-btn" aria-label="Toggle menu"><svg class="menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><svg class="x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle" aria-label="Menu" />
+    <label for="navtoggle" class="nav-btn"><span class="vh">Menu</span><svg class="menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg><svg class="x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></label>
     {% for title, link, slug in M_LINKS_NAVBAR1 %}
     <a href="{{ link|format_siteurl|e }}"{% if slug and slug == page_slug %} aria-current="page"{% endif %}>{{ title|e }}</a>
     {% endfor %}
@@ -81,7 +90,9 @@
   </nav>
 </header>
 
-<main class="shell{% block main_class %}{% endblock main_class %}{% if doc and doc.page_class %} {{ doc.page_class|e }}{% endif %}" id="content">
+{# tabindex="-1": without it the skip link moves the viewport but not
+   focus, and several screen readers leave the cursor behind. #}
+<main class="shell{% block main_class %}{% endblock main_class %}{% if doc and doc.page_class %} {{ doc.page_class|e }}{% endif %}" id="content" tabindex="-1">
 {% block hero %}{% endblock hero %}
 {% block main %}{% endblock main %}
 </main>

@@ -129,7 +129,11 @@ def test_an_insight_carries_article_structured_data(published):
             '@id': 'https://rnaforecast.com/#michael-t-wolfinger'}
         assert article['publisher'] == {
             '@id': 'https://rnaforecast.com/#organization'}
-        assert article['image'].startswith('https://rnaforecast.com/')
+        image = article['image']
+        url = image['url'] if isinstance(image, dict) else image
+        assert url.startswith('https://rnaforecast.com/')
+        if isinstance(image, dict):
+            assert image['width'] >= 1200 and image['height'] >= 630
 
 
 def test_an_insight_ships_the_nodes_it_references(published):

@@ -253,7 +253,8 @@ def test_the_home_page_declares_the_person_and_organization(site):
 def test_every_publication_reaches_the_graph(site):
     page = site / 'publications' / 'index.html'
     articles = nodes_of(page, 'ScholarlyArticle')
-    assert len(articles) == read(page).count('class="pub-title"')
+    assert len(articles) == len(re.findall(r'class="[^"]*\bpub-title\b[^"]*"',
+                                           read(page)))
     assert all('@id' in a for a in articles), 'every paper should carry its DOI'
 
 
@@ -297,3 +298,95 @@ def test_articles_are_attributed_to_that_node(site):
                   if any(author.get('@id') == AUTHOR_ID
                          for author in a.get('author', []))]
     assert len(attributed) == len(articles)
+
+
+# --- structured data added after the 2026-09 audit -------------------------
+
+def test_the_person_is_one_entity_across_every_page(site):
+    """Same @id, same description — a thin copy on one page made the
+    publications graph describe a different man from the rest of the site."""
+    seen = {}
+    for rel in PAGES:
+        for node in nodes_of(site / rel, 'Person'):
+            if node['@id'] == AUTHOR_ID:
+                seen[rel] = node
+    assert len(seen) > 1
+    first = next(iter(seen.values()))
+    for rel, node in seen.items():
+        assert node == first, f'{rel} describes the Person differently'
+
+
+def test_the_publisher_has_a_logo_and_a_legal_name(site):
+    org, = [n for n in nodes_of(site / 'index.html', 'Organization')]
+    assert org['legalName'] == 'RNA Forecast e.U.'
+    assert org['logo']['@type'] == 'ImageObject'
+    assert org['logo']['width'] >= 112, 'Google wants a logo of usable size'
+    assert (site / org['logo']['url'].split('rnaforecast.com/')[1]).is_file()
+    assert not org['email'].startswith('mailto:')
+
+
+def test_the_site_itself_is_described(site):
+    website, = nodes_of(site / 'index.html', 'WebSite')
+    assert website['publisher'] == {'@id': 'https://rnaforecast.com/#organization'}
+    assert website['inLanguage'] == 'en'
+
+
+def test_every_page_below_the_root_has_a_breadcrumb(site):
+    """Every page that carries a graph at all. The two legal pages carry
+    none on purpose: they are Disallowed and out of the sitemap, so there is
+    nothing to describe to a crawler that should not be reading them."""
+    for rel in PAGES:
+        if rel == 'index.html' or not graphs_in(site / rel):
+            continue
+        crumbs, = nodes_of(site / rel, 'BreadcrumbList')
+        items = crumbs['itemListElement']
+        assert items[0]['name'] == 'Home'
+        assert [i['position'] for i in items] == list(range(1, len(items) + 1))
+
+
+def test_the_insight_cites_what_it_cites(site):
+    page = site / 'insights' / 'rna-structure-before-the-experiment' / 'index.html'
+    if not page.is_file():
+        pytest.skip('no published Insight')
+    article, = nodes_of(page, 'Article')
+    cited = {c['identifier']['value'] for c in article['citation']}
+    on_page = set(re.findall(r'https://doi\.org/(10\.[^"\'<\s]+)', read(page)))
+    own = article['identifier']['value']
+    assert cited == {d.rstrip('.,;') for d in on_page} - {own}
+    assert len(cited) > 20
+
+
+def test_the_licence_is_a_url(site):
+    page = site / 'insights' / 'rna-structure-before-the-experiment' / 'index.html'
+    if not page.is_file():
+        pytest.skip('no published Insight')
+    article, = nodes_of(page, 'Article')
+    assert article['license'].startswith('https://creativecommons.org/')
+
+
+def test_a_work_not_in_english_says_so(site):
+    german = [a for a in nodes_of(site / 'publications' / 'index.html',
+                                  'ScholarlyArticle')
+              if a.get('inLanguage')]
+    assert german, 'the German review should carry inLanguage'
+    assert all(a['inLanguage'] == 'de' for a in german)
+    html = read(site / 'publications' / 'index.html')
+    assert 'lang="de"' in html, 'and the markup should say so too'
+
+
+def test_publication_dates_do_not_drift_from_the_page(site, repo):
+    """R_PUB_DATES is a second source for dates, so it is pinned to the
+    bibliography: every key must be a DOI on the page, and the years agree."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('conf', repo / 'pelicanconf.py')
+    conf = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(conf)
+
+    page = read(site / 'publications' / 'index.html')
+    articles = {a['identifier']['value']: a
+                for a in nodes_of(site / 'publications' / 'index.html',
+                                  'ScholarlyArticle')}
+    for doi, date in conf.R_PUB_DATES.items():
+        assert doi in articles, f'{doi} is in R_PUB_DATES but not on the page'
+        assert articles[doi]['datePublished'] == date
+        assert re.search(rf'\({date[:4]}\)', page), f'{doi}: year disagrees'

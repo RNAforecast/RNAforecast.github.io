@@ -154,15 +154,29 @@ def author_node(author_id):
 
 
 def make_author(name, author_id):
+    """One co-author.
+
+    The publications page prints surnames, the home page prints "Walter J".
+    Emitting `familyName` as well means both describe the same person rather
+    than two differently-named ones.
+    """
     name = name.strip(' ,')
     if not name:
         return None
     if name in AUTHOR_ALIASES:
         return {'@id': author_id}
-    return {'@type': 'Person', 'name': name}
+
+    person = {'@type': 'Person', 'name': name}
+    parts = name.split()
+    if len(parts) > 1 and re.fullmatch(r'[A-Z][A-Za-z-]*', parts[-1]):
+        person['familyName'] = ' '.join(parts[:-1])
+        person['givenName'] = parts[-1]
+    else:
+        person['familyName'] = name
+    return person
 
 
-def article_from(pub, fallback_year, author_id):
+def article_from(pub, fallback_year, author_id, dates=None):
     """Build one ScholarlyArticle, or None if the block has no title."""
     title = text_of(pub, 'pub-title')
     if not title:
@@ -196,7 +210,17 @@ def article_from(pub, fallback_year, author_id):
         article['author'] = authors
 
     if year:
-        article['datePublished'] = year
+        # The precise date where the registration agency has one, the year
+        # otherwise. Both are valid schema.org dates.
+        article['datePublished'] = (dates or {}).get(doi, year)
+
+    # A German title inside an English page, marked in the markup with a
+    # lang-de class, which is also what gives the page its lang attribute.
+    title_node = pub.find('pub-title')
+    if title_node:
+        for cls in title_node.classes:
+            if cls.startswith('lang-'):
+                article['inLanguage'] = cls.split('-', 1)[1]
 
     journal = text_of(pub, 'pub-badge', 'tag')
     if journal:
@@ -262,16 +286,18 @@ def resolve_references(nodes, available):
     return nodes
 
 
-def build_graph(content, page_url, page_name, site_url):
+def build_graph(content, page_url, page_name, site_url,
+                person_node=None, dates=None):
     tree = Tree()
     tree.feed(content)
     author_id = f'{site_url}/{AUTHOR_FRAGMENT}' if site_url else AUTHOR_FRAGMENT
+    person_node = person_node or author_node(author_id)
 
     articles = []
     for group in tree.root.find_all('pub-group'):
         year = group.id[1:] if re.fullmatch(r'y\d{4}', group.id) else ''
         for pub in group.find_all('pub'):
-            article = article_from(pub, year, author_id)
+            article = article_from(pub, year, author_id, dates)
             if article:
                 articles.append(article)
 
@@ -279,14 +305,14 @@ def build_graph(content, page_url, page_name, site_url):
                for pub in group.find_all('pub')}
     for pub in tree.root.find_all('pub'):
         if id(pub) not in grouped:
-            article = article_from(pub, '', author_id)
+            article = article_from(pub, '', author_id, dates)
             if article:
                 articles.append(article)
 
     if not articles:
         return None
 
-    graph = [author_node(author_id)]
+    graph = [person_node]
 
     # Only the full listing is a CollectionPage; a page that merely features
     # papers is not the bibliography.
@@ -327,6 +353,31 @@ def site_nodes(settings, siteurl, *ids):
     return [absolutise(by_id[i], siteurl) for i in ids if i in by_id]
 
 
+LICENSE_URLS = {
+    'CC BY 4.0': 'https://creativecommons.org/licenses/by/4.0/',
+    'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
+    'CC BY-NC 4.0': 'https://creativecommons.org/licenses/by-nc/4.0/',
+    'CC0 1.0': 'https://creativecommons.org/publicdomain/zero/1.0/',
+}
+
+
+def cited_dois(content):
+    """Every DOI the rendered piece links, in order, without duplicates."""
+    found = re.findall(r'https://doi\.org/(10\.[^"\'<\s]+)', content)
+    return list(dict.fromkeys(d.rstrip('.,;') for d in found))
+
+
+def breadcrumb(trail, siteurl):
+    """A BreadcrumbList for a page nested below the root."""
+    return {
+        '@type': 'BreadcrumbList',
+        '@id': f'{trail[-1][1]}#breadcrumb',
+        'itemListElement': [
+            {'@type': 'ListItem', 'position': i, 'name': name, 'item': url}
+            for i, (name, url) in enumerate(trail, start=1)],
+    }
+
+
 def article_node(article, settings, siteurl):
     """One schema.org Article, built from the article's own metadata."""
     url = f'{siteurl}/{article.url}' if siteurl else f'/{article.url}'
@@ -364,7 +415,12 @@ def article_node(article, settings, siteurl):
     if abstract:
         node['abstract'] = abstract
     if image:
-        node['image'] = absolutise(f'/{image.lstrip("/")}', siteurl, 'image')
+        url_ = absolutise(f'/{image.lstrip("/")}', siteurl, 'image')
+        # An ImageObject with its dimensions, not a bare URL: consumers that
+        # check whether an image is large enough cannot do so without them.
+        node['image'] = ({'@type': 'ImageObject', 'url': url_,
+                          'width': 1200, 'height': 630}
+                         if url_.endswith('og-card.png') else url_)
     keywords = [tag.name for tag in getattr(article, 'tags', None) or []]
     if keywords:
         node['keywords'] = keywords
@@ -378,10 +434,15 @@ def article_node(article, settings, siteurl):
     series = getattr(article, 'series', None)
     number = getattr(article, 'number', None)
     if series:
-        part = {'@type': 'PublicationIssue', 'name': series}
-        if number:
-            part['issueNumber'] = number
-        node['isPartOf'] = part
+        # The series is the periodical and the Insight is an issue of it.
+        # Naming the *issue* after the series, as this once did, says the
+        # publication is called "RNA Forecast Insights 1".
+        periodical = {'@type': 'Periodical', 'name': series,
+                      'publisher': {'@id': org_id}}
+        node['isPartOf'] = ({'@type': 'PublicationIssue',
+                             'issueNumber': number,
+                             'isPartOf': periodical}
+                            if number else periodical)
     doi = getattr(article, 'doi', None)
     if doi:
         node['identifier'] = {'@type': 'PropertyValue',
@@ -389,7 +450,22 @@ def article_node(article, settings, siteurl):
         node['sameAs'] = f'https://doi.org/{doi}'
     license_ = getattr(article, 'license', None)
     if license_:
-        node['license'] = license_
+        # schema.org's range for license is a URL or a CreativeWork; the
+        # human string belongs on the page, not in the graph.
+        node['license'] = LICENSE_URLS.get(license_, license_)
+
+    # Everything the piece cites, by DOI. The bibliography is already on the
+    # page; this is what makes it legible to a citation graph.
+    cited = cited_dois(getattr(article, 'content', '') or '')
+    own = (getattr(article, 'doi', None) or '').lower()
+    cited = [d for d in cited if d.lower() != own]
+    if cited:
+        node['citation'] = [
+            {'@type': 'ScholarlyArticle',
+             '@id': f'https://doi.org/{doi}',
+             'identifier': {'@type': 'PropertyValue',
+                            'propertyID': 'DOI', 'value': doi}}
+            for doi in cited]
     return node
 
 
@@ -401,6 +477,11 @@ def attach_articles(article_generator):
     for article in article_generator.articles:
         nodes = site_nodes(settings, siteurl, AUTHOR_FRAGMENT, '#organization')
         nodes.append(article_node(article, settings, siteurl))
+        root = f'{siteurl}/' if siteurl else '/'
+        nodes.append(breadcrumb(
+            [('Home', root),
+             ('Insights', f'{root}insights/'),
+             (article.title, f'{root}insights/{article.slug}/')], siteurl))
         article.jsonld = to_script_body(
             {'@context': 'https://schema.org', '@graph': nodes})
         logger.info('scholarly: Article node on %s', article.slug)
@@ -436,6 +517,20 @@ def insights_nodes(page, articles, settings, siteurl):
     return [collection]
 
 
+def full_person(settings, siteurl, fallback_id):
+    """The site's Person node, or a minimal stand-in.
+
+    /publications/ used to build its own thin Person — same @id, five
+    properties instead of thirteen and `sameAs` a string instead of a list —
+    so a consumer merging the pages saw one identifier describing two
+    different people.
+    """
+    for node in settings.get('R_SITE_GRAPH') or []:
+        if node.get('@id') == AUTHOR_FRAGMENT:
+            return absolutise(node, siteurl)
+    return author_node(fallback_id)
+
+
 def attach(page_generator):
     settings = page_generator.settings
     siteurl = settings.get('SITEURL', '')
@@ -454,7 +549,9 @@ def attach(page_generator):
             continue
 
         page_url = f'{siteurl}/{page.url}' if siteurl else f'/{page.url}'
-        graph = build_graph(page.content or '', page_url, page.title, siteurl)
+        graph = build_graph(page.content or '', page_url, page.title, siteurl,
+                            full_person(settings, siteurl, author_id),
+                            settings.get('R_PUB_DATES'))
         nodes = graph['@graph'] if graph else []
 
         if is_home:
@@ -473,6 +570,16 @@ def attach(page_generator):
 
         if not nodes:
             continue
+
+        # Whatever a page's nodes point at travels with them. The fuller
+        # Person carries an affiliation, so /publications/ now references the
+        # Organization and has to ship it too.
+        nodes = resolve_references(nodes, absolutise(site_graph, siteurl))
+
+        if page.url and page.url not in ('', 'index.html'):
+            nodes.append(breadcrumb(
+                [('Home', f'{siteurl}/' if siteurl else '/'),
+                 (page.title, page_url)], siteurl))
 
         page.jsonld = to_script_body(
             {'@context': 'https://schema.org', '@graph': nodes})

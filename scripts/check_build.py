@@ -258,7 +258,8 @@ def check_jsonld(root, problems):
 
         # The graph is derived from the page's own markup, so a markup change
         # could silently stop producing articles.
-        listed = source.count('class="pub-title"')
+        # pub-title is a heading now, and may carry a second class.
+        listed = len(re.findall(r'class="[^"]*\bpub-title\b[^"]*"', source))
         if not listed:
             continue
 
@@ -321,8 +322,8 @@ def check_no_accidental_lists(root, problems):
     any list inside one is this bug.
     """
     block = re.compile(
-        r'<div class="(pub-badge|pub-title|pub-authors|pub-cite|pub-doi|'
-        r'pub-summary|pub-year|tag[^"]*)">(.*?)</div>', re.S)
+        r'<(?:div|h[1-6]) class="(pub-badge|pub-title|pub-authors|pub-cite|'
+        r'pub-doi|pub-summary|pub-year|tag)[^"]*">(.*?)</(?:div|h[1-6])>', re.S)
 
     for page in sorted(html_files(root)):
         shown = os.path.relpath(page, root)

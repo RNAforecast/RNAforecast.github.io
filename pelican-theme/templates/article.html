@@ -58,7 +58,7 @@
    source knows nothing about services, navigation or DOIs. #}
 {% if article.doi %}
 <div class="blueprint insight-cite">
-  <div class="card-h">Cite this Insight</div>
+  <h2 class="card-h">Cite this Insight</h2>
   {# The version belongs here: Zenodo identifies the record by it, and a
      citation that omits it cannot say which version was read. #}
   <p>{{ article.author.name|e }}. {{ article.title|e }}: {{ article.subtitle|e }}.
@@ -70,7 +70,7 @@
 {% endif %}
 
 <div class="blueprint insight-cta">
-  <div class="card-h">Working on a related RNA design problem?</div>
+  <h2 class="card-h">Working on a related RNA design problem?</h2>
   <p>RNA Forecast provides independent computational analysis, structure and
     ensemble review, and method transfer for research teams working with
     structured and therapeutic RNAs. Enquiries about collaborations, joint

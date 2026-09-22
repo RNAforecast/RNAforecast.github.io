@@ -248,8 +248,9 @@ remain implicit, and make an experimental question more specific. The
 experimental result remains the final test.
 
 
+
 References
-----------
+==========
 
 .. container:: refs
 

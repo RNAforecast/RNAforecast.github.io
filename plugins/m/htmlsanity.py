@@ -548,12 +548,19 @@ class SaneHtmlTranslator(HTMLTranslator):
         backrefs = (node.parent['backrefs']
                     if self.settings.footnote_backlinks else [])
         self.body.append('.</dt>\n<dd>')
+        # A caret is not a link name. Screen readers list these together, and
+        # twenty-five entries all called "^" tell the reader nothing about
+        # where any of them goes.
+        number = node.astext().strip() or '?'
         if len(backrefs) == 1:
-            self.body.append('<span class="m-footnote">'
-                             '<a href="#{}">^</a></span> '.format(backrefs[0]))
+            self.body.append(
+                '<span class="m-footnote"><a href="#{}" aria-label="Back to '
+                'reference {}">^</a></span> '.format(backrefs[0], number))
         elif backrefs:
-            links = ' '.join('<a href="#{}">{}</a>'.format(ref, chr(ord('a') + i))
-                             for i, ref in enumerate(backrefs))
+            links = ' '.join(
+                '<a href="#{}" aria-label="Back to reference {}, citation {}">'
+                '{}</a>'.format(ref, number, i + 1, chr(ord('a') + i))
+                for i, ref in enumerate(backrefs))
             self.body.append(
                 '<span class="m-footnote">^ {}</span> '.format(links))
 

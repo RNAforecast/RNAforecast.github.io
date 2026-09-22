@@ -64,6 +64,7 @@ M_THEME_COLOR = '#5980a6'
 
 PLUGIN_PATHS = ['plugins']
 PLUGINS = ['m.htmlsanity',   # the HTML5 RST writer the whole stylesheet targets
+           'semantics',      # headings and lang, which RST cannot express
            'scholarly',      # schema.org data derived from the publications page
            'sitemap']
 
@@ -132,7 +133,7 @@ R_SITE_GRAPH = [
         "givenName": "Michael",
         "familyName": "Wolfinger",
         "jobTitle": "Computational RNA Biologist",
-        "email": "mailto:michael.wolfinger@rnaforecast.com",
+        "email": "michael.wolfinger@rnaforecast.com",
         "url": "https://michaelwolfinger.com/",
         "image": "/static/images/mtw.jpg",
         "affiliation": {"@id": "#organization"},
@@ -160,9 +161,17 @@ R_SITE_GRAPH = [
         "@type": "Organization",
         "@id": "#organization",
         "name": "RNA Forecast",
+        # The registered entity behind the brand. The brand is what the site
+        # says everywhere; this is what a machine needs to identify it.
+        "legalName": "RNA Forecast e.U.",
         "alternateName": "RNA Forecast, Computational RNA Biology",
         "url": "/",
-        "email": "mailto:michael.wolfinger@rnaforecast.com",
+        # A publisher logo is what Google's Article guidance asks for, and
+        # nothing else on the site provided one.
+        "logo": {"@type": "ImageObject",
+                 "url": "/static/images/RNAF_logo1.png",
+                 "width": 1000, "height": 299},
+        "email": "michael.wolfinger@rnaforecast.com",
         "description": "Independent research platform for computational RNA "
                        "biology, covering original research, software "
                        "development, collaboration and advanced training.",
@@ -174,6 +183,16 @@ R_SITE_GRAPH = [
                     "postalCode": "3002",
                     "addressLocality": "Purkersdorf",
                     "addressCountry": "AT"},
+    },
+    {
+        # The site itself, which nothing described before: it is what a
+        # consumer attaches every page of the site to.
+        "@type": "WebSite",
+        "@id": "#website",
+        "url": "/",
+        "name": "RNA Forecast",
+        "inLanguage": "en",
+        "publisher": {"@id": "#organization"},
     },
     {
         # The home page is about the platform, not the person; ProfilePage
@@ -190,6 +209,17 @@ R_SITE_GRAPH = [
 # Extra nodes per page, keyed by slug. The Person node is prepended
 # automatically, so each page's graph stands on its own.
 R_PAGE_GRAPHS = {
+    "research": [
+        {
+            "@type": "CollectionPage",
+            "@id": "/research/#webpage",
+            "url": "/research/",
+            "name": "Research, RNA Forecast",
+            "about": {"@id": "#organization"},
+            "isPartOf": {"@id": "#website"},
+            "inLanguage": "en",
+        },
+    ],
     "about": [
         {
             "@type": "ProfilePage",
@@ -199,6 +229,29 @@ R_PAGE_GRAPHS = {
             "mainEntity": {"@id": "#michael-t-wolfinger"},
         },
     ],
+}
+
+# Publication dates, keyed by DOI, as deposited with the registration agency.
+# The page itself prints only a year, which is all a reader needs; schema.org
+# takes the precise date where one exists. A year with no entry here still
+# works — the graph simply carries the year, as it did before.
+#
+# Fetched from Crossref/DataCite, not typed: tests/test_seo.py asserts every
+# key is a DOI the page carries and that the years agree, so this cannot
+# quietly drift from the bibliography.
+R_PUB_DATES = {
+    "10.3390/ijms27167228": "2026-08-13",
+    "10.1093/nar/gkag473": "2026-05-05",
+    "10.1038/s41587-025-02739-0": "2026-06",
+    "10.5281/zenodo.15233965": "2025-01-22",
+    "10.5281/zenodo.15228717": "2025-03-05",
+    "10.1128/jvi.01215-24": "2024-11-19",
+    "10.1099/jgv.0.001991": "2024-05-29",
+    "10.1038/s41564-023-01587-5": "2024-02-05",
+    "10.1139/bcb-2023-0036": "2024-02-01",
+    "10.1246/bcsj.20230092": "2023-07-15",
+    "10.1093/nar/gkad223": "2023-05-22",
+    "10.1007/s12268-023-1907-x": "2023-03",
 }
 
 SITEMAP = {
