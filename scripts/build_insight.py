@@ -50,6 +50,7 @@ REQUIRED_META = ['title', 'subtitle', 'slug', 'author', 'affiliation', 'date',
 REQUIRED_PUBLISHED = ['abstract', 'description', 'summary', 'tags', 'version']
 
 DOI_RE = re.compile(r'^10\.\d{4,9}/\S+$')
+ORCID_RE = re.compile(r'^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$')
 
 # A LaTeX environment becomes `.. container:: <name>`, which is exactly the
 # site's one-wrapper-one-class convention. Where the design needs a second
@@ -89,6 +90,16 @@ def source_dir(slug):
     return path
 
 
+def orcid_is_valid(orcid):
+    """ISO 7064 MOD 11-2, the check digit built into every ORCID iD."""
+    digits = orcid.replace('-', '')
+    total = 0
+    for char in digits[:-1]:
+        total = (total + int(char)) * 2
+    expected = (12 - total % 11) % 11
+    return ('X' if expected == 10 else str(expected)) == digits[-1]
+
+
 def load_metadata(slug):
     path = os.path.join(source_dir(slug), 'metadata.yaml')
     if not os.path.isfile(path):
@@ -119,6 +130,16 @@ def load_metadata(slug):
     if meta.get('doi') and not DOI_RE.match(str(meta['doi'])):
         raise BuildError(f"{slug}: doi {meta['doi']!r} is not a bare DOI "
                          f"(expected 10.xxxx/...)")
+
+    orcid = str(meta.get('orcid') or '').strip()
+    if orcid:
+        # An ORCID carries an ISO 7064 check digit, which catches a mistyped
+        # one. It cannot catch a *wrong* one: the deposit for Insight 1 went
+        # out with another researcher's valid iD, because the identifier was
+        # typed into Zenodo's form by hand instead of coming from here.
+        if not ORCID_RE.match(orcid) or not orcid_is_valid(orcid):
+            raise BuildError(f'{slug}: orcid {orcid!r} is not a valid iD '
+                             f'(expected 0000-0000-0000-0000)')
 
     for field in ('date', 'modified'):
         if not isinstance(meta[field], date):
@@ -739,7 +760,8 @@ def write_deposit_metadata(slug, meta, out_dir):
     lines = [
         f'Title: {meta["title"]}: {meta["subtitle"]}',
         f'Authors: {meta["author"]} '
-        f'({meta.get("affiliation_formal") or meta["affiliation"]})',
+        f'({meta.get("affiliation_formal") or meta["affiliation"]})'
+        + (f' [ORCID: {meta["orcid"]}]' if meta.get('orcid') else ''),
         f'Publication date: {meta["date"].isoformat()}',
         f'Version: {meta["version"]}',
         f'Resource type: {meta.get("resource_type", "Publication")}',
@@ -784,6 +806,12 @@ def build_pdf(slug, meta):
         'SUBTITLE': meta['subtitle'],
         'AUTHOR': meta['author'],
         'AFFILIATION': meta['affiliation'],
+        # Printed on the title page so the identifier travels with the file:
+        # a reader, a repository and a deposit form all take it from one
+        # place instead of from memory.
+        'ORCIDLINE': (f"\\\\\n\\small ORCID: "
+                      f"\\href{{https://orcid.org/{meta['orcid']}}}"
+                      f"{{{meta['orcid']}}}" if meta.get('orcid') else ''),
         'SERIES': meta['series'],
         'NUMBER': str(meta['number']),
         'VERSION': str(meta['version']),

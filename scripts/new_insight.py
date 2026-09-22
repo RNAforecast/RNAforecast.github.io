@@ -43,6 +43,7 @@ subtitle: A subtitle
 slug: {slug}
 
 author: Michael T. Wolfinger
+orcid: 0000-0003-0925-5205
 # affiliation is the PDF title-page line; affiliation_formal is what a deposit
 # record (Zenodo) should carry. The website says neither: it says the brand.
 affiliation: RNA Forecast e.U., Purkersdorf, Vienna metropolitan area, Austria
