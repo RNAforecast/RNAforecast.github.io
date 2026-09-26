@@ -26,7 +26,19 @@ def test_every_page_has_the_basics(site, rel):
     assert '<link rel="canonical"' in html
     assert '<meta name="description"' in html
     assert '<meta property="og:title"' in html
-    assert re.search(r'<html lang="en"', html)
+    lang = 'de' if rel.startswith(('impressum', 'datenschutz')) else 'en'
+    assert re.search(rf'<html lang="{lang}"', html), rel
+
+
+@pytest.mark.parametrize('rel', ['impressum/index.html', 'datenschutz/index.html'])
+def test_the_legal_pages_are_german(site, rel):
+    """Austrian law, Austrian language: § 25 MedienG and the DSGVO notice
+    are written in German, like michaelwolfinger.com's, and say so."""
+    html = read(site / rel)
+    assert '<html lang="de"' in html
+    assert 'Österreich' in html
+    word = 'Offenlegung' if rel.startswith('impressum') else 'Datenschutzbehörde'
+    assert word in html
 
 
 @pytest.mark.parametrize('rel', PAGES)

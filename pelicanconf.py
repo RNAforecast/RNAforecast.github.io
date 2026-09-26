@@ -107,7 +107,7 @@ R_FOOTER_LINKS = [('Home', '/'),
                   ('Teaching', '/#training'),
                   ('About', '/about/'),
                   ('Impressum', '/impressum/'),
-                  ('Privacy', '/datenschutz/')]
+                  ('Datenschutz', '/datenschutz/')]
 
 R_FOOTER_PROFILES = [('GitHub', 'https://github.com/mtw'),
                      ('ORCID', 'https://orcid.org/0000-0003-0925-5205'),

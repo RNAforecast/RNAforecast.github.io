@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 {# `doc` is whatever this template is about — a page or an article. The child
    template sets it before extending, so the head below is written once. #}
-<html lang="{% if doc and doc.lang %}{{ doc.lang }}{% else %}{{ DEFAULT_LANG }}{% endif %}">
+{# :html_lang: is the document's language when it differs from the site's:
+   the legal pages are German. Pelican's own `lang` would make the page a
+   translation and stop writing it, so it is a plain field of its own. #}
+<html lang="{% if doc and doc.html_lang %}{{ doc.html_lang }}{% elif doc and doc.lang %}{{ doc.lang }}{% else %}{{ DEFAULT_LANG }}{% endif %}">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -176,7 +179,7 @@
   records anonymous usage statistics that show which pages are read. Nothing is sent to
   Google before you decide, and you can change your choice at any time under
   &ldquo;Cookie settings&rdquo; in the footer.
-  <a href="{{ '/datenschutz/'|format_siteurl|e }}">Privacy notice</a></p>
+  <a href="{{ '/datenschutz/'|format_siteurl|e }}">Datenschutzerklärung</a></p>
   <div>
     <button type="button" data-consent="decline">Decline</button>
     <button type="button" data-consent="accept">Accept</button>
