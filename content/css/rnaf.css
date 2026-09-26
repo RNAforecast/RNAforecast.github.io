@@ -250,7 +250,7 @@ hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--spa
    row the first link is the primary one, as the design has it. */
 .btn,
 .hero-actions a, .actions a, .sec-link a, .actions-primary a,
-.pubs-full .pub-links a {
+.pubs-full .pub-links a, .consent button {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   cursor: pointer; text-decoration: none;
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
@@ -263,14 +263,16 @@ hr { height: 1px; border: 0; background: var(--color-divider); margin: var(--spa
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .btn-primary,
-.hero-actions a:first-child, .actions-primary a {
+.hero-actions a:first-child, .actions-primary a, .consent button:last-child {
   background: var(--color-accent-700); color: var(--color-bg);
   border-color: var(--color-accent-700);
 }
 .btn-primary:hover,
-.hero-actions a:first-child:hover, .actions-primary a:hover { background: var(--color-accent-800); }
+.hero-actions a:first-child:hover, .actions-primary a:hover,
+.consent button:last-child:hover { background: var(--color-accent-800); }
 .btn-primary:active,
-.hero-actions a:first-child:active, .actions-primary a:active { background: var(--color-accent-700); }
+.hero-actions a:first-child:active, .actions-primary a:active,
+.consent button:last-child:active { background: var(--color-accent-700); }
 
 .hero-actions a:not(:first-child) { border-color: var(--color-divider); }
 .hero-actions a:not(:first-child):hover, .pubs-full .pub-links a:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
@@ -1078,10 +1080,30 @@ a.m-footnote:hover { text-decoration: underline; }
 .foot-navs a { color: inherit; text-decoration: none; }
 .foot-navs a:hover { color: var(--color-accent); }
 
+/* — consent dialog —
+   The gate in front of Google Analytics, and the one element the site's own
+   script touches: it toggles the `hidden` attribute, so the attribute has to
+   keep winning over the display rule. The buttons take the design's button
+   look from the .btn group above; the last one is the primary action, as in
+   every other action row. */
+.consent {
+  position: fixed; inset: auto 16px 16px; z-index: 20;
+  max-width: 640px; margin-inline: auto;
+  padding: 18px 20px;
+  background: var(--color-bg); color: var(--color-text);
+  border: 1px solid var(--color-divider);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-text) 14%, transparent);
+  font-size: 14px; line-height: 1.5;
+}
+.consent[hidden] { display: none; }
+.consent p { margin: 0 0 14px; }
+.consent a { color: var(--color-accent-700); }
+.consent div { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+
 /* — year index —
-   The design's filter bar was a scripted control. This site ships no
-   JavaScript, so the publications are simply listed in full, grouped by year,
-   with a static jump index in place of the filters. */
+   The design's filter bar was a scripted control. The site's content runs
+   without JavaScript, so the publications are simply listed in full, grouped
+   by year, with a static jump index in place of the filters. */
 .year-index {
   border-top: 1px solid var(--color-divider);
   padding: 22px 0 clamp(20px, 3vw, 32px);
@@ -1165,7 +1187,7 @@ a.m-footnote:hover { text-decoration: underline; }
 }
 
 @media print {
-  .site-head, .site-foot, .skip, .hero-actions, .actions { display: none; }
+  .site-head, .site-foot, .skip, .hero-actions, .actions, .consent { display: none; }
   body { background: #fff; font-size: 11pt; }
   .blueprint::before { display: none; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }

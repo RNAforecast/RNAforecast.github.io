@@ -66,6 +66,44 @@
   </script>
   {%- endif %}
   {% endblock extra %}
+  {% if GOOGLE_ANALYTICS %}
+  {#- The consent gate, and the only script the site runs. Nothing is
+     requested from Google until the visitor accepts in the dialog at the
+     end of <body>: gtag.js is injected here, never written as a <script src>,
+     so the built page carries no Google host and check_build.py's host list
+     stays the site's own. The choice lives in localStorage under
+     `rnaf-consent` for a year, "Cookie settings" in the footer reopens the
+     dialog, and a Global Privacy Control signal counts as a decline. The key
+     name is what check_build.py recognises this block by. -#}
+  <script>
+  (function(){
+    var KEY='rnaf-consent', ID='{{ GOOGLE_ANALYTICS }}', MAX=365*24*3600*1000;
+    function read(){try{var v=JSON.parse(localStorage.getItem(KEY));if(v&&v.t&&Date.now()-v.t<MAX)return v.analytics;}catch(e){}return null;}
+    function write(v){try{localStorage.setItem(KEY,JSON.stringify({analytics:v,t:Date.now()}));}catch(e){}}
+    function dialog(){return document.getElementById('cookie-settings');}
+    function load(){
+      if(window.rnafGaLoaded)return; window.rnafGaLoaded=true;
+      window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments);};
+      gtag('js',new Date()); gtag('config',ID);
+      var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+ID; document.head.appendChild(s);
+    }
+    window.rnafConsent={
+      accept:function(){write(true); dialog().hidden=true; load();},
+      decline:function(){write(false); dialog().hidden=true;},
+      open:function(){dialog().hidden=false;}
+    };
+    document.addEventListener('DOMContentLoaded',function(){
+      var links=document.querySelectorAll('a[href$="#cookie-settings"]');
+      for(var i=0;i<links.length;i++)links[i].addEventListener('click',function(e){e.preventDefault(); rnafConsent.open();});
+      var buttons=document.querySelectorAll('#cookie-settings button[data-consent]');
+      for(var j=0;j<buttons.length;j++)buttons[j].addEventListener('click',function(e){rnafConsent[e.currentTarget.getAttribute('data-consent')]();});
+      var c=read();
+      if(c===true)load();
+      else if(c===null&&navigator.globalPrivacyControl!==true)rnafConsent.open();
+    });
+  })();
+  </script>
+  {% endif %}
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -112,6 +150,11 @@
         {% for title, link in R_FOOTER_LINKS %}
         <a href="{{ link|format_siteurl|e }}">{{ title|e }}</a>
         {% endfor %}
+        {% if GOOGLE_ANALYTICS %}
+        {#- Reopens the consent dialog; rendered with it, so a development
+           build never carries a fragment link with nothing to land on. #}
+        <a href="#cookie-settings">Cookie settings</a>
+        {% endif %}
       </nav>
       {% endif %}
       {% if R_FOOTER_PROFILES %}
@@ -124,5 +167,18 @@
     </div>
   </div>
 </footer>
+{% if GOOGLE_ANALYTICS %}
+<div id="cookie-settings" class="consent" hidden role="dialog" aria-label="Cookie settings">
+  <p><strong>May this site count your visit?</strong> With your consent, Google Analytics
+  records anonymous usage statistics that show which pages are read. Nothing is sent to
+  Google before you decide, and you can change your choice at any time under
+  &ldquo;Cookie settings&rdquo; in the footer.
+  <a href="{{ '/datenschutz/'|format_siteurl|e }}">Privacy notice</a></p>
+  <div>
+    <button type="button" data-consent="decline">Decline</button>
+    <button type="button" data-consent="accept">Accept</button>
+  </div>
+</div>
+{% endif %}
 </body>
 </html>

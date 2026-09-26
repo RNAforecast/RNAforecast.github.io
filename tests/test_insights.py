@@ -207,6 +207,8 @@ def test_the_reference_list_is_a_real_definition_list(published):
 
 
 def test_an_insight_ships_no_javascript_of_its_own(published):
+    """A manuscript cannot smuggle script in; the consent gate comes from the
+    base template and is the one block the checker admits."""
     from scripts import check_build
     for page in published:
         problems = []

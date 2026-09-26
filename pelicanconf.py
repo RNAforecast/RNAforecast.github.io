@@ -309,3 +309,8 @@ SITEMAP = {
 # Search Console token; empty means no meta tag. A DNS TXT record verifies
 # the whole domain instead and survives redesigns.
 GOOGLE_SITE_VERIFICATION = ''
+
+# GA4 measurement ID; empty means no consent dialog and no script at all,
+# which is what a local preview should be. publishconf.py sets it. Google is
+# contacted only after the visitor accepts, see base.html.
+GOOGLE_ANALYTICS = ''
