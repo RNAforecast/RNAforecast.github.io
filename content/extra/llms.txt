@@ -25,8 +25,8 @@ addresses are shown as plain text.
 - [Insights](https://rnaforecast.com/insights/): a curated library of
   scientific perspectives on RNA structure, folding landscapes, structural
   ensembles and computational RNA design. Individual pieces live one level
-  below that page, each at its own slug, and each carries schema.org Article
-  data. Editorial analysis, not peer reviewed work: cite the publications page
+  below that page, each at its own slug, and each carries schema.org
+  ScholarlyArticle data. Editorial analysis, not peer reviewed work: cite the publications page
   for results, and attribute an Insight to its own URL.
 - [RNA Structure Before the Experiment: An ensemble view of therapeutic RNA
   design](https://rnaforecast.com/insights/rna-structure-before-the-experiment/):
@@ -39,9 +39,10 @@ addresses are shown as plain text.
 
 - [Sitemap](https://rnaforecast.com/sitemap.xml)
 - schema.org JSON-LD is embedded in the pages: Person, Organization and
-  ProfilePage on the home page; ScholarlyArticle for every publication on the
-  publications page, each identified by its DOI; Article on every Insight, and
-  a CollectionPage listing them at /insights/.
+  WebSite on every page, ProfilePage on /about/; ScholarlyArticle for every
+  publication on the publications page, each identified by its DOI;
+  ScholarlyArticle on every Insight, identified by its Zenodo DOI, and a
+  CollectionPage listing them at /insights/.
 
 ## Scholarly profiles
 
