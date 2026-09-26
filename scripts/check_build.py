@@ -50,8 +50,10 @@ EXCLUDED_SLUGS = ('impressum', 'datenschutz', 'thanks', '404')
 OG_CARD = 'static/images/og-card.png'
 OG_CARD_SIZE = (1200, 630)
 
-# Search results truncate around 155-160 characters.
+# Search results truncate around 155-160 characters; under 50 a snippet
+# gets padded with whatever text the crawler finds.
 MAX_DESCRIPTION = 150
+MIN_DESCRIPTION = 50
 
 SITE_HOST = 'rnaforecast.com'
 
@@ -214,6 +216,9 @@ def check_share_card(root, problems):
             if length > MAX_DESCRIPTION:
                 problems.append(f'{shown}: meta description is {length} chars, '
                                 f'over the {MAX_DESCRIPTION} cap')
+            elif length < MIN_DESCRIPTION:
+                problems.append(f'{shown}: meta description is {length} chars, '
+                                f'under the {MIN_DESCRIPTION} floor')
 
 
 def check_consent_gate(root, problems):

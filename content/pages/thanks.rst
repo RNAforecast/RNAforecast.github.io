@@ -3,7 +3,7 @@ Message sent
 
 :title: Message sent, RNA Forecast
 :slug: thanks
-:description: Your message to RNA Forecast has been sent.
+:description: Your message to RNA Forecast has been sent and will normally be answered within a few working days.
 :summary: Your message to RNA Forecast has been sent.
 :robots: noindex, follow
 :hero_kicker: Contact
