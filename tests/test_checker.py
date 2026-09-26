@@ -4,6 +4,8 @@ A checker that only ever passes is worse than no checker, so each fault class
 is injected into a real build and the checker is required to report it.
 """
 
+import re
+
 import pytest
 
 from scripts import check_build
@@ -64,12 +66,48 @@ def test_stray_inline_script_is_caught(sabotaged):
     assert_reports(sabotaged, 'unexpected inline <script>')
 
 
-def test_the_build_ships_no_script_but_json_ld(site):
-    """The only <script> left is structured data, which must not be flagged."""
+def test_the_consent_script_is_allowed_and_nothing_else_is(site):
+    """Structured data and the consent gate are the two legitimate scripts;
+    the Google tag itself is never a static request."""
     html = read(site / 'index.html')
     assert '<script type="application/ld+json">' in html
-    assert 'googletagmanager' not in html and 'osano' not in html
+    assert "var KEY='rnaf-consent'" in html
+    assert not re.search(r'<script[^>]*src=["\']?https://www\.googletagmanager',
+                         html)
+    assert 'osano' not in html
     assert problems_for(site) == []
+
+
+def test_a_static_google_tag_is_caught(sabotaged):
+    """The failure that makes the consent dialog decorative: the tag written
+    as a <script src> loads before anyone has been asked."""
+    page = sabotaged / 'index.html'
+    page.write_text(read(page).replace(
+        '</head>',
+        '<script async src="https://www.googletagmanager.com/gtag/js?id=G-X">'
+        '</script></head>', 1))
+    assert_reports(sabotaged, 'loads before consent')
+
+
+def test_a_missing_consent_dialog_is_caught(sabotaged):
+    page = sabotaged / 'index.html'
+    page.write_text(read(page).replace('id="cookie-settings"', 'id="gone"', 1))
+    assert_reports(sabotaged, 'without the dialog')
+
+
+def test_a_missing_cookie_settings_link_is_caught(sabotaged):
+    """Consent that cannot be withdrawn is not consent."""
+    page = sabotaged / 'index.html'
+    page.write_text(read(page).replace('href="#cookie-settings"', 'href="#"'))
+    assert_reports(sabotaged, 'cannot be withdrawn')
+
+
+def test_a_second_inline_script_is_still_caught_beside_the_consent_one(sabotaged):
+    """The allowlist admits the consent block by its key, not every script."""
+    page = sabotaged / 'index.html'
+    page.write_text(read(page).replace(
+        '</body>', '<script>window.x=1</script></body>', 1))
+    assert_reports(sabotaged, 'unexpected inline <script>')
 
 
 def test_broken_jsonld_is_caught(sabotaged):

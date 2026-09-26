@@ -53,13 +53,35 @@ def test_the_retired_contact_page_is_gone(site):
     assert not (site / 'contact').exists()
 
 
-def test_no_page_ships_its_own_javascript(site):
-    """JSON-LD is the only script the site emits, in any build."""
+def test_no_page_ships_script_beyond_json_ld_and_the_consent_gate(site):
+    """The consent script is the one piece of JavaScript, and it is the same
+    block on every page; anything else is script that crept in."""
     for page in sorted(site.rglob('*.html')):
         problems = []
         check_build.check_page(str(site), str(page), problems)
         script_problems = [p for p in problems if 'inline <script>' in p]
         assert script_problems == [], script_problems
+        assert "var KEY='rnaf-consent'" in read(page), page
+
+
+def test_a_development_build_carries_no_script_and_no_dialog(repo, tmp_path):
+    """GOOGLE_ANALYTICS is set in publishconf.py only, so a local preview
+    sets nothing on the device and shows no dialog."""
+    import subprocess
+    import sys
+    out = tmp_path / 'dev'
+    result = subprocess.run(
+        [sys.executable, '-m', 'pelican', 'content', '-o', str(out),
+         '-s', 'pelicanconf.py', '--fatal', 'warnings'],
+        cwd=repo, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    for page in sorted(out.rglob('*.html')):
+        html = read(page)
+        # The privacy notice names the storage key in prose; the script and
+        # the dialog are what must be absent.
+        assert "var KEY='rnaf-consent'" not in html, page
+        assert 'id="cookie-settings"' not in html, page
+        assert 'googletagmanager' not in html, page
 
 
 def test_production_build_uses_absolute_urls(site):

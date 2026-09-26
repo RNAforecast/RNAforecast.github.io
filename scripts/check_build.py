@@ -3,8 +3,9 @@
 
 Checks that the build produced the pages and assets we expect, that every
 reference to the site's own files resolves, and that the pages still request
-nothing from a third party — the site sets no cookies and needs no consent
-banner, and an unnoticed CDN reference is what would quietly end that.
+nothing from a third party — Google Analytics runs behind a consent dialog
+that loads it only on acceptance, so an unnoticed CDN reference or a static
+Google tag is exactly what that dialog exists to prevent.
 
 Outbound links (<a href> to doi.org, ORCID, GitHub …) are not requests and are
 left alone; only subresources — stylesheets, scripts, images, fonts — are held
@@ -64,6 +65,15 @@ SUBRESOURCE_TAGS = {
     'link', 'script', 'img', 'source', 'iframe', 'video', 'audio', 'embed',
 }
 LINK_TAGS = {'a', 'area'}
+
+# The consent gate in base.html is the only script the site runs; it is
+# recognised by its storage key. Anything else inline is script that crept in.
+ALLOWED_INLINE = ("var KEY='rnaf-consent'",)
+
+# The Google tag must only ever be injected by that script after the visitor
+# accepts. Written statically, it would load before anyone was asked.
+GOOGLE_TAG = 'googletagmanager.com/gtag/js'
+CONSENT_DIALOG = 'id="cookie-settings"'
 
 TAG = re.compile(r'<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>')
 ATTR = re.compile(r'\b(href|src|srcset)\s*=\s*["\']([^"\']*)["\']', re.I)
@@ -129,7 +139,8 @@ def check_page(root, page, problems):
             continue
         if 'application/ld+json' in attrs.lower():
             continue
-        # JSON-LD is the only script the site emits; anything else crept in.
+        if any(marker in body for marker in ALLOWED_INLINE):
+            continue
         first = ' '.join(body.split())[:60]
         problems.append(f'{shown}: unexpected inline <script>: {first}')
 
@@ -203,6 +214,38 @@ def check_share_card(root, problems):
             if length > MAX_DESCRIPTION:
                 problems.append(f'{shown}: meta description is {length} chars, '
                                 f'over the {MAX_DESCRIPTION} cap')
+
+
+def check_consent_gate(root, problems):
+    """Google is contacted only after consent, and consent can be changed.
+
+    The gate is a property of the whole page: the tag must not be written as
+    a <script src> (the host check catches that too, but this names the real
+    problem), the dialog the script shows must exist, and the footer must
+    offer a way back into it, or a given consent cannot be withdrawn.
+    """
+    for page in sorted(html_files(root)):
+        shown = os.path.relpath(page, root)
+        with open(page, encoding='utf-8') as f:
+            source = f.read()
+
+        for attrs, _ in SCRIPT.findall(source):
+            if GOOGLE_TAG in attrs:
+                problems.append(f'{shown}: the Google tag is a static '
+                                f'<script src>, so it loads before consent')
+
+        gated = any(marker in source for marker in ALLOWED_INLINE)
+        if not gated:
+            if GOOGLE_TAG in source:
+                problems.append(f'{shown}: mentions the Google tag without '
+                                f'the consent script')
+            continue
+        if CONSENT_DIALOG not in source:
+            problems.append(f'{shown}: consent script without the dialog it '
+                            f'shows')
+        if 'href="#cookie-settings"' not in source:
+            problems.append(f'{shown}: no "Cookie settings" link, so consent '
+                            f'cannot be withdrawn')
 
 
 def check_stylesheet_assets(root, problems):
@@ -494,6 +537,7 @@ def check(root):
         check_page(root, page, problems)
 
     check_share_card(root, problems)
+    check_consent_gate(root, problems)
     check_stylesheet_assets(root, problems)
     check_jsonld(root, problems)
     check_no_accidental_lists(root, problems)
