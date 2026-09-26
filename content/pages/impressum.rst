@@ -20,8 +20,8 @@ Medieninhaber, Diensteanbieter und Verantwortlicher
 | Firmenbuchgericht: Landesgericht St. Pölten
 | UID-Nummer: ATU78022612
 
-Unternehmensgegenstand: Forschung, Softwareentwicklung, wissenschaftliche
-Beratung und Weiterbildung auf dem Gebiet der computergestützten RNA-Biologie.
+Unternehmensgegenstand: Wissenschaftliche Forschung & Entwicklung, sowie 
+Weiterbildung auf dem Gebiet der computergestützten RNA-Biologie.
 
 Für den Inhalt dieser Website verantwortlich: Dr. Michael T. Wolfinger.
 
@@ -67,7 +67,5 @@ verantwortlich.
 Datenschutz
 -----------
 
-Wie diese Website mit personenbezogenen Daten umgeht – was verarbeitet wird,
-auf welcher Rechtsgrundlage, wer Daten erhält, wie lange sie gespeichert werden
-und welche Rechte Sie haben –, ist gesondert in der
-`Datenschutzerklärung </datenschutz/>`__ dargestellt.
+Alle Details zum Umgang dieser Website mit personenbezogenen Daten finden sich in der 
+`Datenschutzerklärung </datenschutz/>`__ .
