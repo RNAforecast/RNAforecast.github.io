@@ -38,6 +38,11 @@ REQUIRED = [
     'sitemap.xml',
     'css/rnaf.css',
     'static/images/og-card.png',
+    'favicon.svg',
+    'apple-touch-icon.png',
+    'site.webmanifest',
+    'static/images/icon-192.png',
+    'static/images/icon-512.png',
 ]
 
 # The imprint and the privacy notice: linked from every page for the people

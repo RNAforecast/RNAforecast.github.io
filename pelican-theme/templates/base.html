@@ -28,8 +28,11 @@
   <link rel="stylesheet" href="{{ href|format_siteurl|e }}" />
   {% endfor %}
   {% if M_FAVICON %}
-  <link rel="icon" href="{{ M_FAVICON[0]|format_siteurl|e }}" type="{{ M_FAVICON[1]|e }}" />
+  <link rel="icon" href="{{ M_FAVICON[0]|format_siteurl|e }}" type="{{ M_FAVICON[1]|e }}" sizes="48x48" />
   {% endif %}
+  <link rel="icon" href="{{ '/favicon.svg'|format_siteurl|e }}" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png'|format_siteurl|e }}" />
+  <link rel="manifest" href="{{ '/site.webmanifest'|format_siteurl|e }}" />
   {% if M_THEME_COLOR %}
   <meta name="theme-color" content="{{ M_THEME_COLOR }}" />
   {% endif %}

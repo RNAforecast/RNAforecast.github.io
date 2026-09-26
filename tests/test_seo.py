@@ -42,6 +42,53 @@ def test_the_share_card_exists_at_the_expected_size(site):
     assert png_size(site / OG_CARD) == OG_CARD_SIZE
 
 
+def test_titles_and_descriptions_are_unique_and_sized(site):
+    """Two pages with one title or one description compete with each other
+    in a result list; a description under 50 chars gets padded by the crawler."""
+    titles, descs = {}, {}
+    for page in sorted(site.rglob('*.html')):
+        html = read(page)
+        title = re.search(r'<title>(.*?)</title>', html, re.S).group(1).strip()
+        desc = re.search(r'<meta name="description" content="([^"]*)"', html).group(1)
+        assert title not in titles, f'{page} shares its title with {titles[title]}'
+        assert desc not in descs, f'{page} shares its description with {descs[desc]}'
+        assert len(title) <= 65, f'{page}: title is {len(title)} chars'
+        assert check_build.MIN_DESCRIPTION <= len(desc) <= check_build.MAX_DESCRIPTION, (
+            f'{page}: description is {len(desc)} chars')
+        titles[title], descs[desc] = page, page
+
+
+def test_every_icon_the_head_promises_exists(site):
+    """Modern tabs take the SVG, iOS the touch icon, installers the manifest."""
+    html = read(site / 'index.html')
+    for rel, href in (('icon', '/favicon.svg'), ('apple-touch-icon', '/apple-touch-icon.png'),
+                      ('manifest', '/site.webmanifest')):
+        assert f'rel="{rel}" href="https://rnaforecast.com{href}"' in html, rel
+        assert (site / href.lstrip('/')).is_file(), href
+    import json
+    manifest = json.loads(read(site / 'site.webmanifest'))
+    for icon in manifest['icons']:
+        assert (site / icon['src'].lstrip('/')).is_file(), icon['src']
+        w, h = check_build.png_size(site / icon['src'].lstrip('/'))
+        assert icon['sizes'] == f'{w}x{h}', icon
+
+
+def test_content_images_load_lazily_and_hero_images_do_not(site):
+    """Every image RST places is below the template-drawn hero.
+
+    The two are told apart by their URL: a template writes an absolute one
+    through format_siteurl, RST leaves the path relative."""
+    for page in sorted(site.rglob('*.html')):
+        html = read(page)
+        body = html.split('<main', 1)[1].split('</main>', 1)[0]
+        for tag in re.findall(r'<img[^>]*>', body, re.S):
+            from_template = 'src="https://rnaforecast.com/' in tag
+            if from_template:
+                assert 'loading="lazy"' not in tag, f'{page}: hero image lazy: {tag[:80]}'
+            else:
+                assert 'loading="lazy"' in tag, f'{page}: content image eager: {tag[:80]}'
+
+
 def test_pages_that_should_not_be_indexed_say_so(site):
     for rel in ['thanks/index.html', '404.html']:
         assert 'noindex' in read(site / rel)

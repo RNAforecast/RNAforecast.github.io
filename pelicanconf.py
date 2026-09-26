@@ -123,6 +123,11 @@ EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     'extra/CNAME': {'path': 'CNAME'},
     'extra/llms.txt': {'path': 'llms.txt'},
+    # Icons beyond the .ico: an SVG for modern tabs, the Apple touch icon at
+    # the root where iOS looks first, and the manifest that names the PNGs.
+    'extra/favicon.svg': {'path': 'favicon.svg'},
+    'extra/apple-touch-icon.png': {'path': 'apple-touch-icon.png'},
+    'extra/site.webmanifest': {'path': 'site.webmanifest'},
 }
 
 PAGE_URL = '{slug}/'
