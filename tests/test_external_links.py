@@ -20,9 +20,10 @@ from conftest import read
 pytestmark = pytest.mark.skipif(not os.environ.get('CHECK_EXTERNAL_LINKS'),
                                 reason='set CHECK_EXTERNAL_LINKS=1')
 SITE_HOSTS = {'rnaforecast.com', 'www.rnaforecast.com'}
-# Single-page apps that answer 404 to non-browser or datacenter requests
-# although the page exists; reported as blocked rather than broken.
-UNRELIABLE_HOSTS = {'bsky.app'}
+# Hosts that refuse scripted requests although the page exists: LinkedIn
+# answers 999, Scopus redirects to a login gate, Bluesky is a single-page
+# app. Reported as blocked rather than broken.
+UNRELIABLE_HOSTS = {'bsky.app', 'www.linkedin.com', 'www.scopus.com'}
 # A browser-like UA: several publishers answer 403 to anything else.
 UA = ('Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 '
       '(KHTML, like Gecko) Chrome/128.0 Safari/537.36')
@@ -55,7 +56,7 @@ def test_external_links_resolve(site):
         results = dict(zip(urls, pool.map(_fetch, urls)))
     broken, blocked = [], []
     for url, status in sorted(results.items()):
-        if status in (403, 429) or urlparse(url).netloc in UNRELIABLE_HOSTS:
+        if status in (403, 429, 999) or urlparse(url).netloc in UNRELIABLE_HOSTS:
             if status != 200:
                 blocked.append(f'{status} {url}')
         elif status != 200:
