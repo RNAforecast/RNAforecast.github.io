@@ -14,7 +14,9 @@ reader needs:
   emits an inline style, which the stylesheet's layout owns and RST may not
   touch, so a content image shipped with no `width`/`height` at all and the
   browser could not reserve space for it. The file itself knows its size, so
-  it is measured here and written onto the tag as plain attributes.
+  it is measured here and written onto the tag as plain attributes. The same
+  rewrite adds `loading="lazy"`: every content image sits below the hero,
+  which the templates draw, so none of them is the first thing on screen.
 
 * **A language attribute.** RST can emit a class but never an attribute, so a
   German title inside an English page could not be marked, and an English
@@ -188,7 +190,9 @@ def size_images(content, content_dir, siteurl):
         if not size:
             return match.group(0)
         count += 1
-        return f'<img {attrs.rstrip()} width="{size[0]}" height="{size[1]}" />'
+        lazy = '' if 'loading=' in attrs else ' loading="lazy"'
+        return (f'<img {attrs.rstrip()} width="{size[0]}" height="{size[1]}"'
+                f'{lazy} />')
 
     return IMG.sub(rewrite, content), count
 
