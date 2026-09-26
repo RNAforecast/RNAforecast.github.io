@@ -37,7 +37,7 @@ make clean      # remove both output dirs
 |---|---|
 | `content/pages/` | the pages, as reStructuredText |
 | `content/css/rnaf.css` | the whole stylesheet, no build step |
-| `content/extra/` | `robots.txt`, `llms.txt`, `CNAME`, favicon |
+| `content/extra/` | `robots.txt`, `llms.txt`, `CNAME`, favicons, touch icon, web manifest |
 | `pelican-theme/templates/` | `base.html` and `page.html` |
 | `plugins/` | the RST writer, the sitemap, the publication structured data |
 | `scripts/check_build.py` | smoke tests over a built site |
