@@ -1,0 +1,9 @@
+# Every URL the live sitemap listed on 26 September 2026. A URL that stops
+# producing a file is a broken link somewhere on the web; add it to
+# RETIRED in tests/test_urls.py only with a redirect in place at Cloudflare.
+https://rnaforecast.com/
+https://rnaforecast.com/about/
+https://rnaforecast.com/insights/
+https://rnaforecast.com/insights/rna-structure-before-the-experiment/
+https://rnaforecast.com/publications/
+https://rnaforecast.com/research/
