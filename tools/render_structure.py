@@ -39,6 +39,7 @@ cmd.png("cand-%s.png" % pdb, width=1360, height=1646, dpi=144, ray=1)
 # Usage:
 #   curl -O https://files.rcsb.org/download/2GIS.cif
 #   pymol -cq tools/render_structure.py -- 2GIS
+#   (run from the repository root; the PNG goes to content/static/images/)
 #
 # Produces cand-<ID>.png with a transparent background, ray traced at
 # 1360x1646 (2x the site's 680x823 hero ratio). Flatten onto the page ground

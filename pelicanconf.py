@@ -115,6 +115,9 @@ R_FOOTER_PROFILES = [('GitHub', 'https://github.com/mtw'),
                       'https://scholar.google.at/citations?user=w0PHGnEAAAAJ&hl=en')]
 
 STATIC_PATHS = ['static', 'extra', 'css', 'files']
+# Everything under STATIC_PATHS is copied as-is, so a Finder .DS_Store in a
+# working copy would ship. The build checker refuses dotfiles and scripts.
+IGNORE_FILES = ['.#*', '.DS_Store']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/favicon.ico': {'path': 'favicon.ico'},

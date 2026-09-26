@@ -487,6 +487,20 @@ def check_venue_badges_alternate(root, problems):
                 break
 
 
+def check_no_working_files(root, problems):
+    """Nothing that is not content ships: no dotfiles, no scripts.
+
+    STATIC_PATHS copies whole directories, so a Finder .DS_Store or a helper
+    script parked beside the images it makes would be published at a URL of
+    its own. One was, for a while.
+    """
+    for dirpath, dirnames, names in os.walk(root):
+        for name in names:
+            rel = os.path.relpath(os.path.join(dirpath, name), root)
+            if name.startswith('.') or name.endswith(('.py', '.pyc', '.sh')):
+                problems.append(f'{rel}: working file in the build')
+
+
 def check_robots_and_sitemap(root, problems):
     robots_path = os.path.join(root, 'robots.txt')
     if os.path.isfile(robots_path):
@@ -545,6 +559,7 @@ def check(root):
     check_fragment_links(root, problems)
     check_email_text_is_escaped(root, problems)
     check_excluded_paths(root, problems)
+    check_no_working_files(root, problems)
     check_robots_and_sitemap(root, problems)
 
     return problems, len(pages)

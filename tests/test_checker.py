@@ -162,6 +162,24 @@ def test_the_declared_form_endpoint_is_accepted(site):
     assert problems_for(site) == []
 
 
+def test_a_working_file_in_the_build_is_caught(sabotaged):
+    """A .DS_Store or a helper script copied along with the images."""
+    (sabotaged / 'static' / 'images' / '.DS_Store').write_bytes(b'\0')
+    (sabotaged / 'static' / 'images' / 'render.py').write_text('print(1)')
+    found = problems_for(sabotaged)
+    assert any('.DS_Store: working file' in p for p in found), found
+    assert any('render.py: working file' in p for p in found), found
+
+
+def test_a_short_description_is_caught(sabotaged):
+    page = sabotaged / 'thanks' / 'index.html'
+    html = read(page)
+    html = re.sub(r'<meta name="description" content="[^"]*"',
+                  '<meta name="description" content="Sent."', html, count=1)
+    page.write_text(html)
+    assert_reports(sabotaged, 'under the 50 floor')
+
+
 def test_a_field_parsed_as_a_list_is_caught(sabotaged):
     """"J. General Virology" became <ol start="10">, losing the "J." and
     printing "10." on the page."""
