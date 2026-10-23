@@ -7,7 +7,7 @@
    Edit those and run: make insight-web SLUG=rna-structure-before-the-experiment
    An edit made here is lost on the next build, and CI fails when this file
    does not match what the sources produce.
-   Generated with pandoc 3.11.
+   Generated with pandoc 3.12.1.
 
 RNA Structure Before the Experiment
 ###################################
@@ -18,7 +18,7 @@ RNA Structure Before the Experiment
 :modified: 2026-09-22
 :author: Michael T. Wolfinger
 :status: published
-:description: How ensemble-aware RNA structure analysis reveals structural consequences of sequence choices before experimental testing.
+:description: Does mRNA structure change protein expression, and can it be predicted? Ensemble-aware structure analysis for RNA design, before the experiment.
 :summary: Whether RNA is the therapeutic molecule or the therapeutic target, structural effects are often hidden behind a sequence-level view. Ensemble-aware RNA structure analysis can reveal these effects and help turn them into experimentally testable hypotheses.
 :bib_abstract: Whether RNA itself is the therapeutic molecule or the therapeutic target, design decisions are often made primarily at the sequence level. The RNA molecule, however, occupies a folding landscape that can change during synthesis, binding, modification, translation, and degradation. For RNA constructs, sequence changes can alter structural ensembles, accessibility and folding behaviour. For RNA targets, these same structural properties influence which sites and conformations are available for interaction. This perspective examines how ensemble-aware RNA structure analysis can make such effects explicit before an experiment is run. Using examples from mRNA design, target accessibility, cotranscriptional folding and modified nucleotides, it discusses both the value and the limitations of thermodynamic structure models. Structural analysis does not predict therapeutic efficacy, but it can reveal relevant differences between variants, make design assumptions explicit and help formulate experimentally testable hypotheses.
 :tags: RNA structure, RNA therapeutics, mRNA, RNA folding, RNA ensembles

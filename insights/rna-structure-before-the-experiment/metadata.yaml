@@ -56,8 +56,8 @@ abstract:
   testable hypotheses.
 
 description: >-
-  How ensemble-aware RNA structure analysis reveals structural consequences of
-  sequence choices before experimental testing.
+  Does mRNA structure change protein expression, and can it be predicted?
+  Ensemble-aware structure analysis for RNA design, before the experiment.
 
 summary: >-
   Whether RNA is the therapeutic molecule or the therapeutic target, structural

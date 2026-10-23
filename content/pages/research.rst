@@ -1,9 +1,9 @@
 Research
 ########
 
-:title: Research, RNA Forecast | Michael T. Wolfinger
+:title: Predictive modelling of RNA structure | RNA Forecast Research
 :slug: research
-:description: Eight research themes at RNA Forecast: RNA structure prediction, engineering, functional RNAs, viral RNA biology, evolution and folding kinetics.
+:description: Predictive modelling of RNA structure for RNA therapeutics and design: structure prediction, folding kinetics, functional and viral RNAs, evolution.
 :summary: Eight connected research themes in computational RNA biology, each grounded in published results, open software and active collaboration.
 :og_type: website
 :hero_kicker: Research

@@ -1,10 +1,10 @@
 Home
 ####
 
-:title: RNA Forecast, Michael T. Wolfinger | Computational RNA Biology
+:title: RNA Forecast | RNA structure prediction, RNA design and training
 :url:
 :save_as: index.html
-:description: Independent research platform for computational RNA biology: RNA structure prediction, folding kinetics, RNA design and viral RNA biology.
+:description: Computational RNA biology research platform in Vienna: RNA structure prediction, folding kinetics, RNA design, viral RNA and hands-on training.
 :summary: Independent research platform for computational RNA biology. Research, software, collaboration and training.
 :hero_kicker: Independent research platform
 :hero_title: RNA Forecast
@@ -374,11 +374,11 @@ Teaching and advanced training
 
     Michael T. Wolfinger has taught computational biology, bioinformatics and RNA analysis at universities in Austria and Germany for more than two decades.
 
-    Through RNA Forecast, Michael also develops and delivers advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial audiences.
+    Through RNA Forecast, Michael also develops advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial audiences. Two training formats are in preparation; the training page has the details and a waitlist for each.
 
     .. container:: actions
 
-      `Teaching and service → </about/>`_
+      `Training and waitlists → </training/>`_
       `Teaching portfolio → <https://michaelwolfinger.com/teaching/>`_
 
   .. container:: blueprint
