@@ -19,7 +19,7 @@ RETIRED = set()
 
 # URLs added since the fixture: new pages, new Insights. Update the fixture
 # and empty this set once they are live.
-ADDED = {'https://rnaforecast.com/training/'}
+ADDED = set()
 
 
 def fixture_urls():
