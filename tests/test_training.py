@@ -4,6 +4,7 @@ and nothing that claims a course is bookable."""
 import re
 
 from conftest import nodes_of, read
+from scripts.check_build import formsubmit_endpoint
 
 PAGE = 'training/index.html'
 
@@ -20,7 +21,7 @@ def test_each_waitlist_form_is_complete(site):
     assert len(forms) == 2
     topics = set()
     for form in forms:
-        assert 'action="https://formsubmit.co/hello@rnaforecast.com"' in form
+        assert f'action="https://formsubmit.co/{formsubmit_endpoint()}"' in form
         assert 'name="_next" value="https://rnaforecast.com/waitlist/"' in form
         assert 'name="_autoresponse"' in form
         assert 'name="_honey"' in form
@@ -51,3 +52,16 @@ def test_the_confirmation_page_is_unlisted(site):
     html = read(site / 'waitlist' / 'index.html')
     assert 'noindex' in html
     assert 'waitlist' not in read(site / 'sitemap.xml')
+
+
+def test_the_endpoint_setting_rewrites_every_form():
+    """Content keeps the readable address; the build routes to the setting."""
+    from plugins.semantics import route_forms
+    html = ('<form action="https://formsubmit.co/hello@rnaforecast.com">'
+            '<form action="https://formsubmit.co/hello@rnaforecast.com">')
+    routed, count = route_forms(html, 'a1b2c3d4e5f6')
+    assert count == 2
+    assert routed.count('action="https://formsubmit.co/a1b2c3d4e5f6"') == 2
+    assert '@' not in routed
+    same, count = route_forms(html, 'hello@rnaforecast.com')
+    assert same == html and count == 0

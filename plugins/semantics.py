@@ -18,6 +18,12 @@ reader needs:
   rewrite adds `loading="lazy"`: every content image sits below the hero,
   which the templates draw, so none of them is the first thing on screen.
 
+* **The form endpoint.** The contact and waitlist forms are raw HTML in the
+  content, written against the readable address. FormSubmit also accepts a
+  random string in place of the address, which keeps it off the page;
+  `FORMSUBMIT_ENDPOINT` holds whichever is in use and the action is rewritten
+  here, so the switch is one setting and not three files.
+
 * **A language attribute.** RST can emit a class but never an attribute, so a
   German title inside an English page could not be marked, and an English
   voice reads it as gibberish. A `lang-de` class on the container becomes a
@@ -197,6 +203,24 @@ def size_images(content, content_dir, siteurl):
     return IMG.sub(rewrite, content), count
 
 
+FORM_ACTION = re.compile(r'(action="https://formsubmit\.co/)([^"]+)(")')
+
+
+def route_forms(content, endpoint):
+    """Point every FormSubmit action at the configured endpoint."""
+    if not endpoint:
+        return content, 0
+    count = 0
+
+    def rewrite(match):
+        nonlocal count
+        if match.group(2) != endpoint:
+            count += 1
+        return f'{match.group(1)}{endpoint}{match.group(3)}'
+
+    return FORM_ACTION.sub(rewrite, content), count
+
+
 def apply(generator):
     for item in list(getattr(generator, 'pages', [])) + \
                 list(getattr(generator, 'articles', [])):
@@ -214,6 +238,12 @@ def apply(generator):
             item._content = sized
             logger.info('semantics: sized %s image(s) on %s', images,
                         item.slug)
+
+        routed, forms = route_forms(
+            item._content, generator.settings.get('FORMSUBMIT_ENDPOINT'))
+        if forms:
+            item._content = routed
+            logger.info('semantics: routed %s form(s) on %s', forms, item.slug)
 
 
 def register():

@@ -180,6 +180,16 @@ def test_a_short_description_is_caught(sabotaged):
     assert_reports(sabotaged, 'under the 50 floor')
 
 
+def test_a_form_posting_past_the_configured_endpoint_is_caught(sabotaged):
+    """The endpoint is one setting; a form written against another address
+    would send enquiries somewhere else."""
+    page = sabotaged / 'index.html'
+    page.write_text(read(page).replace(
+        'https://formsubmit.co/', 'https://formsubmit.co/someone-else@example.org', 1))
+    found = problems_for(sabotaged)
+    assert any('configured FormSubmit endpoint' in p for p in found), found
+
+
 def test_a_field_parsed_as_a_list_is_caught(sabotaged):
     """"J. General Virology" became <ol start="10">, losing the "J." and
     printing "10." on the page."""

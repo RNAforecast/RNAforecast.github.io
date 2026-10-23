@@ -364,6 +364,13 @@ SITEMAP = {
     "exclude": ["impressum", "datenschutz", "thanks", "waitlist", "404"]
 }
 
+# Where the FormSubmit forms post. The content writes the address, which is
+# readable; the build rewrites it to this value (plugins/semantics.py). Once
+# FormSubmit has activated the address it offers a random-string endpoint in
+# its confirmation; put that string here and the address leaves the page.
+# scripts/check_build.py keeps the host to formsubmit.co either way.
+FORMSUBMIT_ENDPOINT = 'hello@rnaforecast.com'
+
 # Search Console token; empty means no meta tag. A DNS TXT record verifies
 # the whole domain instead and survives redesigns.
 GOOGLE_SITE_VERIFICATION = ''

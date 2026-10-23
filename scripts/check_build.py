@@ -69,6 +69,18 @@ ALLOWED_HOSTS = {SITE_HOST}
 # matching disclosure in the privacy notice.
 FORM_ACTION_HOSTS = {SITE_HOST, 'formsubmit.co'}
 
+
+def formsubmit_endpoint():
+    """The endpoint every FormSubmit form must post to, from pelicanconf."""
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    try:
+        with open(os.path.join(here, 'pelicanconf.py'), encoding='utf-8') as f:
+            found = re.search(r"^FORMSUBMIT_ENDPOINT\s*=\s*'([^']+)'", f.read(),
+                              re.M)
+    except OSError:
+        return None
+    return found.group(1) if found else None
+
 SUBRESOURCE_TAGS = {
     'link', 'script', 'img', 'source', 'iframe', 'video', 'audio', 'embed',
 }
@@ -156,10 +168,16 @@ def check_page(root, page, problems):
         action = ACTION.search(attrs)
         if not action:
             continue
-        host = urlsplit(html.unescape(action.group(1))).netloc
+        target = html.unescape(action.group(1))
+        host = urlsplit(target).netloc
         if host and host not in FORM_ACTION_HOSTS:
             problems.append(f'{shown}: form posts to {host}, which is not a '
                             f'declared endpoint')
+        endpoint = formsubmit_endpoint()
+        if host == 'formsubmit.co' and endpoint and \
+                urlsplit(target).path != f'/{endpoint}':
+            problems.append(f'{shown}: form posts to {target}, not to the '
+                            f'configured FormSubmit endpoint')
 
     seen = set()
     for tag, attrs in TAG.findall(source):
