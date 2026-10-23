@@ -27,6 +27,7 @@ Organization nodes they reference so the graph stands on its own.
 
 import json
 import logging
+import os
 import re
 from html.parser import HTMLParser
 
@@ -179,6 +180,69 @@ def make_author(name, author_id):
     return person
 
 
+def normalise_name(name):
+    """Surnames as the page and Crossref each write them, made comparable."""
+    return (name.replace('\u2019', "'").replace('\xa0', ' ')
+            .casefold().strip())
+
+
+def enrich(article, meta):
+    """Merge what Crossref knows about a journal paper into its node.
+
+    The full listing prints surnames only, so without this every co-author
+    is a Person with a family name and nothing to match on. Crossref has
+    the given names, and the ISSN, volume, issue and pages that make the
+    venue an identifier rather than a label. Matched by DOI; a surname the
+    record does not list is left as the page wrote it.
+    """
+    doi = (article.get('identifier') or {}).get('value')
+    info = (meta or {}).get(doi)
+    if not info:
+        return article
+
+    pending = {}
+    for family, given in info.get('authors', []):
+        pending.setdefault(normalise_name(family), []).append((family, given))
+    for author in article.get('author', []):
+        if '@type' not in author or author.get('givenName'):
+            continue
+        matches = pending.get(normalise_name(author['familyName']))
+        if matches:
+            family, given = matches.pop(0)
+            author['familyName'] = family
+            author['givenName'] = given
+            author['name'] = f'{given} {family}'
+
+    periodical = article.get('isPartOf')
+    if periodical:
+        if info.get('journal') and info['journal'] != periodical['name']:
+            periodical['alternateName'] = info['journal']
+        if info.get('issn'):
+            issn = info['issn']
+            periodical['issn'] = issn[0] if len(issn) == 1 else issn
+        container = periodical
+        if info.get('volume'):
+            container = {'@type': 'PublicationVolume',
+                         'volumeNumber': info['volume'],
+                         'isPartOf': container}
+        if info.get('issue'):
+            container = {'@type': 'PublicationIssue',
+                         'issueNumber': info['issue'],
+                         'isPartOf': container}
+        article['isPartOf'] = container
+    if info.get('pages'):
+        article['pagination'] = info['pages']
+    return article
+
+
+def periodical_of(article):
+    """The Periodical at the bottom of an article's isPartOf chain."""
+    node = article.get('isPartOf')
+    while node and node.get('@type') != 'Periodical':
+        node = node.get('isPartOf')
+    return node
+
+
 def article_from(pub, fallback_year, author_id, dates=None):
     """Build one ScholarlyArticle, or None if the block has no title."""
     title = text_of(pub, 'pub-title')
@@ -290,7 +354,7 @@ def resolve_references(nodes, available):
 
 
 def build_graph(content, page_url, page_name, site_url,
-                person_node=None, dates=None):
+                person_node=None, dates=None, meta=None):
     tree = Tree()
     tree.feed(content)
     author_id = f'{site_url}/{AUTHOR_FRAGMENT}' if site_url else AUTHOR_FRAGMENT
@@ -302,7 +366,7 @@ def build_graph(content, page_url, page_name, site_url,
         for pub in group.find_all('pub'):
             article = article_from(pub, year, author_id, dates)
             if article:
-                articles.append(article)
+                articles.append(enrich(article, meta))
 
     grouped = {id(pub) for group in tree.root.find_all('pub-group')
                for pub in group.find_all('pub')}
@@ -310,7 +374,7 @@ def build_graph(content, page_url, page_name, site_url,
         if id(pub) not in grouped:
             article = article_from(pub, '', author_id, dates)
             if article:
-                articles.append(article)
+                articles.append(enrich(article, meta))
 
     if not articles:
         return None
@@ -521,18 +585,29 @@ def attach_articles(article_generator):
 
 
 def insights_nodes(page, articles, settings, siteurl):
-    """The library page: a CollectionPage whose list names each Insight.
+    """The library page: a CollectionPage whose list points at each Insight.
 
-    A plain ItemList of names and URLs, not @id references: the landing page
-    does not carry the article nodes themselves, and a reference to a node it
-    does not define would dangle.
+    The list items reference the article nodes by @id, the same @id each
+    Insight's own page uses, and a summary node for each travels with the
+    page so that nothing dangles: headline, URL, date, author, publisher.
     """
     page_url = f'{siteurl}/{page.url}' if siteurl else f'/{page.url}'
+    ordered = sorted(articles, key=lambda a: a.date, reverse=True)
+    summaries = []
+    for article in ordered:
+        url = f'{siteurl}/{article.url}' if siteurl else f'/{article.url}'
+        summaries.append({
+            '@type': 'ScholarlyArticle',
+            '@id': f'{url}#article',
+            'headline': article.title,
+            'url': url,
+            'datePublished': article.date.date().isoformat(),
+            'author': {'@id': absolutise(AUTHOR_FRAGMENT, siteurl, '@id')},
+            'publisher': {'@id': absolutise('#organization', siteurl, '@id')},
+        })
     items = [
-        {'@type': 'ListItem', 'position': i, 'name': article.title,
-         'url': f'{siteurl}/{article.url}' if siteurl else f'/{article.url}'}
-        for i, article in enumerate(
-            sorted(articles, key=lambda a: a.date, reverse=True), start=1)
+        {'@type': 'ListItem', 'position': i, 'item': {'@id': node['@id']}}
+        for i, node in enumerate(summaries, start=1)
     ]
     collection = {
         '@type': 'CollectionPage',
@@ -547,7 +622,7 @@ def insights_nodes(page, articles, settings, siteurl):
             'itemListOrder': 'https://schema.org/ItemListOrderDescending',
             'itemListElement': items,
         }
-    return [collection]
+    return [collection] + summaries
 
 
 def full_person(settings, siteurl, fallback_id):
@@ -566,6 +641,39 @@ def full_person(settings, siteurl, fallback_id):
 
 PAGE_TYPES = {'WebPage', 'CollectionPage', 'ProfilePage', 'AboutPage',
               'ContactPage'}
+
+
+def git_dates(source):
+    """(first commit, last commit) of a source file as ISO dates, or None.
+
+    Google's ProfilePage guidance asks for dateCreated and dateModified;
+    the repository knows both, the way the sitemap knows lastmod. Needs the
+    full history (CI checks out with fetch-depth: 0).
+    """
+    import subprocess
+    if not source or not os.path.exists(source):
+        return None
+    try:
+        out = subprocess.run(
+            ['git', 'log', '--format=%cI', '--', os.path.basename(source)],
+            cwd=os.path.dirname(source) or '.', capture_output=True,
+            text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    dates = out.stdout.split()
+    if out.returncode != 0 or not dates:
+        return None
+    return dates[-1][:10], dates[0][:10]
+
+
+def date_profile(nodes, source):
+    for node in nodes:
+        if node.get('@type') == 'ProfilePage':
+            found = git_dates(source)
+            if found:
+                node.setdefault('dateCreated', found[0])
+                node.setdefault('dateModified', found[1])
+    return nodes
 
 
 def situate(nodes, siteurl):
@@ -603,7 +711,8 @@ def attach(page_generator):
         graph = build_graph(page.content or '', page_url, page_label(page),
                             siteurl,
                             full_person(settings, siteurl, author_id),
-                            settings.get('R_PUB_DATES'))
+                            settings.get('R_PUB_DATES'),
+                            settings.get('R_PUB_META'))
         nodes = graph['@graph'] if graph else []
 
         if is_home:
@@ -619,6 +728,7 @@ def attach(page_generator):
             lead = [person] if person else []
             nodes = absolutise(lead + extra, siteurl) + nodes
             nodes = resolve_references(nodes, absolutise(site_graph, siteurl))
+            nodes = date_profile(nodes, getattr(page, 'source_path', None))
 
         if not nodes:
             continue

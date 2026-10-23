@@ -336,7 +336,8 @@ def test_every_publication_is_fully_described(site):
         assert article['url'].startswith('https://doi.org/')
         assert article['identifier']['propertyID'] == 'DOI'
         assert article['datePublished']
-        assert article['isPartOf']['name']
+        from plugins.scholarly import periodical_of
+        assert periodical_of(article)['name']
         assert article['description']
         # The site's one-line gloss is not the paper's published abstract.
         assert 'abstract' not in article
@@ -456,6 +457,81 @@ def test_publication_dates_do_not_drift_from_the_page(site, repo):
         assert doi in articles, f'{doi} is in R_PUB_DATES but not on the page'
         assert articles[doi]['datePublished'] == date
         assert re.search(rf'\({date[:4]}\)', page), f'{doi}: year disagrees'
+
+
+def test_publication_metadata_does_not_drift_from_the_page(site, repo):
+    """R_PUB_META is Crossref's view of each paper; it is pinned to the page:
+    every key is a DOI on the page, the surnames agree in order, and the
+    venue gains an ISSN. The owner is never in the map."""
+    import importlib.util
+    from plugins.scholarly import normalise_name, periodical_of
+    spec = importlib.util.spec_from_file_location('conf', repo / 'pelicanconf.py')
+    conf = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(conf)
+
+    page = site / 'publications' / 'index.html'
+    articles = {a['identifier']['value']: a
+                for a in nodes_of(page, 'ScholarlyArticle')}
+    for doi, info in conf.R_PUB_META.items():
+        assert doi in articles, f'{doi} is in R_PUB_META but not on the page'
+        article = articles[doi]
+        listed = [normalise_name(a['familyName']) for a in article['author']
+                  if '@type' in a]
+        mapped = [normalise_name(f) for f, _ in info['authors']]
+        assert listed == mapped, f'{doi}: page {listed} vs map {mapped}'
+        assert all('Wolfinger' not in f for f, _ in info['authors'])
+        for author in article['author']:
+            if '@type' in author:
+                assert author['givenName'], f'{doi}: {author}'
+                assert author['name'] == f"{author['givenName']} {author['familyName']}"
+        assert periodical_of(article)['issn']
+        if info.get('volume'):
+            chain = article['isPartOf']
+            kinds = []
+            while chain:
+                kinds.append(chain['@type'])
+                chain = chain.get('isPartOf')
+            assert kinds[-1] == 'Periodical' and 'PublicationVolume' in kinds
+
+
+def test_the_insights_list_points_at_the_article_nodes(site):
+    """Each list item references an Insight by the @id its own page uses,
+    and the summary node it points at travels with the list."""
+    page = site / 'insights' / 'index.html'
+    collection, = nodes_of(page, 'CollectionPage')
+    items = collection['mainEntity']['itemListElement']
+    present = {n['@id'] for n in nodes_of(page, 'ScholarlyArticle')}
+    for item in items:
+        assert item['item']['@id'] in present
+        assert item['item']['@id'].endswith('/#article')
+    insight = site / 'insights' / 'rna-structure-before-the-experiment' / 'index.html'
+    if insight.is_file():
+        own, = nodes_of(insight, 'ScholarlyArticle')
+        assert own['@id'] in present
+
+
+def test_the_profile_page_is_dated(site):
+    profile, = nodes_of(site / 'about' / 'index.html', 'ProfilePage')
+    assert re.fullmatch(r'\d{4}-\d{2}-\d{2}', profile['dateCreated'])
+    assert re.fullmatch(r'\d{4}-\d{2}-\d{2}', profile['dateModified'])
+    assert profile['dateCreated'] <= profile['dateModified']
+
+
+def test_the_person_and_organization_carry_registry_signals(site):
+    person = next(n for n in nodes_of(site / 'index.html', 'Person')
+                  if n['@id'] == AUTHOR_ID)
+    assert person['honorificPrefix'] == 'Mag. Dr.'
+    assert person['alumniOf']['name'] == 'University of Vienna'
+    assert set(person['knowsLanguage']) == {'en', 'de'}
+    assert person['address']['addressLocality'] == 'Purkersdorf'
+    assert 'streetAddress' not in person['address']
+    assert person['hasOccupation']['name']
+    org, = nodes_of(site / 'index.html', 'Organization')
+    assert org['vatID'] == 'ATU78022612'
+    assert org['identifier']['value'] == 'FN 597678p'
+    assert 'streetAddress' not in org['address']
+    for course in nodes_of(site / 'training' / 'index.html', 'Course'):
+        assert course['educationalLevel'] and course['audience']['educationalRole']
 
 
 # --- how the site situates its own pages -----------------------------------

@@ -166,7 +166,19 @@ R_SITE_GRAPH = [
         "name": "Michael T. Wolfinger",
         "givenName": "Michael",
         "familyName": "Wolfinger",
+        "honorificPrefix": "Mag. Dr.",
         "jobTitle": "Computational RNA Biologist",
+        "hasOccupation": {"@type": "Occupation",
+                          "name": "Computational RNA biologist",
+                          "occupationLocation": {"@type": "City",
+                                                 "name": "Vienna"}},
+        "alumniOf": {"@type": "CollegeOrUniversity",
+                     "name": "University of Vienna",
+                     "sameAs": "https://www.univie.ac.at/"},
+        "knowsLanguage": ["en", "de"],
+        "address": {"@type": "PostalAddress",
+                    "addressLocality": "Purkersdorf",
+                    "addressCountry": "AT"},
         "email": "hello@rnaforecast.com",
         "url": "https://michaelwolfinger.com/",
         "image": "/static/images/mtw.jpg",
@@ -203,6 +215,12 @@ R_SITE_GRAPH = [
         # says everywhere; this is what a machine needs to identify it.
         "legalName": "RNA Forecast e.U.",
         "alternateName": "RNA Forecast, Computational RNA Biology",
+        # Registry identifiers, both public in the Impressum: what lets a
+        # consumer merge this node with the commercial register entry.
+        "vatID": "ATU78022612",
+        "identifier": {"@type": "PropertyValue",
+                       "propertyID": "Firmenbuchnummer",
+                       "value": "FN 597678p"},
         "url": "/",
         # A publisher logo is what Google's Article guidance asks for, and
         # nothing else on the site provided one.
@@ -254,7 +272,7 @@ R_SITE_GRAPH = [
         "@type": "WebPage",
         "@id": "#webpage",
         "url": "/",
-        "name": "RNA Forecast, Michael T. Wolfinger",
+        "name": "RNA Forecast",
         "about": {"@id": "#michael-t-wolfinger"},
         "mainEntity": {"@id": "#organization"},
     },
@@ -306,6 +324,11 @@ R_PAGE_GRAPHS = {
             "inLanguage": "en",
             "teaches": ["RNA secondary structure prediction", "ViennaRNA",
                         "RNA folding kinetics", "RNA design"],
+            "educationalLevel": "Intermediate",
+            "audience": {"@type": "EducationalAudience",
+                         "educationalRole": "researcher",
+                         "audienceType": "Experimental RNA labs, biotech "
+                                         "teams, doctoral programmes"},
         },
         {
             "@type": "Course",
@@ -322,6 +345,11 @@ R_PAGE_GRAPHS = {
             "inLanguage": "en",
             "teaches": ["Local large language models", "Coding agents",
                         "Reproducible research workflows"],
+            "educationalLevel": "Beginner",
+            "audience": {"@type": "EducationalAudience",
+                         "educationalRole": "researcher",
+                         "audienceType": "Research groups whose data must "
+                                         "stay on their own machines"},
         },
     ],
     "about": [
@@ -356,6 +384,184 @@ R_PUB_DATES = {
     "10.1246/bcsj.20230092": "2023-07-15",
     "10.1093/nar/gkad223": "2023-05-22",
     "10.1007/s12268-023-1907-x": "2023-03",
+}
+
+# What the registration agency knows about each journal paper and the page
+# does not print: the co-authors' given names (the full listing writes
+# surnames only), the journal's ISSN and full title, volume, issue and pages.
+# plugins/scholarly.py merges it into each ScholarlyArticle, so a consumer
+# can match the authors and the venue instead of guessing from a surname and
+# an abbreviation. Fetched from Crossref, not typed, and like R_PUB_DATES
+# pinned to the page by tests/test_seo.py: every key is a DOI on the page and
+# the surnames agree in order. The owner is referenced by @id, never listed
+# here. The two Zenodo workshop papers have no Crossref record and no entry.
+R_PUB_META = {
+    "10.3390/ijms27167228": {
+        "journal": "International Journal of Molecular Sciences",
+        "issn": ["1422-0067"],
+        "volume": "27",
+        "issue": "16",
+        "pages": "7228",
+        "authors": [
+            ("Aman", "Aamir"),
+            ("Sidl", "Leonhard"),
+            ("Darai", "Nitchakan"),
+            ("Wolschann", "Peter"),
+            ("Rungrotmongkol", "Thanyada"),
+        ],
+    },
+    "10.1093/nar/gkag473": {
+        "journal": "Nucleic Acids Research",
+        "issn": ["0305-1048", "1362-4962"],
+        "volume": "54",
+        "issue": "9",
+        "authors": [
+            ("Walter", "Jule"),
+            ("Sidl", "Leonhard"),
+            ("Gutenbrunner", "Katrin"),
+            ("Skibinski", "Denis"),
+            ("Kolberg", "Tim"),
+            ("Hofacker", "Ivo L"),
+            ("Yao", "Hua-Ting"),
+            ("Mörl", "Mario"),
+        ],
+    },
+    "10.1038/s41587-025-02739-0": {
+        "journal": "Nature Biotechnology",
+        "issn": ["1087-0156", "1546-1696"],
+        "volume": "44",
+        "issue": "6",
+        "pages": "989-1001",
+        "authors": [
+            ("Borovská", "Ivana"),
+            ("Zhang", "Chundan"),
+            ("Dülk", "Sarah-Luisa J."),
+            ("Morandi", "Edoardo"),
+            ("Cardoso", "Marta F. S."),
+            ("Bourkia", "Billal M."),
+            ("van den Homberg", "Daphne A. L."),
+            ("Velema", "Willem A."),
+            ("Incarnato", "Danny"),
+        ],
+    },
+    "10.2306/scienceasia1513-1874.2025.s013": {
+        "journal": "ScienceAsia",
+        "issn": ["1513-1874"],
+        "volume": "51S",
+        "issue": "1",
+        "pages": "1-10",
+        "authors": [
+            ("Darai", "Nitchakan"),
+            ("Sidl", "Leonhard"),
+            ("Rungrotmongkol", "Thanyada"),
+            ("Wolschann", "Peter"),
+        ],
+    },
+    "10.1128/jvi.01215-24": {
+        "journal": "Journal of Virology",
+        "issn": ["0022-538X", "1098-5514"],
+        "volume": "98",
+        "issue": "11",
+        "authors": [
+            ("Besson", "Benoit"),
+            ("Overheul", "Gijs J."),
+            ("Junglen", "Sandra"),
+            ("van Rij", "Ronald P."),
+        ],
+    },
+    "10.1099/jgv.0.001991": {
+        "journal": "Journal of General Virology",
+        "issn": ["0022-1317", "1465-2099"],
+        "volume": "105",
+        "issue": "5",
+        "authors": [
+            ("Wang", "Lan-Lan"),
+            ("Cheng", "Qia"),
+            ("Newton", "Natalee D."),
+            ("Morgan", "Mahali S."),
+            ("Slonchak", "Andrii"),
+            ("Khromykh", "Alexander A."),
+            ("Cheng", "Tian-Yin"),
+            ("Parry", "Rhys H."),
+        ],
+    },
+    "10.1038/s41564-023-01587-5": {
+        "journal": "Nature Microbiology",
+        "issn": ["2058-5276"],
+        "volume": "9",
+        "issue": "2",
+        "pages": "550-560",
+        "authors": [
+            ("McBroome", "Jakob"),
+            ("de Bernardi Schneider", "Adriano"),
+            ("Roemer", "Cornelius"),
+            ("Hinrichs", "Angie S."),
+            ("O'Toole", "Aine Niamh"),
+            ("Ruis", "Christopher"),
+            ("Turakhia", "Yatish"),
+            ("Rambaut", "Andrew"),
+            ("Corbett-Detig", "Russell"),
+        ],
+    },
+    "10.1139/bcb-2023-0036": {
+        "journal": "Biochemistry and Cell Biology",
+        "issn": ["0829-8211", "1208-6002"],
+        "volume": "102",
+        "issue": "1",
+        "pages": "96-105",
+        "authors": [
+            ("Gemmill", "Dannielle L."),
+            ("Nelson", "Corey R."),
+            ("Badmalia", "Maulik D."),
+            ("Pereira", "Higor S."),
+            ("Kerr", "Liam"),
+            ("Patel", "Trushar R."),
+        ],
+    },
+    "10.1246/bcsj.20230092": {
+        "journal": "Bulletin of the Chemical Society of Japan",
+        "issn": ["0009-2673", "1348-0634"],
+        "volume": "96",
+        "issue": "7",
+        "pages": "677-685",
+        "authors": [
+            ("Darai", "Nitchakan"),
+            ("Hengphasatporn", "Kowit"),
+            ("Wolschann", "Peter"),
+            ("Shigeta", "Yasuteru"),
+            ("Rungrotmongkol", "Thanyada"),
+            ("Harada", "Ryuhei"),
+        ],
+    },
+    "10.1093/nar/gkad223": {
+        "journal": "Nucleic Acids Research",
+        "issn": ["0305-1048", "1362-4962"],
+        "volume": "51",
+        "issue": "9",
+        "pages": "4588-4601",
+        "authors": [
+            ("Mrozowich", "Tyler"),
+            ("Park", "Sean M"),
+            ("Waldl", "Maria"),
+            ("Henrickson", "Amy"),
+            ("Tersteeg", "Scott"),
+            ("Nelson", "Corey R"),
+            ("De Klerk", "Anneke"),
+            ("Demeler", "Borries"),
+            ("Hofacker", "Ivo L"),
+            ("Patel", "Trushar R"),
+        ],
+    },
+    "10.1007/s12268-023-1907-x": {
+        "journal": "BIOspektrum",
+        "issn": ["0947-0867", "1868-6249"],
+        "volume": "29",
+        "issue": "2",
+        "pages": "156-158",
+        "authors": [
+            ("Ochsenreiter", "Roman"),
+        ],
+    },
 }
 
 SITEMAP = {

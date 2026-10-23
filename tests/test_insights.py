@@ -86,10 +86,13 @@ def test_the_library_lists_every_published_insight(site, published):
     items = collection['mainEntity']['itemListElement']
     assert len(items) == len(published)
 
+    summaries = {n['@id']: n for n in nodes_of(site / LIBRARY, 'ScholarlyArticle')}
     for page in published:
         url = f'https://rnaforecast.com/insights/{page.parent.name}/'
         assert f'href="{url}"' in html, url
-        assert any(item['url'] == url for item in items), url
+        # The list references each Insight's node; the node carries the URL.
+        assert any(summaries[item['item']['@id']]['url'] == url
+                   for item in items), url
 
 
 # --- an individual Insight ------------------------------------------------
