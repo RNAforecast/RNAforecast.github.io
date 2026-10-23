@@ -246,8 +246,8 @@ def test_an_unescaped_email_in_link_text_is_caught(sabotaged):
     page = sabotaged / 'about' / 'index.html'
     # docutils escapes the @ in both the href and the text; only the text
     # is what Cloudflare rewrites, so that is what this unescapes.
-    page.write_text(read(page).replace('>michael.wolfinger&#64;rnaforecast.com</a>',
-                                       '>michael.wolfinger@rnaforecast.com</a>', 1))
+    page.write_text(read(page).replace('>hello&#64;rnaforecast.com</a>',
+                                       '>hello@rnaforecast.com</a>', 1))
     assert_reports(sabotaged, 'literal address')
 
 

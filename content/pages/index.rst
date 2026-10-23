@@ -457,7 +457,7 @@ Enquiries
 
     .. container:: actions-primary
 
-      `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`_
+      `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`_
 
   .. container:: blueprint
 
@@ -468,7 +468,7 @@ Enquiries
     .. raw:: html
 
       <form class="contact-form" method="post"
-            action="https://formsubmit.co/michael.wolfinger@rnaforecast.com">
+            action="https://formsubmit.co/hello@rnaforecast.com">
         <input type="hidden" name="_subject" value="RNA Forecast enquiry" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_next" value="https://rnaforecast.com/thanks/" />

@@ -14,4 +14,4 @@ Message sent
 .. container:: closing
 
   If your enquiry is urgent, you can also write directly to
-  `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__.
+  `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__.

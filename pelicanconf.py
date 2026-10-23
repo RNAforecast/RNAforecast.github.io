@@ -167,7 +167,7 @@ R_SITE_GRAPH = [
         "givenName": "Michael",
         "familyName": "Wolfinger",
         "jobTitle": "Computational RNA Biologist",
-        "email": "michael.wolfinger@rnaforecast.com",
+        "email": "hello@rnaforecast.com",
         "url": "https://michaelwolfinger.com/",
         "image": "/static/images/mtw.jpg",
         "affiliation": {"@id": "#organization"},
@@ -209,7 +209,7 @@ R_SITE_GRAPH = [
         "logo": {"@type": "ImageObject",
                  "url": "/static/images/RNAF_logo1.png",
                  "width": 1000, "height": 299},
-        "email": "michael.wolfinger@rnaforecast.com",
+        "email": "hello@rnaforecast.com",
         "description": "Independent research platform for computational RNA "
                        "biology, covering original research, software "
                        "development, collaboration and advanced training.",
@@ -221,7 +221,7 @@ R_SITE_GRAPH = [
         # in prose and nowhere in the graph.
         "contactPoint": {"@type": "ContactPoint",
                          "contactType": "Research and collaboration enquiries",
-                         "email": "michael.wolfinger@rnaforecast.com",
+                         "email": "hello@rnaforecast.com",
                          "url": "/#contact",
                          "availableLanguage": ["en", "de"]},
         "sameAs": ["https://michaelwolfinger.com/",

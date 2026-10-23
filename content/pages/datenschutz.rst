@@ -15,7 +15,7 @@ Verantwortlicher
 
 | RNA Forecast e.U., Inhaber Mag. Dr. Michael T. Wolfinger
 | Linzer Straße 30–32/2/5, 3002 Purkersdorf, Österreich
-| `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
+| `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
 
 Verarbeitungen
 --------------
@@ -48,7 +48,7 @@ Antwort erfolgen.
 einträgt, übermittelt seine E-Mail-Adresse (über FormSubmit) und erhält eine
 Bestätigung sowie später eine Nachricht, sobald Termine feststehen.
 Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 174 TKG 2021. Die Einwilligung
-kann jederzeit per E-Mail an michael.wolfinger@rnaforecast.com widerrufen
+kann jederzeit per E-Mail an hello@rnaforecast.com widerrufen
 werden; die Adresse wird dann gelöscht.
 
 Empfänger

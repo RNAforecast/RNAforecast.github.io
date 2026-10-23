@@ -72,7 +72,7 @@ ViennaRNA and computational RNA design
     .. raw:: html
 
       <form class="contact-form" method="post"
-            action="https://formsubmit.co/michael.wolfinger@rnaforecast.com">
+            action="https://formsubmit.co/hello@rnaforecast.com">
         <input type="hidden" name="_subject" value="RNA Forecast waitlist: ViennaRNA" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_next" value="https://rnaforecast.com/waitlist/" />
@@ -152,7 +152,7 @@ Local AI coding tools for research groups
     .. raw:: html
 
       <form class="contact-form" method="post" id="waitlist"
-            action="https://formsubmit.co/michael.wolfinger@rnaforecast.com">
+            action="https://formsubmit.co/hello@rnaforecast.com">
         <input type="hidden" name="_subject" value="RNA Forecast waitlist: local AI tools" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_next" value="https://rnaforecast.com/waitlist/" />
@@ -175,5 +175,5 @@ Local AI coding tools for research groups
 .. container:: closing
 
   Questions about either format, or a group with a specific need:
-  `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
+  `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
   or the `contact form </#contact>`__.

@@ -17,5 +17,5 @@ Page not found
 
   If you followed a link from elsewhere and expected to land somewhere
   specific, write to
-  `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
+  `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
   and it will be put right.

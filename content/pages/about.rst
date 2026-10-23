@@ -383,14 +383,14 @@ Contact
 
     .. container:: actions-primary
 
-      `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
+      `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
 
   .. container:: blueprint
 
     .. container:: pairs pairs-wide
 
       Email
-        `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
+        `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
 
       Location
         Purkersdorf (Vienna metropolitan area), Austria

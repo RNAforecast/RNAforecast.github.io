@@ -15,5 +15,5 @@ On the list
 
   If you have a question in the meantime, or want to tell us what the course
   should cover, just reply to the confirmation message or write to
-  `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__.
+  `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__.
   The same reply takes you off the list, no questions asked.

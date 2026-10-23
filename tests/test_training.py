@@ -20,7 +20,7 @@ def test_each_waitlist_form_is_complete(site):
     assert len(forms) == 2
     topics = set()
     for form in forms:
-        assert 'action="https://formsubmit.co/michael.wolfinger@rnaforecast.com"' in form
+        assert 'action="https://formsubmit.co/hello@rnaforecast.com"' in form
         assert 'name="_next" value="https://rnaforecast.com/waitlist/"' in form
         assert 'name="_autoresponse"' in form
         assert 'name="_honey"' in form

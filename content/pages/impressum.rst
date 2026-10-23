@@ -25,7 +25,7 @@ Weiterbildung auf dem Gebiet der computergestützten RNA-Biologie.
 
 Für den Inhalt dieser Website verantwortlich: Dr. Michael T. Wolfinger.
 
-| E-Mail: `michael.wolfinger@rnaforecast.com <mailto:michael.wolfinger@rnaforecast.com>`__
+| E-Mail: `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
 | GitHub: `github.com/mtw <https://github.com/mtw>`__
 | ORCID: `0000-0003-0925-5205 <https://orcid.org/0000-0003-0925-5205>`__
 
