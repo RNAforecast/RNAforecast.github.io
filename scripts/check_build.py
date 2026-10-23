@@ -29,6 +29,7 @@ REQUIRED = [
     'publications/index.html',
     'insights/index.html',
     'about/index.html',
+    'training/index.html',
     'impressum/index.html',
     'datenschutz/index.html',
     '404.html',
@@ -50,7 +51,7 @@ REQUIRED = [
 EXCLUDED_PATHS = ('/impressum/', '/datenschutz/')
 
 # Absent from the sitemap: the two above, plus the pages nobody navigates to.
-EXCLUDED_SLUGS = ('impressum', 'datenschutz', 'thanks', '404')
+EXCLUDED_SLUGS = ('impressum', 'datenschutz', 'thanks', 'waitlist', '404')
 
 OG_CARD = 'static/images/og-card.png'
 OG_CARD_SIZE = (1200, 630)

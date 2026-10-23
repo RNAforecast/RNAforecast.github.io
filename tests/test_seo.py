@@ -13,8 +13,8 @@ from scripts import check_build
 from conftest import graphs_in, nodes_of, read
 
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
-         'insights/index.html', 'about/index.html', 'impressum/index.html',
-         'datenschutz/index.html']
+         'insights/index.html', 'about/index.html', 'training/index.html',
+         'impressum/index.html', 'datenschutz/index.html']
 
 AUTHOR_ID = 'https://rnaforecast.com/#michael-t-wolfinger'
 ORG_ID = 'https://rnaforecast.com/#organization'
@@ -102,7 +102,7 @@ def test_content_images_load_lazily_and_hero_images_do_not(site):
 
 
 def test_pages_that_should_not_be_indexed_say_so(site):
-    for rel in ['thanks/index.html', '404.html']:
+    for rel in ['thanks/index.html', 'waitlist/index.html', '404.html']:
         assert 'noindex' in read(site / rel)
 
 
@@ -180,6 +180,7 @@ def test_sitemap_lists_the_public_pages(site):
         'https://rnaforecast.com/insights/',
         'https://rnaforecast.com/publications/',
         'https://rnaforecast.com/research/',
+        'https://rnaforecast.com/training/',
     }
     assert expected <= locs
     insights = {loc for loc in locs - expected

@@ -402,6 +402,13 @@ table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, tran
 .hero:not(:has(.hero-sub)) h1 { font-size: clamp(38px, 7vw, 84px); max-width: 16ch; }
 .hero:not(:has(.hero-sub)) .hero-lead { max-width: 66ch; margin-top: 26px; }
 
+/* — page lead —
+   An introductory paragraph before the first section, the page-level
+   counterpart of the Insight's lead: it gets the measure and the room the
+   first section's kicker would otherwise crowd. */
+main > article > .lead { max-width: 66ch; margin: 0 0 clamp(32px, 5vw, 56px); }
+main > article > .lead p { font-size: 17px; line-height: 1.6; color: var(--ink-82); margin: 0; }
+
 /* — sections —
    Each top-level section of a page carries a kicker above a hairline rule.
    The kicker is generated: numbered by default from a counter, or named by

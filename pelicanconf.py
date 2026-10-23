@@ -93,7 +93,7 @@ M_LINKS_NAVBAR1 = [('Research', '/research/', 'research'),
                    ('Insights', '/insights/', 'insights'),
                    ('Software', '/#software', ''),
                    ('Collaborations', '/#collaborations', ''),
-                   ('Teaching & Training', '/#training', ''),
+                   ('Training', '/training/', 'training'),
                    ('About', '/about/', 'about'),
                    ('Contact', '/#contact', '')]
 
@@ -104,7 +104,7 @@ R_FOOTER_LINKS = [('Home', '/'),
                   ('Research', '/research/'),
                   ('Publications', '/publications/'),
                   ('Insights', '/insights/'),
-                  ('Teaching', '/#training'),
+                  ('Training', '/training/'),
                   ('About', '/about/'),
                   ('Impressum', '/impressum/'),
                   ('Datenschutz', '/datenschutz/')]
@@ -274,6 +274,56 @@ R_PAGE_GRAPHS = {
             "inLanguage": "en",
         },
     ],
+    "training": [
+        {
+            "@type": "WebPage",
+            "@id": "/training/#webpage",
+            "url": "/training/",
+            "name": "Training, RNA Forecast",
+            "about": {"@id": "#organization"},
+            "mainEntity": {"@type": "ItemList",
+                           "itemListElement": [
+                               {"@type": "ListItem", "position": 1,
+                                "item": {"@id": "/training/#viennarna"}},
+                               {"@type": "ListItem", "position": 2,
+                                "item": {"@id": "/training/#local-ai-tools"}}]},
+        },
+        # Courses in preparation: no Offer and no CourseInstance on purpose,
+        # since nothing is scheduled or bookable yet. Add both when it is.
+        {
+            "@type": "Course",
+            "@id": "/training/#viennarna",
+            "url": "/training/#viennarna",
+            "name": "ViennaRNA and computational RNA design",
+            "description": "Hands-on training for research groups: RNA "
+                           "secondary structure and the Boltzmann ensemble, "
+                           "probing data as soft constraints, folding "
+                           "kinetics, accessibility, and design review before "
+                           "synthesis. Half day to full day, remote or on site.",
+            "provider": {"@id": "#organization"},
+            "instructor": {"@id": "#michael-t-wolfinger"},
+            "courseMode": ["online", "onsite"],
+            "inLanguage": "en",
+            "teaches": ["RNA secondary structure prediction", "ViennaRNA",
+                        "RNA folding kinetics", "RNA design"],
+        },
+        {
+            "@type": "Course",
+            "@id": "/training/#local-ai-tools",
+            "url": "/training/#local-ai-tools",
+            "name": "Local AI coding tools for research groups",
+            "description": "A scientist's half-day workshop on running coding "
+                           "agents against models on the group's own "
+                           "hardware: model choice, setup on macOS and Linux, "
+                           "a research workflow, privacy and cost.",
+            "provider": {"@id": "#organization"},
+            "instructor": {"@id": "#michael-t-wolfinger"},
+            "courseMode": ["online", "onsite"],
+            "inLanguage": "en",
+            "teaches": ["Local large language models", "Coding agents",
+                        "Reproducible research workflows"],
+        },
+    ],
     "about": [
         {
             "@type": "ProfilePage",
@@ -311,7 +361,7 @@ R_PUB_DATES = {
 SITEMAP = {
     "format": "xml",
     "hints": False,
-    "exclude": ["impressum", "datenschutz", "thanks", "404"]
+    "exclude": ["impressum", "datenschutz", "thanks", "waitlist", "404"]
 }
 
 # Search Console token; empty means no meta tag. A DNS TXT record verifies

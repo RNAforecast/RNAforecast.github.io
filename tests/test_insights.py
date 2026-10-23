@@ -60,8 +60,12 @@ def test_the_current_section_is_marked_on_the_library_page(site):
 
 def test_the_ui_never_calls_the_section_a_blog(site):
     """Pelican may think in articles; the reader never sees the word."""
+    import re
     for page in sorted(site.rglob('*.html')):
-        assert 'blog' not in read(page).lower(), page
+        # Links to michaelwolfinger.com legitimately contain /blog/; it is
+        # the reader-facing wording that must not.
+        text = re.sub(r'href="[^"]*"', '', read(page))
+        assert 'blog' not in text.lower(), page
 
 
 def test_no_blog_furniture_is_generated(site):

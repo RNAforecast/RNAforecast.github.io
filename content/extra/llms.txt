@@ -32,6 +32,9 @@ addresses are shown as plain text.
   design](https://rnaforecast.com/insights/rna-structure-before-the-experiment/):
   Insight 1, 21 September 2026, doi:10.5281/zenodo.22872982. The same text is
   deposited as a PDF working paper on Zenodo and served beside the page.
+- [Training](https://rnaforecast.com/training/): two hands-on formats for
+  research groups, both in preparation with a waitlist each: ViennaRNA and
+  computational RNA design, and local AI coding tools for research groups.
 - [About](https://rnaforecast.com/about/): biography, research interests,
   scientific positions and service, teaching, and contact details.
 
