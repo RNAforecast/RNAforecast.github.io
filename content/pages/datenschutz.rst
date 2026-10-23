@@ -8,7 +8,7 @@ Datenschutzerklärung
 :html_lang: de
 :page_class: legal
 :hero_title: Datenschutzerklärung
-:hero_lead: Information nach Art. 13 DSGVO · Stand: September 2026
+:hero_lead: Information nach Art. 13 DSGVO · Stand: Oktober 2026
 
 Verantwortlicher
 ----------------
@@ -44,6 +44,13 @@ Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Anbahnung einer Zusammenarbeit),
 sonst lit. f DSGVO (Beantwortung von Anfragen). Ohne diese Angaben kann keine
 Antwort erfolgen.
 
+**Warteliste.** Wer sich für eine Benachrichtigung über künftige Trainings
+einträgt, übermittelt seine E-Mail-Adresse (über FormSubmit) und erhält eine
+Bestätigung sowie später eine Nachricht, sobald Termine feststehen.
+Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 174 TKG 2021. Die Einwilligung
+kann jederzeit per E-Mail an michael.wolfinger@rnaforecast.com widerrufen
+werden; die Adresse wird dann gelöscht.
+
 Empfänger
 ---------
 
@@ -57,7 +64,9 @@ Speicherdauer
 
 Logfiles: für die Dauer der technischen Aufbewahrung durch die Anbieter.
 Google-Analytics-Ereignisdaten: 14 Monate. Anfragen: bis zur Erledigung,
-danach nur im Rahmen gesetzlicher Aufbewahrungspflichten.
+danach nur im Rahmen gesetzlicher Aufbewahrungspflichten. Warteliste: bis zur
+Benachrichtigung über den ersten Termin, längstens zwölf Monate, oder bis zum
+Widerruf.
 
 Ihre Rechte
 -----------
