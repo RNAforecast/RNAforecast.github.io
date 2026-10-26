@@ -7,12 +7,20 @@
 # edit rather than a change of silence.
 #
 # Consecutive User-agent lines share the rules that follow them.
+#
+# The imprint and the privacy notice carry a private address and are kept out
+# of search results by a noindex tag on the page. Search engines must be able
+# to fetch the page to see that tag, so they are not disallowed here: a
+# Disallow would hide the tag and leave the URL listed as an empty entry.
+# Everyone else, the AI agents and the unnamed rest, is disallowed, because
+# for them the point is not to read the page at all.
 
 User-agent: *
 Disallow: /impressum/
 Disallow: /datenschutz/
 
-# Search engines and their AI answer surfaces
+# Search engines and their AI answer surfaces: allowed everywhere, so that
+# the noindex on the legal pages is seen and honoured.
 User-agent: Googlebot
 User-agent: Google-Extended
 User-agent: Bingbot
@@ -20,8 +28,6 @@ User-agent: DuckDuckBot
 User-agent: Applebot
 User-agent: Applebot-Extended
 Allow: /
-Disallow: /impressum/
-Disallow: /datenschutz/
 
 # Model training, retrieval and on-demand fetch agents
 User-agent: GPTBot

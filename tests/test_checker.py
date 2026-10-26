@@ -229,6 +229,31 @@ def test_an_excluded_page_appearing_in_the_sitemap_is_caught(sabotaged):
     assert_reports(sabotaged, 'which is excluded')
 
 
+def test_a_legal_page_without_noindex_is_caught(sabotaged):
+    page = sabotaged / 'impressum' / 'index.html'
+    page.write_text(read(page).replace(
+        '<meta name="robots" content="noindex, follow" />', '', 1))
+    assert_reports(sabotaged, '/impressum/: excluded but carries no noindex')
+
+
+def test_a_search_engine_kept_off_a_legal_page_is_caught(sabotaged):
+    """A Disallow for Googlebot hides the noindex and leaves the URL in the
+    index as an empty entry."""
+    robots = sabotaged / 'robots.txt'
+    robots.write_text(read(robots).replace(
+        'User-agent: Applebot-Extended\nAllow: /\n',
+        'User-agent: Applebot-Extended\nAllow: /\nDisallow: /impressum/\n', 1))
+    assert_reports(sabotaged, 'noindex is never seen')
+
+
+def test_an_ai_agent_let_onto_a_legal_page_is_caught(sabotaged):
+    robots = sabotaged / 'robots.txt'
+    text = read(robots)
+    head, _, tail = text.rpartition('Disallow: /datenschutz/\n')
+    robots.write_text(head + tail)
+    assert_reports(sabotaged, 'may read /datenschutz/, which is excluded')
+
+
 def test_a_sitemap_url_that_does_not_exist_is_caught(sabotaged):
     sitemap = sabotaged / 'sitemap.xml'
     sitemap.write_text(read(sitemap).replace(

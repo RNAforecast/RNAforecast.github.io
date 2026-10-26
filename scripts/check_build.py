@@ -48,7 +48,16 @@ REQUIRED = [
 
 # The imprint and the privacy notice: linked from every page for the people
 # who need them, but not research content, and carrying a private address.
+# They stay out of search results by a noindex tag, which a search engine can
+# only honour if it is allowed to fetch the page; a Disallow for a search
+# engine hides the tag and leaves the URL listed as an empty entry (Search
+# Console: "Indexed, though blocked by robots.txt"). Every other agent is
+# disallowed, because for those the point is not to read the page at all.
 EXCLUDED_PATHS = ('/impressum/', '/datenschutz/')
+
+# Agents that honour noindex and therefore must be allowed to crawl the
+# excluded pages. Matched against each record of robots.txt.
+SEARCH_AGENTS = ('Googlebot', 'Bingbot', 'DuckDuckBot', 'Applebot')
 
 # Absent from the sitemap: the two above, plus the pages nobody navigates to.
 EXCLUDED_SLUGS = ('impressum', 'datenschutz', 'thanks', 'waitlist', '404')
@@ -354,9 +363,20 @@ def check_jsonld(root, problems):
 def check_excluded_paths(root, problems):
     """Pages kept out of search results and away from LLM readers.
 
-    Keeping EXCLUDED_PATHS out means all three of robots.txt, llms.txt and the
-    sitemap have to agree, and each is edited separately.
+    Keeping EXCLUDED_PATHS out means four things have to agree, and each is
+    edited separately: the page carries noindex, robots.txt lets search
+    engines fetch it (so the tag is seen) and keeps everyone else off it,
+    llms.txt does not link it, and the sitemap omits it.
     """
+    for path in EXCLUDED_PATHS:
+        page = os.path.join(root, path.strip('/'), 'index.html')
+        if not os.path.isfile(page):
+            continue
+        with open(page, encoding='utf-8') as f:
+            html = f.read()
+        if not re.search(r'<meta name="robots" content="[^"]*noindex', html):
+            problems.append(f'{path}: excluded but carries no noindex tag')
+
     robots_path = os.path.join(root, 'robots.txt')
     if os.path.isfile(robots_path):
         with open(robots_path, encoding='utf-8') as f:
@@ -367,11 +387,17 @@ def check_excluded_paths(root, problems):
                    if re.search(r'(?im)^User-agent:', r)]
         for record in records:
             agents = re.findall(r'(?im)^User-agent:\s*(\S+)', record)
+            searches = any(a in SEARCH_AGENTS for a in agents)
             for path in EXCLUDED_PATHS:
-                if not re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$',
-                                 record):
+                disallowed = re.search(
+                    rf'(?im)^Disallow:\s*{re.escape(path)}\s*$', record)
+                if searches and disallowed:
+                    problems.append(f'robots.txt: {", ".join(agents)} may not '
+                                    f'fetch {path}, so its noindex is never '
+                                    f'seen and the URL stays indexed')
+                elif not searches and not disallowed:
                     problems.append(f'robots.txt: {", ".join(agents)} may '
-                                    f'crawl {path}, which is excluded')
+                                    f'read {path}, which is excluded')
 
     llms_path = os.path.join(root, 'llms.txt')
     if os.path.isfile(llms_path):

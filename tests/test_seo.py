@@ -101,13 +101,19 @@ def test_content_images_load_lazily_and_hero_images_do_not(site):
                 assert 'loading="lazy"' in tag, f'{page}: content image eager: {tag[:80]}'
 
 
+NOINDEX = ['thanks/index.html', 'waitlist/index.html', '404.html',
+           'impressum/index.html', 'datenschutz/index.html']
+
+
 def test_pages_that_should_not_be_indexed_say_so(site):
-    for rel in ['thanks/index.html', 'waitlist/index.html', '404.html']:
-        assert 'noindex' in read(site / rel)
+    for rel in NOINDEX:
+        assert '<meta name="robots" content="noindex, follow" />' in read(site / rel), rel
 
 
 def test_indexable_pages_are_not_accidentally_noindexed(site):
     for rel in PAGES:
+        if rel in NOINDEX:
+            continue
         assert 'noindex' not in read(site / rel), rel
 
 
@@ -134,21 +140,42 @@ def test_no_crawler_is_blanket_disallowed(site):
     assert not re.search(r'(?im)^Disallow:\s*/\s*$', robots(site))
 
 
-@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
-def test_the_legal_pages_stay_out_of_the_index(site, path):
-    assert re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$', robots(site))
-
-
-@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
-def test_every_robots_record_excludes_the_legal_pages(site, path):
+def robots_records(site):
     """A named agent group does not inherit the rules of the '*' group."""
     records = [r for r in re.split(r'\n\s*\n', robots(site))
                if re.search(r'(?im)^User-agent:', r)]
     assert len(records) >= 3
-    for record in records:
-        agents = re.findall(r'(?im)^User-agent:\s*(\S+)', record)
-        assert re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$',
-                         record), agents
+    return [(re.findall(r'(?im)^User-agent:\s*(\S+)', r), r) for r in records]
+
+
+@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
+def test_search_engines_may_fetch_the_legal_pages(site, path):
+    """The pages leave the index by noindex, and a crawler that is kept off
+    a page never sees its tag: that is how both legal pages ended up listed
+    as 'Indexed, though blocked by robots.txt' in October 2026."""
+    seen = 0
+    for agents, record in robots_records(site):
+        if any(a in check_build.SEARCH_AGENTS for a in agents):
+            seen += 1
+            assert not re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$',
+                                 record), agents
+    assert seen, 'no robots.txt record names a search engine'
+
+
+@pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
+def test_everyone_else_is_kept_off_the_legal_pages(site, path):
+    """AI agents and the unnamed rest do not honour noindex; for them the
+    page is simply off limits."""
+    for agents, record in robots_records(site):
+        if not any(a in check_build.SEARCH_AGENTS for a in agents):
+            assert re.search(rf'(?im)^Disallow:\s*{re.escape(path)}\s*$',
+                             record), agents
+
+
+def test_googlebot_has_its_own_record(site):
+    """The '*' group disallows the legal pages, so Googlebot has to be
+    named explicitly or it inherits that and never sees the noindex."""
+    assert any('Googlebot' in agents for agents, _ in robots_records(site))
 
 
 @pytest.mark.parametrize('path', check_build.EXCLUDED_PATHS)
@@ -400,8 +427,8 @@ def test_the_site_itself_is_described(site):
 
 def test_every_page_below_the_root_has_a_breadcrumb(site):
     """Every page that carries a graph at all. The two legal pages carry
-    none on purpose: they are Disallowed and out of the sitemap, so there is
-    nothing to describe to a crawler that should not be reading them."""
+    none on purpose: they are noindex and out of the sitemap, so there is
+    nothing to describe to a crawler that should not be listing them."""
     for rel in PAGES:
         if rel == 'index.html' or not graphs_in(site / rel):
             continue

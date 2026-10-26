@@ -6,6 +6,7 @@ Impressum
 :description: Impressum von rnaforecast.com — Offenlegung nach § 5 ECG, § 14 UGB und § 25 MedienG: Medieninhaber, Firmenbuch, UID und grundlegende Richtung.
 :summary: Impressum von rnaforecast.com.
 :html_lang: de
+:robots: noindex, follow
 :page_class: legal
 :hero_title: Impressum
 :hero_lead: Offenlegung gemäß § 5 ECG, § 14 UGB und § 25 MedienG · Stand: September 2026

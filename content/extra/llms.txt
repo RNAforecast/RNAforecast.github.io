@@ -65,5 +65,6 @@ publication rather than the PDF URL. The canonical domain is
 https://rnaforecast.com — content is not mirrored elsewhere.
 
 The legal pages at /impressum/ and /datenschutz/ are out of scope: they are the
-imprint and the privacy notice, carry no research content, and are disallowed
-in robots.txt. Please do not fetch, index, summarise or quote them.
+imprint and the privacy notice, carry no research content, are marked noindex
+and are disallowed for AI agents in robots.txt. Please do not fetch, index,
+summarise or quote them.

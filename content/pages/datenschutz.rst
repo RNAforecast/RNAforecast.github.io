@@ -6,6 +6,7 @@ Datenschutzerklärung
 :description: Datenschutzerklärung für rnaforecast.com nach Art. 13 DSGVO — Verantwortlicher, Zwecke und Rechtsgrundlagen, Empfänger, Speicherdauer und Ihre Rechte.
 :summary: Datenschutzerklärung für rnaforecast.com.
 :html_lang: de
+:robots: noindex, follow
 :page_class: legal
 :hero_title: Datenschutzerklärung
 :hero_lead: Information nach Art. 13 DSGVO · Stand: Oktober 2026
