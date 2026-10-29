@@ -330,3 +330,17 @@ def test_png_size_reads_the_header(tmp_path, data, expected):
     path = tmp_path / 'x.png'
     path.write_bytes(data)
     assert check_build.png_size(path) == expected
+
+
+def test_a_renamed_form_field_is_caught(sabotaged):
+    """The handler drops a field it has no rule for, so a renamed input
+    would lose data silently; the checker mirrors the handler's field list."""
+    page = sabotaged / 'index.html'
+    page.write_text(read(page).replace('name="organization"', 'name="affiliation"', 1))
+    assert_reports(sabotaged, 'sends "affiliation", which the handler does not store')
+
+
+def test_a_form_without_the_honeypot_is_caught(sabotaged):
+    page = sabotaged / 'training' / 'index.html'
+    page.write_text(read(page).replace('name="_honey"', 'name="_hny"', 1))
+    assert_reports(sabotaged, 'has no _honey field')

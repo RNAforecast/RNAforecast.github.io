@@ -77,13 +77,55 @@ ViennaRNA and computational RNA design
         <input type="hidden" name="topic" value="viennarna" />
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <p class="field">
+          <label for="viennarna-name">Name</label>
+          <input class="input" type="text" id="viennarna-name" name="name"
+                 autocomplete="name" />
+        </p>
+        <p class="field">
           <label for="viennarna-email">Email <abbr title="required">*</abbr></label>
           <input class="input" type="email" id="viennarna-email" name="email"
                  autocomplete="email" required />
         </p>
         <p class="field">
+          <label for="viennarna-organization">Affiliation</label>
+          <input class="input" type="text" id="viennarna-organization" name="organization"
+                 autocomplete="organization" placeholder="Institute, company or group" />
+        </p>
+        <p class="field">
+          <label for="viennarna-role">You are</label>
+          <select class="input" id="viennarna-role" name="role">
+            <option value="">Choose one</option>
+            <option value="experimental-lab">An experimental lab</option>
+            <option value="computational-group">A computational group</option>
+            <option value="biotech-industry">Biotech or industry</option>
+            <option value="doctoral-programme">A doctoral programme or course</option>
+            <option value="tool-developer">A tool developer</option>
+            <option value="other">Something else</option>
+          </select>
+        </p>
+        <p class="field">
+          <label for="viennarna-format">Preferred format</label>
+          <select class="input" id="viennarna-format" name="format">
+            <option value="">No preference yet</option>
+            <option value="remote">Remote</option>
+            <option value="on-site">On site</option>
+            <option value="either">Either</option>
+          </select>
+        </p>
+        <p class="field">
+          <label for="viennarna-group">Who would attend</label>
+          <select class="input" id="viennarna-group" name="group">
+            <option value="">Not sure yet</option>
+            <option value="just-me">Just me</option>
+            <option value="2-5">2 to 5 people</option>
+            <option value="6-12">6 to 12 people</option>
+            <option value="more-than-12">More than 12</option>
+          </select>
+        </p>
+        <p class="field">
           <label for="viennarna-wish">What should it cover?</label>
-          <textarea class="input" id="viennarna-wish" name="wishes" rows="3"></textarea>
+          <textarea class="input" id="viennarna-wish" name="wishes" rows="3"
+                    placeholder="Your sequences, your questions, the methods you want to see"></textarea>
         </p>
         <p class="form-note">One e-mail when a date exists. No newsletter. Remove yourself any time by replying.</p>
         <button class="btn btn-primary btn-block" type="submit">Join the ViennaRNA waitlist</button>
@@ -156,13 +198,55 @@ Local AI coding tools for research groups
         <input type="hidden" name="topic" value="local-ai-tools" />
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <p class="field">
+          <label for="local-ai-tools-name">Name</label>
+          <input class="input" type="text" id="local-ai-tools-name" name="name"
+                 autocomplete="name" />
+        </p>
+        <p class="field">
           <label for="local-ai-tools-email">Email <abbr title="required">*</abbr></label>
           <input class="input" type="email" id="local-ai-tools-email" name="email"
                  autocomplete="email" required />
         </p>
         <p class="field">
+          <label for="local-ai-tools-organization">Affiliation</label>
+          <input class="input" type="text" id="local-ai-tools-organization" name="organization"
+                 autocomplete="organization" placeholder="Institute, company or group" />
+        </p>
+        <p class="field">
+          <label for="local-ai-tools-role">You are</label>
+          <select class="input" id="local-ai-tools-role" name="role">
+            <option value="">Choose one</option>
+            <option value="experimental-lab">An experimental lab</option>
+            <option value="computational-group">A computational group</option>
+            <option value="biotech-industry">Biotech or industry</option>
+            <option value="doctoral-programme">A doctoral programme or course</option>
+            <option value="tool-developer">A tool developer</option>
+            <option value="other">Something else</option>
+          </select>
+        </p>
+        <p class="field">
+          <label for="local-ai-tools-format">Preferred format</label>
+          <select class="input" id="local-ai-tools-format" name="format">
+            <option value="">No preference yet</option>
+            <option value="remote">Remote</option>
+            <option value="on-site">On site</option>
+            <option value="either">Either</option>
+          </select>
+        </p>
+        <p class="field">
+          <label for="local-ai-tools-group">Who would attend</label>
+          <select class="input" id="local-ai-tools-group" name="group">
+            <option value="">Not sure yet</option>
+            <option value="just-me">Just me</option>
+            <option value="2-5">2 to 5 people</option>
+            <option value="6-12">6 to 12 people</option>
+            <option value="more-than-12">More than 12</option>
+          </select>
+        </p>
+        <p class="field">
           <label for="local-ai-tools-wish">What should it cover?</label>
-          <textarea class="input" id="local-ai-tools-wish" name="wishes" rows="3"></textarea>
+          <textarea class="input" id="local-ai-tools-wish" name="wishes" rows="3"
+                    placeholder="Your hardware, your workflow, what must stay on the machine"></textarea>
         </p>
         <p class="form-note">One e-mail when a date exists. No newsletter. Remove yourself any time by replying.</p>
         <button class="btn btn-primary btn-block" type="submit">Join the local AI tools waitlist</button>

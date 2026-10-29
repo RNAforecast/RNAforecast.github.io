@@ -80,8 +80,18 @@ FORM_ACTION_HOSTS = {SITE_HOST, 'forms.rnaforecast.com'}
 
 # The form ids the handler (repo mtw/form-handler, src/forms.js) knows for
 # this site. A form posting to any other id would be accepted by nobody.
-FORMS = ('rnaf-contact', 'rnaf-waitlist-viennarna',
-         'rnaf-waitlist-local-ai-tools')
+# The forms and the fields each one sends, mirroring src/forms.js in the
+# handler repo (RNAforecast/form-handler). The handler drops a field it has
+# no rule for, silently, so a renamed input would lose data without a trace.
+WAITLIST_FIELDS = frozenset({'name', 'email', 'organization', 'role',
+                             'format', 'group', 'wishes', 'topic'})
+FORMS = {
+    'rnaf-contact': frozenset({'name', 'email', 'organization', 'topic',
+                               'message'}),
+    'rnaf-waitlist-viennarna': WAITLIST_FIELDS,
+    'rnaf-waitlist-local-ai-tools': WAITLIST_FIELDS,
+}
+HONEYPOT = '_honey'
 
 
 def form_handler():
@@ -111,7 +121,8 @@ CONSENT_DIALOG = 'id="cookie-settings"'
 TAG = re.compile(r'<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>')
 ATTR = re.compile(r'\b(href|src|srcset)\s*=\s*["\']([^"\']*)["\']', re.I)
 SCRIPT = re.compile(r'<script\b([^>]*)>(.*?)</script>', re.I | re.S)
-FORM = re.compile(r'<form\b([^>]*)>', re.I)
+FORM = re.compile(r'<form\b([^>]*)>(.*?)</form>', re.I | re.S)
+FIELD_NAME = re.compile(r'<(?:input|select|textarea)\b[^>]*\bname\s*=\s*["\']([^"\']*)["\']', re.I)
 ACTION = re.compile(r'\baction\s*=\s*["\']([^"\']*)["\']', re.I)
 CSS_URL = re.compile(r'url\(\s*["\']?([^"\')]+)["\']?\s*\)')
 
@@ -177,7 +188,7 @@ def check_page(root, page, problems):
         first = ' '.join(body.split())[:60]
         problems.append(f'{shown}: unexpected inline <script>: {first}')
 
-    for attrs in FORM.findall(source):
+    for attrs, body in FORM.findall(source):
         action = ACTION.search(attrs)
         if not action:
             continue
@@ -187,11 +198,20 @@ def check_page(root, page, problems):
             problems.append(f'{shown}: form posts to {host}, which is not a '
                             f'declared endpoint')
         handler = form_handler()
-        if host != SITE_HOST and handler and (
-                not target.startswith(handler + '/')
-                or target[len(handler) + 1:] not in FORMS):
+        if host == SITE_HOST or not handler:
+            continue
+        form_id = target[len(handler) + 1:]
+        if not target.startswith(handler + '/') or form_id not in FORMS:
             problems.append(f'{shown}: form posts to {target}, which is not '
                             f'a declared form of the configured handler')
+            continue
+        declared = FORMS[form_id]
+        sent = set(FIELD_NAME.findall(body))
+        if HONEYPOT not in sent:
+            problems.append(f'{shown}: form {target} has no {HONEYPOT} field')
+        for name in sorted(sent - declared - {HONEYPOT}):
+            problems.append(f'{shown}: form {target} sends "{name}", which '
+                            f'the handler does not store')
 
     seen = set()
     for tag, attrs in TAG.findall(source):

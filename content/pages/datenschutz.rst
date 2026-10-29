@@ -50,8 +50,9 @@ sonst lit. f DSGVO (Beantwortung von Anfragen). Ohne diese Angaben kann keine
 Antwort erfolgen.
 
 **Warteliste.** Wer sich für eine Benachrichtigung über künftige Trainings
-einträgt, übermittelt seine E-Mail-Adresse über dasselbe Formularsystem und
-erhält eine Bestätigung sowie später eine Nachricht, sobald Termine feststehen.
+einträgt, übermittelt seine E-Mail-Adresse und freiwillig Name, Zugehörigkeit
+und Angaben zum gewünschten Format über dasselbe Formularsystem und erhält
+eine Bestätigung sowie später eine Nachricht, sobald Termine feststehen.
 Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 174 TKG 2021. Die Einwilligung
 kann jederzeit per E-Mail an hello@rnaforecast.com widerrufen
 werden; die Adresse wird dann gelöscht.

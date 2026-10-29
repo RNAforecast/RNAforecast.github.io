@@ -482,8 +482,26 @@ Enquiries
                  autocomplete="email" required />
         </p>
         <p class="field">
+          <label for="cf-organization">Affiliation</label>
+          <input class="input" type="text" id="cf-organization" name="organization"
+                 autocomplete="organization" placeholder="Institute, company or group" />
+        </p>
+        <p class="field">
+          <label for="cf-topic">Subject <abbr title="required">*</abbr></label>
+          <select class="input" id="cf-topic" name="topic" required>
+            <option value="">Choose one</option>
+            <option value="collaboration">Research collaboration</option>
+            <option value="joint-proposal">Joint proposal or grant</option>
+            <option value="talk-or-workshop">Invited talk or workshop</option>
+            <option value="method-transfer">Method transfer or advice</option>
+            <option value="training">Training for a group</option>
+            <option value="other">Something else</option>
+          </select>
+        </p>
+        <p class="field">
           <label for="cf-message">Message <abbr title="required">*</abbr></label>
-          <textarea class="input" id="cf-message" name="message" rows="5"
+          <textarea class="input" id="cf-message" name="message" rows="6"
+                    placeholder="What you are working on, what you need, and any timeline"
                     required></textarea>
         </p>
         <p class="form-note">Fields marked <abbr title="required">*</abbr> are required.</p>

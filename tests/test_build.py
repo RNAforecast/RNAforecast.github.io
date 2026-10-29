@@ -113,3 +113,17 @@ def test_every_image_reserves_its_space(site):
     for page in sorted(site.rglob('*.html')):
         for tag in re.findall(r'<img[^>]*>', read(page)):
             assert 'width=' in tag and 'height=' in tag, f'{page}: {tag}'
+
+
+def test_the_contact_form_asks_what_the_enquiry_is_about(site):
+    """The subject is a fixed list the handler validates, so the notification
+    can be tagged with it; the handler's enum is the same list."""
+    html = read(site / 'index.html')
+    form = re.search(r'<form\b[^>]*rnaf-contact.*?</form>', html, re.S).group(0)
+    select = re.search(r'<select[^>]*name="topic"[^>]*required[^>]*>(.*?)</select>', form, re.S)
+    assert select, 'the subject select is missing or not required'
+    assert re.findall(r'value="([^"]+)"', select.group(1)) == [
+        'collaboration', 'joint-proposal', 'talk-or-workshop',
+        'method-transfer', 'training', 'other']
+    assert re.search(r'<input[^>]*name="organization"[^>]*>', form)
+    assert 'required' not in re.search(r'<input[^>]*name="organization"[^>]*>', form).group(0)

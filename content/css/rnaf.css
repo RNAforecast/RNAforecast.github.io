@@ -900,6 +900,8 @@ article > section.theme > .theme-body { grid-column: 2; grid-row: 1 / span 2; }
 .input:hover { border-color: var(--color-text); }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
 textarea.input { min-height: 90px; resize: vertical; display: block; }
+select.input { cursor: pointer; }
+.input::placeholder { color: var(--ink-45); }
 .input:user-invalid { border-color: var(--color-error); }
 .form-note { font-size: 12px; color: var(--ink-65); margin: 0 0 var(--space-3); }
 .form-fallback { margin: var(--space-3) 0 0; }

@@ -15,6 +15,14 @@ def test_the_anchors_michaelwolfinger_com_links_to_exist(site):
         assert f'id="{anchor}"' in html, anchor
 
 
+WAITLIST_SELECTS = {
+    'role': ['experimental-lab', 'computational-group', 'biotech-industry',
+             'doctoral-programme', 'tool-developer', 'other'],
+    'format': ['remote', 'on-site', 'either'],
+    'group': ['just-me', '2-5', '6-12', 'more-than-12'],
+}
+
+
 def test_each_waitlist_form_is_complete(site):
     html = read(site / PAGE)
     forms = re.findall(r'<form\b.*?</form>', html, re.S)
@@ -28,6 +36,16 @@ def test_each_waitlist_form_is_complete(site):
         assert f'class="form-error" id="{topic}-error"' in form
         assert 'name="_honey"' in form
         assert 'type="email"' in form and 'required' in form
+        # one required field, the address; everything else is optional and
+        # an enum, so the list can be sorted without reading free text
+        assert len(re.findall(r'\srequired[\s/>]', form)) == 1, 'only the address is required'
+        for name, values in WAITLIST_SELECTS.items():
+            select = re.search(rf'<select[^>]*name="{name}"[^>]*>(.*?)</select>', form, re.S)
+            assert select, f'no <select name="{name}">'
+            assert re.findall(r'value="([^"]+)"', select.group(1)) == values
+            assert 'required' not in select.group(0)
+        for name in ('name', 'organization'):
+            assert re.search(rf'<input[^>]*name="{name}"[^>]*>', form)
         # FormSubmit's options are gone with FormSubmit; the handler owns them.
         assert not re.search(r'name="_(next|subject|template|autoresponse|captcha)"', form)
         assert 'hello&#64;rnaforecast.com</a>' in form, 'no fallback address'
