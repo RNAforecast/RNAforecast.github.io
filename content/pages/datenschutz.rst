@@ -39,15 +39,19 @@ DSGVO, § 165 Abs. 3 TKG 2021. Ihre Entscheidung wird zwölf Monate im Local
 Storage Ihres Browsers (``rnaf-consent``) gespeichert; ein
 Global-Privacy-Control-Signal gilt als Ablehnung.
 
-**Kontakt.** Angaben aus dem Kontaktformular (übermittelt durch FormSubmit)
-oder einer E-Mail werden zur Beantwortung der Anfrage verwendet.
+**Kontakt.** Angaben aus dem Kontaktformular oder einer E-Mail werden zur
+Beantwortung der Anfrage verwendet. Formulareingaben nimmt ein eigener Dienst
+auf Cloudflare Workers entgegen und speichert sie in einer Datenbank bei
+Cloudflare (D1), zusammen mit einem Hashwert der IP-Adresse und dem
+User-Agent zur Missbrauchsabwehr; die Benachrichtigung an mich und eine
+Eingangsbestätigung an Sie werden über Resend versandt.
 Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Anbahnung einer Zusammenarbeit),
 sonst lit. f DSGVO (Beantwortung von Anfragen). Ohne diese Angaben kann keine
 Antwort erfolgen.
 
 **Warteliste.** Wer sich für eine Benachrichtigung über künftige Trainings
-einträgt, übermittelt seine E-Mail-Adresse (über FormSubmit) und erhält eine
-Bestätigung sowie später eine Nachricht, sobald Termine feststehen.
+einträgt, übermittelt seine E-Mail-Adresse über dasselbe Formularsystem und
+erhält eine Bestätigung sowie später eine Nachricht, sobald Termine feststehen.
 Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 174 TKG 2021. Die Einwilligung
 kann jederzeit per E-Mail an hello@rnaforecast.com widerrufen
 werden; die Adresse wird dann gelöscht.
@@ -55,7 +59,7 @@ werden; die Adresse wird dann gelöscht.
 Empfänger
 ---------
 
-Auftragsverarbeiter sind GitHub, Cloudflare, Google und FormSubmit, jeweils
+Auftragsverarbeiter sind GitHub, Cloudflare, Google und Resend, jeweils
 mit möglicher Übermittlung in die USA auf Grundlage des EU-US Data Privacy
 Framework, andernfalls der Standardvertragsklauseln der Europäischen
 Kommission.
@@ -67,7 +71,8 @@ Logfiles: für die Dauer der technischen Aufbewahrung durch die Anbieter.
 Google-Analytics-Ereignisdaten: 14 Monate. Anfragen: bis zur Erledigung,
 danach nur im Rahmen gesetzlicher Aufbewahrungspflichten. Warteliste: bis zur
 Benachrichtigung über den ersten Termin, längstens zwölf Monate, oder bis zum
-Widerruf.
+Widerruf. Die in der Formulardatenbank gespeicherte Kopie einer Eingabe wird
+mit der Anfrage beziehungsweise dem Wartelisteneintrag gelöscht.
 
 Ihre Rechte
 -----------

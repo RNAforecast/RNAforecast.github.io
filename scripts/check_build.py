@@ -76,19 +76,23 @@ ALLOWED_HOSTS = {SITE_HOST}
 
 # A form action is a data flow, not a subresource: a new host here needs a
 # matching disclosure in the privacy notice.
-FORM_ACTION_HOSTS = {SITE_HOST, 'formsubmit.co'}
+FORM_ACTION_HOSTS = {SITE_HOST, 'forms.rnaforecast.com'}
+
+# The form ids the handler (repo mtw/form-handler, src/forms.js) knows for
+# this site. A form posting to any other id would be accepted by nobody.
+FORMS = ('rnaf-contact', 'rnaf-waitlist-viennarna',
+         'rnaf-waitlist-local-ai-tools')
 
 
-def formsubmit_endpoint():
-    """The endpoint every FormSubmit form must post to, from pelicanconf."""
+def form_handler():
+    """The base URL every form must post to, from pelicanconf."""
     here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     try:
         with open(os.path.join(here, 'pelicanconf.py'), encoding='utf-8') as f:
-            found = re.search(r"^FORMSUBMIT_ENDPOINT\s*=\s*'([^']+)'", f.read(),
-                              re.M)
+            found = re.search(r"^FORM_HANDLER\s*=\s*'([^']+)'", f.read(), re.M)
     except OSError:
         return None
-    return found.group(1) if found else None
+    return found.group(1).rstrip('/') if found else None
 
 SUBRESOURCE_TAGS = {
     'link', 'script', 'img', 'source', 'iframe', 'video', 'audio', 'embed',
@@ -182,11 +186,12 @@ def check_page(root, page, problems):
         if host and host not in FORM_ACTION_HOSTS:
             problems.append(f'{shown}: form posts to {host}, which is not a '
                             f'declared endpoint')
-        endpoint = formsubmit_endpoint()
-        if host == 'formsubmit.co' and endpoint and \
-                urlsplit(target).path != f'/{endpoint}':
-            problems.append(f'{shown}: form posts to {target}, not to the '
-                            f'configured FormSubmit endpoint')
+        handler = form_handler()
+        if host != SITE_HOST and handler and (
+                not target.startswith(handler + '/')
+                or target[len(handler) + 1:] not in FORMS):
+            problems.append(f'{shown}: form posts to {target}, which is not '
+                            f'a declared form of the configured handler')
 
     seen = set()
     for tag, attrs in TAG.findall(source):

@@ -152,13 +152,13 @@ def test_a_form_posting_somewhere_new_is_caught(sabotaged):
     """A form action is a data flow and needs a disclosure, so it must not
     change silently."""
     page = sabotaged / 'index.html'
-    page.write_text(read(page).replace('https://formsubmit.co/',
+    page.write_text(read(page).replace('https://forms.rnaforecast.com/',
                                        'https://evil.example.com/'))
     assert_reports(sabotaged, 'form posts to evil.example.com')
 
 
 def test_the_declared_form_endpoint_is_accepted(site):
-    assert 'formsubmit.co' in read(site / 'index.html')
+    assert 'action="https://forms.rnaforecast.com/rnaf-contact"' in read(site / 'index.html')
     assert problems_for(site) == []
 
 
@@ -180,14 +180,15 @@ def test_a_short_description_is_caught(sabotaged):
     assert_reports(sabotaged, 'under the 50 floor')
 
 
-def test_a_form_posting_past_the_configured_endpoint_is_caught(sabotaged):
-    """The endpoint is one setting; a form written against another address
-    would send enquiries somewhere else."""
+def test_a_form_posting_to_an_unknown_form_id_is_caught(sabotaged):
+    """The handler accepts only the ids it knows; a typo would post into
+    a 404 and lose every enquiry quietly."""
     page = sabotaged / 'index.html'
     page.write_text(read(page).replace(
-        'https://formsubmit.co/', 'https://formsubmit.co/someone-else@example.org', 1))
+        'https://forms.rnaforecast.com/rnaf-contact',
+        'https://forms.rnaforecast.com/rnaf-contct', 1))
     found = problems_for(sabotaged)
-    assert any('configured FormSubmit endpoint' in p for p in found), found
+    assert any('not a declared form' in p for p in found), found
 
 
 def test_a_field_parsed_as_a_list_is_caught(sabotaged):

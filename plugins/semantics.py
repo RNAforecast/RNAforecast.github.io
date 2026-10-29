@@ -18,11 +18,11 @@ reader needs:
   rewrite adds `loading="lazy"`: every content image sits below the hero,
   which the templates draw, so none of them is the first thing on screen.
 
-* **The form endpoint.** The contact and waitlist forms are raw HTML in the
-  content, written against the readable address. FormSubmit also accepts a
-  random string in place of the address, which keeps it off the page;
-  `FORMSUBMIT_ENDPOINT` holds whichever is in use and the action is rewritten
-  here, so the switch is one setting and not three files.
+* **The form handler.** The contact and waitlist forms are raw HTML in the
+  content, written against the production handler
+  (`https://forms.rnaforecast.com/<form-id>`). `FORM_HANDLER` can point a
+  build at a preview Worker instead, and the base is rewritten here, so the
+  switch is one setting and not three files.
 
 * **A language attribute.** RST can emit a class but never an attribute, so a
   German title inside an English page could not be marked, and an English
@@ -203,22 +203,18 @@ def size_images(content, content_dir, siteurl):
     return IMG.sub(rewrite, content), count
 
 
-FORM_ACTION = re.compile(r'(action="https://formsubmit\.co/)([^"]+)(")')
+FORM_HANDLER = 'https://forms.rnaforecast.com'
+FORM_ACTION = re.compile(
+    r'(action=")' + re.escape(FORM_HANDLER) + r'(/[\w-]+")')
 
 
-def route_forms(content, endpoint):
-    """Point every FormSubmit action at the configured endpoint."""
-    if not endpoint:
+def route_forms(content, handler):
+    """Point every form at the configured handler, keeping the form id."""
+    handler = (handler or '').rstrip('/')
+    if not handler or handler == FORM_HANDLER:
         return content, 0
-    count = 0
-
-    def rewrite(match):
-        nonlocal count
-        if match.group(2) != endpoint:
-            count += 1
-        return f'{match.group(1)}{endpoint}{match.group(3)}'
-
-    return FORM_ACTION.sub(rewrite, content), count
+    routed, count = FORM_ACTION.subn(rf'\g<1>{handler}\g<2>', content)
+    return routed, count
 
 
 def apply(generator):
@@ -240,7 +236,7 @@ def apply(generator):
                         item.slug)
 
         routed, forms = route_forms(
-            item._content, generator.settings.get('FORMSUBMIT_ENDPOINT'))
+            item._content, generator.settings.get('FORM_HANDLER'))
         if forms:
             item._content = routed
             logger.info('semantics: routed %s form(s) on %s', forms, item.slug)

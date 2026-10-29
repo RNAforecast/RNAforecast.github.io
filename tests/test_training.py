@@ -4,7 +4,7 @@ and nothing that claims a course is bookable."""
 import re
 
 from conftest import nodes_of, read
-from scripts.check_build import formsubmit_endpoint
+from scripts.check_build import form_handler
 
 PAGE = 'training/index.html'
 
@@ -21,12 +21,16 @@ def test_each_waitlist_form_is_complete(site):
     assert len(forms) == 2
     topics = set()
     for form in forms:
-        assert f'action="https://formsubmit.co/{formsubmit_endpoint()}"' in form
-        assert 'name="_next" value="https://rnaforecast.com/waitlist/"' in form
-        assert 'name="_autoresponse"' in form
+        topic = re.search(r'name="topic" value="([^"]+)"', form).group(1)
+        topics.add(topic)
+        assert f'action="{form_handler()}/rnaf-waitlist-{topic}"' in form
+        # The handler redirects back to this id on a rejected post.
+        assert f'class="form-error" id="{topic}-error"' in form
         assert 'name="_honey"' in form
         assert 'type="email"' in form and 'required' in form
-        topics.add(re.search(r'name="topic" value="([^"]+)"', form).group(1))
+        # FormSubmit's options are gone with FormSubmit; the handler owns them.
+        assert not re.search(r'name="_(next|subject|template|autoresponse|captcha)"', form)
+        assert 'hello&#64;rnaforecast.com</a>' in form, 'no fallback address'
     assert topics == {'viennarna', 'local-ai-tools'}
 
 
@@ -54,14 +58,14 @@ def test_the_confirmation_page_is_unlisted(site):
     assert 'waitlist' not in read(site / 'sitemap.xml')
 
 
-def test_the_endpoint_setting_rewrites_every_form():
-    """Content keeps the readable address; the build routes to the setting."""
+def test_the_handler_setting_rewrites_every_form():
+    """Content writes the production handler; a preview is one setting away."""
     from plugins.semantics import route_forms
-    html = ('<form action="https://formsubmit.co/hello@rnaforecast.com">'
-            '<form action="https://formsubmit.co/hello@rnaforecast.com">')
-    routed, count = route_forms(html, 'a1b2c3d4e5f6')
+    html = ('<form action="https://forms.rnaforecast.com/rnaf-contact">'
+            '<form action="https://forms.rnaforecast.com/rnaf-waitlist-viennarna">')
+    routed, count = route_forms(html, 'https://form-handler-preview.example.workers.dev/')
     assert count == 2
-    assert routed.count('action="https://formsubmit.co/a1b2c3d4e5f6"') == 2
-    assert '@' not in routed
-    same, count = route_forms(html, 'hello@rnaforecast.com')
+    assert 'action="https://form-handler-preview.example.workers.dev/rnaf-contact"' in routed
+    assert 'action="https://form-handler-preview.example.workers.dev/rnaf-waitlist-viennarna"' in routed
+    same, count = route_forms(html, 'https://forms.rnaforecast.com')
     assert same == html and count == 0

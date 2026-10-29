@@ -468,10 +468,8 @@ Enquiries
     .. raw:: html
 
       <form class="contact-form" method="post"
-            action="https://formsubmit.co/hello@rnaforecast.com">
-        <input type="hidden" name="_subject" value="RNA Forecast enquiry" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_next" value="https://rnaforecast.com/thanks/" />
+            action="https://forms.rnaforecast.com/rnaf-contact">
+        <p class="form-error" id="contact-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <p class="field">
           <label for="cf-name">Name <abbr title="required">*</abbr></label>
@@ -490,4 +488,6 @@ Enquiries
         </p>
         <p class="form-note">Fields marked <abbr title="required">*</abbr> are required.</p>
         <button class="btn btn-primary btn-block" type="submit">Send message</button>
+        <p class="form-note form-fallback">Problems with the form? Email
+          <a href="mailto:hello@rnaforecast.com">hello&#64;rnaforecast.com</a>.</p>
       </form>

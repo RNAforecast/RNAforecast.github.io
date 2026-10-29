@@ -72,11 +72,8 @@ ViennaRNA and computational RNA design
     .. raw:: html
 
       <form class="contact-form" method="post"
-            action="https://formsubmit.co/hello@rnaforecast.com">
-        <input type="hidden" name="_subject" value="RNA Forecast waitlist: ViennaRNA" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_next" value="https://rnaforecast.com/waitlist/" />
-        <input type="hidden" name="_autoresponse" value="You are on the RNA Forecast waitlist for ViennaRNA. You will get one e-mail when a first date exists, nothing else. To be removed, reply to this message." />
+            action="https://forms.rnaforecast.com/rnaf-waitlist-viennarna">
+        <p class="form-error" id="viennarna-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input type="hidden" name="topic" value="viennarna" />
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <p class="field">
@@ -90,6 +87,8 @@ ViennaRNA and computational RNA design
         </p>
         <p class="form-note">One e-mail when a date exists. No newsletter. Remove yourself any time by replying.</p>
         <button class="btn btn-primary btn-block" type="submit">Join the ViennaRNA waitlist</button>
+        <p class="form-note form-fallback">Problems with the form? Email
+          <a href="mailto:hello@rnaforecast.com">hello&#64;rnaforecast.com</a>.</p>
       </form>
 
 .. _local-ai-tools:
@@ -152,11 +151,8 @@ Local AI coding tools for research groups
     .. raw:: html
 
       <form class="contact-form" method="post" id="waitlist"
-            action="https://formsubmit.co/hello@rnaforecast.com">
-        <input type="hidden" name="_subject" value="RNA Forecast waitlist: local AI tools" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_next" value="https://rnaforecast.com/waitlist/" />
-        <input type="hidden" name="_autoresponse" value="You are on the RNA Forecast waitlist for local AI tools. You will get one e-mail when a first date exists, nothing else. To be removed, reply to this message." />
+            action="https://forms.rnaforecast.com/rnaf-waitlist-local-ai-tools">
+        <p class="form-error" id="local-ai-tools-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input type="hidden" name="topic" value="local-ai-tools" />
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <p class="field">
@@ -170,6 +166,8 @@ Local AI coding tools for research groups
         </p>
         <p class="form-note">One e-mail when a date exists. No newsletter. Remove yourself any time by replying.</p>
         <button class="btn btn-primary btn-block" type="submit">Join the local AI tools waitlist</button>
+        <p class="form-note form-fallback">Problems with the form? Email
+          <a href="mailto:hello@rnaforecast.com">hello&#64;rnaforecast.com</a>.</p>
       </form>
 
 .. container:: closing

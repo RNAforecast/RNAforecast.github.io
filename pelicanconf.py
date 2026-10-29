@@ -570,12 +570,12 @@ SITEMAP = {
     "exclude": ["impressum", "datenschutz", "thanks", "waitlist", "404"]
 }
 
-# Where the FormSubmit forms post. The content writes the address, which is
-# readable; the build rewrites it to this value (plugins/semantics.py). Once
-# FormSubmit has activated the address it offers a random-string endpoint in
-# its confirmation; put that string here and the address leaves the page.
-# scripts/check_build.py keeps the host to formsubmit.co either way.
-FORMSUBMIT_ENDPOINT = 'hello@rnaforecast.com'
+# The form handler (repo mtw/form-handler, a Cloudflare Worker): every form
+# posts to <FORM_HANDLER>/<form-id>. The content writes the production URL;
+# the build rewrites the base to this value (plugins/semantics.py), so a
+# preview Worker can be tried by changing one line. scripts/check_build.py
+# fails a form that posts anywhere else or to an unknown form id.
+FORM_HANDLER = 'https://forms.rnaforecast.com'
 
 # Search Console token; empty means no meta tag. A DNS TXT record verifies
 # the whole domain instead and survives redesigns.
