@@ -103,9 +103,10 @@
       for(var i=0;i<links.length;i++)links[i].addEventListener('click',function(e){e.preventDefault(); rnafConsent.open();});
       var buttons=document.querySelectorAll('#cookie-settings button[data-consent]');
       for(var j=0;j<buttons.length;j++)buttons[j].addEventListener('click',function(e){rnafConsent[e.currentTarget.getAttribute('data-consent')]();});
+      if(navigator.globalPrivacyControl===true)return;   // outranks a stored acceptance too
       var c=read();
       if(c===true)load();
-      else if(c===null&&navigator.globalPrivacyControl!==true)rnafConsent.open();
+      else if(c===null)rnafConsent.open();
     });
   })();
   </script>
