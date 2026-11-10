@@ -11,62 +11,14 @@ Impressum
 :hero_title: Impressum
 :hero_lead: Offenlegung gemäß § 5 ECG, § 14 UGB und § 25 MedienG · Stand: November 2026
 
-Medieninhaber, Diensteanbieter und Verantwortlicher
----------------------------------------------------
+| RNA Forecast e.U., Inhaber Mag. Dr. Michael T. Wolfinger
+| Linzer Straße 30–32/2/5, 3002 Purkersdorf, Österreich
+| Firmenbuchnummer FN 597678p, Landesgericht St. Pölten
+| UID-Nummer ATU78022612
+| E-Mail: `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
 
-| RNA Forecast e.U.
-| Inhaber: Mag. Dr. Michael T. Wolfinger
-| Sitz: Linzer Straße 30–32/2/5, 3002 Purkersdorf, Österreich
-| Firmenbuchnummer: FN 597678p
-| Firmenbuchgericht: Landesgericht St. Pölten
-| UID-Nummer: ATU78022612
-
-Unternehmensgegenstand: Wissenschaftliche Forschung & Entwicklung, sowie 
+Unternehmensgegenstand: Wissenschaftliche Forschung und Entwicklung sowie
 Weiterbildung auf dem Gebiet der computergestützten RNA-Biologie.
 
-Für den Inhalt dieser Website verantwortlich: Dr. Michael T. Wolfinger.
-
-| E-Mail: `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
-| GitHub: `github.com/mtw <https://github.com/mtw>`__
-| ORCID: `0000-0003-0925-5205 <https://orcid.org/0000-0003-0925-5205>`__
-
-Grundlegende Richtung
----------------------
-
-RNA Forecast ist die unabhängige Forschungsplattform von Michael T. Wolfinger.
-Die Website dokumentiert wissenschaftliche Forschung, Publikationen, Software,
-Lehrtätigkeit und Kooperationen auf dem Gebiet der computergestützten
-RNA-Biologie.
-
-Ihre grundlegende Richtung im Sinne der Offenlegungspflicht nach § 25 MedienG
-ist die Dokumentation und Vermittlung dieser wissenschaftlichen Arbeit.
-
-Urheberrecht
-------------
-
-Copyright © Michael T. Wolfinger. Soweit nicht anders angegeben, verbleiben
-Texte, Abbildungen, Software und Fotografien auf dieser Website im Eigentum der
-jeweiligen Urheber.
-
-Wissenschaftliche Publikationen unterliegen den Urheberrechtsbestimmungen der
-jeweiligen Verlage.
-
-Open-Source-Software
---------------------
-
-Über RNA Forecast veröffentlichte Software steht unter der jeweils angegebenen
-Open-Source-Lizenz. Lizenzinformationen finden sich in den einzelnen
-Repositories.
-
-Externe Links
--------------
-
-Trotz sorgfältiger Prüfung wird keine Haftung für die Inhalte externer Websites
-übernommen. Für diese Seiten sind ausschließlich deren Betreiber
-verantwortlich.
-
-Datenschutz
------------
-
-Alle Details zum Umgang dieser Website mit personenbezogenen Daten finden sich in der 
-`Datenschutzerklärung </datenschutz/>`__ .
+Grundlegende Richtung: Dokumentation und Vermittlung dieser wissenschaftlichen
+Arbeit. Medieninhaber und verantwortlich für den Inhalt: Mag. Dr. Michael T. Wolfinger.

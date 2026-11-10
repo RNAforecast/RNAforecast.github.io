@@ -11,91 +11,50 @@ Datenschutzerklärung
 :hero_title: Datenschutzerklärung
 :hero_lead: Information nach Art. 13 DSGVO · Stand: November 2026
 
-Verantwortlicher
-----------------
+**Verantwortlicher:** RNA Forecast e.U., Inhaber Mag. Dr. Michael T. Wolfinger,
+Linzer Straße 30–32/2/5, 3002 Purkersdorf, `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__.
 
-| RNA Forecast e.U., Inhaber Mag. Dr. Michael T. Wolfinger
-| Linzer Straße 30–32/2/5, 3002 Purkersdorf, Österreich
-| `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__
+**Hosting und Logfiles.** GitHub Pages und Cloudflare verarbeiten IP-Adresse und
+Verbindungsdaten, um die Website bereitzustellen und abzusichern (Art. 6 Abs. 1 lit. f DSGVO).
 
-Verarbeitungen
---------------
+**Reichweite und Ladezeiten.** Cloudflare Web Analytics zählt Seitenaufrufe und misst
+Ladezeiten sowie die Core Web Vitals über die Leistungsschnittstellen Ihres Browsers.
+Es werden keine Cookies gesetzt und nichts auf Ihrem Gerät gespeichert (Art. 6 Abs. 1 lit. f DSGVO).
 
-**Server-Logfiles.** GitHub Pages (Hosting) und Cloudflare (Auslieferung)
-verarbeiten Verbindungsdaten einschließlich der IP-Adresse, um die Website
-bereitzustellen und abzusichern. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO
-(sicherer Betrieb).
+**Google Analytics 4, nur mit Einwilligung.** Erst nach Zustimmung im Dialog lädt die
+Website Google Analytics 4 und misst die Nutzung pseudonym. Google setzt dann die Cookies
+``_ga`` und ``_ga_*`` (bis zu zwei Jahre). Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO,
+§ 165 Abs. 3 TKG 2021. Ihre Wahl speichert Ihr Browser zwölf Monate lang unter ``rnaf-consent``.
+Ein Global-Privacy-Control-Signal gilt als Ablehnung.
 
-**Reichweitenmessung.** Cloudflare Web Analytics zählt Seitenaufrufe ohne
-Cookies und ohne Zugriff auf den Speicher Ihres Geräts. Rechtsgrundlage:
-Art. 6 Abs. 1 lit. f DSGVO (Interesse an Nutzungsstatistik); § 165 TKG 2021 ist
-nicht anwendbar. Dieselbe Erfassung misst zusätzlich Ladezeiten und die Core Web
-Vitals (Largest Contentful Paint, Interaction to Next Paint, Cumulative Layout Shift)
-über die Leistungsschnittstellen Ihres Browsers (Real User Measurements). Dafür werden
-keine Cookies gesetzt und nichts auf Ihrem Gerät gespeichert; die Rechtsgrundlage
-bleibt Art. 6 Abs. 1 lit. f DSGVO.
+**Kontaktformular und E-Mail.** Ihre Angaben werden zur Beantwortung Ihrer Anfrage verwendet.
+Das Formular speichert sie in einer Datenbank bei Cloudflare (D1) und meldet sie über
+Resend an mich; Sie erhalten eine Bestätigung. Zur Missbrauchsabwehr speichert die Datenbank
+einen Hashwert Ihrer IP-Adresse und Ihren User-Agent. Pflichtangaben sind für die Antwort
+erforderlich, alles andere ist freiwillig (Art. 6 Abs. 1 lit. b, sonst lit. f DSGVO).
 
-**Google Analytics.** Nur nach Ihrer Einwilligung im Dialog beim ersten Besuch
-misst Google Analytics 4 (Google Ireland Limited) die Nutzung pseudonym und
-setzt dazu die Cookies ``_ga`` und ``_ga_*`` (Laufzeit bis zu zwei Jahre).
-Vorher wird nichts von Google geladen. Rechtsgrundlage: Art. 6 Abs. 1 lit. a
-DSGVO, § 165 Abs. 3 TKG 2021. Ihre Entscheidung wird zwölf Monate im Local
-Storage Ihres Browsers (``rnaf-consent``) gespeichert; ein
-Global-Privacy-Control-Signal gilt als Ablehnung.
+Eingaben werden automatisch auf Spam geprüft, etwa anhand von Links, Schriftzeichen,
+Telefonnummern und wiederholten Einsendungen. Spam wird weder weitergeleitet noch beantwortet.
+Die Prüfung trifft keine Entscheidung mit rechtlicher Wirkung für Sie (Art. 22 DSGVO).
 
-**Kontakt.** Angaben aus dem Kontaktformular oder einer E-Mail werden zur
-Beantwortung der Anfrage verwendet. Formulareingaben nimmt ein eigener Dienst
-auf Cloudflare Workers entgegen und speichert sie in einer Datenbank bei
-Cloudflare (D1), zusammen mit einem Hashwert der IP-Adresse und dem
-User-Agent zur Missbrauchsabwehr; die Benachrichtigung an mich und eine
-Eingangsbestätigung an Sie werden über Resend versandt.
-Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Anbahnung einer Zusammenarbeit),
-sonst lit. f DSGVO (Beantwortung von Anfragen). Ohne diese Angaben kann keine
-Antwort erfolgen.
+**Warteliste.** E-Mail-Adresse, und freiwillig Name, Zugehörigkeit und gewünschtes Format.
+Sie erhalten eine Bestätigung und, sobald ein Termin feststeht, eine Nachricht
+(Art. 6 Abs. 1 lit. a DSGVO). Die Einwilligung können Sie jederzeit an
+`hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__ widerrufen.
 
-**Missbrauchsprüfung.** Jede Einsendung wird automatisch auf Merkmale von Spam geprüft,
-etwa Links, Schriftzeichen, Telefonnummern, eine zweite E-Mail-Adresse im Text und
-wiederholte Einsendungen. Eine als Spam eingestufte Einsendung wird weder weitergeleitet
-noch beantwortet. Sie wird nur gespeichert, um Fehleinstufungen nachvollziehen zu können,
-und nach 30 Tagen gelöscht. Zur Abwehr dauerhafter Absender werden außerdem ein Hashwert
-der IP-Adresse und der angegebene Name als Zähler gespeichert, ebenfalls für höchstens
-30 Tage. Die Prüfung trifft keine Entscheidung, die Ihnen gegenüber rechtliche Wirkung
-entfaltet oder Sie in ähnlicher Weise erheblich beeinträchtigt (Art. 22 DSGVO).
-Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Schutz vor Missbrauch).
+**Empfänger.** GitHub, Cloudflare, Google und Resend. Eine Übermittlung in die USA
+erfolgt auf Grundlage des EU-US Data Privacy Framework oder der Standardvertragsklauseln.
 
-**Warteliste.** Wer sich für eine Benachrichtigung über künftige Trainings
-einträgt, übermittelt seine E-Mail-Adresse und freiwillig Name, Zugehörigkeit
-und Angaben zum gewünschten Format über dasselbe Formularsystem und erhält
-eine Bestätigung sowie später eine Nachricht, sobald Termine feststehen.
-Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 174 TKG 2021. Die Einwilligung
-kann jederzeit per E-Mail an hello@rnaforecast.com widerrufen
-werden; die Adresse wird dann gelöscht.
+**Speicherdauer.**
 
-Empfänger
----------
+- Logfiles: nach den Vorgaben der Anbieter.
+- Google-Analytics-Daten: 14 Monate.
+- Kontaktanfragen: bis zur Erledigung, spätestens zwölf Monate nach Eingang.
+- Spam und Absenderzähler der Prüfung: 30 Tage.
+- Warteliste: bis zum ersten Termin, höchstens zwölf Monate, oder bis zum Widerruf.
 
-Auftragsverarbeiter sind GitHub, Cloudflare, Google und Resend, jeweils
-mit möglicher Übermittlung in die USA auf Grundlage des EU-US Data Privacy
-Framework, andernfalls der Standardvertragsklauseln der Europäischen
-Kommission.
-
-Speicherdauer
--------------
-
-Logfiles: für die Dauer der technischen Aufbewahrung durch die Anbieter.
-Google-Analytics-Ereignisdaten: 14 Monate. Anfragen: bis zur Erledigung,
-danach nur im Rahmen gesetzlicher Aufbewahrungspflichten. Warteliste: bis zur
-Benachrichtigung über den ersten Termin, längstens zwölf Monate, oder bis zum
-Widerruf. Als Spam eingestufte Einsendungen sowie die Zähler der Missbrauchsprüfung: 30 Tage.
-Die in der Formulardatenbank gespeicherte Kopie einer Eingabe wird
-mit der Anfrage beziehungsweise dem Wartelisteneintrag gelöscht.
-
-Ihre Rechte
------------
-
-Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
-Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO). Eine
-Einwilligung können Sie jederzeit mit Wirkung für die Zukunft über
-„Cookie settings“ in der Fußzeile widerrufen. Beschwerden nimmt die
-Österreichische Datenschutzbehörde, Barichgasse 40–42, 1030 Wien,
-`dsb.gv.at <https://dsb.gv.at/>`__, entgegen.
+**Ihre Rechte.** Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung,
+Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO). Eine Einwilligung können Sie
+jederzeit mit Wirkung für die Zukunft über „Cookie settings“ in der Fußzeile widerrufen.
+Beschwerden nimmt die Österreichische Datenschutzbehörde entgegen, Barichgasse 40–42,
+1030 Wien, `dsb.gv.at <https://dsb.gv.at/>`__.
