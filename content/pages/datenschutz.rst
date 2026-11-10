@@ -9,7 +9,7 @@ Datenschutzerklärung
 :robots: noindex, follow
 :page_class: legal
 :hero_title: Datenschutzerklärung
-:hero_lead: Information nach Art. 13 DSGVO · Stand: Oktober 2026
+:hero_lead: Information nach Art. 13 DSGVO · Stand: November 2026
 
 Verantwortlicher
 ----------------
@@ -29,7 +29,11 @@ bereitzustellen und abzusichern. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO
 **Reichweitenmessung.** Cloudflare Web Analytics zählt Seitenaufrufe ohne
 Cookies und ohne Zugriff auf den Speicher Ihres Geräts. Rechtsgrundlage:
 Art. 6 Abs. 1 lit. f DSGVO (Interesse an Nutzungsstatistik); § 165 TKG 2021 ist
-nicht anwendbar.
+nicht anwendbar. Dieselbe Erfassung misst zusätzlich Ladezeiten und die Core Web
+Vitals (Largest Contentful Paint, Interaction to Next Paint, Cumulative Layout Shift)
+über die Leistungsschnittstellen Ihres Browsers (Real User Measurements). Dafür werden
+keine Cookies gesetzt und nichts auf Ihrem Gerät gespeichert; die Rechtsgrundlage
+bleibt Art. 6 Abs. 1 lit. f DSGVO.
 
 **Google Analytics.** Nur nach Ihrer Einwilligung im Dialog beim ersten Besuch
 misst Google Analytics 4 (Google Ireland Limited) die Nutzung pseudonym und
@@ -48,6 +52,16 @@ Eingangsbestätigung an Sie werden über Resend versandt.
 Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Anbahnung einer Zusammenarbeit),
 sonst lit. f DSGVO (Beantwortung von Anfragen). Ohne diese Angaben kann keine
 Antwort erfolgen.
+
+**Missbrauchsprüfung.** Jede Einsendung wird automatisch auf Merkmale von Spam geprüft,
+etwa Links, Schriftzeichen, Telefonnummern, eine zweite E-Mail-Adresse im Text und
+wiederholte Einsendungen. Eine als Spam eingestufte Einsendung wird weder weitergeleitet
+noch beantwortet. Sie wird nur gespeichert, um Fehleinstufungen nachvollziehen zu können,
+und nach 30 Tagen gelöscht. Zur Abwehr dauerhafter Absender werden außerdem ein Hashwert
+der IP-Adresse und der angegebene Name als Zähler gespeichert, ebenfalls für höchstens
+30 Tage. Die Prüfung trifft keine Entscheidung, die Ihnen gegenüber rechtliche Wirkung
+entfaltet oder Sie in ähnlicher Weise erheblich beeinträchtigt (Art. 22 DSGVO).
+Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Schutz vor Missbrauch).
 
 **Warteliste.** Wer sich für eine Benachrichtigung über künftige Trainings
 einträgt, übermittelt seine E-Mail-Adresse und freiwillig Name, Zugehörigkeit
@@ -72,7 +86,8 @@ Logfiles: für die Dauer der technischen Aufbewahrung durch die Anbieter.
 Google-Analytics-Ereignisdaten: 14 Monate. Anfragen: bis zur Erledigung,
 danach nur im Rahmen gesetzlicher Aufbewahrungspflichten. Warteliste: bis zur
 Benachrichtigung über den ersten Termin, längstens zwölf Monate, oder bis zum
-Widerruf. Die in der Formulardatenbank gespeicherte Kopie einer Eingabe wird
+Widerruf. Als Spam eingestufte Einsendungen sowie die Zähler der Missbrauchsprüfung: 30 Tage.
+Die in der Formulardatenbank gespeicherte Kopie einer Eingabe wird
 mit der Anfrage beziehungsweise dem Wartelisteneintrag gelöscht.
 
 Ihre Rechte

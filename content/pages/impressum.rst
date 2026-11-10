@@ -9,7 +9,7 @@ Impressum
 :robots: noindex, follow
 :page_class: legal
 :hero_title: Impressum
-:hero_lead: Offenlegung gemäß § 5 ECG, § 14 UGB und § 25 MedienG · Stand: September 2026
+:hero_lead: Offenlegung gemäß § 5 ECG, § 14 UGB und § 25 MedienG · Stand: November 2026
 
 Medieninhaber, Diensteanbieter und Verantwortlicher
 ---------------------------------------------------
