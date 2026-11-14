@@ -596,3 +596,34 @@ def test_the_organization_offers_a_way_to_reach_it(site):
     assert org['contactPoint']['email']
     assert org['contactPoint']['url'].startswith('https://rnaforecast.com/')
     assert org['sameAs'] and org['logo']['width'] == 1000
+
+
+# --- Content-Security-Policy -------------------------------------------------------------
+# The consent gate is the only inline script the site runs, and the CSP served from the
+# edge (Cloudflare, Rules → Transform Rules, "csp report-only") allows it by the SHA-256 of
+# its exact bytes. If the script changes, the hash changes, and with an enforcing policy
+# the consent banner would stop working on the live site. This pins the hash so the change
+# is noticed here first.
+CONSENT_SCRIPT_SHA256 = 'sha256-wsPk4t9cEi4F8FKXueIzHNdJFh+/lMbXA2IWNSE6J8I='
+INLINE_SCRIPT = re.compile(r'<script(?P<attrs>[^>]*)>(?P<body>.*?)</script>', re.S)
+
+
+def inline_script_hashes(html):
+    import base64
+    import hashlib
+    hashes = set()
+    for m in INLINE_SCRIPT.finditer(html):
+        if 'src=' in m.group('attrs') or 'ld+json' in m.group('attrs'):
+            continue
+        digest = hashlib.sha256(m.group('body').encode('utf-8')).digest()
+        hashes.add('sha256-' + base64.b64encode(digest).decode())
+    return hashes
+
+
+@pytest.mark.parametrize('page', PAGES)
+def test_the_only_inline_script_is_the_consent_gate_with_the_pinned_hash(site, page):
+    hashes = inline_script_hashes(read(site / page))
+    assert hashes == {CONSENT_SCRIPT_SHA256}, (
+        f'{page}: inline script hash is {sorted(hashes)}, pinned {CONSENT_SCRIPT_SHA256}. '
+        'The consent script changed: update the Content-Security-Policy rule in Cloudflare '
+        'for rnaforecast.com with the new hash, then the constant here.')
