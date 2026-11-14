@@ -9,7 +9,7 @@ Training
 :hero_kicker: Training
 :hero_title: Hands-on training for research groups
 :hero_lead: RNA Forecast prepares two hands-on formats for research groups, remote or on site. Neither has dates yet. Each has a waitlist, and the list gets one e-mail when a first date is fixed.
-:hero_actions: `ViennaRNA and RNA design <#viennarna>`__ `Local AI coding tools <#local-ai-tools>`__
+:hero_actions: `Join the ViennaRNA waitlist <#viennarna-waitlist>`__ `Join the local AI waitlist <#waitlist>`__
 
 .. container:: lead
 
@@ -71,7 +71,7 @@ ViennaRNA and computational RNA design
 
     .. raw:: html
 
-      <form class="contact-form" method="post"
+      <form class="contact-form" method="post" referrerpolicy="no-referrer-when-downgrade" id="viennarna-waitlist"
             action="https://forms.rnaforecast.com/rnaf-waitlist-viennarna">
         <p class="form-error" id="viennarna-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input type="hidden" name="topic" value="viennarna" />
@@ -192,7 +192,7 @@ Local AI coding tools for research groups
 
     .. raw:: html
 
-      <form class="contact-form" method="post" id="waitlist"
+      <form class="contact-form" method="post" referrerpolicy="no-referrer-when-downgrade" id="waitlist"
             action="https://forms.rnaforecast.com/rnaf-waitlist-local-ai-tools">
         <p class="form-error" id="local-ai-tools-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input type="hidden" name="topic" value="local-ai-tools" />

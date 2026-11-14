@@ -467,7 +467,7 @@ Enquiries
 
     .. raw:: html
 
-      <form class="contact-form" method="post"
+      <form class="contact-form" method="post" referrerpolicy="no-referrer-when-downgrade"
             action="https://forms.rnaforecast.com/rnaf-contact">
         <p class="form-error" id="contact-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
