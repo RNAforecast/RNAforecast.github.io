@@ -283,7 +283,7 @@ RNA folding kinetics
 
 .. container:: theme-body
 
-  How RNA folds over time, not just where it lands. Approximating folding time
+  How RNA folds over time, which is a different question from where it ends up. Approximating folding time
   distributions fast enough to be used routinely alongside structure
   prediction.
 

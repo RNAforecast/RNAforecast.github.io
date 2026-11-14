@@ -3,13 +3,13 @@ Training
 
 :title: Training, RNA Forecast | ViennaRNA and local AI tools
 :slug: training
-:description: Hands-on training for research groups: ViennaRNA and computational RNA design, and local AI coding tools. Both in preparation, each with a waitlist.
+:description: Hands-on training for research groups in ViennaRNA and RNA design, and in local AI coding tools. Both in preparation, both with a waitlist.
 :referrer: no-referrer-when-downgrade
-:summary: Two hands-on training formats for research groups, remote or on site: ViennaRNA and computational RNA design, and local AI coding tools. Both in preparation; each has a waitlist.
+:summary: Two hands-on training formats for research groups, remote or on site, one on ViennaRNA and computational RNA design and one on local AI coding tools. Both are in preparation and both have a waitlist.
 :og_type: website
 :hero_kicker: Training
 :hero_title: Hands-on training for research groups
-:hero_lead: RNA Forecast prepares two hands-on formats for research groups, remote or on site. Neither has dates yet. Each has a waitlist, and the list gets one e-mail when a first date is fixed.
+:hero_lead: RNA Forecast is preparing two hands-on formats for research groups, remote or on site. There are no dates yet. Whoever joins one of the waitlists gets one message from RNA Forecast, when the first date is fixed.
 :hero_actions: `Join the ViennaRNA waitlist <#viennarna-waitlist>`__ `Join the local AI waitlist <#waitlist>`__
 
 .. container:: lead
@@ -38,30 +38,48 @@ ViennaRNA and computational RNA design
     an RNA Forecast training it is being prepared, and dates will be announced
     to the waitlist first.
 
-    **Who it is for.** Experimental RNA labs that want computational depth;
-    biotech teams working on mRNA, siRNA or structured RNA; doctoral
-    programmes; tool developers.
+    **Who it is for.** Experimental RNA labs that want computational depth,
+    doctoral programmes, biotech teams working on mRNA, siRNA or structured
+    RNA, computational groups and tool developers.
 
     **What is covered**, chosen per group, half day to full day:
 
-    - RNA secondary structure and the nearest-neighbour model: what ``RNAfold``
+    - RNA secondary structure and the nearest neighbour model: what ``RNAfold``
       computes, and why the MFE structure is one answer among many.
-    - The Boltzmann ensemble: pair probabilities, centroid and MEA structures,
-      ensemble diversity; reading a dot plot; when the MFE misleads.
-    - Probing data: SHAPE and DMS reactivities as soft constraints, the three
-      ViennaRNA methods, what the data change and what they do not.
-    - Folding kinetics: suboptimal structures, barrier trees, ``barriers`` and
-      ``treekin``, cotranscriptional folding; when kinetics matter for a design.
+    - The Boltzmann ensemble, i.e. pair probabilities, centroid and MEA
+      structures, ensemble diversity and helix probabilities, how to read a dot
+      plot, and when the MFE misleads.
+    - Probing data, i.e. SHAPE and DMS reactivities as soft constraints, the
+      three ViennaRNA methods and, new in ViennaRNA 2.8.0, cross-linking
+      interval pairs, with a look at what the data change and what they do not.
+    - Modified nucleotides, i.e. the pseudouridine and N1-methylpseudouridine
+      parameters for therapeutic mRNA, so that the molecule that is folded is
+      the one that is made.
+    - Large RNAs and viral genomes: local folding with ``RNAplfold``, locally
+      stable elements, conserved structure from alignments with ``RNAalifold``,
+      covariation as evidence.
     - Accessibility and RNA–RNA interaction: ``RNAplfold``, ``RNAcofold`` and
-      ``RNAup`` for siRNA, ASO and miRNA sites.
-    - Design review before synthesis: objective, ensemble defect, kinetic
-      traps, variant robustness; a checklist participants take home.
+      ``RNAup`` for siRNA, ASO and miRNA sites, and how to map variants onto a
+      structure.
+    - Design review before synthesis, i.e. the objective, the ensemble defect
+      and how a design holds up under sequence variants, with a checklist that
+      participants take home.
 
-    **Format.** Live, remote or on site, groups of 6 to 12, half day or full
-    day, participants' own sequences welcome. Materials stay with the group.
+    Tertiary structure prediction is outside the scope. The course covers how
+    far secondary structure and ensembles take a question before that becomes
+    necessary.
 
-    Free material on the topic:
-    `interpreting SHAPE and chemical probing data <https://michaelwolfinger.com/blog/2026/How-to-Interpret-SHAPE-and-Chemical-Probing-Data-for-RNA-Structure-Decisions/>`__
+    **Format.** Live, remote or on site, as a group of 6 to 12 or as a single
+    participant in an open remote cohort, half day or full day, participants'
+    own sequences welcome. Materials stay with the group.
+
+    Free material on the topic, in reading order on the
+    `ViennaRNA in practice <https://michaelwolfinger.com/rna-structure-prediction/>`__
+    page:
+    `RNAfold and the ensemble <https://michaelwolfinger.com/blog/2026/rnafold-in-practice/>`__,
+    `SHAPE and chemical probing data <https://michaelwolfinger.com/blog/2026/How-to-Interpret-SHAPE-and-Chemical-Probing-Data-for-RNA-Structure-Decisions/>`__,
+    `RNAplfold and accessibility <https://michaelwolfinger.com/blog/2026/rnaplfold-accessibility/>`__,
+    the `ViennaRNA 2.8.0 release note <https://michaelwolfinger.com/blog/2026/viennarna-2-8-0/>`__
     and the `RNA structure glossary <https://michaelwolfinger.com/glossary/>`__.
 
   .. container:: blueprint
@@ -128,7 +146,7 @@ ViennaRNA and computational RNA design
           <textarea class="input" id="viennarna-wish" name="wishes" rows="3"
                     placeholder="Your sequences, your questions, the methods you want to see"></textarea>
         </p>
-        <p class="form-note">One e-mail when a date exists. No newsletter. Remove yourself any time by replying.</p>
+        <p class="form-note">You get one e-mail when a date is fixed and nothing else, and a reply to that e-mail takes you off the list.</p>
         <button class="btn btn-primary btn-block" type="submit">Join the ViennaRNA waitlist</button>
         <p class="form-note form-fallback">Problems with the form? Email
           <a href="mailto:hello@rnaforecast.com">hello&#64;rnaforecast.com</a>.</p>
@@ -136,8 +154,8 @@ ViennaRNA and computational RNA design
 
 .. _local-ai-tools:
 
-Local AI coding tools for research groups
------------------------------------------
+Local AI coding tools for research groups and small teams
+---------------------------------------------------------
 
 .. container:: kicker
 
@@ -147,43 +165,47 @@ Local AI coding tools for research groups
 
   .. container:: split-main
 
-    New. The setup guides this course is built on are published and
-    maintained on michaelwolfinger.com; the course itself is in preparation
-    and will run as a live half-day cohort, updated for every run because the
-    tools change monthly.
+    The setup guides this course is built on are published and maintained on
+    michaelwolfinger.com. The course itself is in preparation and will run as
+    a live half-day cohort, updated for every run because the tools change
+    monthly.
 
-    A scientist's workshop on running coding agents, Claude Code and OpenAI
-    Codex CLI, against models that run on the group's own hardware with
-    LM Studio or Ollama, on Apple Silicon and on Linux with NVIDIA or AMD
-    GPUs, with notes for Windows. For groups whose unpublished data,
-    manuscripts and code must not leave the machine.
+    A scientist's workshop on running coding agents, Claude Code, OpenAI
+    Codex CLI, OpenCode and pi, against models that run on your own hardware
+    with LM Studio, Ollama or an exo cluster across several machines, on Apple
+    Silicon and on Linux with NVIDIA or AMD GPUs, with notes for Windows. For
+    research groups and small teams whose data must stay in house: unpublished
+    data, manuscripts and code that must not leave the machine.
 
     **What is covered:**
 
-    - Hardware and model choice: what fits in 16, 24, 32 and 64+ GB; measured
-      memory needs; tool calling as the property that decides whether a model
-      is usable.
-    - Setup on macOS and Linux, and what differs on Windows: LM Studio, Ollama,
-      the environment variables, context length as the setting that breaks
-      most sessions.
+    - Hardware and model choice, i.e. what fits in 16, 24, 32 and 64+ GB with
+      measured memory needs, tool calling as the property that decides whether
+      a model is usable at all (and how to check it instead of trusting the
+      agent's report), and context size as the second limit.
+    - Setup on macOS and Linux, with the differences on Windows, i.e. LM Studio,
+      Ollama, the environment variables and the context length, which is the
+      setting that breaks most sessions.
     - A research workflow: scripts and analysis notebooks, tests as the safety
       net, ``AGENTS.md`` and ``CLAUDE.md`` for durable instructions, reading
       diffs.
-    - What local models can and cannot do compared with hosted ones; where
-      they fail and how to work around it.
+    - What local models can and cannot do compared with hosted ones, where
+      they fail, and how to work around it.
     - Privacy and cost: what leaves the machine with each configuration,
       telemetry switches, what a GPU box costs against API spend.
     - Hands-on: every participant leaves with a working setup on their laptop
       or against the group's server.
 
     **Prerequisites.** A laptop with 16 GB or more, or access to a group
-    machine; comfort with a terminal. **Format.** Live cohort, half day, 6 to
+    machine, and some comfort with a terminal. **Format.** Live cohort, half day, 6 to
     12 participants, remote or on site.
 
     The guides:
     `Claude Code with a local model on Apple Silicon <https://michaelwolfinger.com/blog/2026/claude-code-local-llm-apple-silicon/>`__,
     `Claude Code with Ollama <https://michaelwolfinger.com/blog/2026/claude-code-ollama-local-llm/>`__,
-    `Codex CLI with LM Studio or Ollama <https://michaelwolfinger.com/blog/2026/codex-cli-local-model-lm-studio-ollama/>`__.
+    `Codex CLI with LM Studio, Ollama or exo <https://michaelwolfinger.com/blog/2026/codex-cli-local-model-lm-studio-ollama/>`__,
+    `four coding agents against ten local models <https://michaelwolfinger.com/blog/2026/coding-agents-local-models-exo-cluster/>`__
+    and `a reproducible data analysis with a local model <https://michaelwolfinger.com/blog/2026/claude-code-scientific-data-analysis/>`__.
 
   .. container:: blueprint
 
@@ -249,7 +271,7 @@ Local AI coding tools for research groups
           <textarea class="input" id="local-ai-tools-wish" name="wishes" rows="3"
                     placeholder="Your hardware, your workflow, what must stay on the machine"></textarea>
         </p>
-        <p class="form-note">One e-mail when a date exists. No newsletter. Remove yourself any time by replying.</p>
+        <p class="form-note">You get one e-mail when a date is fixed and nothing else, and a reply to that e-mail takes you off the list.</p>
         <button class="btn btn-primary btn-block" type="submit">Join the local AI tools waitlist</button>
         <p class="form-note form-fallback">Problems with the form? Email
           <a href="mailto:hello@rnaforecast.com">hello&#64;rnaforecast.com</a>.</p>

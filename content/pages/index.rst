@@ -286,8 +286,8 @@ Selected collaborations
 -----------------------
 
 Selected research collaborations with groups in Europe, Asia and Australia.
-Each is a project with its own timeline, and each has produced joint
-publications.
+Each of them is a project with its own timeline. All of them have led to
+joint publications.
 
 .. container:: collabs
 
@@ -375,7 +375,7 @@ Teaching and advanced training
 
     Michael T. Wolfinger has taught computational biology, bioinformatics and RNA analysis at universities in Austria and Germany for more than two decades.
 
-    Through RNA Forecast, Michael also develops advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial audiences. Two training formats are in preparation; the training page has the details and a waitlist for each.
+    Through RNA Forecast, Michael also develops advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial audiences. Two training formats are in preparation. The training page has the details and a waitlist for each.
 
     .. container:: actions
 
@@ -412,7 +412,7 @@ Michael T. Wolfinger
 
   .. container:: portrait-main
 
-    Computational RNA biologist. His research covers RNA structure prediction and folding kinetics, structure-aware RNA design, RNA-protein recognition and structured viral RNAs. Much of it centres on RNAs whose function comes from their structure, not just their sequence.
+    Computational RNA biologist. His research covers RNA structure prediction and folding kinetics, structure-aware RNA design, RNA-protein recognition and structured viral RNAs. Much of it centres on RNAs whose function comes from their structure rather than from their sequence alone.
 
     He is an independent Principal Investigator, leading research projects as well as collaborative projects with the Theoretical Biochemistry Group at the University of Vienna, a long-standing centre of RNA bioinformatics and home of the ViennaRNA Package. In 2023 and 2024 he was a visiting professor at the University of Freiburg.
 

@@ -270,8 +270,8 @@ Publications
 
           Presents KinPFN, a deep learning method based on prior data fitted
           networks that approximates RNA folding time distributions from only
-          a few simulated examples, enabling orders of magnitude faster and
-          accurate modelling of RNA folding kinetics.
+          a few simulated examples, which makes accurate modelling of RNA
+          folding kinetics orders of magnitude faster.
 
         .. container:: pub-links
 
@@ -421,7 +421,7 @@ Publications
 
           Describes the discovery of Xinyang flavivirus, a new tick only virus
           from China representing a previously unknown branch of the
-          flavivirus family, highlighting how unexplored viral diversity in
+          flavivirus family, an example of how unexplored viral diversity in
           ticks can reveal new evolutionary paths.
 
         .. container:: pub-links
