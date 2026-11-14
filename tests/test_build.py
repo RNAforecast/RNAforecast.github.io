@@ -11,7 +11,9 @@ from conftest import read
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
          'insights/index.html', 'about/index.html', 'impressum/index.html',
          'datenschutz/index.html', 'thanks/index.html',
-         'training/index.html', 'waitlist/index.html', '404.html']
+         'training/index.html', 'waitlist/index.html', '404.html',
+         'list/index.html', 'list/check-inbox/index.html',
+         'list/confirmed/index.html', 'list/unsubscribed/index.html']
 
 
 def insights(site):

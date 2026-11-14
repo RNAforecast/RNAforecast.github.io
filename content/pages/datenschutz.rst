@@ -52,6 +52,18 @@ erfolgt auf Grundlage des EU-US Data Privacy Framework oder der Standardvertrags
 - Kontaktanfragen: bis zur Erledigung, spätestens zwölf Monate nach Eingang.
 - Spam und Absenderzähler der Prüfung: 30 Tage.
 - Warteliste: bis zum ersten Termin, höchstens zwölf Monate, oder bis zum Widerruf.
+- Verteiler („Notes by e-mail“): bis zur Abmeldung; unbestätigte Anmeldungen sieben Tage;
+  abgemeldete Adressen 30 Tage.
+
+**Benachrichtigungen per E-Mail.** Wer sich auf der Seite „Notes by e-mail“ einträgt,
+erhält zunächst einen Bestätigungslink (Double-Opt-in) und danach gelegentlich eine kurze
+Nachricht, wenn etwas Neues veröffentlicht wurde, höchstens einige Male im Jahr.
+Gespeichert werden die E-Mail-Adresse, der Zeitpunkt der Anmeldung und Bestätigung sowie
+die Seite, von der aus die Anmeldung erfolgte. Rechtsgrundlage ist die Einwilligung
+(Art. 6 Abs. 1 lit. a DSGVO); sie kann jederzeit über den Link in jeder Nachricht oder durch
+eine Antwort mit „stop“ widerrufen werden. Der Versand erfolgt über Resend (Resend, Inc.,
+USA) auf Grundlage der EU-Standardvertragsklauseln; eine Weitergabe an andere Empfänger
+findet nicht statt.
 
 **Ihre Rechte.** Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung,
 Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO). Eine Einwilligung können Sie

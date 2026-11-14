@@ -14,7 +14,9 @@ from conftest import graphs_in, nodes_of, read
 
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
          'insights/index.html', 'about/index.html', 'training/index.html',
-         'impressum/index.html', 'datenschutz/index.html']
+         'impressum/index.html', 'datenschutz/index.html',
+         'list/index.html', 'list/check-inbox/index.html',
+         'list/confirmed/index.html', 'list/unsubscribed/index.html']
 
 AUTHOR_ID = 'https://rnaforecast.com/#michael-t-wolfinger'
 ORG_ID = 'https://rnaforecast.com/#organization'
@@ -102,7 +104,9 @@ def test_content_images_load_lazily_and_hero_images_do_not(site):
 
 
 NOINDEX = ['thanks/index.html', 'waitlist/index.html', '404.html',
-           'impressum/index.html', 'datenschutz/index.html']
+           'impressum/index.html', 'datenschutz/index.html',
+           'list/check-inbox/index.html', 'list/confirmed/index.html',
+           'list/unsubscribed/index.html']
 
 
 def test_pages_that_should_not_be_indexed_say_so(site):
@@ -208,6 +212,7 @@ def test_sitemap_lists_the_public_pages(site):
         'https://rnaforecast.com/publications/',
         'https://rnaforecast.com/research/',
         'https://rnaforecast.com/training/',
+        'https://rnaforecast.com/list/',
     }
     assert expected <= locs
     insights = {loc for loc in locs - expected

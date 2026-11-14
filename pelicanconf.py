@@ -105,6 +105,7 @@ R_FOOTER_LINKS = [('Home', '/'),
                   ('Publications', '/publications/'),
                   ('Insights', '/insights/'),
                   ('Training', '/training/'),
+                  ('Notes by e-mail', '/list/'),
                   ('About', '/about/'),
                   ('Impressum', '/impressum/'),
                   ('Datenschutz', '/datenschutz/')]
@@ -567,7 +568,8 @@ R_PUB_META = {
 SITEMAP = {
     "format": "xml",
     "hints": False,
-    "exclude": ["impressum", "datenschutz", "thanks", "waitlist", "404"]
+    "exclude": ["impressum", "datenschutz", "thanks", "waitlist", "404",
+                "list/check-inbox", "list/confirmed", "list/unsubscribed"]
 }
 
 # The form handler (repo mtw/form-handler, a Cloudflare Worker): every form
