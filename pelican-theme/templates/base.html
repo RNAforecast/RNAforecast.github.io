@@ -19,6 +19,9 @@
   {% if doc.robots %}
   <meta name="robots" content="{{ doc.robots|e }}" />
   {% endif %}
+  {% if doc.referrer %}
+  <meta name="referrer" content="{{ doc.referrer|e }}" />
+  {% endif %}
   <link rel="canonical" href="{{ doc.url|format_siteurl|e }}" />
   {% endif %}
   {% endblock meta %}

@@ -4,6 +4,7 @@ Training
 :title: Training, RNA Forecast | ViennaRNA and local AI tools
 :slug: training
 :description: Hands-on training for research groups: ViennaRNA and computational RNA design, and local AI coding tools. Both in preparation, each with a waitlist.
+:referrer: no-referrer-when-downgrade
 :summary: Two hands-on training formats for research groups, remote or on site: ViennaRNA and computational RNA design, and local AI coding tools. Both in preparation; each has a waitlist.
 :og_type: website
 :hero_kicker: Training
@@ -71,7 +72,7 @@ ViennaRNA and computational RNA design
 
     .. raw:: html
 
-      <form class="contact-form" method="post" referrerpolicy="no-referrer-when-downgrade" id="viennarna-waitlist"
+      <form class="contact-form" method="post" id="viennarna-waitlist"
             action="https://forms.rnaforecast.com/rnaf-waitlist-viennarna">
         <p class="form-error" id="viennarna-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input type="hidden" name="topic" value="viennarna" />
@@ -192,7 +193,7 @@ Local AI coding tools for research groups
 
     .. raw:: html
 
-      <form class="contact-form" method="post" referrerpolicy="no-referrer-when-downgrade" id="waitlist"
+      <form class="contact-form" method="post" id="waitlist"
             action="https://forms.rnaforecast.com/rnaf-waitlist-local-ai-tools">
         <p class="form-error" id="local-ai-tools-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input type="hidden" name="topic" value="local-ai-tools" />

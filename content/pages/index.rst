@@ -5,6 +5,7 @@ Home
 :url:
 :save_as: index.html
 :description: Computational RNA biology research platform in Vienna: RNA structure prediction, folding kinetics, RNA design, viral RNA and hands-on training.
+:referrer: no-referrer-when-downgrade
 :summary: Independent research platform for computational RNA biology. Research, software, collaboration and training.
 :hero_kicker: Independent research platform
 :hero_title: RNA Forecast
@@ -467,7 +468,7 @@ Enquiries
 
     .. raw:: html
 
-      <form class="contact-form" method="post" referrerpolicy="no-referrer-when-downgrade"
+      <form class="contact-form" method="post"
             action="https://forms.rnaforecast.com/rnaf-contact">
         <p class="form-error" id="contact-error">Something was missing or not valid. Please check the fields and send again.</p>
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
