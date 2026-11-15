@@ -61,9 +61,9 @@ ViennaRNA and computational RNA design
     - Accessibility and RNA–RNA interaction: ``RNAplfold``, ``RNAcofold`` and
       ``RNAup`` for siRNA, ASO and miRNA sites, and how to map variants onto a
       structure.
-    - Design review before synthesis, i.e. the objective, the ensemble defect
-      and how a design holds up under sequence variants, with a checklist that
-      participants take home.
+    - RNA structure review before synthesis, i.e. the objective, the ensemble
+      defect and how a design holds up under sequence variants, with a
+      checklist that participants take home.
 
     Tertiary structure prediction is outside the scope. The course covers how
     far secondary structure and ensembles take a question before that becomes
