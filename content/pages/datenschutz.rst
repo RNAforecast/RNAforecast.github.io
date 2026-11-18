@@ -9,7 +9,7 @@ Datenschutzerklärung
 :robots: noindex, follow
 :page_class: legal
 :hero_title: Datenschutzerklärung
-:hero_lead: Information nach Art. 13 DSGVO · Stand: November 2026
+:hero_lead: Information nach Art. 13 DSGVO · Stand: 17. November 2026
 
 **Verantwortlicher:** RNA Forecast e.U., Inhaber Mag. Dr. Michael T. Wolfinger,
 Linzer Straße 30–32/2/5, 3002 Purkersdorf, `hello@rnaforecast.com <mailto:hello@rnaforecast.com>`__.
@@ -17,25 +17,19 @@ Linzer Straße 30–32/2/5, 3002 Purkersdorf, `hello@rnaforecast.com <mailto:hel
 **Hosting und Logfiles.** GitHub Pages und Cloudflare verarbeiten IP-Adresse und
 Verbindungsdaten, um die Website bereitzustellen und abzusichern (Art. 6 Abs. 1 lit. f DSGVO).
 
-**Reichweite und Ladezeiten.** Cloudflare Web Analytics zählt Seitenaufrufe und misst
-Ladezeiten sowie die Core Web Vitals über die Leistungsschnittstellen Ihres Browsers.
-Es werden keine Cookies gesetzt und nichts auf Ihrem Gerät gespeichert (Art. 6 Abs. 1 lit. f DSGVO).
+**Reichweite.** Cloudflare Web Analytics zählt Seitenaufrufe und Ladezeiten, ohne Cookies
+zu setzen oder etwas auf Ihrem Gerät zu speichern (Art. 6 Abs. 1 lit. f DSGVO).
 
 **Google Analytics 4, nur mit Einwilligung.** Erst nach Zustimmung im Dialog lädt die
 Website Google Analytics 4 und misst die Nutzung pseudonym. Google setzt dann die Cookies
 ``_ga`` und ``_ga_*`` (bis zu zwei Jahre). Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO,
-§ 165 Abs. 3 TKG 2021. Ihre Wahl speichert Ihr Browser zwölf Monate lang unter ``rnaf-consent``.
-Ein Global-Privacy-Control-Signal gilt als Ablehnung.
+§ 165 Abs. 3 TKG 2021. Ihre Wahl speichert Ihr Browser zwölf Monate lang.
 
 **Kontaktformular und E-Mail.** Ihre Angaben werden zur Beantwortung Ihrer Anfrage verwendet.
-Das Formular speichert sie in einer Datenbank bei Cloudflare (D1) und meldet sie über
-Resend an mich; Sie erhalten eine Bestätigung. Zur Missbrauchsabwehr speichert die Datenbank
-einen Hashwert Ihrer IP-Adresse und Ihren User-Agent. Pflichtangaben sind für die Antwort
-erforderlich, alles andere ist freiwillig (Art. 6 Abs. 1 lit. b, sonst lit. f DSGVO).
-
-Eingaben werden automatisch auf Spam geprüft, etwa anhand von Links, Schriftzeichen,
-Telefonnummern und wiederholten Einsendungen. Spam wird weder weitergeleitet noch beantwortet.
-Die Prüfung trifft keine Entscheidung mit rechtlicher Wirkung für Sie (Art. 22 DSGVO).
+Sie werden in einer Datenbank bei Cloudflare gespeichert und über Resend zugestellt.
+Zur Spamabwehr werden zusätzlich ein Hashwert Ihrer IP-Adresse und Ihr User-Agent
+gespeichert. Pflichtangaben sind für die Antwort erforderlich, alles andere ist freiwillig
+(Art. 6 Abs. 1 lit. b, sonst lit. f DSGVO).
 
 **Warteliste.** E-Mail-Adresse, und freiwillig Name, Zugehörigkeit und gewünschtes Format.
 Sie erhalten eine Bestätigung und, sobald ein Termin feststeht, eine Nachricht
@@ -55,15 +49,10 @@ erfolgt auf Grundlage des EU-US Data Privacy Framework oder der Standardvertrags
 - Verteiler („Notes by e-mail“): bis zur Abmeldung; unbestätigte Anmeldungen sieben Tage;
   abgemeldete Adressen 30 Tage.
 
-**Benachrichtigungen per E-Mail.** Wer sich auf der Seite „Notes by e-mail“ einträgt,
-erhält zunächst einen Bestätigungslink (Double-Opt-in) und danach gelegentlich eine kurze
-Nachricht, wenn etwas Neues veröffentlicht wurde, höchstens einige Male im Jahr.
-Gespeichert werden die E-Mail-Adresse, der Zeitpunkt der Anmeldung und Bestätigung sowie
-die Seite, von der aus die Anmeldung erfolgte. Rechtsgrundlage ist die Einwilligung
-(Art. 6 Abs. 1 lit. a DSGVO); sie kann jederzeit über den Link in jeder Nachricht oder durch
-eine Antwort mit „stop“ widerrufen werden. Der Versand erfolgt über Resend (Resend, Inc.,
-USA) auf Grundlage der EU-Standardvertragsklauseln; eine Weitergabe an andere Empfänger
-findet nicht statt.
+**Benachrichtigungen per E-Mail („Notes by e-mail“).** E-Mail-Adresse, Zeitpunkt von
+Anmeldung und Bestätigung (Double-Opt-in) und die Seite der Anmeldung, für gelegentliche
+Hinweise auf Neues (Art. 6 Abs. 1 lit. a DSGVO). Widerruf jederzeit über den Link in jeder
+Nachricht.
 
 **Ihre Rechte.** Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung,
 Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO). Eine Einwilligung können Sie
