@@ -104,3 +104,24 @@ What a review will contain
         <p class="form-note form-fallback">Problems with the form? Email
           <a href="mailto:hello@rnaforecast.com">hello&#64;rnaforecast.com</a>.</p>
       </form>
+
+.. _who-will-write-the-reviews:
+
+Who will write the reviews
+--------------------------
+
+.. raw:: html
+
+  <div class="portrait">
+    <figure class="blueprint">
+      <img src="/static/images/mtw.jpg" alt="Michael T. Wolfinger" width="240" height="317" loading="lazy" />
+    </figure>
+    <div class="portrait-main">
+      <h2>Michael T. Wolfinger</h2>
+      <p>Computational RNA biologist and co-developer of the ViennaRNA Package. His
+        research covers RNA structure, folding dynamics, viral RNA biology and the
+        computational design of functional RNAs. He has taught computational RNA
+        biology at universities in Austria and Germany for more than two decades.</p>
+      <p><a href="/about/">About Michael T. Wolfinger</a> · <a href="/publications/">Publications</a></p>
+    </div>
+  </div>
