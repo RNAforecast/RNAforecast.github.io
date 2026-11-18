@@ -90,6 +90,7 @@ FORMS = {
                                'message'}),
     'rnaf-waitlist-viennarna': WAITLIST_FIELDS,
     'rnaf-waitlist-local-ai-tools': WAITLIST_FIELDS,
+    'rnaf-waitlist-review': WAITLIST_FIELDS,
     'rnaf-list': frozenset({'email'}),
 }
 HONEYPOT = '_honey'

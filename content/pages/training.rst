@@ -61,7 +61,7 @@ ViennaRNA and computational RNA design
     - Accessibility and RNA–RNA interaction: ``RNAplfold``, ``RNAcofold`` and
       ``RNAup`` for siRNA, ASO and miRNA sites, and how to map variants onto a
       structure.
-    - RNA structure review before synthesis, i.e. the objective, the ensemble
+    - `RNA structure review </structure-review/>`__ before synthesis, i.e. the objective, the ensemble
       defect and how a design holds up under sequence variants, with a
       checklist that participants take home.
 

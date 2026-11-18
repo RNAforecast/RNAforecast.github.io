@@ -13,7 +13,7 @@ from scripts import check_build
 from conftest import graphs_in, nodes_of, read
 
 PAGES = ['index.html', 'research/index.html', 'publications/index.html',
-         'insights/index.html', 'about/index.html', 'training/index.html',
+         'insights/index.html', 'about/index.html', 'training/index.html', 'structure-review/index.html',
          'impressum/index.html', 'datenschutz/index.html',
          'list/index.html', 'list/check-inbox/index.html',
          'list/confirmed/index.html', 'list/unsubscribed/index.html']
@@ -213,6 +213,7 @@ def test_sitemap_lists_the_public_pages(site):
         'https://rnaforecast.com/research/',
         'https://rnaforecast.com/training/',
         'https://rnaforecast.com/list/',
+        'https://rnaforecast.com/structure-review/',
     }
     assert expected <= locs
     insights = {loc for loc in locs - expected
