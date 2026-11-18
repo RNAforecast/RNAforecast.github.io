@@ -375,7 +375,7 @@ Teaching and advanced training
 
     Michael T. Wolfinger has taught computational biology, bioinformatics and RNA analysis at universities in Austria and Germany for more than two decades.
 
-    Through RNA Forecast, Michael also develops advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial audiences. Two training formats are in preparation. The training page has the details and a waitlist for each. RNA Forecast is also preparing RNA structure reviews, commissioned scientific assessments of a predicted structure before the experiment.
+    Through RNA Forecast, Michael also develops advanced workshops on the ViennaRNA ecosystem and computational RNA analysis for academic and industrial audiences. Two training formats are in preparation. The training page has the details and a waitlist for each. RNA Forecast is also developing a format for RNA structure reviews, commissioned scientific assessments of a predicted structure before the experiment.
 
     .. container:: actions
 
