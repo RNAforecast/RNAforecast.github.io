@@ -65,9 +65,14 @@ ViennaRNA and computational RNA design
       defect and how a design holds up under sequence variants, with a
       checklist that participants take home.
 
-    Tertiary structure prediction is outside the scope. The course covers how
-    far secondary structure and ensembles take a question before that becomes
-    necessary.
+    **What is not covered.** Tertiary structure prediction. Wet-lab work,
+    including probing library preparation. Building or engineering an analysis
+    pipeline. Design methodology, i.e. how to arrive at a construct, as
+    distinct from how to read what a prediction says about one. The course
+    covers how far secondary structure and ensembles take a question before
+    those become necessary. Groups that want a specific molecule assessed
+    rather than a method taught will find that in an
+    `RNA structure review </structure-review/>`__.
 
     **Format.** Live, remote or on site, as a group of 6 to 12 or as a single
     participant in an open remote cohort, half day or full day, participants'
